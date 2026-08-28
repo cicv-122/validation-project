@@ -1,0 +1,86 @@
+{% extends 'base/base.html' %}
+{% load static i18n %}
+
+{% block title %}
+    {% translate 'База данных сертифицированных' %}
+{% endblock %}
+
+{% block links %}
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid black;
+            padding: 8px;
+            text-align: center;
+        }
+        th {
+            background-color: #cecece;
+            color: black;
+        }
+        td {
+            background-color: #fff;
+            color: black;
+        }
+    </style>
+    <link rel="stylesheet" href="{% static 'dist/libs/dataTables/dataTables.min.css' %}">
+{% endblock %}
+
+{% block content %}
+    <section class="section documents">
+        <div class="container">
+            <div class="row">
+                <div class="title col-12 m-auto">
+                    <h3>{% translate 'База данных сертифицированных' %}</h3>
+                </div>
+                <table id="certified_users">
+                    <thead>
+                        <tr>
+                            <th>{% translate '№ п/п' %}</th>
+                            <th>{% translate 'Фото' %}</th>
+                            <th>{% translate 'Ф.И.О' %}</th>
+                            <th>{% translate 'Регистрационный номер Сертификата' %}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for certified_user in certified_users %}
+                            <tr>
+                                <td>{{ forloop.counter }}</td>
+                                <td><img src="{{ certified_user.image.url }}" alt="" width="75"></td>
+                                <td>{{ certified_user.get_full_name }}</td>
+                                <td>{{ certified_user.registration_number }}</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+{% endblock %}
+
+{% block scripts %}
+    <script src="{% static 'dist/libs/dataTables/dataTables.js' %}"></script>
+    <script>
+        $('#certified_users').DataTable({
+            "lengthChange": false,
+            "language": {
+                "processing": "{%  trans "Подождите..." %}",
+                "search": "{% trans "Поиск:" %}",
+                "lengthMenu": "{% trans "Показать _MENU_ записей" %}",
+                "info": "{% trans "Записи с _START_ до _END_ из _TOTAL_ записей" %}",
+                "infoEmpty": "{% trans "Записи с 0 до 0 из 0 записей" %}",
+                "infoFiltered": "{% trans "(отфильтровано из _MAX_ записей)" %}",
+                "infoPostFix": "",
+                "loadingRecords": "{% trans "Загрузка записей..." %}",
+                "zeroRecords": "{% trans "Записи отсутствуют." %}",
+                "emptyTable": "{% trans "В таблице отсутствуют данные" %}",
+                "aria": {
+                    "sortAscending": ": активировать для сортировки столбца по возрастанию",
+                    "sortDescending": ": активировать для сортировки столбца по убыванию"
+                }
+            }
+        });
+    </script>
+{% endblock scripts %}

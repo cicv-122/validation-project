@@ -1,0 +1,50 @@
+version: "3.8"
+services:
+  icvc_db:
+    image: postgres:14.6-alpine
+    restart: always
+    container_name: icvc_db_prod
+    volumes:
+      - icvc_pgdata:/var/lib/postgresql/data/
+    env_file:
+      - ./.env
+    environment:
+      - POSTGRES_USER=${DATABASE_USER}
+      - POSTGRES_PASSWORD=${DATABASE_PASSWORD}
+      - POSTGRES_DB=${DATABASE_NAME}
+
+  icvc_backend:
+    build:
+      context: .
+      dockerfile: Dockerfile.prod
+    container_name: icvc_backend_prod
+    restart: always
+    depends_on:
+      - icvc_db
+    env_file:
+      - ./.env
+    # В проде мы не монтируем ./ в /var/www/project (код уже внутри контейнера намертво)
+    # Но мы должны вынести media и статику в общий раздел, чтобы Nginx имел к ним доступ
+    volumes:
+      - icvc_media:/var/www/project/media
+      - icvc_static:/var/www/project/staticfiles
+
+  icvc_nginx:
+    image: nginx:1.25-alpine
+    container_name: icvc_nginx_prod
+    restart: always
+    ports:
+      - "80:80"
+      - "443:443"
+    depends_on:
+      - icvc_backend
+    volumes:
+      - ./config/deploy/nginx.conf:/etc/nginx/conf.d/default.conf
+      - icvc_media:/var/www/project/media
+      - icvc_static:/var/www/project/staticfiles
+      - /etc/letsencrypt:/etc/letsencrypt:ro
+
+volumes:
+  icvc_pgdata:
+  icvc_media:
+  icvc_static:

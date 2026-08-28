@@ -1,0 +1,19 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+	:root {
+		--brand-blue: #283375;
+	}
+	body {
+		@apply antialiased text-gray-900 bg-gray-50;
+	}
+}
+
+@layer utilities {
+	.bg-topography {
+		background-image: url('/static/dist/images/bg/pattern.png');
+		background-repeat: repeat;
+	}
+}

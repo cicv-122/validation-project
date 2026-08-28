@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+
+  <!-- Главная страница -->
+  <url>
+    <loc>https://validation.kg/</loc>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://validation.kg/?lang=ru"/>
+    <xhtml:link rel="alternate" hreflang="ky" href="https://validation.kg/?lang=ky"/>
+  </url>
+
+  <!-- Новости -->
+  <url>
+    <loc>https://validation.kg/news</loc>
+    <changefreq>daily</changefreq>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://validation.kg/news?lang=ru"/>
+    <xhtml:link rel="alternate" hreflang="ky" href="https://validation.kg/news?lang=ky"/>
+  </url>
+
+  <!-- О нас — Руководство -->
+  <url>
+    <loc>https://validation.kg/about/management</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- О нас — Дополнительная информация -->
+  <url>
+    <loc>https://validation.kg/about/additional-info</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- Галерея — Фото -->
+  <url>
+    <loc>https://validation.kg/gallery/images</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <!-- Галерея — Видео -->
+  <url>
+    <loc>https://validation.kg/gallery/videos</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <!-- Документы — Партнеры -->
+  <url>
+    <loc>https://validation.kg/documents/partners</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- Документы — Центры оценки -->
+  <url>
+    <loc>https://validation.kg/documents/assessment-centers</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- Документы — База экспертов -->
+  <url>
+    <loc>https://validation.kg/documents/experts</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- Документы — База сертифицированных -->
+  <url>
+    <loc>https://validation.kg/documents/certified-users</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- Документы — Проф. стандарты -->
+  <url>
+    <loc>https://validation.kg/documents/prof-standards</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- Подача заявки -->
+  <url>
+    <loc>https://validation.kg/apply</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Статус заявки -->
+  <url>
+    <loc>https://validation.kg/apply/status</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+</urlset>

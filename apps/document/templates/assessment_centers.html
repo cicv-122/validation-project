@@ -1,0 +1,28 @@
+{% extends 'base/base.html' %}
+{% load static i18n %}
+
+{% block title %}
+    {% translate 'Центры оценки' %}
+{% endblock %}
+
+{% block content %}
+    <section class="section documents">
+        <div class="container">
+            <div class="row">
+                <div class="title col-12 m-auto">
+                    <h3>{% translate 'Центры оценки' %}</h3>
+                </div>
+                <ol class="assessments">
+                    {% for assessment in assessments %}
+                        <li>
+                            <div class="d-flex flex-column">
+                                <span class="organization">{{ assessment.organization }}</span>
+                                <span>Руководитель Центра оценки: <span class="director">{{ assessment.director }}</span></span>
+                            </div>
+                        </li>
+                    {% endfor %}
+                </ol>
+            </div>
+        </div>
+    </section>
+{% endblock %}

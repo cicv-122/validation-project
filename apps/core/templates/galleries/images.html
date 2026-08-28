@@ -1,0 +1,48 @@
+{% extends 'base/base.html' %}
+{% load static i18n imagekit %}
+
+{% block title %}
+    {% translate 'Фотогалерея' %}
+{% endblock %}
+
+{% block links %}
+    <link rel="stylesheet" href="{% static 'dist/libs/magnific-popper/main.min.css' %}">
+{% endblock links %}
+
+{% block content %}
+    <section class="section">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="title mb-3">
+                        <span>{% translate 'Новости' %}</span>
+                        <h3>{% translate 'Фотогалерея' %}</h3>
+                    </div>
+                </div>
+            </div>
+            <div class="row gallery-list">
+                {% for gallery in galleries %}
+                    <div class="col-6 col-md-6 col-lg-4 p-1">
+                        <a class="gallery-item" href="{{ gallery.image.url }}">
+                            <span class="gallery-item-hover">{% trans 'Посмотреть' %}</span>
+                            {% generateimage 'main:thumbnail' source=gallery.image -- class="mypicture" %}
+                        </a>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+{% endblock %}
+
+{% block scripts %}
+    <script src="{% static 'dist/libs/magnific-popper/main.min.js' %}"></script>
+    <script>
+        $(".gallery-list").magnificPopup({
+            delegate: "a",
+            type: "image",
+            gallery: {
+                enabled: true
+            }
+        });
+    </script>
+{% endblock scripts %}

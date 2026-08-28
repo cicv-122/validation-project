@@ -1,0 +1,74 @@
+{% extends 'base/base.html' %}
+{% load static i18n %}
+
+{% block title %}
+    {% translate 'База данных экспертов' %}
+{% endblock %}
+
+{% block links %}
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid black;
+            padding: 8px;
+            text-align: center;
+        }
+        th {
+            background-color: #cecece;
+            color: black;
+        }
+        td {
+            background-color: #fff;
+            color: black;
+        }
+    </style>
+{% endblock %}
+
+{% block content %}
+    <section class="section documents">
+        <div class="container">
+            <div class="row">
+                <div class="title col-12 m-auto">
+                    <h3>{% translate 'База данных экспертов' %}</h3>
+                </div>
+                <ol class="assessments">
+                    {% for assessment in assessments %}
+                        <li>
+                            <div class="d-flex flex-column">
+                                <span class="organization">{{ assessment.organization }}</span>
+                                <span>Руководитель Центра оценки: <span class="director">{{ assessment.director }}</span></span>
+                            </div>
+                            <div class="mt-3">
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th>{% translate '№ п/п' %}</th>
+                                            <th>{% translate 'Профессия' %}</th>
+                                            <th>{% translate 'Оценщики' %}</th>
+                                            <th>{% translate 'Оценщик работодатель' %}</th>
+                                            <th>{% translate 'Консультант' %}</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for appraiser in assessment.assessment_centers.all %}
+                                        	<tr>
+                                                <td>{{ forloop.counter }}</td>
+                                                <td>{{ appraiser.profession }}</td>
+                                                <td>{{ appraiser.appraisers }}</td>
+                                                <td>{{ appraiser.appraiser_employer }}</td>
+                                                <td>{{ appraiser.consultant }}</td>
+                                            </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </li>
+                    {% endfor %}
+                </ol>
+            </div>
+        </div>
+    </section>
+{% endblock %}

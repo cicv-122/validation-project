@@ -1,0 +1,28 @@
+{% extends 'base/base.html' %}
+{% load static i18n %}
+
+{% block title %}
+    {{ title }}
+{% endblock %}
+
+{% block content %}
+    <section class="section documents">
+        <div class="container">
+            <div class="row">
+                <div class="title col-12 m-auto">
+                    <h3>{{ title }}</h3>
+                </div>
+                <ul class="cooperation-list col-12 m-auto">
+                    {% for item in documents %}
+                        <li>
+                            <a {% if item.file %} href="{{ item.file.url }}" {% endif %} >
+                                <i class="fa fa-file mr-2"></i>
+                                {{ item.title }}
+                            </a>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </section>
+{% endblock %}

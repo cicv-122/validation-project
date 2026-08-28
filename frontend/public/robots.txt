@@ -1,0 +1,9 @@
+User-agent: *
+Allow: /
+
+# Запрет индексации административного раздела
+Disallow: /admin/
+Disallow: /api/
+
+# Sitemap
+Sitemap: https://validation.kg/sitemap.xml

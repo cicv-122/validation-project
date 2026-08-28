@@ -1,0 +1,52 @@
+# Этап 1: Сборка фронтенда (React + Vite)
+FROM node:20-alpine as frontend-builder
+
+WORKDIR /app/frontend
+
+# Копируем файлы конфигурации для кэширования слоев
+COPY frontend/package.json frontend/package-lock.json* frontend/yarn.lock* ./
+RUN npm install
+
+# Копируем исходники фронтенда и собираем
+COPY frontend/ .
+RUN npm run build
+
+# Этап 2: Сборка бэкенда (Python) и объединение
+FROM python:3.12-slim as backend
+
+# Отключаем создание .pyc файлов и буферизацию Python, настраиваем Poetry
+ENV PYTHONDONTWRITEBYTECODE=1 \
+    PYTHONUNBUFFERED=1 \
+    POETRY_VERSION=1.8.2 \
+    POETRY_HOME="/opt/poetry" \
+    POETRY_VIRTUALENVS_CREATE=false
+
+# Системные зависимости для PostgreSQL и Poetry
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    build-essential libpq-dev curl \
+    && rm -rf /var/lib/apt/lists/*
+
+# Установка Poetry
+RUN curl -sSL https://install.python-poetry.org | python3 -
+ENV PATH="$POETRY_HOME/bin:$PATH"
+
+WORKDIR /var/www/project
+
+# Устанавливаем зависимости Python
+# Копируем сначала файлы поэтри для использования кэша
+COPY pyproject.toml poetry.lock ./
+RUN poetry install --no-root --only main
+
+# Копируем весь проект
+COPY . .
+
+# Копируем скомпилированный фронтенд из предыдущего этапа
+COPY --from=frontend-builder /app/frontend/dist ./frontend/dist
+
+# Собираем все статические файлы (включая собранный React) в папку staticfiles
+RUN python manage.py collectstatic --noinput
+
+EXPOSE 8000
+
+# Запускаем Gunicorn
+CMD ["gunicorn", "config.wsgi:application", "--bind", "0.0.0.0:8000", "--workers", "4", "--timeout", "60"]

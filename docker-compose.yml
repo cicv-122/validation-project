@@ -1,0 +1,34 @@
+version: "3.5"
+services:
+  icvc_official:
+    container_name: icvc_official
+    build:
+      dockerfile: Dockerfile
+    volumes:
+      - ./:/var/www/project
+    ports:
+      - "8000:8000"
+    command: sh -c "poetry run python manage.py runserver 0.0.0.0:8000"
+    restart: always
+    environment:
+      - DEBUG=True
+    env_file:
+      - ./.env
+    depends_on:
+      - icvc_db
+
+  icvc_db:
+    image: postgres:14.6-alpine
+    restart: always
+    container_name: icvc_db
+    hostname: postgres
+    ports:
+      - 5432:5432
+    volumes:
+      - ../icvc_db-data:/var/lib/postgresql/data/
+    env_file:
+      - ./.env
+    environment:
+      - POSTGRES_USER=${DATABASE_USER}
+      - POSTGRES_PASSWORD=${DATABASE_PASSWORD}
+      - POSTGRES_DB=${DATABASE_NAME}

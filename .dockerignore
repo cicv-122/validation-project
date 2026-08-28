@@ -1,0 +1,14 @@
+node_modules
+venv
+.git
+.idea
+__pycache__
+*.pyc
+data_dump.backup
+media.tar.gz
+media/
+static/
+staticfiles/
+archive.tar.gz
+frontend/node_modules
+frontend/dist

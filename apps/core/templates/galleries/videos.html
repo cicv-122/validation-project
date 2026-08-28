@@ -1,0 +1,56 @@
+{% extends 'base/base.html' %}
+{% load static i18n imagekit %}
+
+{% block title %}
+    {% translate 'Видео галерея' %}
+{% endblock %}
+
+{% block content %}
+    <section class="section">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="title mb-3">
+                        <span>{% translate 'Новости' %}</span>
+                        <h3>{% translate 'Видео галерея' %}</h3>
+                    </div>
+                </div>
+            </div>
+            <div class="row gallery-list">
+                {% for gallery in galleries %}
+                    <div class="col-6 col-md-6 col-lg-4 p-1">
+                        {{ gallery.convert_ytframe|safe }}
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+{% endblock %}
+
+{% block scripts %}
+    <script>
+        $('body').contents().each(function() {
+
+            // Skip non text nodes.
+            if (this.nodeType !== 3) {
+                return true;
+            }
+
+            // Grab text
+            var matches = this.data.match(/(?:http:\/\/)?(?:www\.)?(?:youtube\.com|youtu\.be)\/(?:watch\?v=)?(.+)/g);
+
+            if (!matches) {
+                return true;
+            }
+
+            var iframe = $('<iframe width="420" height="345" frameborder="0" allowfullscreen />', {
+                src: 'http://www.youtube.com/embed/' + matches[1]
+            });
+
+            iframe.insertAfter(this);
+
+            $(this).remove();
+
+        });
+    </script>
+{% endblock scripts %}
