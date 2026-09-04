@@ -1,4 +1,4 @@
-import { useParams, Link, useLocation, useNavigate } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { useCertifiedUserVerification } from '../hooks/useApi';
 import { Spinner, SEO } from '../components/ui';
@@ -8,8 +8,6 @@ import { translateProfession } from '../utils/translateProfession';
 export default function VerifyCertificate() {
 	const { id } = useParams<{ id: string }>();
 	const { t, i18n } = useTranslation();
-	const location = useLocation();
-	const navigate = useNavigate();
 	const { data: user, isLoading, error } = useCertifiedUserVerification(id);
 
 	if (isLoading) {
@@ -165,21 +163,12 @@ export default function VerifyCertificate() {
 						<p className='text-sm text-gray-500 font-medium'>
 							{t('Центр независимой сертификации и валидации КР')}
 						</p>
-						<button
-							onClick={() => {
-								console.log('[DEBUG] VerifyCertificate Back Click. location.state:', location.state);
-								if (location.state?.fromPage) {
-									console.log('[DEBUG] Going back in history (navigate(-1))');
-									navigate(-1);
-								} else {
-									console.log('[DEBUG] Navigating directly to list');
-									navigate('/documents/certified-users');
-								}
-							}}
+						<Link
+							to='/documents/certified-users'
 							className='text-sm text-blue-600 hover:text-blue-800 font-bold transition-colors'
 						>
 							{t('В базу данных')} &rarr;
-						</button>
+						</Link>
 					</div>
 				</div>
 			</div>
