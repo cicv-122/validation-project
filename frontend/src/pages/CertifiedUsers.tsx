@@ -1,5 +1,6 @@
 import { useState, useEffect, useLayoutEffect, useCallback, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
+import { useSearchParams } from 'react-router-dom';
 import { EmptyState, ErrorMessage, PageHero, SEO, Spinner } from '../components/ui';
 import { useCertifiedUsers } from '../hooks/useApi';
 import CertifiedUserModal from '../components/CertifiedUserModal';
@@ -42,6 +43,9 @@ function totalPages(count: number, pageSize = 20) {
 
 export default function CertifiedUsers() {
 	const { t, i18n } = useTranslation();
+	const [searchParams, setSearchParams] = useSearchParams();
+	const highlightParam = searchParams.get('highlight');
+	const [highlightedReg, setHighlightedReg] = useState<string | null>(highlightParam);
 
 	// Continuous passive scroll listener to guarantee 100% accurate scrollPos
 	const activeScrollRef = useRef(0);
@@ -55,17 +59,27 @@ export default function CertifiedUsers() {
 		return () => window.removeEventListener('scroll', onScroll);
 	}, []);
 	
-	// Restore search state from sessionStorage
+	// Restore search state from sessionStorage or URL highlight parameter
 	const [inputValue, setInputValue] = useState(() => {
-		return sessionStorage.getItem('certified_users_search') || '';
+		return highlightParam || sessionStorage.getItem('certified_users_search') || '';
 	});
 	const [page, setPage] = useState(() => {
+		if (highlightParam) return 1;
 		const saved = sessionStorage.getItem('certified_users_page');
 		return saved ? parseInt(saved, 10) : 1;
 	});
 	const [selectedUser, setSelectedUser] = useState<CertifiedUser | null>(null);
 	const listRef = useRef<HTMLDivElement>(null);
 	const isFirstPageRender = useRef(true);
+
+	// Handle highlightParam updates if URL changes
+	useEffect(() => {
+		if (highlightParam) {
+			setInputValue(highlightParam);
+			setHighlightedReg(highlightParam);
+			setPage(1);
+		}
+	}, [highlightParam]);
 
 	// Debounced search — API call fires 400ms after user stops typing
 	const search = useDebounce(inputValue, 400);
@@ -78,6 +92,31 @@ export default function CertifiedUsers() {
 	useEffect(() => {
 		sessionStorage.setItem('certified_users_page', page.toString());
 	}, [page]);
+
+	const { data, isLoading, isFetching, error } = useCertifiedUsers(search, page);
+
+	const users = data?.results ?? [];
+	const count = data?.count ?? 0;
+	const pages = totalPages(count);
+
+	// Smoothly scroll to highlighted card and glow
+	useEffect(() => {
+		if (highlightedReg && !isLoading && users.length > 0) {
+			const targetCard = document.getElementById(`user-card-${encodeURIComponent(highlightedReg)}`);
+			if (targetCard) {
+				const scrollTimer = setTimeout(() => {
+					targetCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
+				}, 150);
+				const removeHighlightTimer = setTimeout(() => {
+					setHighlightedReg(null);
+				}, 4000);
+				return () => {
+					clearTimeout(scrollTimer);
+					clearTimeout(removeHighlightTimer);
+				};
+			}
+		}
+	}, [highlightedReg, isLoading, users]);
 
 	// 0-flicker instant scroll restoration BEFORE browser paints on initial mount
 	useLayoutEffect(() => {
@@ -137,12 +176,6 @@ export default function CertifiedUsers() {
 		}
 	}, [page]);
 
-	const { data, isLoading, isFetching, error } = useCertifiedUsers(search, page);
-
-	const users = data?.results ?? [];
-	const count = data?.count ?? 0;
-	const pages = totalPages(count);
-
 	const handleSearch = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
 		setInputValue(e.target.value);
 		setPage(1);
@@ -152,7 +185,10 @@ export default function CertifiedUsers() {
 		setInputValue('');
 		sessionStorage.removeItem('certified_users_search');
 		setPage(1);
-	}, []);
+		if (searchParams.has('highlight')) {
+			setSearchParams({}, { replace: true });
+		}
+	}, [searchParams, setSearchParams]);
 
 	const handlePageChange = useCallback((newPage: number) => {
 		setPage(newPage);
@@ -222,15 +258,22 @@ export default function CertifiedUsers() {
 					<>
 						{/* Grid with slight opacity while fetching next page */}
 						<div className={`grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 transition-opacity duration-200 ${isFetching ? 'opacity-60' : 'opacity-100'}`}>
-							{users.map((user) => (
-								<div
-									key={user.id}
-									onClick={() => {
-										saveScrollPosition();
-										setSelectedUser(user);
-									}}
-									className='bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden hover:shadow-md hover:-translate-y-0.5 transition-all duration-200 cursor-pointer'
-								>
+							{users.map((user) => {
+								const isHighlighted = highlightedReg === user.registration_number;
+								return (
+									<div
+										key={user.id}
+										id={`user-card-${encodeURIComponent(user.registration_number)}`}
+										onClick={() => {
+											saveScrollPosition();
+											setSelectedUser(user);
+										}}
+										className={`bg-white rounded-2xl shadow-sm border overflow-hidden hover:shadow-md hover:-translate-y-0.5 transition-all duration-300 cursor-pointer ${
+											isHighlighted
+												? 'ring-4 ring-blue-500 shadow-xl scale-[1.02] border-blue-500 bg-blue-50/30'
+												: 'border-gray-100'
+										}`}
+									>
 									{/* Photo */}
 									{user.image ? (
 										<img
@@ -267,7 +310,8 @@ export default function CertifiedUsers() {
 										)}
 									</div>
 								</div>
-							))}
+								);
+							})}
 						</div>
 
 						{/* ── Pagination ───────────────────────────────────── */}

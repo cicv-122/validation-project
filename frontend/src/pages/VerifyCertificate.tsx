@@ -164,7 +164,7 @@ export default function VerifyCertificate() {
 							{t('Центр независимой сертификации и валидации КР')}
 						</p>
 						<Link
-							to='/documents/certified-users'
+							to={`/documents/certified-users?highlight=${encodeURIComponent(user.registration_number)}`}
 							className='text-sm text-blue-600 hover:text-blue-800 font-bold transition-colors'
 						>
 							{t('В базу данных')} &rarr;
