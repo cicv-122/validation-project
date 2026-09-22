@@ -36,8 +36,9 @@ const LanguageRedirect = () => {
 const queryClient = new QueryClient({
 	defaultOptions: {
 		queries: {
-			staleTime: 5 * 60 * 1000, // 5 минут — данные не перезапрашиваются при переходах
-			gcTime: 10 * 60 * 1000,  // 10 минут — кэш хранится в памяти
+			staleTime: 0, // Данные всегда запрашиваются свежими при переходах
+			gcTime: 5 * 60 * 1000, // Кэш хранится в памяти 5 минут
+			refetchOnWindowFocus: true, // Обновлять при возврате на вкладку
 		},
 	},
 });
