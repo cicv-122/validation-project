@@ -284,7 +284,7 @@ export default function Experts() {
 																</Link>
 															) : exp.partner_id ? (
 																<Link
-																	to={`/about/partners/${exp.partner_id}?from=experts&expertId=${exp.id}#expert-${exp.id}`}
+																	to={`/documents/partners/${exp.partner_id}?from=experts&expertId=${exp.id}#expert-${exp.id}`}
 																	title='Перейти на страницу партнера'
 																	className='group inline-flex items-center gap-1.5 font-semibold text-emerald-900 bg-emerald-50/80 hover:bg-emerald-100 hover:text-emerald-950 px-3 py-1.5 rounded-md border border-emerald-200/80 text-xs sm:text-sm leading-relaxed transition-all shadow-xs'>
 																	<span>
