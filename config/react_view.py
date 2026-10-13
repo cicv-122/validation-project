@@ -79,8 +79,8 @@ def _get_page_meta(path: str) -> dict:
         if meta:
             return meta
 
-    # Partner detail: /documents/partners/<pk> or /<lang>/documents/partners/<pk>
-    partner_match = re.match(r'^(?:/[a-z]{2})?/documents/partners/(\d+)/?$', path)
+    # Partner detail: /documents/partners/<pk> or /about/partners/<pk>
+    partner_match = re.match(r'^(?:/[a-z]{2})?/(?:documents|about)/partners/(\d+)/?$', path)
     if partner_match:
         pk = partner_match.group(1)
         meta = _get_partner_meta(pk)

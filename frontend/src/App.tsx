@@ -69,6 +69,8 @@ export default function App() {
 									<Route path='about/management' element={<Management />} />
 									<Route path='documents/partners' element={<Partners />} />
 									<Route path='documents/partners/:id' element={<PartnerDetail />} />
+									<Route path='about/partners' element={<Partners />} />
+									<Route path='about/partners/:id' element={<PartnerDetail />} />
 									<Route path='documents/assessment-centers' element={<AssessmentCenters />} />
 									<Route path='documents/assessment-centers/:id' element={<AssessmentCenterDetail />} />
 									<Route path='documents/experts' element={<Experts />} />
