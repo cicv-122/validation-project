@@ -5,7 +5,7 @@ import { EmptyState, ErrorMessage, PageHero, SEO, Spinner } from '../components/
 import { useAssessmentCenters } from '../hooks/useApi';
 
 export default function AssessmentCenters() {
-	const { t } = useTranslation();
+	const { t, i18n } = useTranslation();
 	const { data: centers, isLoading, error } = useAssessmentCenters();
 
 	// Restore scroll position when data loads and user returned from detail page
@@ -55,7 +55,13 @@ export default function AssessmentCenters() {
 							>
 								<div>
 									<h3 className='text-xl font-bold text-gray-900 mb-6 group-hover:text-blue-600 transition-colors duration-300 leading-tight min-h-28 flex items-start'>
-										{center.organization}
+										{center.id === 4
+											? (i18n.language.startsWith('k') || i18n.language === 'ky'
+												? 'С. Нааматов атындагы Нарын мамлекеттик университетинин Агрардык техникалык-экономикалык колледжи'
+												: i18n.language.startsWith('en')
+												? 'Agrarian Technical and Economic College of Naryn State University named after S. Naamatov'
+												: 'Аграрный технико-экономический колледж Нарынского государственного университета имени С. Нааматова')
+											: center.organization}
 									</h3>
 									<div>
 										<p className='text-sm text-gray-500 mb-2'>{t('Руководство Центра')}:</p>

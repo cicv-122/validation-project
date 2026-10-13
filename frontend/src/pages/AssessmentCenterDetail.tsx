@@ -1,12 +1,18 @@
 import { useTranslation } from 'react-i18next';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useParams, useLocation } from 'react-router-dom';
 import { ErrorMessage, SEO, Spinner } from '../components/ui';
 import { useAssessmentCenter } from '../hooks/useApi';
 
 export default function AssessmentCenterDetail() {
-	const { t } = useTranslation();
+	const { t, i18n } = useTranslation();
 	const { id } = useParams<{ id: string }>();
+	const location = useLocation();
 	const { data: center, isLoading, error } = useAssessmentCenter(id);
+
+	const searchParams = new URLSearchParams(location.search);
+	const fromExperts = searchParams.get('from') === 'experts';
+	const expertId = searchParams.get('expertId');
+	const backToExpertsUrl = `/documents/experts${expertId ? `?expertId=${expertId}#expert-${expertId}` : ''}`;
 
 	if (isLoading) {
 		return <Spinner />;
@@ -28,8 +34,8 @@ export default function AssessmentCenterDetail() {
 			/>
 
 			<div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8'>
-				{/* Back Link */}
-				<div className='mb-8' id='center-detail-container'>
+				{/* Back Links */}
+				<div className='mb-8 flex flex-wrap items-center gap-4' id='center-detail-container'>
 					<Link
 						to='/documents/assessment-centers'
 						className='inline-flex items-center text-blue-600 hover:text-blue-800 font-medium transition-colors'
@@ -48,6 +54,30 @@ export default function AssessmentCenterDetail() {
 						</svg>
 						{t('Назад к списку центров')}
 					</Link>
+
+					{fromExperts && (
+						<>
+							<span className='text-gray-300'>|</span>
+							<Link
+								to={backToExpertsUrl}
+								className='inline-flex items-center text-emerald-600 hover:text-emerald-800 font-medium transition-colors bg-emerald-50 px-3 py-1 rounded-lg border border-emerald-200 text-sm'
+							>
+								<svg
+									xmlns='http://www.w3.org/2000/svg'
+									className='h-4 w-4 mr-1.5'
+									viewBox='0 0 20 20'
+									fill='currentColor'
+								>
+									<path
+										fillRule='evenodd'
+										d='M9.707 16.707a1 1 0 01-1.414 0l-6-6a1 1 0 010-1.414l6-6a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l4.293 4.293a1 1 0 010 1.414z'
+										clipRule='evenodd'
+									/>
+								</svg>
+								{t('Назад к базе экспертов')}
+							</Link>
+						</>
+					)}
 				</div>
 
 				<div className='grid grid-cols-1 lg:grid-cols-3 gap-8'>
@@ -55,7 +85,13 @@ export default function AssessmentCenterDetail() {
 					<div className='lg:col-span-2 space-y-6'>
 						<div className='bg-white rounded-2xl shadow-sm border border-gray-100 p-6 sm:p-8'>
 							<h1 className='text-2xl sm:text-3xl font-extrabold text-gray-900 leading-tight mb-4'>
-								{center.organization}
+								{center.id === 4
+									? (i18n.language.startsWith('k') || i18n.language === 'ky'
+										? 'С. Нааматов атындагы Нарын мамлекеттик университетинин Агрардык техникалык-экономикалык колледжи'
+										: i18n.language.startsWith('en')
+										? 'Agrarian Technical and Economic College of Naryn State University named after S. Naamatov'
+										: 'Аграрный технико-экономический колледж Нарынского государственного университета имени С. Нааматова')
+									: center.organization}
 							</h1>
 							<div className='w-20 h-1.5 bg-blue-500 rounded-full'></div>
 						</div>
