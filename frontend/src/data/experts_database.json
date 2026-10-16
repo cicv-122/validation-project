@@ -610,14 +610,14 @@
     "role_kg": "Баалоочу",
     "profession_ru": "Швея",
     "profession_kg": "Тикмечи",
-    "organization": "Руководитель, ОсОО «Садовская УПП КОС и КОХ»",
+    "organization": "Руководитель, ОсОО «Садовское УПП КОС и КОГ»",
     "phone": "0999 818 188",
     "id": 31,
     "assessment_center_id": null,
-    "partner_id": null,
+    "partner_id": 22,
     "name_en": "Bakaev Samat Omurbekovich",
-    "organization_en": "Director, LLC \"Sadovskaya UPP KOS and KOKh\"",
-    "organization_kg": "Жетекчи, «Садовская УПП КОС жана КОХ» ЖЧКсы"
+    "organization_en": "Director, LLC \"Sadovskoe UPP KOS and KOG\"",
+    "organization_kg": "Жетекчи, «Садовское УПП КОС жана КОГ» ЖЧКсы"
   },
   {
     "code": "01",
@@ -630,14 +630,14 @@
     "role_kg": "Баалоочу",
     "profession_ru": "Швея",
     "profession_kg": "Тикмечи",
-    "organization": "Руководитель, ОсОО «Токмокское УПП КОС и КОХ»",
+    "organization": "Руководитель, ОсОО «Токмокское УПП КОС и КОГ»",
     "phone": "0705 066 499",
     "id": 32,
     "assessment_center_id": null,
-    "partner_id": null,
+    "partner_id": 22,
     "name_en": "Turbatov Salamat",
-    "organization_en": "Director, LLC \"Tokmokskoe UPP KOS and KOKh\"",
-    "organization_kg": "Жетекчи, «Токмокское УПП КОС жана КОХ» ЖЧКсы"
+    "organization_en": "Director, LLC \"Tokmokskoe UPP KOS and KOG\"",
+    "organization_kg": "Жетекчи, «Токмокское УПП КОС жана КОГ» ЖЧКсы"
   },
   {
     "code": "01",
