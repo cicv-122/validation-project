@@ -36,7 +36,7 @@ export default function ContactsSection() {
 							</svg>
 						</div>
 						<h3 className='text-white font-semibold mb-1'>{t('Адрес')}</h3>
-						<p className='text-blue-200 text-sm'>{t('ул. Байтик Баатыра, 122')}</p>
+						<p className='text-blue-200 text-sm'>{t('ул. Жусупа Абдрахманова, 276')}</p>
 						<p className='text-blue-200 text-sm'>{t('г. Бишкек, Кыргызстан')}</p>
 					</div>
 

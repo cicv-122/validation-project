@@ -79,7 +79,7 @@ export default function Footer() {
 							<li>
 								<span className='flex items-start'>
 									<span className='mr-2'>📍</span>
-									{t('ул. Байтик Баатыра, 122')}
+									{t('ул. Жусупа Абдрахманова, 276')}
 								</span>
 							</li>
 						</ul>
