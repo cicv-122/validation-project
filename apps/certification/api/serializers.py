@@ -30,6 +30,7 @@ class CertificationApplicationSerializer(serializers.ModelSerializer):
             'qualification_level',
             'inn',
             'phone',
+            'whatsapp',
             'email',
             'address',
             'data_consent',

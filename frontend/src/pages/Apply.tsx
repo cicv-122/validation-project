@@ -19,6 +19,7 @@ export default function Apply() {
 	const { t } = useTranslation();
 	const [step, setStep] = useState(0);
 	const [isSubmitting, setIsSubmitting] = useState(false);
+	const [validationError, setValidationError] = useState<string | null>(null);
 	const [submitResult, setSubmitResult] = useState<{
 		success: boolean;
 		regNumber?: string;
@@ -30,6 +31,7 @@ export default function Apply() {
 		birth_year: '',
 		inn: '',
 		phone: '',
+		whatsapp: '',
 		email: '',
 		address: '',
 		profession: '',
@@ -44,6 +46,7 @@ export default function Apply() {
 		e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
 	) => {
 		const { name, value, type } = e.target;
+		setValidationError(null);
 		if (type === 'checkbox') {
 			setForm((prev) => ({ ...prev, [name]: (e.target as HTMLInputElement).checked }));
 		} else {
@@ -60,8 +63,36 @@ export default function Apply() {
 		});
 	};
 
+	// Валидация всей формы перед отправкой
+	const validateForm = () => {
+		if (!form.full_name.trim()) {
+			return { isValid: false, stepIndex: 0, error: 'Укажите ФИО кандидата (Шаг 1)' };
+		}
+		if (!form.inn || form.inn.length !== 14 || !/^\d+$/.test(form.inn)) {
+			return { isValid: false, stepIndex: 0, error: 'Укажите корректный 14-значный персональный номер (Шаг 1)' };
+		}
+		if (!form.phone.trim()) {
+			return { isValid: false, stepIndex: 0, error: 'Укажите номер телефона для связи (Шаг 1)' };
+		}
+		if (!form.profession.trim()) {
+			return { isValid: false, stepIndex: 1, error: 'Укажите вашу профессию (Шаг 2)' };
+		}
+		if (!form.data_consent) {
+			return { isValid: false, stepIndex: 3, error: 'Необходимо подтвердить согласие на обработку данных (Шаг 4)' };
+		}
+		return { isValid: true, stepIndex: 3, error: null };
+	};
+
 	const handleSubmit = async () => {
+		const check = validateForm();
+		if (!check.isValid) {
+			setValidationError(check.error);
+			setStep(check.stepIndex);
+			return;
+		}
+
 		setIsSubmitting(true);
+		setValidationError(null);
 		try {
 			const data = new FormData();
 			Object.entries(form).forEach(([key, val]) => data.append(key, String(val)));
@@ -86,22 +117,6 @@ export default function Apply() {
 		} finally {
 			setIsSubmitting(false);
 		}
-	};
-
-	const canNext = () => {
-		if (step === 0)
-			return (
-				form.full_name &&
-				form.inn &&
-				form.inn.length === 14 &&
-				/^\d+$/.test(form.inn) &&
-				form.phone &&
-				form.email
-			);
-		if (step === 1) return form.profession;
-		if (step === 2) return true;
-		if (step === 3) return form.data_consent;
-		return false;
 	};
 
 	// Success screen
@@ -141,7 +156,19 @@ export default function Apply() {
 							'Сохраните этот номер. Вы можете проверить статус вашей заявки на странице «Статус заявки».'
 						)}
 					</p>
-					<div className='flex gap-3 justify-center'>
+					<div className='flex gap-3 justify-center flex-wrap'>
+						{form.phone && (
+							<a
+								href={`https://wa.me/${form.whatsapp ? form.whatsapp.replace(/\D/g, '') : form.phone.replace(/\D/g, '')}?text=${encodeURIComponent(
+									`Здравствуйте, ${form.full_name}!\nВаша заявка на сертификацию/валидацию зарегистрирована в ЦНСВ при МП КР.\nРегистрационный номер: ${submitResult.regNumber}\nПроверить статус заявки: https://validation.kg/apply/status?reg=${submitResult.regNumber}`
+								)}`}
+								target='_blank'
+								rel='noopener noreferrer'
+								className='px-5 py-2.5 bg-green-600 text-white rounded-lg text-sm font-medium hover:bg-green-700 transition-colors flex items-center gap-2'
+							>
+								<span>💬 Сохранить в WhatsApp</span>
+							</a>
+						)}
 						<a
 							href={`/apply/status?reg=${submitResult.regNumber}`}
 							className='px-5 py-2.5 bg-blue-600 text-white rounded-lg text-sm font-medium hover:bg-blue-700 transition-colors'
@@ -182,28 +209,53 @@ export default function Apply() {
 				{/* Stepper */}
 				<div className='flex items-center mb-8 gap-0'>
 					{STEPS.map((label, i) => (
-						<div key={i} className='flex-1 flex flex-col items-center'>
+						<button
+							key={i}
+							type='button'
+							onClick={() => {
+								setValidationError(null);
+								setStep(i);
+							}}
+							className='flex-1 flex flex-col items-center group cursor-pointer focus:outline-none'
+						>
 							<div
 								className={`w-9 h-9 rounded-full flex items-center justify-center text-sm font-semibold border-2 transition-all ${
 									i < step
-										? 'bg-blue-600 border-blue-600 text-white'
+										? 'bg-blue-600 border-blue-600 text-white group-hover:scale-105'
 										: i === step
-										? 'bg-white border-blue-600 text-blue-600'
-										: 'bg-white border-gray-200 text-gray-400'
+										? 'bg-white border-blue-600 text-blue-600 shadow-md group-hover:scale-105'
+										: 'bg-white border-gray-200 text-gray-400 group-hover:border-blue-400 group-hover:text-blue-500'
 								}`}
 							>
 								{i < step ? '✓' : i + 1}
 							</div>
 							<span
-								className={`text-xs mt-1 text-center ${
-									i === step ? 'text-blue-600 font-medium' : 'text-gray-400'
+								className={`text-xs mt-1 text-center transition-colors ${
+									i === step ? 'text-blue-600 font-semibold' : 'text-gray-400 group-hover:text-gray-600'
 								}`}
 							>
 								{t(label)}
 							</span>
-						</div>
+						</button>
 					))}
 				</div>
+
+				{/* Validation Banner if any error */}
+				{validationError && (
+					<div className='mb-6 p-4 bg-red-50 border border-red-200 rounded-xl text-sm text-red-700 flex items-center justify-between animate-shake'>
+						<div className='flex items-center gap-2'>
+							<span className='text-red-500 font-bold'>⚠️</span>
+							<span>{t(validationError)}</span>
+						</div>
+						<button
+							type='button'
+							onClick={() => setValidationError(null)}
+							className='text-xs text-red-500 hover:underline font-medium'
+						>
+							✕
+						</button>
+					</div>
+				)}
 
 				{/* Card */}
 				<div className='bg-white rounded-2xl shadow-lg p-8'>
@@ -228,7 +280,10 @@ export default function Apply() {
 					{/* Navigation */}
 					<div className='flex justify-between mt-8 pt-6 border-t border-gray-100'>
 						<button
-							onClick={() => setStep((s) => Math.max(0, s - 1))}
+							onClick={() => {
+								setValidationError(null);
+								setStep((s) => Math.max(0, s - 1));
+							}}
 							disabled={step === 0}
 							className='px-5 py-2.5 rounded-lg text-sm font-medium text-gray-600 bg-gray-100 hover:bg-gray-200 disabled:opacity-30 disabled:cursor-not-allowed transition-colors'
 						>
@@ -236,16 +291,18 @@ export default function Apply() {
 						</button>
 						{step < STEPS.length - 1 ? (
 							<button
-								onClick={() => setStep((s) => s + 1)}
-								disabled={!canNext()}
-								className='px-6 py-2.5 rounded-lg text-sm font-semibold text-white bg-blue-600 hover:bg-blue-700 disabled:opacity-40 disabled:cursor-not-allowed transition-colors'
+								onClick={() => {
+									setValidationError(null);
+									setStep((s) => s + 1);
+								}}
+								className='px-6 py-2.5 rounded-lg text-sm font-semibold text-white bg-blue-600 hover:bg-blue-700 transition-colors'
 							>
 								{t('Далее →')}
 							</button>
 						) : (
 							<button
 								onClick={handleSubmit}
-								disabled={!canNext() || isSubmitting}
+								disabled={isSubmitting}
 								className='px-6 py-2.5 rounded-lg text-sm font-semibold text-white bg-green-600 hover:bg-green-700 disabled:opacity-40 disabled:cursor-not-allowed transition-colors flex items-center gap-2'
 							>
 								{isSubmitting ? (

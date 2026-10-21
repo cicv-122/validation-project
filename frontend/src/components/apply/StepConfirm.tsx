@@ -5,6 +5,7 @@ interface FormData {
 	birth_year: string;
 	inn: string;
 	phone: string;
+	whatsapp: string;
 	email: string;
 	address: string;
 	profession: string;
@@ -44,6 +45,7 @@ export default function StepConfirm({ form, documentsCount, errorMsg, onChange }
 				<Row label={t('Год рождения')} value={form.birth_year || '—'} />
 				<Row label={t('Персональный номер')} value={form.inn} />
 				<Row label={t('Телефон')} value={form.phone} />
+				{form.whatsapp && <Row label='WhatsApp' value={form.whatsapp} />}
 				{form.address && <Row label='Адрес' value={form.address} />}
 				<Row label='Профессия' value={form.profession} />
 				{form.qualification_level && <Row label='Уровень' value={form.qualification_level} />}

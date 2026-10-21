@@ -5,6 +5,7 @@ interface FormData {
 	birth_year: string;
 	inn: string;
 	phone: string;
+	whatsapp: string;
 	email: string;
 	address: string;
 }
@@ -69,7 +70,7 @@ export default function StepPersonal({ form, onChange, onInnChange }: StepPerson
 					)}
 				</div>
 				<div>
-					<label className='block text-sm font-medium text-gray-700 mb-1'>{t('Телефон *')}</label>
+					<label className='block text-sm font-medium text-gray-700 mb-1'>{t('Телефон для связи *')}</label>
 					<input
 						type='tel'
 						name='phone'
@@ -80,14 +81,30 @@ export default function StepPersonal({ form, onChange, onInnChange }: StepPerson
 					/>
 				</div>
 				<div>
-					<label className='block text-sm font-medium text-gray-700 mb-1'>{t('E-mail *')}</label>
+					<label className='block text-sm font-medium text-gray-700 mb-1 flex items-center justify-between'>
+						<span>{t('Номер WhatsApp')}</span>
+						<button
+							type='button'
+							onClick={() => {
+								if (form.phone) {
+									const pseudoEvent = {
+										target: { name: 'whatsapp', value: form.phone, type: 'text' }
+									} as any;
+									onChange(pseudoEvent);
+								}
+							}}
+							className='text-xs text-blue-600 hover:underline'
+						>
+							{t('Такой же, как телефон')}
+						</button>
+					</label>
 					<input
-						type='email'
-						name='email'
-						value={form.email}
+						type='tel'
+						name='whatsapp'
+						value={form.whatsapp}
 						onChange={onChange}
-						placeholder='example@mail.com'
-						className='w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none text-sm'
+						placeholder='+996 700 000000'
+						className='w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 outline-none text-sm'
 					/>
 				</div>
 				<div className='md:col-span-2'>

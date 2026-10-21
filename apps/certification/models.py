@@ -159,7 +159,8 @@ class CertificationApplication(models.Model):
 
     # Контактные данные
     phone = models.CharField(max_length=50, verbose_name=_('Телефон'))
-    email = models.EmailField(verbose_name=_('E-mail'))
+    whatsapp = models.CharField(max_length=50, blank=True, default='', verbose_name=_('WhatsApp'))
+    email = models.EmailField(blank=True, null=True, default='', verbose_name=_('E-mail'))
     address = models.TextField(blank=True, verbose_name=_('Адрес проживания'))
 
     # Согласие на обработку данных

@@ -48,5 +48,5 @@ RUN python manage.py collectstatic --noinput
 
 EXPOSE 8000
 
-# Запускаем Gunicorn
-CMD ["gunicorn", "config.wsgi:application", "--bind", "0.0.0.0:8000", "--workers", "4", "--timeout", "60"]
+# Запускаем Gunicorn (2 воркера + потоки для оптимизации потребления памяти на тарифе 1 GB RAM)
+CMD ["gunicorn", "config.wsgi:application", "--bind", "0.0.0.0:8000", "--workers", "2", "--threads", "2", "--worker-class", "gthread", "--max-requests", "500", "--max-requests-jitter", "50", "--timeout", "60"]

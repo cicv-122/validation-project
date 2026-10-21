@@ -120,12 +120,11 @@ class CertificationApplicationAdmin(admin.ModelAdmin):
         'profession',
         'application_type',
         'status_badge',
-        'experience_years',
-        'submitted_at',
+        'phone_with_whatsapp',
         'created_at',
     ]
     list_filter = ['application_type', 'status', 'created_at', 'submitted_at']
-    search_fields = ['full_name', 'profession', 'email', 'phone', 'inn', 'registration_number']
+    search_fields = ['full_name', 'profession', 'email', 'phone', 'whatsapp', 'inn', 'registration_number']
     readonly_fields = ['registration_number', 'created_at', 'updated_at', 'submitted_at', 'reviewed_at', 'deleted_at']
     inlines = [ApplicationDocumentInline, AssessmentInline]
     ordering = ['-created_at']
@@ -145,7 +144,7 @@ class CertificationApplicationAdmin(admin.ModelAdmin):
             'fields': ('registration_number', 'application_type', 'status', 'created_at', 'updated_at', 'deleted_at')
         }),
         ('Данные кандидата', {
-            'fields': ('full_name', 'birth_year', 'inn', 'phone', 'email', 'address')
+            'fields': ('full_name', 'birth_year', 'inn', 'phone', 'whatsapp', 'email', 'address')
         }),
         ('Профессия', {
             'fields': ('profession_ref', 'profession', 'qualification_level')
@@ -172,6 +171,19 @@ class CertificationApplicationAdmin(admin.ModelAdmin):
         color, bg = STATUS_COLORS.get(obj.status, ('#374151', '#f3f4f6'))
         return badge(obj.get_status_display(), color, bg)
     status_badge.short_description = 'Статус'
+
+    def phone_with_whatsapp(self, obj):
+        wa_target = obj.whatsapp or obj.phone
+        cleaned_wa = ''.join(c for c in wa_target if c.isdigit())
+        if cleaned_wa:
+            wa_link = f'https://wa.me/{cleaned_wa}'
+            return format_html(
+                '{} <a href="{}" target="_blank" title="Написать в WhatsApp" style="display:inline-block; margin-left:6px; background:#25D366; color:white; padding:2px 6px; border-radius:4px; text-decoration:none; font-weight:bold; font-size:11px;">WA 💬</a>',
+                obj.phone,
+                wa_link
+            )
+        return obj.phone
+    phone_with_whatsapp.short_description = 'Телефон / WhatsApp'
 
 
 @admin.register(ApplicationDocument)

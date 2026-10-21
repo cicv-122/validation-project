@@ -59,3 +59,12 @@ static/modeltranslation/
 icvc-official/
 archive.tar.gz
 media.tar.gz
+media_files.tar.gz
+*.sql
+*.docx
+*.xlsx
+archive_data/
+egov_export/
+egov_news_bundle.zip
+validation_db_prod.sql
+

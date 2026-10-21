@@ -84,7 +84,7 @@ STATUS_MESSAGES = {
 
 @receiver(pre_save, sender=CertificationApplication)
 def send_status_change_email(sender, instance, **kwargs):
-    """Отправляет email кандидату при изменении статуса заявки."""
+    """Отправляет email кандидату при изменении статуса заявки (только если настроен email-сервер)."""
     if not instance.pk:
         return  # новая заявка — пропускаем
 
@@ -99,8 +99,13 @@ def send_status_change_email(sender, instance, **kwargs):
     # Сохраняем старый статус для аудита
     instance._previous_status = previous.status
 
+    # Не пытаемся отправлять email, если он пустой или если настройки почты не заданы (предотвращает зависания)
+    email_host_user = getattr(settings, 'EMAIL_HOST_USER', '')
+    if not email_host_user or 'example@' in email_host_user or not instance.email:
+        return
+
     template = STATUS_MESSAGES.get(instance.status)
-    if not template or not instance.email:
+    if not template:
         return
 
     type_display = dict(CertificationApplication.TYPE_CHOICES).get(
@@ -117,15 +122,21 @@ def send_status_change_email(sender, instance, **kwargs):
     )
 
     try:
-        send_mail(
-            subject=template['subject'],
-            message=body,
-            from_email=getattr(settings, 'DEFAULT_FROM_EMAIL', 'noreply@icvc.kg'),
-            recipient_list=[instance.email],
-            fail_silently=True,
-        )
+        import threading
+        # Отправляем в отдельном потоке, чтобы браузер/админка не зависали в ожидании ответа SMTP
+        threading.Thread(
+            target=send_mail,
+            kwargs={
+                'subject': template['subject'],
+                'message': body,
+                'from_email': getattr(settings, 'DEFAULT_FROM_EMAIL', 'noreply@icvc.kg'),
+                'recipient_list': [instance.email],
+                'fail_silently': True,
+            },
+            daemon=True
+        ).start()
     except Exception:
-        pass  # не блокируем сохранение при ошибке отправки
+        pass
 
 
 @receiver(post_save, sender=CertificationApplication)
