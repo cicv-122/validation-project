@@ -21,7 +21,7 @@ export default function ImageGallery() {
 	const slides = allImages.map((img: any) => ({ src: img.image }));
 
 	return (
-		<div className='bg-gray-50 min-h-screen'>
+		<div className='bg-transparent min-h-screen text-gray-900 dark:text-gray-100 transition-colors duration-200'>
 			<SEO
 				title={`${t('Фотогалерея')} — ${t('ЦНСВ при МП КР')}`}
 				description={t(
@@ -40,7 +40,7 @@ export default function ImageGallery() {
 							{allImages.map((img: any, idx: number) => (
 								<div
 									key={img.id}
-									className='bg-white rounded-xl shadow border border-gray-100 overflow-hidden hover:shadow-lg transition-shadow group cursor-pointer relative'
+									className='bg-white dark:bg-[#11162b] rounded-2xl shadow-sm border border-gray-100 dark:border-blue-900/40 overflow-hidden hover:shadow-xl dark:hover:border-blue-500/50 transition-all duration-300 group cursor-pointer relative'
 									onClick={() => setLightboxIndex(idx)}
 								>
 									<div className='aspect-w-3 aspect-h-2 w-full'>

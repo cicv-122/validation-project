@@ -24,11 +24,11 @@ export default function StepDocuments({ documents, onDocAdd }: StepDocumentsProp
 
 	return (
 		<div>
-			<h2 className='text-xl font-bold text-gray-800 mb-2 flex items-center gap-2'>
-				<span className='w-7 h-7 rounded-full bg-blue-600 text-white text-sm flex items-center justify-center'>3</span>
+			<h2 className='text-xl font-bold text-gray-800 dark:text-white mb-2 flex items-center gap-2'>
+				<span className='w-7 h-7 rounded-full bg-blue-600 text-white text-sm flex items-center justify-center font-bold'>3</span>
 				{t('Документы портфолио')}
 			</h2>
-			<p className='text-sm text-gray-500 mb-6'>
+			<p className='text-sm text-gray-500 dark:text-gray-400 mb-6'>
 				{t('Загрузите документы, подтверждающие вашу профессиональную квалификацию. Рекомендуется приложить все доступные документы.')}
 			</p>
 			<div className='space-y-4'>
@@ -38,14 +38,16 @@ export default function StepDocuments({ documents, onDocAdd }: StepDocumentsProp
 						<div
 							key={dt.value}
 							className={`rounded-xl border-2 p-4 transition-all ${
-								uploaded ? 'border-green-400 bg-green-50' : 'border-gray-200'
+								uploaded
+									? 'border-green-400 dark:border-green-600/60 bg-green-50 dark:bg-green-950/30'
+									: 'border-gray-200 dark:border-blue-900/40 bg-white dark:bg-[#0c0f24]'
 							}`}
 						>
 							<div className='flex items-start justify-between gap-3'>
 								<div className='flex-1'>
-									<p className='text-sm font-medium text-gray-800'>{dt.label}</p>
+									<p className='text-sm font-medium text-gray-800 dark:text-gray-200'>{dt.label}</p>
 									{uploaded && (
-										<p className='text-xs text-green-600 mt-1 flex items-center gap-1'>
+										<p className='text-xs text-green-600 dark:text-green-400 mt-1 flex items-center gap-1 font-medium'>
 											<svg className='w-3.5 h-3.5' fill='currentColor' viewBox='0 0 20 20'>
 												<path fillRule='evenodd' d='M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z' clipRule='evenodd' />
 											</svg>
@@ -53,7 +55,7 @@ export default function StepDocuments({ documents, onDocAdd }: StepDocumentsProp
 										</p>
 									)}
 								</div>
-								<label className='cursor-pointer px-3 py-1.5 rounded-lg text-xs font-medium bg-blue-600 text-white hover:bg-blue-700 transition-colors whitespace-nowrap'>
+								<label className='cursor-pointer px-3 py-1.5 rounded-lg text-xs font-semibold bg-blue-600 hover:bg-blue-700 dark:bg-blue-600 dark:hover:bg-blue-500 text-white transition-colors whitespace-nowrap shadow-sm'>
 									{uploaded ? 'Заменить' : 'Выбрать файл'}
 									<input
 										type='file'

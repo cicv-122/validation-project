@@ -22,15 +22,15 @@ export default function NewsSection({ news, isLoading }: NewsSectionProps) {
 	return (
 		<section className='py-16'>
 			<div className='max-w-7xl mx-auto'>
-				<div className='flex justify-between items-end mb-8 border-b-2 border-gray-100 pb-4'>
-					<h3 className='text-2xl font-bold text-gray-900'>
-						<Link to='/news' className='hover:text-blue-600 transition-colors'>
+				<div className='flex justify-between items-end mb-8 border-b-2 border-gray-100 dark:border-blue-900/30 pb-4'>
+					<h3 className='text-2xl font-bold text-gray-900 dark:text-white'>
+						<Link to='/news' className='hover:text-blue-600 dark:hover:text-blue-400 transition-colors'>
 							{t('Новости')}
 						</Link>
 					</h3>
 					<Link
 						to='/news'
-						className='inline-flex items-center gap-2 text-sm font-semibold text-[#283375] hover:text-blue-700 transition-colors group'
+						className='inline-flex items-center gap-2 text-sm font-semibold text-[#283375] dark:text-blue-300 hover:text-blue-700 dark:hover:text-blue-200 transition-colors group'
 					>
 						{t('Все новости')}
 						<svg

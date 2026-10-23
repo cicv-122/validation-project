@@ -200,7 +200,7 @@ export default function CertifiedUsers() {
 	};
 
 	return (
-		<div className='bg-gray-50 min-h-screen'>
+		<div className='bg-gray-50 dark:bg-[#0c0f24] min-h-screen text-gray-900 dark:text-gray-100 transition-colors duration-200'>
 			<SEO
 				title={`${t('База данных сертифицированных')} — ЦНСВ`}
 				description={t(
@@ -223,7 +223,7 @@ export default function CertifiedUsers() {
 							value={inputValue}
 							onChange={handleSearch}
 							placeholder={t('Поиск по ФИО, профессии или рег. номеру...')}
-							className='w-full pl-12 pr-10 py-3.5 text-sm bg-white border border-gray-200 rounded-2xl shadow-sm focus:outline-none focus:ring-2 focus:ring-[#283375] focus:border-[#283375] transition-all'
+							className='w-full pl-12 pr-10 py-3.5 text-sm bg-white dark:bg-[#11162b] text-gray-900 dark:text-gray-100 placeholder-gray-400 dark:placeholder-gray-500 border border-gray-200 dark:border-blue-900/40 rounded-2xl shadow-sm focus:outline-none focus:ring-2 focus:ring-[#283375] dark:focus:ring-blue-500 focus:border-[#283375] transition-all'
 						/>
 						{inputValue && (
 							<button
@@ -240,10 +240,10 @@ export default function CertifiedUsers() {
 
 					{/* Result count badge */}
 					{!isLoading && data && (
-						<p className='text-center text-sm text-gray-500 mt-3'>
+						<p className='text-center text-sm text-gray-500 dark:text-gray-400 mt-3'>
 							{search
-								? <><span className='font-semibold text-[#283375]'>{count}</span> {t('Найдено специалистов')}</>
-								: <>{t('Найдено специалистов')}: <span className='font-semibold text-[#283375]'>{count}</span></>
+								? <><span className='font-semibold text-[#283375] dark:text-blue-400'>{count}</span> {t('Найдено специалистов')}</>
+								: <>{t('Найдено специалистов')}: <span className='font-semibold text-[#283375] dark:text-blue-400'>{count}</span></>
 							}
 						</p>
 					)}
@@ -268,10 +268,10 @@ export default function CertifiedUsers() {
 											saveScrollPosition();
 											setSelectedUser(user);
 										}}
-										className={`bg-white rounded-2xl shadow-sm border overflow-hidden hover:shadow-md hover:-translate-y-0.5 transition-all duration-300 cursor-pointer ${
+										className={`bg-white dark:bg-[#11162b] rounded-2xl shadow-sm border overflow-hidden hover:shadow-md hover:-translate-y-0.5 transition-all duration-300 cursor-pointer ${
 											isHighlighted
-												? 'ring-4 ring-blue-500 shadow-xl scale-[1.02] border-blue-500 bg-blue-50/30'
-												: 'border-gray-100'
+												? 'ring-4 ring-blue-500 shadow-xl scale-[1.02] border-blue-500 bg-blue-50/30 dark:bg-blue-900/30'
+												: 'border-gray-100 dark:border-blue-900/30'
 										}`}
 									>
 									{/* Photo */}
@@ -282,29 +282,29 @@ export default function CertifiedUsers() {
 											className='w-full h-52 object-cover object-top'
 										/>
 									) : (
-										<div className='w-full h-52 flex items-center justify-center bg-gray-100'>
+										<div className='w-full h-52 flex items-center justify-center bg-gray-100 dark:bg-slate-800/60'>
 											<PersonIcon />
 										</div>
 									)}
 
 									{/* Info */}
 									<div className='p-4 text-center space-y-2'>
-										<h3 className='text-base font-bold text-gray-900 leading-tight' title={i18n.language === 'en' ? transliterate(user.full_name) : user.full_name}>
+										<h3 className='text-base font-bold text-gray-900 dark:text-white leading-tight' title={i18n.language === 'en' ? transliterate(user.full_name) : user.full_name}>
 											{i18n.language === 'en' ? transliterate(user.full_name) : user.full_name}
 										</h3>
 
 										{user.profession && (
-											<p className='text-xs text-gray-500 line-clamp-2'>
+											<p className='text-xs text-gray-500 dark:text-gray-400 line-clamp-2'>
 												{translateProfession(user.profession, i18n.language)}
 											</p>
 										)}
 
-										<span className='inline-block text-xs font-semibold text-[#283375] bg-blue-50 border border-blue-100 py-1 px-3 rounded-full'>
+										<span className='inline-block text-xs font-semibold text-[#283375] dark:text-blue-300 bg-blue-50 dark:bg-blue-950/70 border border-blue-100 dark:border-blue-800/60 py-1 px-3 rounded-full'>
 											{t('Рег. номер')}: {user.registration_number}
 										</span>
 
 										{user.issued_date && (
-											<p className='text-xs text-gray-400'>
+											<p className='text-xs text-gray-400 dark:text-gray-500'>
 												{t('Выдача сертификата')}: {new Date(user.issued_date).toLocaleDateString('ru-RU')}
 											</p>
 										)}
@@ -328,7 +328,7 @@ export default function CertifiedUsers() {
 										id='certified-users-prev'
 										onClick={() => handlePageChange(Math.max(1, page - 1))}
 										disabled={page === 1 || isFetching}
-										className='px-4 py-2 text-sm font-medium rounded-xl border border-gray-200 bg-white text-gray-700 hover:bg-gray-50 disabled:opacity-40 disabled:cursor-not-allowed transition-all'
+										className='px-4 py-2 text-sm font-medium rounded-xl border border-gray-200 dark:border-blue-900/40 bg-white dark:bg-[#11162b] text-gray-700 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-blue-900/30 disabled:opacity-40 disabled:cursor-not-allowed transition-all'
 									>
 										← {t('Предыдущая')}
 									</button>
@@ -352,8 +352,8 @@ export default function CertifiedUsers() {
 														disabled={isFetching}
 														className={`w-9 h-9 text-sm font-medium rounded-xl transition-all ${
 															page === p
-																? 'bg-[#283375] text-white shadow-sm'
-																: 'bg-white border border-gray-200 text-gray-700 hover:bg-gray-50'
+																? 'bg-[#283375] dark:bg-blue-600 text-white shadow-sm'
+																: 'bg-white dark:bg-[#11162b] border border-gray-200 dark:border-blue-900/40 text-gray-700 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-blue-900/30'
 														}`}
 													>
 														{p}
@@ -366,7 +366,7 @@ export default function CertifiedUsers() {
 										id='certified-users-next'
 										onClick={() => handlePageChange(Math.min(pages, page + 1))}
 										disabled={page === pages || isFetching}
-										className='px-4 py-2 text-sm font-medium rounded-xl border border-gray-200 bg-white text-gray-700 hover:bg-gray-50 disabled:opacity-40 disabled:cursor-not-allowed transition-all'
+										className='px-4 py-2 text-sm font-medium rounded-xl border border-gray-200 dark:border-blue-900/40 bg-white dark:bg-[#11162b] text-gray-700 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-blue-900/30 disabled:opacity-40 disabled:cursor-not-allowed transition-all'
 									>
 										{t('Следующая')} →
 									</button>

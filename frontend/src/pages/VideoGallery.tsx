@@ -16,7 +16,7 @@ export default function VideoGallery() {
 	const allVideos = data?.pages.flatMap((page) => page.results) || [];
 
 	return (
-		<div className='bg-white min-h-screen'>
+		<div className='bg-transparent min-h-screen text-gray-900 dark:text-gray-100 transition-colors duration-200'>
 			<SEO
 				title={`${t('Видео галерея')} — ${t('ЦНСВ при МП КР')}`}
 				description={t(
@@ -35,7 +35,7 @@ export default function VideoGallery() {
 							{allVideos.map((video: any) => (
 								<div
 									key={video.id}
-									className='bg-black rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-shadow'
+									className='bg-black rounded-2xl overflow-hidden shadow-sm hover:shadow-xl border border-transparent dark:border-blue-900/40 transition-shadow'
 								>
 									<div
 										className='w-full relative overflow-hidden'

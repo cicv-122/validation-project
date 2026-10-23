@@ -26,12 +26,12 @@ export default function Navbar() {
 
 	const desktopLinkClass = (active: boolean) =>
 		active
-			? 'bg-white text-[#283375] inline-flex items-center px-4 h-10 text-sm font-bold transition-all duration-200 rounded-xl'
+			? 'bg-white dark:bg-blue-600 text-[#283375] dark:text-white inline-flex items-center px-4 h-10 text-sm font-bold transition-all duration-200 rounded-xl shadow-xs'
 			: 'text-white hover:bg-white/10 inline-flex items-center px-4 h-full text-sm font-medium transition-all duration-200';
 
 	const mobileLinkClass = (active: boolean) =>
 		active
-			? 'bg-white text-[#283375] block px-4 py-2 text-base font-bold rounded-xl transition-colors'
+			? 'bg-white dark:bg-blue-600 text-[#283375] dark:text-white block px-4 py-2 text-base font-bold rounded-xl transition-colors'
 			: 'text-white hover:bg-white/5 block px-4 py-2 text-base font-medium rounded-xl transition-colors';
 
 	const toggleMenu = () => setIsOpen(!isOpen);
@@ -39,8 +39,7 @@ export default function Navbar() {
 	return (
 		<>
 			<nav
-				className='shadow-md sticky top-0 border-t border-blue-800/30 z-50 rounded-xl'
-				style={{ backgroundColor: '#283375' }}
+				className='shadow-md sticky top-0 border-t border-blue-800/30 dark:border-slate-800 z-50 rounded-xl bg-[#283375] dark:bg-[#141b36] transition-colors duration-200'
 			>
 				<div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8'>
 					<div className='flex justify-center h-14 relative'>
@@ -69,8 +68,7 @@ export default function Navbar() {
 									</svg>
 								</button>
 								<div
-									className='absolute hidden group-hover:block top-full left-0 w-48 shadow-xl py-1 z-50 border border-blue-800/50'
-									style={{ backgroundColor: '#283375' }}
+									className='absolute hidden group-hover:block top-full left-0 w-48 shadow-xl py-1 z-50 border border-blue-800/50 dark:border-slate-800 bg-[#283375] dark:bg-[#141b36]'
 								>
 									<Link to='/news' className='block px-4 py-2 text-sm text-white hover:bg-white/10'>
 										{t('Все новости')}
@@ -117,8 +115,7 @@ export default function Navbar() {
 									</svg>
 								</button>
 								<div
-									className='absolute hidden group-hover:block top-full left-0 w-64 shadow-xl py-1 z-50 border border-blue-800/50'
-									style={{ backgroundColor: '#283375' }}
+									className='absolute hidden group-hover:block top-full left-0 w-64 shadow-xl py-1 z-50 border border-blue-800/50 dark:border-slate-800 bg-[#283375] dark:bg-[#141b36]'
 								>
 									<Link
 										to='/about/management'
@@ -168,8 +165,7 @@ export default function Navbar() {
 									</svg>
 								</button>
 								<div
-									className='absolute hidden group-hover:block top-full right-0 w-64 shadow-xl py-1 z-50 border border-blue-800/50'
-									style={{ backgroundColor: '#283375' }}
+									className='absolute hidden group-hover:block top-full right-0 w-64 shadow-xl py-1 z-50 border border-blue-800/50 dark:border-slate-800 bg-[#283375] dark:bg-[#141b36]'
 								>
 									<Link
 										to='/documents/assessment-centers'

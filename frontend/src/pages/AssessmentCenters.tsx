@@ -28,7 +28,7 @@ export default function AssessmentCenters() {
 	}, [isLoading, centers]);
 
 	return (
-		<div className='bg-gray-50 min-h-screen'>
+		<div className='bg-transparent min-h-screen text-gray-900 dark:text-gray-100 transition-colors duration-200'>
 			<SEO
 				title={`${t('Центры оценки компетенций')} — ${t('ЦНСВ при МП КР')}`}
 				description={t(
@@ -51,10 +51,10 @@ export default function AssessmentCenters() {
 									sessionStorage.setItem('from_centers', 'true');
 									sessionStorage.setItem('centers_scroll_pos', window.scrollY.toString());
 								}}
-								className='group bg-white rounded-xl shadow-sm hover:shadow-md transition-all duration-300 p-6 border border-gray-100 border-l-4 border-l-blue-500 flex flex-col justify-between hover:border-l-blue-600'
+								className='group bg-white dark:bg-[#11162b] rounded-2xl shadow-sm hover:shadow-xl dark:hover:border-blue-500/50 transition-all duration-300 p-6 border border-gray-100 dark:border-blue-900/40 border-l-4 border-l-blue-500 dark:border-l-blue-500 flex flex-col justify-between hover:border-l-blue-600'
 							>
 								<div>
-									<h3 className='text-xl font-bold text-gray-900 mb-6 group-hover:text-blue-600 transition-colors duration-300 leading-tight min-h-28 flex items-start'>
+									<h3 className='text-xl font-bold text-gray-900 dark:text-white mb-6 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors duration-300 leading-tight min-h-28 flex items-start'>
 										{center.id === 4
 											? (i18n.language.startsWith('k') || i18n.language === 'ky'
 												? 'С. Нааматов атындагы Нарын мамлекеттик университетинин Агрардык техникалык-экономикалык колледжи'
@@ -64,16 +64,16 @@ export default function AssessmentCenters() {
 											: center.organization}
 									</h3>
 									<div>
-										<p className='text-sm text-gray-500 mb-2'>{t('Руководство Центра')}:</p>
+										<p className='text-sm text-gray-500 dark:text-gray-400 mb-2'>{t('Руководство Центра')}:</p>
 										<div className='space-y-3'>
 											{center.directors?.map((director: any) => (
 												<div
 													key={director.id}
-													className='bg-slate-50/80 rounded-lg p-3 border border-slate-100 group-hover:bg-slate-100/50 transition-colors duration-300'
+													className='bg-slate-50/80 dark:bg-slate-900/70 rounded-xl p-3 border border-slate-100 dark:border-blue-900/30 group-hover:bg-slate-100/50 dark:group-hover:bg-blue-900/30 transition-colors duration-300'
 												>
-													<p className='font-medium text-gray-800'>{director.name}</p>
+													<p className='font-medium text-gray-800 dark:text-gray-200'>{director.name}</p>
 													{director.phone && (
-														<div className='mt-1 flex items-center text-gray-600'>
+														<div className='mt-1 flex items-center text-gray-600 dark:text-gray-400'>
 															<svg
 																className='w-3.5 h-3.5 mr-1.5 text-blue-500'
 																fill='none'

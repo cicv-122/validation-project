@@ -9,7 +9,7 @@ export default function AdditionalInfo() {
 	const { data: standards, isLoading, error } = useProfStandards();
 
 	return (
-		<div className='bg-gray-50 min-h-screen'>
+		<div className='bg-transparent min-h-screen text-gray-900 dark:text-gray-100 transition-colors duration-200'>
 			<SEO
 				title={`${t('Дополнительная информация')} — ${t('ЦНСВ при МП КР')}`}
 				description={t(
@@ -20,9 +20,9 @@ export default function AdditionalInfo() {
 			<div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12'>
 				{/* Static Documents Section */}
 				<div className='mb-16'>
-					<h2 className='text-2xl font-bold text-gray-800 mb-6 flex items-center'>
+					<h2 className='text-2xl font-bold text-gray-800 dark:text-white mb-6 flex items-center'>
 						<svg
-							className='w-6 h-6 mr-2 text-blue-600'
+							className='w-6 h-6 mr-2 text-blue-600 dark:text-blue-400'
 							fill='none'
 							stroke='currentColor'
 							viewBox='0 0 24 24'
@@ -85,29 +85,29 @@ export default function AdditionalInfo() {
 					) : error ? (
 						<ErrorMessage message={t('Ошибка загрузки документов.')} />
 					) : standards && standards.length > 0 ? (
-						<div className='bg-white overflow-hidden shadow-sm rounded-2xl border border-gray-100'>
+						<div className='bg-white dark:bg-[#11162b] overflow-hidden shadow-sm rounded-2xl border border-gray-100 dark:border-blue-900/40'>
 							<div className='overflow-x-auto'>
-								<table className='min-w-full divide-y divide-gray-100'>
-									<thead className='bg-gray-50/80'>
+								<table className='min-w-full divide-y divide-gray-100 dark:divide-blue-900/30'>
+									<thead className='bg-gray-50/80 dark:bg-slate-900/60'>
 										<tr>
 											<th
 												scope='col'
-												className='px-6 py-4 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider'
+												className='px-6 py-4 text-left text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider'
 											>
 												{t('Название')}
 											</th>
 											<th
 												scope='col'
-												className='px-6 py-4 text-right text-xs font-semibold text-gray-500 uppercase tracking-wider'
+												className='px-6 py-4 text-right text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider'
 											>
 												{t('Файл')}
 											</th>
 										</tr>
 									</thead>
-									<tbody className='bg-white divide-y divide-gray-50'>
+									<tbody className='bg-white dark:bg-[#11162b] divide-y divide-gray-50 dark:divide-blue-900/30'>
 										{standards.map((doc: ProfStandard) => (
-											<tr key={doc.id} className='hover:bg-slate-50/50 transition-colors'>
-												<td className='px-6 py-5 whitespace-normal text-sm font-semibold text-gray-900 leading-snug'>
+											<tr key={doc.id} className='hover:bg-slate-50/50 dark:hover:bg-blue-900/20 transition-colors'>
+												<td className='px-6 py-5 whitespace-normal text-sm font-semibold text-gray-900 dark:text-white leading-snug'>
 													{doc.title}
 												</td>
 												<td className='px-6 py-5 whitespace-nowrap text-right text-sm font-semibold'>
@@ -115,7 +115,7 @@ export default function AdditionalInfo() {
 														href={doc.file}
 														target='_blank'
 														rel='noreferrer'
-														className='text-blue-600 hover:text-blue-800 inline-flex items-center transition-colors bg-blue-50 px-3 py-1.5 rounded-lg hover:bg-blue-100'
+														className='text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 inline-flex items-center transition-colors bg-blue-50 dark:bg-blue-950/70 border border-transparent dark:border-blue-800/40 px-3 py-1.5 rounded-lg hover:bg-blue-100 dark:hover:bg-blue-900/40'
 													>
 														<svg
 															xmlns='http://www.w3.org/2000/svg'

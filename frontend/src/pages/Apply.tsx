@@ -122,11 +122,11 @@ export default function Apply() {
 	// Success screen
 	if (submitResult?.success) {
 		return (
-			<div className='min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 flex items-center justify-center px-4 py-16'>
-				<div className='bg-white rounded-2xl shadow-xl p-10 max-w-lg w-full text-center'>
-					<div className='w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6'>
+			<div className='min-h-screen bg-slate-50 dark:bg-[#080b18] text-gray-900 dark:text-gray-100 flex items-center justify-center px-4 py-16 transition-colors'>
+				<div className='bg-white dark:bg-[#11162b] rounded-2xl shadow-xl border border-gray-100 dark:border-blue-900/40 p-10 max-w-lg w-full text-center'>
+					<div className='w-20 h-20 bg-green-100 dark:bg-green-950/50 rounded-full flex items-center justify-center mx-auto mb-6'>
 						<svg
-							className='w-10 h-10 text-green-600'
+							className='w-10 h-10 text-green-600 dark:text-green-400'
 							fill='none'
 							viewBox='0 0 24 24'
 							stroke='currentColor'
@@ -139,19 +139,19 @@ export default function Apply() {
 							/>
 						</svg>
 					</div>
-					<h2 className='text-2xl font-bold text-gray-900 mb-3'>{t('Заявка успешно подана!')}</h2>
-					<p className='text-gray-600 mb-6'>
+					<h2 className='text-2xl font-bold text-gray-900 dark:text-white mb-3'>{t('Заявка успешно подана!')}</h2>
+					<p className='text-gray-600 dark:text-gray-300 mb-6'>
 						{t('Ваш регистрационный номер для отслеживания статуса:')}
 					</p>
-					<div className='bg-blue-50 border border-blue-200 rounded-xl px-6 py-4 mb-6'>
-						<p className='text-xs text-blue-500 uppercase tracking-wider mb-1'>
+					<div className='bg-blue-50 dark:bg-[#0c0f24] border border-blue-200 dark:border-blue-900/50 rounded-xl px-6 py-4 mb-6'>
+						<p className='text-xs text-blue-600 dark:text-blue-400 font-semibold uppercase tracking-wider mb-1'>
 							{t('Регистрационный номер')}
 						</p>
-						<p className='font-mono text-base font-bold text-blue-800 break-all'>
+						<p className='font-mono text-base font-bold text-blue-800 dark:text-blue-300 break-all'>
 							{submitResult.regNumber}
 						</p>
 					</div>
-					<p className='text-sm text-gray-500 mb-8'>
+					<p className='text-sm text-gray-500 dark:text-gray-400 mb-8'>
 						{t(
 							'Сохраните этот номер. Вы можете проверить статус вашей заявки на странице «Статус заявки».'
 						)}
@@ -171,13 +171,13 @@ export default function Apply() {
 						)}
 						<a
 							href={`/apply/status?reg=${submitResult.regNumber}`}
-							className='px-5 py-2.5 bg-blue-600 text-white rounded-lg text-sm font-medium hover:bg-blue-700 transition-colors'
+							className='px-5 py-2.5 bg-blue-600 hover:bg-blue-700 dark:bg-blue-600 dark:hover:bg-blue-500 text-white rounded-lg text-sm font-medium transition-colors'
 						>
 							{t('Проверить статус')}
 						</a>
 						<a
 							href='/'
-							className='px-5 py-2.5 bg-gray-100 text-gray-700 rounded-lg text-sm font-medium hover:bg-gray-200 transition-colors'
+							className='px-5 py-2.5 bg-gray-100 hover:bg-gray-200 dark:bg-[#1a213d] dark:hover:bg-[#232c4f] text-gray-700 dark:text-gray-200 rounded-lg text-sm font-medium transition-colors'
 						>
 							{t('На главную')}
 						</a>
@@ -188,7 +188,7 @@ export default function Apply() {
 	}
 
 	return (
-		<div className='min-h-screen bg-gradient-to-br from-slate-50 to-blue-50 py-12 px-4'>
+		<div className='min-h-screen bg-slate-50 dark:bg-[#080b18] text-gray-900 dark:text-gray-100 py-12 px-4 transition-colors'>
 			<SEO
 				title={`${t('Подача заявки')} — ${t('ЦНСВ при МП КР')}`}
 				description={t(
@@ -198,10 +198,10 @@ export default function Apply() {
 			<div className='max-w-3xl mx-auto'>
 				{/* Header */}
 				<div className='text-center mb-10'>
-					<h1 className='text-3xl font-extrabold text-gray-900'>
+					<h1 className='text-3xl font-extrabold text-gray-900 dark:text-white tracking-tight'>
 						{t('Заявка на сертификацию / валидацию')}
 					</h1>
-					<p className='mt-3 text-gray-500 text-sm'>
+					<p className='mt-3 text-gray-500 dark:text-gray-400 text-sm'>
 						{t('Приложение №1 — Центр независимой сертификации и валидации при МП КР')}
 					</p>
 				</div>
@@ -223,15 +223,15 @@ export default function Apply() {
 									i < step
 										? 'bg-blue-600 border-blue-600 text-white group-hover:scale-105'
 										: i === step
-										? 'bg-white border-blue-600 text-blue-600 shadow-md group-hover:scale-105'
-										: 'bg-white border-gray-200 text-gray-400 group-hover:border-blue-400 group-hover:text-blue-500'
+										? 'bg-white dark:bg-[#11162b] border-blue-600 dark:border-blue-400 text-blue-600 dark:text-blue-400 shadow-md group-hover:scale-105'
+										: 'bg-white dark:bg-[#11162b] border-gray-200 dark:border-blue-900/40 text-gray-400 dark:text-gray-500 group-hover:border-blue-400 group-hover:text-blue-400'
 								}`}
 							>
 								{i < step ? '✓' : i + 1}
 							</div>
 							<span
 								className={`text-xs mt-1 text-center transition-colors ${
-									i === step ? 'text-blue-600 font-semibold' : 'text-gray-400 group-hover:text-gray-600'
+									i === step ? 'text-blue-600 dark:text-blue-400 font-semibold' : 'text-gray-400 dark:text-gray-500 group-hover:text-gray-600 dark:group-hover:text-gray-300'
 								}`}
 							>
 								{t(label)}
@@ -242,7 +242,7 @@ export default function Apply() {
 
 				{/* Validation Banner if any error */}
 				{validationError && (
-					<div className='mb-6 p-4 bg-red-50 border border-red-200 rounded-xl text-sm text-red-700 flex items-center justify-between animate-shake'>
+					<div className='mb-6 p-4 bg-red-50 dark:bg-red-950/40 border border-red-200 dark:border-red-900/50 rounded-xl text-sm text-red-700 dark:text-red-300 flex items-center justify-between animate-shake'>
 						<div className='flex items-center gap-2'>
 							<span className='text-red-500 font-bold'>⚠️</span>
 							<span>{t(validationError)}</span>
@@ -258,12 +258,25 @@ export default function Apply() {
 				)}
 
 				{/* Card */}
-				<div className='bg-white rounded-2xl shadow-lg p-8'>
+				<div className='bg-white dark:bg-[#11162b] rounded-2xl shadow-lg border border-gray-100 dark:border-blue-900/40 p-8'>
 					{step === 0 && (
 						<StepPersonal
 							form={form}
 							onChange={handleChange}
-							onInnChange={(val) => setForm((prev) => ({ ...prev, inn: val }))}
+							onInnChange={(val) => {
+								setForm((prev) => {
+									const updated = { ...prev, inn: val };
+									// Если введено 14 цифр — автоматически определяем год рождения из ИНН (позиции 6..10: ДДММГГГГ)
+									if (val.length === 14) {
+										const yearStr = val.substring(5, 9);
+										const yearNum = parseInt(yearStr, 10);
+										if (yearNum >= 1930 && yearNum <= 2020) {
+											updated.birth_year = String(yearNum);
+										}
+									}
+									return updated;
+								});
+							}}
 						/>
 					)}
 					{step === 1 && <StepProfession form={form} onChange={handleChange} />}
@@ -278,14 +291,14 @@ export default function Apply() {
 					)}
 
 					{/* Navigation */}
-					<div className='flex justify-between mt-8 pt-6 border-t border-gray-100'>
+					<div className='flex justify-between mt-8 pt-6 border-t border-gray-100 dark:border-blue-900/30'>
 						<button
 							onClick={() => {
 								setValidationError(null);
 								setStep((s) => Math.max(0, s - 1));
 							}}
 							disabled={step === 0}
-							className='px-5 py-2.5 rounded-lg text-sm font-medium text-gray-600 bg-gray-100 hover:bg-gray-200 disabled:opacity-30 disabled:cursor-not-allowed transition-colors'
+							className='px-5 py-2.5 rounded-lg text-sm font-medium text-gray-600 dark:text-gray-300 bg-gray-100 hover:bg-gray-200 dark:bg-[#1a213d] dark:hover:bg-[#232c4f] disabled:opacity-30 disabled:cursor-not-allowed transition-colors'
 						>
 							{t('← Назад')}
 						</button>
@@ -295,7 +308,7 @@ export default function Apply() {
 									setValidationError(null);
 									setStep((s) => s + 1);
 								}}
-								className='px-6 py-2.5 rounded-lg text-sm font-semibold text-white bg-blue-600 hover:bg-blue-700 transition-colors'
+								className='px-6 py-2.5 rounded-lg text-sm font-semibold text-white bg-blue-600 hover:bg-blue-700 dark:bg-blue-600 dark:hover:bg-blue-500 transition-colors shadow-sm'
 							>
 								{t('Далее →')}
 							</button>
@@ -303,7 +316,7 @@ export default function Apply() {
 							<button
 								onClick={handleSubmit}
 								disabled={isSubmitting}
-								className='px-6 py-2.5 rounded-lg text-sm font-semibold text-white bg-green-600 hover:bg-green-700 disabled:opacity-40 disabled:cursor-not-allowed transition-colors flex items-center gap-2'
+								className='px-6 py-2.5 rounded-lg text-sm font-semibold text-white bg-green-600 hover:bg-green-700 disabled:opacity-40 disabled:cursor-not-allowed transition-colors flex items-center gap-2 shadow-sm'
 							>
 								{isSubmitting ? (
 									<>
@@ -329,10 +342,10 @@ export default function Apply() {
 				</div>
 
 				{/* Info box */}
-				<div className='mt-6 bg-blue-50 border border-blue-200 rounded-xl p-4 text-sm text-blue-800'>
-					<p className='font-semibold mb-1'>{t('Адрес Центра:')}</p>
+				<div className='mt-6 bg-blue-50 dark:bg-[#11162b] border border-blue-200 dark:border-blue-900/40 rounded-xl p-4 text-sm text-blue-800 dark:text-blue-300'>
+					<p className='font-semibold mb-1 text-blue-900 dark:text-blue-200'>{t('Адрес Центра:')}</p>
 					<p>{t('ул. Жусупа Абдрахманова, 276')}</p>
-					<p className='mt-1'>Тел: +996703047535, +996755222794</p>
+					<p className='mt-1 text-blue-700 dark:text-blue-400'>Тел: +996703047535, +996755222794</p>
 				</div>
 			</div>
 		</div>

@@ -8,7 +8,7 @@ export default function ProfStandards() {
 	const { data: standards, isLoading, error } = useProfStandards();
 
 	return (
-		<div className='bg-white min-h-screen'>
+		<div className='bg-transparent min-h-screen text-gray-900 dark:text-gray-100 transition-colors duration-200'>
 			<SEO
 				title={`${t('Профессиональные стандарты')} — ${t('ЦНСВ при МП КР')}`}
 				description={t(
@@ -22,37 +22,37 @@ export default function ProfStandards() {
 				) : error ? (
 					<ErrorMessage message={t('Ошибка загрузки документов.')} />
 				) : standards && standards.length > 0 ? (
-					<div className='overflow-x-auto shadow-sm rounded-lg border border-gray-200'>
-						<table className='min-w-full divide-y divide-gray-200'>
-							<thead className='bg-gray-50'>
+					<div className='overflow-x-auto shadow-sm rounded-2xl border border-gray-200 dark:border-blue-900/40 bg-white dark:bg-[#11162b]'>
+						<table className='min-w-full divide-y divide-gray-200 dark:divide-blue-900/30'>
+							<thead className='bg-gray-50 dark:bg-slate-900/60'>
 								<tr>
 									<th
 										scope='col'
-										className='px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'
+										className='px-6 py-3.5 text-left text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider'
 									>
 										{t('Название')}
 									</th>
 									<th
 										scope='col'
-										className='px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'
+										className='px-6 py-3.5 text-left text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider'
 									>
 										{t('Дата публ.')}
 									</th>
 									<th
 										scope='col'
-										className='px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider'
+										className='px-6 py-3.5 text-right text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider'
 									>
 										{t('Файл')}
 									</th>
 								</tr>
 							</thead>
-							<tbody className='bg-white divide-y divide-gray-200'>
+							<tbody className='bg-white dark:bg-[#11162b] divide-y divide-gray-200 dark:divide-blue-900/30'>
 								{standards.map((doc: ProfStandard) => (
-									<tr key={doc.id} className='hover:bg-gray-50 transition-colors'>
-										<td className='px-6 py-4 whitespace-normal text-sm font-medium text-gray-900'>
+									<tr key={doc.id} className='hover:bg-blue-50/50 dark:hover:bg-blue-900/20 transition-colors'>
+										<td className='px-6 py-4 whitespace-normal text-sm font-semibold text-gray-900 dark:text-white'>
 											{doc.title}
 										</td>
-										<td className='px-6 py-4 whitespace-nowrap text-sm text-gray-500'>
+										<td className='px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-400'>
 											{new Date(doc.created_at).toLocaleDateString(i18n.language)}
 										</td>
 										<td className='px-6 py-4 whitespace-nowrap text-right text-sm font-medium'>
@@ -60,7 +60,7 @@ export default function ProfStandards() {
 												href={doc.file}
 												target='_blank'
 												rel='noreferrer'
-												className='text-blue-600 hover:text-blue-900 inline-flex items-center gap-1'
+												className='text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 inline-flex items-center gap-1 font-semibold'
 											>
 												<svg
 													className='w-4 h-4'

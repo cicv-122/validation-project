@@ -7,6 +7,7 @@ import Navbar from './components/Navbar';
 import ScrollToTop from './components/ScrollToTop';
 import Toolbar from './components/Toolbar';
 import { Spinner } from './components/ui';
+import { ThemeProvider } from './context/ThemeContext';
 
 const AdditionalInfo = lazy(() => import('./pages/AdditionalInfo'));
 const ApplicationStatus = lazy(() => import('./pages/ApplicationStatus'));
@@ -45,56 +46,58 @@ const queryClient = new QueryClient({
 
 export default function App() {
 	return (
-		<HelmetProvider>
-			<QueryClientProvider client={queryClient}>
-				<Router>
-					<ScrollToTop />
-					<div className='flex flex-col min-h-screen bg-gray-50'>
-						<div className='px-5'>
-							<Toolbar />
+		<ThemeProvider>
+			<HelmetProvider>
+				<QueryClientProvider client={queryClient}>
+					<Router>
+						<ScrollToTop />
+						<div className='flex flex-col min-h-screen bg-gray-50 dark:bg-[#080b18] text-gray-900 dark:text-gray-100 transition-colors duration-200'>
+							<div className='px-3 sm:px-5 pt-3'>
+								<Toolbar />
+							</div>
+							<div className='px-3 sm:px-5 my-3 sticky top-2 z-[60]'>
+								<Navbar />
+							</div>
+
+							<main className='flex-grow px-3 sm:px-5'>
+								<Suspense fallback={<Spinner />}>
+									<Routes>
+										<Route index element={<Home />} />
+										<Route path='news' element={<NewsList />} />
+										<Route path='news/:slug' element={<NewsDetail />} />
+										<Route path='gallery/images' element={<ImageGallery />} />
+										<Route path='gallery/videos' element={<VideoGallery />} />
+										<Route path='about/additional-info' element={<AdditionalInfo />} />
+										<Route path='about/management' element={<Management />} />
+										<Route path='documents/partners' element={<Partners />} />
+										<Route path='documents/partners/:id' element={<PartnerDetail />} />
+										<Route path='about/partners' element={<Partners />} />
+										<Route path='about/partners/:id' element={<PartnerDetail />} />
+										<Route path='documents/assessment-centers' element={<AssessmentCenters />} />
+										<Route path='documents/assessment-centers/:id' element={<AssessmentCenterDetail />} />
+										<Route path='documents/experts' element={<Experts />} />
+										<Route path='documents/certified-users' element={<CertifiedUsers />} />
+										<Route path='documents/prof-standards' element={<ProfStandards />} />
+										<Route path='verify/:id' element={<VerifyCertificate />} />
+										<Route path='apply' element={<Apply />} />
+										<Route path='apply/status' element={<ApplicationStatus />} />
+
+										{/* Редиректы со старых языковых префиксов */}
+										<Route path='ru/*' element={<LanguageRedirect />} />
+										<Route path='ky/*' element={<LanguageRedirect />} />
+										<Route path='en/*' element={<LanguageRedirect />} />
+
+										{/* 404 */}
+										<Route path='*' element={<NotFound />} />
+									</Routes>
+								</Suspense>
+							</main>
+
+							<Footer />
 						</div>
-						<div className='px-5 mb-5 sticky top-2 z-[60]'>
-							<Navbar />
-						</div>
-
-						<main className='flex-grow px-5'>
-							<Suspense fallback={<Spinner />}>
-								<Routes>
-									<Route index element={<Home />} />
-									<Route path='news' element={<NewsList />} />
-									<Route path='news/:slug' element={<NewsDetail />} />
-									<Route path='gallery/images' element={<ImageGallery />} />
-									<Route path='gallery/videos' element={<VideoGallery />} />
-									<Route path='about/additional-info' element={<AdditionalInfo />} />
-									<Route path='about/management' element={<Management />} />
-									<Route path='documents/partners' element={<Partners />} />
-									<Route path='documents/partners/:id' element={<PartnerDetail />} />
-									<Route path='about/partners' element={<Partners />} />
-									<Route path='about/partners/:id' element={<PartnerDetail />} />
-									<Route path='documents/assessment-centers' element={<AssessmentCenters />} />
-									<Route path='documents/assessment-centers/:id' element={<AssessmentCenterDetail />} />
-									<Route path='documents/experts' element={<Experts />} />
-									<Route path='documents/certified-users' element={<CertifiedUsers />} />
-									<Route path='documents/prof-standards' element={<ProfStandards />} />
-									<Route path='verify/:id' element={<VerifyCertificate />} />
-									<Route path='apply' element={<Apply />} />
-									<Route path='apply/status' element={<ApplicationStatus />} />
-
-									{/* Редиректы со старых языковых префиксов */}
-									<Route path='ru/*' element={<LanguageRedirect />} />
-									<Route path='ky/*' element={<LanguageRedirect />} />
-									<Route path='en/*' element={<LanguageRedirect />} />
-
-									{/* 404 */}
-									<Route path='*' element={<NotFound />} />
-								</Routes>
-							</Suspense>
-						</main>
-
-						<Footer />
-					</div>
-				</Router>
-			</QueryClientProvider>
-		</HelmetProvider>
+					</Router>
+				</QueryClientProvider>
+			</HelmetProvider>
+		</ThemeProvider>
 	);
 }

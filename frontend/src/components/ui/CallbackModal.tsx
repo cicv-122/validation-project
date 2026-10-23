@@ -113,9 +113,9 @@ export default function CallbackModal({ isOpen, onClose }: Props) {
 			<div className='absolute inset-0 bg-black/60 backdrop-blur-sm' onClick={onClose} />
 
 			{/* Modal card */}
-			<div className='relative bg-white rounded-3xl shadow-2xl w-full max-w-md overflow-hidden animate-fade-in-up'>
+			<div className='relative bg-white dark:bg-[#11162b] rounded-3xl shadow-2xl w-full max-w-md overflow-hidden animate-fade-in-up border border-transparent dark:border-blue-900/40 transition-colors'>
 				{/* Header */}
-				<div className='bg-[#283375] px-7 py-6 text-white'>
+				<div className='bg-[#283375] dark:bg-[#161d3d] px-7 py-6 text-white border-b border-transparent dark:border-blue-900/30'>
 					<button
 						onClick={onClose}
 						className='absolute top-4 right-4 text-white/60 hover:text-white transition-colors p-1'
@@ -132,10 +132,10 @@ export default function CallbackModal({ isOpen, onClose }: Props) {
 					</button>
 					<div className='flex items-center gap-3 mb-2'>
 						<div>
-							<h2 id='callback-modal-title' className='text-lg font-extrabold leading-tight'>
+							<h2 id='callback-modal-title' className='text-lg font-extrabold leading-tight text-white'>
 								{t('Оставьте номер — мы поможем!')}
 							</h2>
-							<p className='text-white/75 text-sm mt-0.5'>
+							<p className='text-white/75 dark:text-blue-200/80 text-sm mt-0.5'>
 								{t('Менеджер ответит на все вопросы и поможет собрать документы')}
 							</p>
 						</div>
@@ -146,15 +146,15 @@ export default function CallbackModal({ isOpen, onClose }: Props) {
 				<div className='px-7 py-6'>
 					{status === 'success' ? (
 						<div className='text-center py-4'>
-							<h3 className='text-xl font-bold text-gray-900 mb-2'>{t('Заявка принята!')}</h3>
-							<p className='text-gray-500 text-sm leading-relaxed'>
+							<h3 className='text-xl font-bold text-gray-900 dark:text-white mb-2'>{t('Заявка принята!')}</h3>
+							<p className='text-gray-500 dark:text-gray-300 text-sm leading-relaxed'>
 								{t(
 									'Наш менеджер напишет вам в WhatsApp или позвонит в течение рабочего дня. Мы поможем вам со всеми документами!'
 								)}
 							</p>
 							<button
 								onClick={onClose}
-								className='mt-6 px-6 py-2.5 bg-[#283375] text-white rounded-xl font-semibold text-sm hover:bg-[#1e2660] transition-colors'
+								className='mt-6 px-6 py-2.5 bg-[#283375] dark:bg-blue-600 text-white rounded-xl font-semibold text-sm hover:bg-[#1e2660] dark:hover:bg-blue-500 transition-colors'
 							>
 								{t('Закрыть')}
 							</button>
@@ -165,7 +165,7 @@ export default function CallbackModal({ isOpen, onClose }: Props) {
 							<div>
 								<label
 									htmlFor='cb-name'
-									className='block text-sm font-semibold text-gray-700 mb-1.5'
+									className='block text-sm font-semibold text-gray-700 dark:text-gray-200 mb-1.5'
 								>
 									{t('Как к вам обращаться?')}
 								</label>
@@ -177,7 +177,7 @@ export default function CallbackModal({ isOpen, onClose }: Props) {
 									value={name}
 									onChange={(e) => setName(e.target.value)}
 									placeholder={t('Например, Айнура')}
-									className='w-full px-4 py-3.5 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-[#283375] focus:border-[#283375] transition-all text-base outline-none'
+									className='w-full px-4 py-3.5 bg-gray-50 dark:bg-[#0c0f24] text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500 border border-gray-200 dark:border-blue-900/40 rounded-xl focus:ring-2 focus:ring-[#283375] dark:focus:ring-blue-500 focus:border-[#283375] transition-all text-base outline-none'
 								/>
 							</div>
 
@@ -185,7 +185,7 @@ export default function CallbackModal({ isOpen, onClose }: Props) {
 							<div>
 								<label
 									htmlFor='cb-phone'
-									className='block text-sm font-semibold text-gray-700 mb-1.5'
+									className='block text-sm font-semibold text-gray-700 dark:text-gray-200 mb-1.5'
 								>
 									{t('Ваш номер телефона (WhatsApp)')}
 								</label>
@@ -197,7 +197,7 @@ export default function CallbackModal({ isOpen, onClose }: Props) {
 									value={phone}
 									onChange={(e) => setPhone(e.target.value)}
 									placeholder='+996 555 000 000'
-									className='w-full px-4 py-3.5 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-[#283375] focus:border-[#283375] transition-all text-base outline-none'
+									className='w-full px-4 py-3.5 bg-gray-50 dark:bg-[#0c0f24] text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500 border border-gray-200 dark:border-blue-900/40 rounded-xl focus:ring-2 focus:ring-[#283375] dark:focus:ring-blue-500 focus:border-[#283375] transition-all text-base outline-none'
 								/>
 							</div>
 
@@ -205,7 +205,7 @@ export default function CallbackModal({ isOpen, onClose }: Props) {
 							<div>
 								<label
 									htmlFor='cb-profession'
-									className='block text-sm font-semibold text-gray-700 mb-1.5'
+									className='block text-sm font-semibold text-gray-700 dark:text-gray-200 mb-1.5'
 								>
 									{t('Ваша профессия')}
 								</label>
@@ -213,11 +213,11 @@ export default function CallbackModal({ isOpen, onClose }: Props) {
 									id='cb-profession'
 									value={profession}
 									onChange={(e) => setProfession(e.target.value)}
-									className='w-full px-4 py-3.5 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-[#283375] focus:border-[#283375] transition-all text-base outline-none appearance-none cursor-pointer'
+									className='w-full px-4 py-3.5 bg-gray-50 dark:bg-[#0c0f24] text-gray-900 dark:text-white border border-gray-200 dark:border-blue-900/40 rounded-xl focus:ring-2 focus:ring-[#283375] dark:focus:ring-blue-500 focus:border-[#283375] transition-all text-base outline-none appearance-none cursor-pointer'
 								>
-									<option value=''>{t('Выберите профессию...')}</option>
+									<option value='' className='dark:bg-[#11162b]'>{t('Выберите профессию...')}</option>
 									{PROFESSIONS.map((p) => (
-										<option key={p} value={p}>
+										<option key={p} value={p} className='dark:bg-[#11162b]'>
 											{t(p)}
 										</option>
 									))}
@@ -229,7 +229,7 @@ export default function CallbackModal({ isOpen, onClose }: Props) {
 								<div>
 									<label
 										htmlFor='cb-custom-profession'
-										className='block text-sm font-semibold text-gray-700 mb-1.5'
+										className='block text-sm font-semibold text-gray-700 dark:text-gray-200 mb-1.5'
 									>
 										{t('Укажите вашу профессию')}
 									</label>
@@ -240,14 +240,14 @@ export default function CallbackModal({ isOpen, onClose }: Props) {
 										value={customProfession}
 										onChange={(e) => setCustomProfession(e.target.value)}
 										placeholder={t('Например, Пекарь')}
-										className='w-full px-4 py-3.5 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-[#283375] focus:border-[#283375] transition-all text-base outline-none'
+										className='w-full px-4 py-3.5 bg-gray-50 dark:bg-[#0c0f24] text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500 border border-gray-200 dark:border-blue-900/40 rounded-xl focus:ring-2 focus:ring-[#283375] dark:focus:ring-blue-500 focus:border-[#283375] transition-all text-base outline-none'
 									/>
 								</div>
 							)}
 
 							{/* Error */}
 							{status === 'error' && (
-								<div className='bg-red-50 border border-red-200 rounded-xl px-4 py-3 text-red-700 text-sm'>
+								<div className='bg-red-50 dark:bg-red-950/60 border border-red-200 dark:border-red-800 rounded-xl px-4 py-3 text-red-700 dark:text-red-300 text-sm'>
 									{errorMsg}
 								</div>
 							)}
@@ -256,7 +256,7 @@ export default function CallbackModal({ isOpen, onClose }: Props) {
 							<button
 								type='submit'
 								disabled={status === 'loading' || !name || !phone}
-								className='w-full bg-[#283375] hover:bg-[#1e2660] disabled:opacity-50 disabled:cursor-not-allowed text-white font-bold text-base py-4 rounded-xl transition-all shadow-lg shadow-blue-900/20 flex items-center justify-center gap-2'
+								className='w-full bg-[#283375] dark:bg-blue-600 hover:bg-[#1e2660] dark:hover:bg-blue-500 disabled:opacity-50 disabled:cursor-not-allowed text-white font-bold text-base py-4 rounded-xl transition-all shadow-lg shadow-blue-900/20 flex items-center justify-center gap-2 cursor-pointer'
 							>
 								{status === 'loading' ? (
 									<>

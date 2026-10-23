@@ -141,7 +141,7 @@ export default function NewsList() {
 	const showSkeleton = isLoading && items.length === 0;
 
 	return (
-		<div className='bg-white min-h-screen'>
+		<div className='bg-transparent min-h-screen text-gray-900 dark:text-gray-100 transition-colors duration-200'>
 			<SEO
 				title={`${t('Новости')} — ${t('ЦНСВ при МП КР')}`}
 				description={t(
@@ -160,7 +160,7 @@ export default function NewsList() {
 							{items.map((item: NewsItem) => (
 								<div
 									key={item.id}
-									className='bg-white border rounded-xl shadow-sm hover:shadow-xl transition-all duration-300 overflow-hidden flex flex-col group'
+									className='bg-white dark:bg-[#11162b] border border-gray-100 dark:border-blue-900/30 rounded-2xl shadow-sm hover:shadow-xl dark:hover:border-blue-600/40 transition-all duration-300 overflow-hidden flex flex-col group'
 								>
 									<Link
 										to={`/news/${item.slug}`}
@@ -190,12 +190,12 @@ export default function NewsList() {
 											)}
 											<div className='absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-10 transition-opacity duration-300' />
 										</div>
-										<div className='p-6 flex-grow flex flex-col justify-between bg-white relative top-[-10px] rounded-t-2xl'>
+										<div className='p-6 flex-grow flex flex-col justify-between bg-white dark:bg-[#11162b] relative top-[-10px] rounded-t-2xl transition-colors'>
 											<div>
-												<span className='inline-block px-3 py-1 bg-blue-50 text-blue-600 text-xs font-semibold rounded-full mb-3'>
+												<span className='inline-block px-3 py-1 bg-blue-50 dark:bg-blue-950/70 text-blue-600 dark:text-blue-300 border border-blue-100 dark:border-blue-800/40 text-xs font-semibold rounded-full mb-3'>
 													{new Date(item.created).toLocaleDateString(i18n.language)}
 												</span>
-												<h2 className='text-xl font-bold text-gray-900 mb-3 line-clamp-3 group-hover:text-blue-600 transition-colors'>
+												<h2 className='text-xl font-bold text-gray-900 dark:text-white mb-3 line-clamp-3 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors'>
 													{item.title}
 												</h2>
 											</div>

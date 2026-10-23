@@ -29,7 +29,7 @@ export default function Partners() {
 	}, [isLoading, partners]);
 
 	return (
-		<div className='bg-white min-h-screen'>
+		<div className='bg-transparent min-h-screen text-gray-900 dark:text-gray-100 transition-colors duration-200'>
 			<SEO
 				title={`${t('Партнеры по развитию')} — ${t('ЦНСВ при МП КР')}`}
 				description={t(
@@ -43,8 +43,8 @@ export default function Partners() {
 				) : error ? (
 					<ErrorMessage message={t('Ошибка загрузки документов.')} />
 				) : partners && partners.length > 0 ? (
-					<div className='bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden'>
-						<ul className='divide-y divide-gray-100'>
+					<div className='bg-white dark:bg-[#11162b] rounded-2xl shadow-sm border border-gray-100 dark:border-blue-900/40 overflow-hidden'>
+						<ul className='divide-y divide-gray-100 dark:divide-blue-900/30'>
 							{partners.map((doc: DevelopmentPartner) => (
 								<li key={doc.id}>
 									<Link
@@ -53,10 +53,10 @@ export default function Partners() {
 											sessionStorage.setItem('from_partners', 'true');
 											sessionStorage.setItem('partners_scroll_pos', window.scrollY.toString());
 										}}
-										className='group flex items-center justify-between px-6 py-5 hover:bg-slate-50 transition-all duration-300'
+										className='group flex items-center justify-between px-6 py-5 hover:bg-slate-50 dark:hover:bg-blue-900/20 transition-all duration-300'
 									>
 										<div className='flex items-center space-x-4 w-full'>
-											<div className='flex-shrink-0 w-10 h-10 rounded-full bg-blue-50 flex items-center justify-center text-blue-500 group-hover:bg-blue-600 group-hover:text-white transition-colors duration-300'>
+											<div className='flex-shrink-0 w-10 h-10 rounded-full bg-blue-50 dark:bg-blue-950/70 flex items-center justify-center text-blue-500 dark:text-blue-300 group-hover:bg-blue-600 group-hover:text-white transition-colors duration-300'>
 												<svg
 													xmlns='http://www.w3.org/2000/svg'
 													className='h-5 w-5'
@@ -73,7 +73,7 @@ export default function Partners() {
 												</svg>
 											</div>
 											<div className='flex-1 min-w-0'>
-												<p className='text-base font-semibold text-gray-800 group-hover:text-blue-700 transition-colors duration-300 truncate whitespace-normal'>
+												<p className='text-base font-semibold text-gray-800 dark:text-gray-100 group-hover:text-blue-700 dark:group-hover:text-blue-400 transition-colors duration-300 truncate whitespace-normal'>
 													{doc.title}
 												</p>
 											</div>

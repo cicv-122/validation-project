@@ -7,7 +7,7 @@
 		--brand-blue: #283375;
 	}
 	body {
-		@apply antialiased text-gray-900 bg-gray-50;
+		@apply antialiased text-gray-900 bg-gray-50 dark:bg-[#080b18] dark:text-gray-100 transition-colors duration-200;
 	}
 }
 
@@ -15,5 +15,8 @@
 	.bg-topography {
 		background-image: url('/static/dist/images/bg/pattern.png');
 		background-repeat: repeat;
+	}
+	.bg-radial-vignette {
+		background: radial-gradient(circle at 50% 0%, rgba(59, 130, 246, 0.15), transparent 70%);
 	}
 }

@@ -36,19 +36,19 @@ export default function Management() {
 	const renderMember = (member: ManagementMember) => (
 		<div
 			key={member.id}
-			className='bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden hover:shadow-lg transition-shadow duration-300 flex flex-col'
+			className='bg-white dark:bg-[#11162b] rounded-2xl shadow-sm border border-gray-100 dark:border-blue-900/40 overflow-hidden hover:shadow-xl dark:hover:border-blue-500/50 transition-all duration-300 flex flex-col'
 		>
-			<div className='aspect-[4/5] w-full relative bg-gray-100 flex items-center justify-center overflow-hidden'>
+			<div className='aspect-[4/5] w-full relative bg-gray-100 dark:bg-slate-800 flex items-center justify-center overflow-hidden'>
 				<MemberImage image={member.image} name={member.full_name} />
-				<div className='absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent' />
+				<div className='absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent' />
 				<div className='absolute bottom-0 left-0 right-0 p-6 text-white drop-shadow-md'>
 					<h3 className='text-xl font-bold mb-1 leading-tight'>{member.full_name}</h3>
-					<p className='font-medium text-blue-200 text-sm leading-snug'>{member.position}</p>
+					<p className='font-medium text-blue-200 dark:text-blue-300 text-sm leading-snug'>{member.position}</p>
 				</div>
 			</div>
 			{member.description && (
 				<div className='p-6 flex-grow'>
-					<p className='text-gray-600 text-sm leading-relaxed whitespace-pre-line'>
+					<p className='text-gray-600 dark:text-gray-300 text-sm leading-relaxed whitespace-pre-line'>
 						{member.description}
 					</p>
 				</div>
@@ -60,7 +60,7 @@ export default function Management() {
 	const employees = members?.filter((m) => !m.is_management) || [];
 
 	return (
-		<div className='bg-white min-h-screen'>
+		<div className='bg-transparent min-h-screen text-gray-900 dark:text-gray-100 transition-colors duration-200'>
 			<SEO
 				title={`${t('Руководство')} — ${t('ЦНСВ при МП КР')}`}
 				description={t(

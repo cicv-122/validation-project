@@ -29,43 +29,43 @@ export default function StepProfession({ form, onChange }: StepProfessionProps) 
 
 	return (
 		<div>
-			<h2 className='text-xl font-bold text-gray-800 mb-6 flex items-center gap-2'>
-				<span className='w-7 h-7 rounded-full bg-blue-600 text-white text-sm flex items-center justify-center'>2</span>
+			<h2 className='text-xl font-bold text-gray-800 dark:text-white mb-6 flex items-center gap-2'>
+				<span className='w-7 h-7 rounded-full bg-blue-600 text-white text-sm flex items-center justify-center font-bold'>2</span>
 				{t('Профессия')} — {t('Тип процедуры *')}
 			</h2>
 			<div className='space-y-5'>
 				<div>
-					<label className='block text-sm font-medium text-gray-700 mb-1'>{t('Профессия *')}</label>
+					<label className='block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1'>{t('Профессия *')}</label>
 					<input
 						type='text'
 						name='profession'
 						value={form.profession}
 						onChange={onChange}
 						placeholder={t('Например: Повар, Сварщик, Парикмахер...')}
-						className='w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none text-sm'
+						className='w-full px-4 py-2.5 bg-white dark:bg-[#0c0f24] border border-gray-300 dark:border-blue-900/50 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none text-sm text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-600'
 					/>
 				</div>
 				<div>
-					<label className='block text-sm font-medium text-gray-700 mb-1'>{t('Квалификационный уровень')}</label>
+					<label className='block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1'>{t('Квалификационный уровень')}</label>
 					<input
 						type='text'
 						name='qualification_level'
 						value={form.qualification_level}
 						onChange={onChange}
 						placeholder={t('Например: 4-й уровень')}
-						className='w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none text-sm'
+						className='w-full px-4 py-2.5 bg-white dark:bg-[#0c0f24] border border-gray-300 dark:border-blue-900/50 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none text-sm text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-600'
 					/>
 				</div>
 				<div>
-					<label className='block text-sm font-medium text-gray-700 mb-3'>{t('Тип процедуры *')}</label>
+					<label className='block text-sm font-medium text-gray-700 dark:text-gray-300 mb-3'>{t('Тип процедуры *')}</label>
 					<div className='grid grid-cols-1 sm:grid-cols-2 gap-4'>
 						{OPTIONS.map(opt => (
 							<label
 								key={opt.value}
 								className={`flex flex-col cursor-pointer rounded-xl border-2 p-4 transition-all ${
 									form.application_type === opt.value
-										? 'border-blue-500 bg-blue-50'
-										: 'border-gray-200 hover:border-blue-300'
+										? 'border-blue-500 bg-blue-50 dark:bg-blue-950/40 text-blue-950 dark:text-white'
+										: 'border-gray-200 dark:border-blue-900/40 bg-white dark:bg-[#0c0f24] hover:border-blue-300 dark:hover:border-blue-700'
 								}`}
 							>
 								<input
@@ -76,8 +76,8 @@ export default function StepProfession({ form, onChange }: StepProfessionProps) 
 									onChange={onChange}
 									className='sr-only'
 								/>
-								<span className='font-semibold text-gray-800 text-sm'>{t(opt.label)}</span>
-								<span className='text-xs text-gray-500 mt-1'>{t(opt.desc)}</span>
+								<span className='font-semibold text-gray-800 dark:text-white text-sm'>{t(opt.label)}</span>
+								<span className='text-xs text-gray-500 dark:text-gray-400 mt-1'>{t(opt.desc)}</span>
 							</label>
 						))}
 					</div>

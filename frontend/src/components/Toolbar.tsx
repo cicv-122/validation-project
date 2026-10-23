@@ -1,10 +1,13 @@
 import { useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
+import { useTheme } from '../context/ThemeContext';
 
 import emblemKyrgyzstan from '../assets/logo/emblem-kyrgyzstan.svg';
 import logoDarkKg from '../assets/logo/logo-dark-bg-kg.svg';
 import logoDarkRu from '../assets/logo/logo-dark-bg-ru.svg';
+import logoWhiteKg from '../assets/logo/logo-white-transparent-kg.svg';
+import logoWhiteRu from '../assets/logo/logo-white-transparent-ru.svg';
 
 const LANGUAGES = [
 	{ code: 'ru', label: 'Русский', flag: '🇷🇺' },
@@ -14,12 +17,16 @@ const LANGUAGES = [
 
 export default function Toolbar() {
 	const { t, i18n } = useTranslation();
+	const { theme, toggleTheme } = useTheme();
 	const [isOpen, setIsOpen] = useState(false);
 	const dropdownRef = useRef<HTMLDivElement>(null);
 	const lang = i18n.language;
 
 	const isKyrgyz = lang?.startsWith('ky') || lang?.startsWith('kg');
-	const logo = isKyrgyz ? logoDarkKg : logoDarkRu;
+	// В светлой теме - синий логотип на белом фоне (logoDark), в тёмной теме - белоснежный логотип (logoWhite)
+	const logo = theme === 'dark'
+		? (isKyrgyz ? logoWhiteKg : logoWhiteRu)
+		: (isKyrgyz ? logoDarkKg : logoDarkRu);
 
 	const currentLang = LANGUAGES.find((l) => l.code === lang) ?? LANGUAGES[0];
 
@@ -35,9 +42,9 @@ export default function Toolbar() {
 	};
 
 	return (
-		<header className='bg-white'>
+		<header className='bg-white dark:bg-[#0f142b] border-b border-gray-100 dark:border-blue-900/30 rounded-2xl shadow-sm transition-colors duration-200 overflow-hidden'>
 			{/* Top Bar */}
-			<div className='bg-[#283375] border-b border-blue-800 shadow-sm rounded-b-xl'>
+			<div className='bg-[#283375] dark:bg-[#161d3d] border-b border-blue-800 dark:border-blue-900/40 shadow-sm'>
 				<div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8'>
 					<div className='flex justify-between items-center h-10 text-xs sm:text-sm gap-2'>
 						<div className='flex items-center space-x-4'>
@@ -52,56 +59,88 @@ export default function Toolbar() {
 							</a>
 						</div>
 
-						{/* Language Switcher */}
-						<div className='flex items-center border-l border-blue-700/50 pl-4'>
-							<div ref={dropdownRef} className='relative' onBlur={handleBlur}>
-								<button
-									onClick={() => setIsOpen((o) => !o)}
-									className='flex items-center gap-1.5 text-white/90 hover:text-white transition-colors font-medium cursor-pointer select-none'
-								>
-									<span className='text-sm sm:text-base leading-none'>{currentLang.flag}</span>
-									<span className='truncate max-w-[80px] sm:max-w-none'>{currentLang.label}</span>
-									<svg
-										className={`w-3 h-3 opacity-70 ml-0.5 transition-transform ${
-											isOpen ? 'rotate-180' : ''
-										}`}
-										fill='currentColor'
-										viewBox='0 0 20 20'
-									>
-										<path
-											fillRule='evenodd'
-											d='M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z'
-											clipRule='evenodd'
-										/>
-									</svg>
-								</button>
-
-								{isOpen && (
-									<div className='absolute right-0 top-[calc(100%+8px)] bg-white rounded-md shadow-xl py-1 z-[200] min-w-[155px] border border-gray-100'>
-										{LANGUAGES.map(({ code, label, flag }) => (
-											<button
-												key={code}
-												tabIndex={0}
-												onClick={() => handleSelect(code)}
-												className='w-full flex items-center gap-2.5 px-4 py-2 text-sm text-gray-800 hover:bg-gray-50 transition-colors'
-											>
-												<span className='text-base leading-none'>{flag}</span>
-												<span className='flex-1 text-left'>{label}</span>
-												{lang === code && (
-													<svg
-														className='w-4 h-4 text-[#283375] flex-shrink-0'
-														fill='none'
-														stroke='currentColor'
-														strokeWidth={2.5}
-														viewBox='0 0 24 24'
-													>
-														<path strokeLinecap='round' strokeLinejoin='round' d='M5 13l4 4L19 7' />
-													</svg>
-												)}
-											</button>
-										))}
-									</div>
+						{/* Right Actions: Dark Mode Toggle + Language Switcher */}
+						<div className='flex items-center space-x-2 sm:space-x-3'>
+							{/* Theme Toggle Button */}
+							<button
+								onClick={toggleTheme}
+								type='button'
+								title={theme === 'dark' ? t('Светлая тема') : t('Тёмная тема')}
+								aria-label='Toggle theme'
+								className='flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-white/10 hover:bg-white/20 text-white text-xs font-medium transition-colors cursor-pointer select-none'
+							>
+								{theme === 'dark' ? (
+									<>
+										<svg className='w-3.5 h-3.5 text-amber-300' fill='currentColor' viewBox='0 0 20 20'>
+											<path
+												fillRule='evenodd'
+												d='M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z'
+												clipRule='evenodd'
+											/>
+										</svg>
+										<span className='hidden sm:inline'>{t('Светлая')}</span>
+									</>
+								) : (
+									<>
+										<svg className='w-3.5 h-3.5 text-blue-200' fill='currentColor' viewBox='0 0 20 20'>
+											<path d='M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z' />
+										</svg>
+										<span className='hidden sm:inline'>{t('Тёмная')}</span>
+									</>
 								)}
+							</button>
+
+							{/* Language Switcher */}
+							<div className='flex items-center border-l border-blue-700/50 pl-2 sm:pl-3'>
+								<div ref={dropdownRef} className='relative' onBlur={handleBlur}>
+									<button
+										onClick={() => setIsOpen((o) => !o)}
+										className='flex items-center gap-1.5 text-white/90 hover:text-white transition-colors font-medium cursor-pointer select-none'
+									>
+										<span className='text-sm sm:text-base leading-none'>{currentLang.flag}</span>
+										<span className='truncate max-w-[80px] sm:max-w-none'>{currentLang.label}</span>
+										<svg
+											className={`w-3 h-3 opacity-70 ml-0.5 transition-transform ${
+												isOpen ? 'rotate-180' : ''
+											}`}
+											fill='currentColor'
+											viewBox='0 0 20 20'
+										>
+											<path
+												fillRule='evenodd'
+												d='M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z'
+												clipRule='evenodd'
+											/>
+										</svg>
+									</button>
+
+									{isOpen && (
+										<div className='absolute right-0 top-[calc(100%+8px)] bg-white dark:bg-[#1a224e] rounded-md shadow-xl py-1 z-[200] min-w-[155px] border border-gray-100 dark:border-blue-900/60'>
+											{LANGUAGES.map(({ code, label, flag }) => (
+												<button
+													key={code}
+													tabIndex={0}
+													onClick={() => handleSelect(code)}
+													className='w-full flex items-center gap-2.5 px-4 py-2 text-sm text-gray-800 dark:text-gray-100 hover:bg-gray-50 dark:hover:bg-blue-900/40 transition-colors'
+												>
+													<span className='text-base leading-none'>{flag}</span>
+													<span className='flex-1 text-left'>{label}</span>
+													{lang === code && (
+														<svg
+															className='w-4 h-4 text-[#283375] dark:text-blue-400 flex-shrink-0'
+															fill='none'
+															stroke='currentColor'
+															strokeWidth={2.5}
+															viewBox='0 0 24 24'
+														>
+															<path strokeLinecap='round' strokeLinejoin='round' d='M5 13l4 4L19 7' />
+														</svg>
+													)}
+												</button>
+											))}
+										</div>
+									)}
+								</div>
 							</div>
 						</div>
 					</div>
@@ -127,10 +166,10 @@ export default function Toolbar() {
 
 						{/* Title */}
 						<div className='text-center flex-grow px-2 sm:px-4 min-w-0'>
-							<p className='text-xs sm:text-xl md:text-3xl font-extrabold text-[#283375] leading-tight mb-1 uppercase tracking-tight'>
+							<p className='text-xs sm:text-xl md:text-3xl font-extrabold text-[#283375] dark:text-blue-300 leading-tight mb-1 uppercase tracking-tight transition-colors'>
 								{t('Центр независимой сертификации и валидации')}
 							</p>
-							<p className='text-gray-600 font-bold text-[10px] sm:text-sm md:text-base leading-tight'>
+							<p className='text-gray-600 dark:text-gray-300 font-bold text-[10px] sm:text-sm md:text-base leading-tight transition-colors'>
 								{t('при Министерстве просвещения Кыргызской Республики')}
 							</p>
 						</div>

@@ -17,7 +17,7 @@ export default function NewsCard({ item }: NewsCardProps) {
 	const { t, i18n } = useTranslation();
 
 	return (
-		<div className='bg-white border rounded-xl shadow-sm hover:shadow-lg transition-shadow overflow-hidden group'>
+		<div className='bg-white dark:bg-[#11162b] border border-gray-200 dark:border-blue-900/40 rounded-xl shadow-sm hover:shadow-lg dark:hover:border-blue-700 transition-all overflow-hidden group'>
 			<Link
 				to={`/news/${item.slug}`}
 				onClick={() => {
@@ -49,8 +49,8 @@ export default function NewsCard({ item }: NewsCardProps) {
 					)}
 				</div>
 				<div className='p-5 flex-grow flex flex-col justify-between'>
-					<h4 className='text-lg font-semibold text-gray-900 mb-3 line-clamp-2'>{item.title}</h4>
-					<span className='text-sm text-gray-500 block text-right mt-4'>
+					<h4 className='text-lg font-semibold text-gray-900 dark:text-gray-100 mb-3 line-clamp-2 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors'>{item.title}</h4>
+					<span className='text-sm text-gray-500 dark:text-gray-400 block text-right mt-4'>
 						{new Date(item.created).toLocaleDateString(i18n.language)}
 					</span>
 				</div>

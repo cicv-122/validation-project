@@ -23,11 +23,11 @@ export default function HeroSection({ sliders, isLoading }: HeroSectionProps) {
 	const { t } = useTranslation();
 
 	return (
-		<section className='relative bg-[#283375] pt-16 md:pt-24 pb-12 md:pb-20 rounded-3xl overflow-hidden'>
+		<section className='relative bg-[#283375] dark:bg-[#151c38] pt-16 md:pt-24 pb-12 md:pb-20 rounded-3xl overflow-hidden border border-transparent dark:border-blue-900/40 transition-colors duration-200'>
 			{/* Паттерн топографии */}
-			<div className='absolute inset-0 bg-topography pointer-events-none' />
+			<div className='absolute inset-0 bg-topography pointer-events-none opacity-40 dark:opacity-20' />
 			{/* Градиент, чтобы текст слева легко читался */}
-			<div className='absolute inset-0 bg-gradient-to-r from-[#283375] via-transparent to-transparent opacity-80 pointer-events-none z-0' />
+			<div className='absolute inset-0 bg-gradient-to-r from-[#283375] dark:from-[#151c38] via-transparent to-transparent opacity-80 pointer-events-none z-0' />
 
 			<div className='relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 z-10'>
 				<div className='flex flex-col lg:flex-row items-center gap-12 lg:gap-16'>
@@ -45,13 +45,13 @@ export default function HeroSection({ sliders, isLoading }: HeroSectionProps) {
 						<div className='flex flex-wrap gap-4'>
 							<Link
 								to='/apply'
-								className='inline-flex items-center bg-white text-[#283375] font-bold px-8 py-4 rounded-xl hover:bg-blue-50 transition-all shadow-lg hover:shadow-xl active:scale-95'
+								className='inline-flex items-center bg-white dark:bg-blue-600 text-[#283375] dark:text-white font-bold px-8 py-4 rounded-xl hover:bg-blue-50 dark:hover:bg-blue-500 transition-all shadow-lg hover:shadow-xl active:scale-95'
 							>
 								✦ {t('Подать заявку')}
 							</Link>
 							<a
 								href='#contacts'
-								className='inline-flex items-center text-white border-2 border-white/60 font-bold px-8 py-4 rounded-xl hover:bg-white/10 transition-all'
+								className='inline-flex items-center text-white border-2 border-white/60 dark:border-white/30 font-bold px-8 py-4 rounded-xl hover:bg-white/10 transition-all'
 							>
 								{t('Связаться с нами')}
 							</a>
