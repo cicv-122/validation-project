@@ -35,70 +35,11 @@ import qrcode
 import qrcode.image.svg
 from io import BytesIO
 
-# ---------------------------------------------------------------------------
-# Профессиональные отраслевые кластеры для умного поиска и фильтрации
-# (позволяет при запросе "сварщик" находить всех электрогазосварщиков,
-#  при запросе "повар" - кондитеров и шеф-поваров, и т.д.)
-# ---------------------------------------------------------------------------
-PROFESSION_CLUSTERS = {
-    'welding': {
-        'title': 'Сварочные технологии (газо-/электросварка)',
-        'stems': ['свар', 'газоэлектросвар', 'электрогазосвар', 'газорез'],
-    },
-    'textile': {
-        'title': 'Швейное производство и дизайн одежды',
-        'stems': ['шве', 'портн', 'закрой', 'модельер'],
-    },
-    'culinary': {
-        'title': 'Общепит, кулинария и кондитеры',
-        'stems': ['повар', 'кулинар', 'кондитер', 'пекар', 'шеф-повар'],
-    },
-    'electrical': {
-        'title': 'Электромонтаж и электрооборудование',
-        'stems': ['электр', 'электромонт', 'электромонтаж', 'энергет'],
-    },
-    'construction': {
-        'title': 'Строительство, отделка и монтаж',
-        'stems': ['строит', 'маляр', 'штукатур', 'арматур', 'бетон', 'каменщик', 'плиточн', 'гипсокартон', 'отделоч'],
-    },
-    'automotive': {
-        'title': 'Автосервис, ремонт и диагностика',
-        'stems': ['автослесар', 'автомехан', 'автоэлектр', 'ремонт авто', 'диагност', 'слесарь по ремонту'],
-    },
-    'sanitary': {
-        'title': 'Сантехника и водоснабжение',
-        'stems': ['сантех', 'слесарь-сантех', 'водопровод'],
-    },
-    'metallurgy': {
-        'title': 'Металлообработка (токари, слесари)',
-        'stems': ['токар', 'фрезер', 'слесар', 'жестян', 'станоч'],
-    },
-    'beauty': {
-        'title': 'Индустрия красоты и парикмахерское дело',
-        'stems': ['парикмах', 'барбер', 'стилист', 'косметол', 'визаж'],
-    },
-}
-
-
-def get_or_create_staff_for_user(user):
-    """
-    Возвращает StaffProfile для пользователя.
-    Если пользователь является суперпользователем и профиль еще не создан,
-    создает профиль руководителя автоматически.
-    """
-    if hasattr(user, 'staff_profile'):
-        return user.staff_profile
-
-    if user.is_superuser:
-        full_name = f"{user.first_name} {user.last_name}".strip() or user.username
-        profile = StaffProfile.objects.create(
-            user=user,
-            full_name=full_name,
-            role='supervisor',
-            is_active=True,
-        )
-        return profile
-    return None
+from apps.certification.selectors import (
+    PROFESSION_CLUSTERS,
+    get_or_create_staff_for_user,
+)
+from apps.document.services import get_or_create_app_for_certified_user
 
 
 class StaffAuthLoginView(APIView):
@@ -709,46 +650,6 @@ class StaffCertifiedUsersListView(APIView):
         page = paginator.paginate_queryset(qs, request)
         serializer = StaffCertifiedUserSerializer(page, many=True, context={'request': request})
         return paginator.get_paginated_response(serializer.data)
-
-
-def get_or_create_app_for_certified_user(user_obj):
-    """
-    Возвращает или создает связанное дело (CertificationApplication) для специалиста из реестра.
-    Это гарантирует, что к любому специалисту (включая 759 архивных записей) можно прикреплять
-    оценочные листы, экзаменационные задания, фото с экзаменов, протоколы и сканы сертификатов.
-    ВАЖНО: Делам из реестра всегда присваивается origin='registry_archive', чтобы они
-    не попадали в поток новых онлайн-заявок граждан с сайта.
-    """
-    app = getattr(user_obj, 'application', None)
-    if not app and user_obj.registration_number:
-        clean_digits = ''.join(c for c in user_obj.registration_number if c.isdigit())
-        app = (
-            CertificationApplication.objects.filter(certificate_number_issued=user_obj.registration_number, deleted_at__isnull=True).first() or
-            (CertificationApplication.objects.filter(certificate_number_issued__icontains=clean_digits, deleted_at__isnull=True).first() if clean_digits else None) or
-            CertificationApplication.objects.filter(full_name__iexact=user_obj.get_full_name(), deleted_at__isnull=True).first()
-        )
-    if not app:
-        app = CertificationApplication.objects.create(
-            origin='registry_archive',
-            full_name=user_obj.get_full_name(),
-            inn=user_obj.inn or '',
-            profession=user_obj.profession or '',
-            certificate_number_issued=user_obj.registration_number or '',
-            status='completed',
-            application_type='certification',
-            scheduled_date=user_obj.issued_date,
-            phone=getattr(user_obj, 'phone', '') or '—',
-        )
-    else:
-        if app.origin != 'registry_archive' and (not app.phone or app.phone == '—'):
-            app.origin = 'registry_archive'
-            app.save(update_fields=['origin'])
-
-    if user_obj.application != app:
-        user_obj.application = app
-        user_obj.save(update_fields=['application'])
-
-    return app
 
 
 class StaffCertifiedUserDetailView(APIView):
