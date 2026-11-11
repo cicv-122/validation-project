@@ -1,4 +1,16 @@
 // frontend/src/entities/candidate/model/types.ts
+export type {
+	CitizenshipCode,
+	PinAnalysisResult,
+} from '../../../utils/kyrgyzPinValidator';
+export {
+	CITIZENSHIP_OPTIONS,
+	analyzeKyrgyzPin,
+	detectCitizenshipFromExistingInn,
+} from '../../../utils/kyrgyzPinValidator';
+
+export type CitizenshipOption = (typeof import('../../../utils/kyrgyzPinValidator').CITIZENSHIP_OPTIONS)[number];
+
 export type CandidateApplicationType = 'certification' | 'validation';
 
 export type CandidateStatus =
