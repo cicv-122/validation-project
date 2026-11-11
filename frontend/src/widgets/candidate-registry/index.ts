@@ -1,0 +1,2 @@
+// Candidate registry widget
+export {};

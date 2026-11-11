@@ -1,0 +1,2 @@
+// Dossier viewer widget
+export {};

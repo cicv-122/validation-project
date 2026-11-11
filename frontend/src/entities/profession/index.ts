@@ -1,0 +1,2 @@
+// Profession entity
+export {};

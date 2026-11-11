@@ -1,0 +1,2 @@
+// Staff profile entity
+export {};

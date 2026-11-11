@@ -1,0 +1,2 @@
+// Assessment entity
+export {};

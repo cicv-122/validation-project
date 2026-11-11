@@ -1,0 +1,2 @@
+// Certificate entity
+export {};

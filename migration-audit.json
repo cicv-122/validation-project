@@ -1,0 +1,394 @@
+[
+  {
+    "file": "pages/staff/StaffDashboard.tsx",
+    "lines": 2670,
+    "imports_count": 3,
+    "suggested_layer": "widgets/features/entities",
+    "priority": "high"
+  },
+  {
+    "file": "pages/staff/StaffCandidateDossier.tsx",
+    "lines": 1966,
+    "imports_count": 3,
+    "suggested_layer": "widgets/features/entities",
+    "priority": "high"
+  },
+  {
+    "file": "pages/VerifyCertificate.tsx",
+    "lines": 1114,
+    "imports_count": 9,
+    "suggested_layer": "pages",
+    "priority": "high"
+  },
+  {
+    "file": "components/Navbar.tsx",
+    "lines": 592,
+    "imports_count": 4,
+    "suggested_layer": "widgets",
+    "priority": "high"
+  },
+  {
+    "file": "components/home/StatisticsSection.tsx",
+    "lines": 562,
+    "imports_count": 4,
+    "suggested_layer": "widgets",
+    "priority": "high"
+  },
+  {
+    "file": "pages/PartnerDetail.tsx",
+    "lines": 471,
+    "imports_count": 5,
+    "suggested_layer": "pages",
+    "priority": "medium"
+  },
+  {
+    "file": "pages/Apply.tsx",
+    "lines": 461,
+    "imports_count": 9,
+    "suggested_layer": "widgets/features/entities",
+    "priority": "medium"
+  },
+  {
+    "file": "pages/CertifiedUsers.tsx",
+    "lines": 404,
+    "imports_count": 9,
+    "suggested_layer": "pages",
+    "priority": "medium"
+  },
+  {
+    "file": "components/ui/CustomVideoPlayer.tsx",
+    "lines": 367,
+    "imports_count": 1,
+    "suggested_layer": "shared/ui",
+    "priority": "medium"
+  },
+  {
+    "file": "components/staff/StaffHeader.tsx",
+    "lines": 361,
+    "imports_count": 4,
+    "suggested_layer": "widgets/staff-header",
+    "priority": "medium"
+  },
+  {
+    "file": "api/staff.ts",
+    "lines": 360,
+    "imports_count": 1,
+    "suggested_layer": "entities/api",
+    "priority": "medium"
+  },
+  {
+    "file": "pages/Experts.tsx",
+    "lines": 337,
+    "imports_count": 5,
+    "suggested_layer": "pages",
+    "priority": "medium"
+  },
+  {
+    "file": "utils/kyrgyzPinValidator.ts",
+    "lines": 336,
+    "imports_count": 0,
+    "suggested_layer": "shared/lib",
+    "priority": "medium"
+  },
+  {
+    "file": "components/apply/StepProfession.tsx",
+    "lines": 335,
+    "imports_count": 4,
+    "suggested_layer": "features/apply-form",
+    "priority": "medium"
+  },
+  {
+    "file": "pages/AssessmentCenterDetail.tsx",
+    "lines": 322,
+    "imports_count": 4,
+    "suggested_layer": "pages",
+    "priority": "medium"
+  },
+  {
+    "file": "components/ui/CallbackModal.tsx",
+    "lines": 292,
+    "imports_count": 3,
+    "suggested_layer": "shared/ui",
+    "priority": "medium"
+  },
+  {
+    "file": "pages/ApplicationStatus.tsx",
+    "lines": 287,
+    "imports_count": 5,
+    "suggested_layer": "pages",
+    "priority": "medium"
+  },
+  {
+    "file": "pages/NewsDetail.tsx",
+    "lines": 281,
+    "imports_count": 11,
+    "suggested_layer": "pages",
+    "priority": "medium"
+  },
+  {
+    "file": "pages/Contacts.tsx",
+    "lines": 258,
+    "imports_count": 2,
+    "suggested_layer": "pages",
+    "priority": "medium"
+  },
+  {
+    "file": "hooks/useApi.ts",
+    "lines": 250,
+    "imports_count": 3,
+    "suggested_layer": "shared/hooks",
+    "priority": "medium"
+  },
+  {
+    "file": "pages/NewsList.tsx",
+    "lines": 241,
+    "imports_count": 8,
+    "suggested_layer": "pages",
+    "priority": "medium"
+  },
+  {
+    "file": "components/apply/StepPersonal.tsx",
+    "lines": 233,
+    "imports_count": 1,
+    "suggested_layer": "features/apply-form",
+    "priority": "medium"
+  },
+  {
+    "file": "components/apply/PhotoCropperModal.tsx",
+    "lines": 220,
+    "imports_count": 2,
+    "suggested_layer": "features/apply-form",
+    "priority": "medium"
+  },
+  {
+    "file": "components/CertifiedUserModal.tsx",
+    "lines": 212,
+    "imports_count": 6,
+    "suggested_layer": "widgets",
+    "priority": "medium"
+  },
+  {
+    "file": "components/apply/StepDocuments.tsx",
+    "lines": 178,
+    "imports_count": 3,
+    "suggested_layer": "features/apply-form",
+    "priority": "low"
+  },
+  {
+    "file": "pages/staff/StaffLogin.tsx",
+    "lines": 153,
+    "imports_count": 4,
+    "suggested_layer": "pages",
+    "priority": "low"
+  },
+  {
+    "file": "pages/AdditionalInfo.tsx",
+    "lines": 150,
+    "imports_count": 5,
+    "suggested_layer": "pages",
+    "priority": "low"
+  },
+  {
+    "file": "pages/AssessmentCenters.tsx",
+    "lines": 128,
+    "imports_count": 5,
+    "suggested_layer": "pages",
+    "priority": "low"
+  },
+  {
+    "file": "components/home/HeroSection.tsx",
+    "lines": 110,
+    "imports_count": 4,
+    "suggested_layer": "widgets",
+    "priority": "low"
+  },
+  {
+    "file": "pages/Partners.tsx",
+    "lines": 109,
+    "imports_count": 6,
+    "suggested_layer": "pages",
+    "priority": "low"
+  },
+  {
+    "file": "components/Footer.tsx",
+    "lines": 108,
+    "imports_count": 3,
+    "suggested_layer": "widgets",
+    "priority": "low"
+  },
+  {
+    "file": "pages/ImageGallery.tsx",
+    "lines": 107,
+    "imports_count": 5,
+    "suggested_layer": "pages",
+    "priority": "low"
+  },
+  {
+    "file": "pages/Management.tsx",
+    "lines": 103,
+    "imports_count": 5,
+    "suggested_layer": "pages",
+    "priority": "low"
+  },
+  {
+    "file": "components/home/ContactsSection.tsx",
+    "lines": 94,
+    "imports_count": 1,
+    "suggested_layer": "widgets",
+    "priority": "low"
+  },
+  {
+    "file": "pages/ProfStandards.tsx",
+    "lines": 92,
+    "imports_count": 4,
+    "suggested_layer": "pages",
+    "priority": "low"
+  },
+  {
+    "file": "pages/VideoGallery.tsx",
+    "lines": 92,
+    "imports_count": 3,
+    "suggested_layer": "pages",
+    "priority": "low"
+  },
+  {
+    "file": "components/apply/StepConfirm.tsx",
+    "lines": 86,
+    "imports_count": 1,
+    "suggested_layer": "features/apply-form",
+    "priority": "low"
+  },
+  {
+    "file": "components/home/NewsSection.tsx",
+    "lines": 73,
+    "imports_count": 4,
+    "suggested_layer": "widgets",
+    "priority": "low"
+  },
+  {
+    "file": "components/Toolbar.tsx",
+    "lines": 61,
+    "imports_count": 5,
+    "suggested_layer": "widgets",
+    "priority": "low"
+  },
+  {
+    "file": "components/ui/NewsCard.tsx",
+    "lines": 60,
+    "imports_count": 2,
+    "suggested_layer": "shared/ui",
+    "priority": "low"
+  },
+  {
+    "file": "components/ui/SocialLinks.tsx",
+    "lines": 48,
+    "imports_count": 0,
+    "suggested_layer": "shared/ui",
+    "priority": "low"
+  },
+  {
+    "file": "components/ui/SEO.tsx",
+    "lines": 46,
+    "imports_count": 2,
+    "suggested_layer": "shared/ui",
+    "priority": "low"
+  },
+  {
+    "file": "components/ui/DocumentCard.tsx",
+    "lines": 33,
+    "imports_count": 0,
+    "suggested_layer": "shared/ui",
+    "priority": "low"
+  },
+  {
+    "file": "pages/Home.tsx",
+    "lines": 33,
+    "imports_count": 6,
+    "suggested_layer": "pages",
+    "priority": "low"
+  },
+  {
+    "file": "pages/NotFound.tsx",
+    "lines": 29,
+    "imports_count": 2,
+    "suggested_layer": "pages",
+    "priority": "low"
+  },
+  {
+    "file": "utils/translateProfession.ts",
+    "lines": 29,
+    "imports_count": 1,
+    "suggested_layer": "shared/lib",
+    "priority": "low"
+  },
+  {
+    "file": "components/ScrollToTop.tsx",
+    "lines": 27,
+    "imports_count": 2,
+    "suggested_layer": "widgets",
+    "priority": "low"
+  },
+  {
+    "file": "api/client.ts",
+    "lines": 23,
+    "imports_count": 2,
+    "suggested_layer": "entities/api",
+    "priority": "low"
+  },
+  {
+    "file": "utils/transliterate.ts",
+    "lines": 23,
+    "imports_count": 0,
+    "suggested_layer": "shared/lib",
+    "priority": "low"
+  },
+  {
+    "file": "components/ui/PageHero.tsx",
+    "lines": 19,
+    "imports_count": 0,
+    "suggested_layer": "shared/ui",
+    "priority": "low"
+  },
+  {
+    "file": "components/ui/EmptyState.tsx",
+    "lines": 16,
+    "imports_count": 0,
+    "suggested_layer": "shared/ui",
+    "priority": "low"
+  },
+  {
+    "file": "components/ui/ErrorMessage.tsx",
+    "lines": 16,
+    "imports_count": 0,
+    "suggested_layer": "shared/ui",
+    "priority": "low"
+  },
+  {
+    "file": "utils/newsStore.ts",
+    "lines": 15,
+    "imports_count": 1,
+    "suggested_layer": "shared/lib",
+    "priority": "low"
+  },
+  {
+    "file": "components/ui/LoadingSkeleton.tsx",
+    "lines": 14,
+    "imports_count": 0,
+    "suggested_layer": "shared/ui",
+    "priority": "low"
+  },
+  {
+    "file": "components/ui/index.ts",
+    "lines": 11,
+    "imports_count": 0,
+    "suggested_layer": "shared/ui",
+    "priority": "low"
+  },
+  {
+    "file": "components/ui/Spinner.tsx",
+    "lines": 7,
+    "imports_count": 0,
+    "suggested_layer": "shared/ui",
+    "priority": "low"
+  }
+]
