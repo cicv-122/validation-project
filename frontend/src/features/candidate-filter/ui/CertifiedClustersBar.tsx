@@ -1,5 +1,5 @@
 // frontend/src/features/candidate-filter/ui/CertifiedClustersBar.tsx
-import React from 'react';
+import React, { useRef } from 'react';
 import type { CertifiedClusterItem } from '../../../api/staff';
 
 interface CertifiedClustersBarProps {
@@ -29,6 +29,14 @@ export const CertifiedClustersBar: React.FC<CertifiedClustersBarProps> = ({
 	activeCluster,
 	onClusterChange,
 }) => {
+	const scrollContainerRef = useRef<HTMLDivElement>(null);
+
+	const handleScrollBy = (amount: number) => {
+		if (scrollContainerRef.current) {
+			scrollContainerRef.current.scrollBy({ left: amount, behavior: 'smooth' });
+		}
+	};
+
 	return (
 		<div className="bg-white p-5 rounded-2xl border border-slate-200 shadow-xs space-y-4">
 			<div className="flex flex-col md:flex-row items-center justify-between gap-4">
@@ -124,45 +132,71 @@ export const CertifiedClustersBar: React.FC<CertifiedClustersBarProps> = ({
 
 			{/* Отраслевые кластеры профессий */}
 			{clusters.length > 0 && (
-				<div
-					onWheel={(e) => {
-						if (e.deltaY !== 0 && e.currentTarget.scrollWidth > e.currentTarget.clientWidth) {
-							e.currentTarget.scrollLeft += e.deltaY;
-						}
-					}}
-					className="pt-3 border-t border-slate-100 flex items-center gap-1.5 overflow-x-auto pb-3.5 pt-1 scroll-smooth [&::-webkit-scrollbar]:h-1.5 [&::-webkit-scrollbar-track]:bg-slate-100 [&::-webkit-scrollbar-track]:rounded-full [&::-webkit-scrollbar-thumb]:bg-slate-300 hover:[&::-webkit-scrollbar-thumb]:bg-slate-400 [&::-webkit-scrollbar-thumb]:rounded-full"
-				>
+				<div className="pt-3 border-t border-slate-100 flex items-center gap-2">
 					<span className="text-[11px] font-bold text-slate-400 uppercase tracking-wider shrink-0 mr-1 flex items-center gap-1">
 						<svg className="w-3.5 h-3.5 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
 							<path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
 						</svg>
 						Отрасли:
 					</span>
-					{clusters.map((c) => {
-						const isSel = activeCluster === c.key;
-						return (
-							<button
-								key={c.key}
-								type="button"
-								onMouseDown={(e) => e.preventDefault()}
-								onClick={() => onClusterChange(isSel ? '' : c.key)}
-								className={`px-3 py-1.5 rounded-xl text-xs font-bold transition-all shrink-0 cursor-pointer flex items-center gap-1.5 select-none ${
-									isSel
-										? 'bg-[#283375] text-white shadow-xs border border-transparent'
-										: 'bg-slate-50 text-slate-600 hover:bg-slate-100 border border-slate-200'
-								}`}
-							>
-								<span>{c.title}</span>
-								<span
-									className={`text-[10px] px-1.5 py-0.2 rounded-full font-extrabold ${
-										isSel ? 'bg-white/20 text-white' : 'bg-white text-slate-500 border border-slate-200'
+
+					{/* Кнопка скролла влево */}
+					<button
+						type="button"
+						onMouseDown={(e) => e.preventDefault()}
+						onClick={() => handleScrollBy(-240)}
+						className="hidden sm:flex shrink-0 w-7 h-7 rounded-lg items-center justify-center bg-slate-100 hover:bg-slate-200 text-slate-600 transition-colors cursor-pointer"
+						title="Прокрутить влево"
+					>
+						<svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+							<path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M15 19l-7-7 7-7" />
+						</svg>
+					</button>
+
+					{/* Горизонтальный список отраслей */}
+					<div
+						ref={scrollContainerRef}
+						className="flex-1 flex items-center gap-1.5 overflow-x-auto pb-3 pt-1 [&::-webkit-scrollbar]:h-1.5 [&::-webkit-scrollbar-track]:bg-slate-100 [&::-webkit-scrollbar-track]:rounded-full [&::-webkit-scrollbar-thumb]:bg-slate-300 hover:[&::-webkit-scrollbar-thumb]:bg-slate-400 [&::-webkit-scrollbar-thumb]:rounded-full"
+					>
+						{clusters.map((c) => {
+							const isSel = activeCluster === c.key;
+							return (
+								<button
+									key={c.key}
+									type="button"
+									onMouseDown={(e) => e.preventDefault()}
+									onClick={() => onClusterChange(isSel ? '' : c.key)}
+									className={`px-3 py-1.5 rounded-xl text-xs font-bold transition-all shrink-0 cursor-pointer flex items-center gap-1.5 select-none ${
+										isSel
+											? 'bg-[#283375] text-white shadow-xs border border-transparent'
+											: 'bg-slate-50 text-slate-600 hover:bg-slate-100 border border-slate-200'
 									}`}
 								>
-									{c.count}
-								</span>
-							</button>
-						);
-					})}
+									<span>{c.title}</span>
+									<span
+										className={`text-[10px] px-1.5 py-0.2 rounded-full font-extrabold ${
+											isSel ? 'bg-white/20 text-white' : 'bg-white text-slate-500 border border-slate-200'
+										}`}
+									>
+										{c.count}
+									</span>
+								</button>
+							);
+						})}
+					</div>
+
+					{/* Кнопка скролла вправо */}
+					<button
+						type="button"
+						onMouseDown={(e) => e.preventDefault()}
+						onClick={() => handleScrollBy(240)}
+						className="hidden sm:flex shrink-0 w-7 h-7 rounded-lg items-center justify-center bg-slate-100 hover:bg-slate-200 text-slate-600 transition-colors cursor-pointer"
+						title="Прокрутить вправо"
+					>
+						<svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+							<path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M9 5l7 7-7 7" />
+						</svg>
+					</button>
 				</div>
 			)}
 		</div>
