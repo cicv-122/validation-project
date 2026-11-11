@@ -234,6 +234,9 @@ class CertifiedUser(models.Model):
         return self.qr_code
 
     def save(self, *args, **kwargs):
+        if not self.order:
+            max_order = CertifiedUser.objects.aggregate(models.Max('order'))['order__max'] or 0
+            self.order = max_order + 1
         if not self.verification_token:
             self.verification_token = uuid.uuid4()
         if self.profession:

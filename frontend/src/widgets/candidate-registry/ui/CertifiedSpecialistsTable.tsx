@@ -122,17 +122,17 @@ export const CertifiedSpecialistsTable: React.FC<CertifiedSpecialistsTableProps>
 				</div>
 			) : (
 				<div className={`transition-opacity duration-150 ${isUpdating ? 'opacity-40 pointer-events-none' : 'opacity-100'}`}>
-					<div className="overflow-x-auto pb-1 [&::-webkit-scrollbar]:h-2 [&::-webkit-scrollbar-track]:bg-slate-50 [&::-webkit-scrollbar-track]:rounded-full [&::-webkit-scrollbar-thumb]:bg-slate-300 hover:[&::-webkit-scrollbar-thumb]:bg-slate-400 [&::-webkit-scrollbar-thumb]:rounded-full">
-						<table className="w-full text-left text-xs min-w-[960px]">
-							<thead className="bg-slate-50 border-b border-slate-200 text-slate-500 font-bold uppercase tracking-wider">
+					<div className="overflow-x-auto pb-1 [&::-webkit-scrollbar]:h-1.5 [&::-webkit-scrollbar-track]:bg-slate-50 [&::-webkit-scrollbar-track]:rounded-full [&::-webkit-scrollbar-thumb]:bg-slate-300 hover:[&::-webkit-scrollbar-thumb]:bg-slate-400 [&::-webkit-scrollbar-thumb]:rounded-full">
+						<table className="w-full text-left text-xs">
+							<thead className="bg-slate-50 border-b border-slate-200 text-slate-500 font-bold uppercase tracking-wider text-[11px]">
 								<tr>
-									<th className="py-3.5 px-4 w-12 text-center">Фото</th>
-									<th className="py-3.5 px-4 whitespace-nowrap">Номер сертификата</th>
-									<th className="py-3.5 px-4 whitespace-nowrap">ФИО специалиста</th>
-									<th className="py-3.5 px-4 whitespace-nowrap">ИНН / ПИН</th>
-									<th className="py-3.5 px-4">Присвоенная профессия</th>
-									<th className="py-3.5 px-4 whitespace-nowrap">Дата выдачи</th>
-									<th className="py-3.5 px-4 text-right whitespace-nowrap">Действие</th>
+									<th className="py-3 px-2 w-10 text-center">Фото</th>
+									<th className="py-3 px-2.5 whitespace-nowrap">Номер сертификата</th>
+									<th className="py-3 px-2.5">ФИО специалиста</th>
+									<th className="py-3 px-2 whitespace-nowrap">ИНН / ПИН</th>
+									<th className="py-3 px-2.5">Присвоенная профессия</th>
+									<th className="py-3 px-2 whitespace-nowrap">Дата выдачи</th>
+									<th className="py-3 px-3 text-right whitespace-nowrap">Действие</th>
 								</tr>
 							</thead>
 							<tbody className="divide-y divide-slate-100">
@@ -140,25 +140,25 @@ export const CertifiedSpecialistsTable: React.FC<CertifiedSpecialistsTableProps>
 									<tr
 										key={item.id}
 										id={`candidate-row-${item.id}`}
-										className="hover:bg-slate-50/80 transition-colors h-[60px]"
+										className="hover:bg-slate-50/80 transition-colors h-[58px]"
 									>
-										<td className="py-2.5 px-4 text-center">
+										<td className="py-2 px-2 text-center">
 											{item.image_url || item.image ? (
 												<img
 													src={item.image_url || item.image || ''}
 													alt={item.full_name}
-													className="w-10 h-10 rounded-xl object-cover border border-slate-200 shadow-2xs mx-auto"
+													className="w-8 h-8 rounded-lg object-cover border border-slate-200 shadow-2xs mx-auto"
 												/>
 											) : (
-												<div className="w-10 h-10 rounded-xl bg-[#283375]/8 border border-[#283375]/15 flex items-center justify-center text-[#283375] font-extrabold text-xs mx-auto shadow-2xs">
+												<div className="w-8 h-8 rounded-lg bg-[#283375]/8 border border-[#283375]/15 flex items-center justify-center text-[#283375] font-extrabold text-[11px] mx-auto shadow-2xs">
 													{getInitials(item.full_name)}
 												</div>
 											)}
 										</td>
-										<td className="py-2.5 px-4 font-mono font-bold text-blue-900 whitespace-nowrap">
+										<td className="py-2 px-2.5 font-mono font-bold text-blue-900 whitespace-nowrap text-xs">
 											{item.registration_number}
 										</td>
-										<td className="py-2.5 px-4 font-bold text-slate-900 text-sm whitespace-nowrap">
+										<td className="py-2 px-2.5 font-bold text-slate-900 text-xs leading-snug">
 											<Link
 												to={`/staff/candidates/${item.id}`}
 												state={candidateDossierState(item.id)}
@@ -168,7 +168,7 @@ export const CertifiedSpecialistsTable: React.FC<CertifiedSpecialistsTableProps>
 												{item.full_name}
 											</Link>
 										</td>
-										<td className="py-2.5 px-4 whitespace-nowrap font-mono">
+										<td className="py-2 px-2 whitespace-nowrap font-mono">
 											<Link
 												to={`/staff/candidates/${item.id}`}
 												state={candidateDossierState(item.id)}
@@ -176,42 +176,44 @@ export const CertifiedSpecialistsTable: React.FC<CertifiedSpecialistsTableProps>
 												className="inline-block transition-transform hover:scale-105"
 											>
 												{item.inn ? (
-													<span className="px-2.5 py-1 rounded-lg bg-emerald-50 text-emerald-700 border border-emerald-200 text-[11px] font-bold flex items-center gap-1 shadow-2xs">
+													<span className="px-2 py-0.5 rounded-md bg-emerald-50 text-emerald-700 border border-emerald-200 text-[10px] font-bold flex items-center gap-1 shadow-2xs">
 														<span className="text-emerald-600 font-black">✓</span>
 														<span>{item.inn}</span>
 													</span>
 												) : (
-													<span className="px-2.5 py-1 rounded-lg bg-amber-50 text-amber-700 border border-amber-200 text-[11px] font-bold flex items-center gap-1 shadow-2xs">
+													<span className="px-2 py-0.5 rounded-md bg-amber-50 text-amber-700 border border-amber-200 text-[10px] font-bold flex items-center gap-1 shadow-2xs">
 														<span className="text-amber-500 font-black">⚠</span>
 														<span>Не указан</span>
 													</span>
 												)}
 											</Link>
 										</td>
-										<td className="py-2.5 px-4 font-medium text-slate-700">
+										<td className="py-2 px-2.5 font-medium text-slate-700 text-xs">
 											<div className="line-clamp-2 leading-tight" title={item.profession}>
 												{formatProfessionTitle(item.profession)}
 											</div>
 										</td>
-										<td className="py-2.5 px-4 text-slate-500 whitespace-nowrap">
+										<td className="py-2 px-2 text-slate-500 whitespace-nowrap text-[11px]">
 											{item.issued_date || '—'}
 										</td>
-										<td className="py-2.5 px-4 text-right">
-											<div className="flex items-center justify-end gap-2">
+										<td className="py-2 px-3 text-right whitespace-nowrap">
+											<div className="flex items-center justify-end gap-1.5">
 												<Link
 													to={`/staff/candidates/${item.id}`}
 													state={candidateDossierState(item.id)}
-													className="px-3.5 py-1.5 rounded-xl bg-[#283375] text-white font-bold hover:bg-[#1e265c] transition-all text-xs inline-flex items-center gap-1.5 shadow-2xs whitespace-nowrap cursor-pointer"
+													className="px-2.5 py-1.5 rounded-lg bg-[#283375] text-white font-bold hover:bg-[#1e265c] transition-all text-xs inline-flex items-center gap-1 shadow-2xs cursor-pointer"
+													title="Редактировать дело специалиста"
 												>
-													<svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+													<svg className="w-3.5 h-3.5 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
 														<path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
 													</svg>
-													<span>Редактировать дело</span>
+													<span className="hidden xl:inline">Редактировать дело</span>
+													<span className="xl:hidden">Дело</span>
 												</Link>
 												<button
 													type="button"
 													onClick={() => onDeleteSpecialist(item)}
-													className="p-1.5 rounded-xl text-red-500 hover:text-red-700 hover:bg-red-50 border border-transparent hover:border-red-200 transition-all cursor-pointer"
+													className="p-1.5 rounded-lg text-red-500 hover:text-red-700 hover:bg-red-50 border border-transparent hover:border-red-200 transition-all cursor-pointer"
 													title="Удалить специалиста из реестра"
 												>
 													<svg className="w-4 h-4 text-red-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
