@@ -233,7 +233,12 @@ export default function StatisticsSection() {
 			defaultDesc: 'человек прошли сертификацию и валидацию с 2024 г.',
 			icon: (
 				<svg className='w-6 h-6' fill='none' stroke='currentColor' viewBox='0 0 24 24'>
-					<path strokeLinecap='round' strokeLinejoin='round' strokeWidth={2} d='M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z' />
+					<path
+						strokeLinecap='round'
+						strokeLinejoin='round'
+						strokeWidth={2}
+						d='M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z'
+					/>
 				</svg>
 			),
 		},
@@ -246,7 +251,12 @@ export default function StatisticsSection() {
 			defaultDesc: 'из них — трудовые мигранты',
 			icon: (
 				<svg className='w-6 h-6' fill='none' stroke='currentColor' viewBox='0 0 24 24'>
-					<path strokeLinecap='round' strokeLinejoin='round' strokeWidth={2} d='M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z' />
+					<path
+						strokeLinecap='round'
+						strokeLinejoin='round'
+						strokeWidth={2}
+						d='M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z'
+					/>
 				</svg>
 			),
 		},
@@ -259,7 +269,12 @@ export default function StatisticsSection() {
 			defaultDesc: 'профессий; уровни 3 и 4 НРК',
 			icon: (
 				<svg className='w-6 h-6' fill='none' stroke='currentColor' viewBox='0 0 24 24'>
-					<path strokeLinecap='round' strokeLinejoin='round' strokeWidth={2} d='M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z' />
+					<path
+						strokeLinecap='round'
+						strokeLinejoin='round'
+						strokeWidth={2}
+						d='M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z'
+					/>
 				</svg>
 			),
 		},
@@ -272,7 +287,12 @@ export default function StatisticsSection() {
 			defaultDesc: 'инструментов оценки (при поддержке GIZ, АБР, МОТ)',
 			icon: (
 				<svg className='w-6 h-6' fill='none' stroke='currentColor' viewBox='0 0 24 24'>
-					<path strokeLinecap='round' strokeLinejoin='round' strokeWidth={2} d='M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z' />
+					<path
+						strokeLinecap='round'
+						strokeLinejoin='round'
+						strokeWidth={2}
+						d='M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z'
+					/>
 				</svg>
 			),
 		},
@@ -284,7 +304,12 @@ export default function StatisticsSection() {
 			defaultDesc: 'оценщиков в базе (в т.ч. от работодателей)',
 			icon: (
 				<svg className='w-6 h-6' fill='none' stroke='currentColor' viewBox='0 0 24 24'>
-					<path strokeLinecap='round' strokeLinejoin='round' strokeWidth={2} d='M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z' />
+					<path
+						strokeLinecap='round'
+						strokeLinejoin='round'
+						strokeWidth={2}
+						d='M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z'
+					/>
 				</svg>
 			),
 		},
@@ -296,7 +321,12 @@ export default function StatisticsSection() {
 			defaultDesc: 'утверждённых профессиональных стандартов',
 			icon: (
 				<svg className='w-6 h-6' fill='none' stroke='currentColor' viewBox='0 0 24 24'>
-					<path strokeLinecap='round' strokeLinejoin='round' strokeWidth={2} d='M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253' />
+					<path
+						strokeLinecap='round'
+						strokeLinejoin='round'
+						strokeWidth={2}
+						d='M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253'
+					/>
 				</svg>
 			),
 		},
@@ -308,7 +338,12 @@ export default function StatisticsSection() {
 			defaultDesc: 'лабораторий оснащены для практической оценки',
 			icon: (
 				<svg className='w-6 h-6' fill='none' stroke='currentColor' viewBox='0 0 24 24'>
-					<path strokeLinecap='round' strokeLinejoin='round' strokeWidth={2} d='M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z' />
+					<path
+						strokeLinecap='round'
+						strokeLinejoin='round'
+						strokeWidth={2}
+						d='M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z'
+					/>
 				</svg>
 			),
 		},
@@ -321,7 +356,12 @@ export default function StatisticsSection() {
 			defaultDesc: 'сом — стоимость услуги для кандидата',
 			icon: (
 				<svg className='w-6 h-6' fill='none' stroke='currentColor' viewBox='0 0 24 24'>
-					<path strokeLinecap='round' strokeLinejoin='round' strokeWidth={2} d='M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z' />
+					<path
+						strokeLinecap='round'
+						strokeLinejoin='round'
+						strokeWidth={2}
+						d='M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z'
+					/>
 				</svg>
 			),
 		},
@@ -349,19 +389,17 @@ export default function StatisticsSection() {
 							</h2>
 						</div>
 						<p className='text-sm text-gray-500 max-w-md'>
-							{t('stats.footnote', 'Результаты деятельности и динамика развития Центра независимой сертификации и валидации')}
+							{t(
+								'stats.footnote',
+								'Результаты деятельности и динамика развития Центра независимой сертификации и валидации'
+							)}
 						</p>
 					</div>
 
 					{/* Сетка показателей 4 в ряд на desktop */}
 					<div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6'>
 						{stats.map((item, idx) => (
-							<StatCard
-								key={item.id}
-								item={item}
-								isVisible={isVisible}
-								delay={idx * 60}
-							/>
+							<StatCard key={item.id} item={item} isVisible={isVisible} delay={idx * 60} />
 						))}
 					</div>
 				</div>
@@ -373,20 +411,33 @@ export default function StatisticsSection() {
 							<h3 className='text-2xl sm:text-3xl font-extrabold text-gray-900'>
 								{t('stats.chart.title', 'В 2025 году обучено 111 оценщиков')}
 							</h3>
-							
+
 							{/* Динамический текст направлений из реальной базы данных */}
 							<p className='mt-2.5 text-sm text-gray-700 leading-relaxed font-normal'>
 								<span className='font-semibold text-gray-900'>
 									{currentLang === 'ky'
 										? `${sectorStats.length} негизги багыт: `
-										: (currentLang === 'en'
+										: currentLang === 'en'
 											? `${sectorStats.length} priority fields: `
-											: `${sectorStats.length === 2 ? 'Два направления' : `${sectorStats.length} направления`}: `)}
+											: `${sectorStats.length === 2 ? 'Два направления' : `${sectorStats.length} направления`}: `}
 								</span>
 								<span className='text-[#283375] font-medium'>
-									{sectorStats.map((s) => (currentLang === 'ky' ? s.nameKg : (currentLang === 'en' ? s.nameEn : s.nameRu)).toLowerCase()).join('; ')}
+									{sectorStats
+										.map((s) =>
+											(currentLang === 'ky'
+												? s.nameKg
+												: currentLang === 'en'
+													? s.nameEn
+													: s.nameRu
+											).toLowerCase()
+										)
+										.join('; ')}
 								</span>
-								. {t('stats.chart.tail', 'Мастера производственного обучения и представители работодателей.')}
+								.{' '}
+								{t(
+									'stats.chart.tail',
+									'Мастера производственного обучения и представители работодателей.'
+								)}
 							</p>
 						</div>
 
@@ -407,20 +458,28 @@ export default function StatisticsSection() {
 						{regionStats.map((r, i) => {
 							const percent = Math.round((r.count / maxCount) * 100);
 
-							const city = currentLang === 'ky' ? (r.cityKg || r.cityRu) : r.cityRu;
-							const region = currentLang === 'ky' ? (r.regionKg || r.regionRu) : r.regionRu;
+							const city = currentLang === 'ky' ? r.cityKg || r.cityRu : r.cityRu;
+							const region = currentLang === 'ky' ? r.regionKg || r.regionRu : r.regionRu;
 
 							let labelTitle = city;
 							let labelSubtitle = '';
 
-							if (city && region && city !== region && !region.includes(city.replace(/^г\.\s*/, ''))) {
+							if (
+								city &&
+								region &&
+								city !== region &&
+								!region.includes(city.replace(/^г\.\s*/, ''))
+							) {
 								labelSubtitle = region;
 							} else if (!city && region) {
 								labelTitle = region;
 							}
 
 							return (
-								<div key={r.id} className='group flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-4'>
+								<div
+									key={r.id}
+									className='group flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-4'
+								>
 									{/* Название города и области в скобках */}
 									<div className='sm:w-72 text-sm font-semibold text-gray-800 flex items-center justify-between sm:justify-start gap-1.5'>
 										<div className='truncate'>
@@ -458,7 +517,12 @@ export default function StatisticsSection() {
 													title={`Из них ${r.trainersCount} имеют квалификацию тренера-оценщика`}
 													className='text-[10px] font-semibold text-emerald-700 bg-emerald-50 border border-emerald-200/80 px-1.5 py-0.5 rounded-md'
 												>
-													+{r.trainersCount} {currentLang === 'ky' ? 'тренер' : currentLang === 'en' ? 'trainers' : 'тренеров'}
+													+{r.trainersCount}{' '}
+													{currentLang === 'ky'
+														? 'тренер'
+														: currentLang === 'en'
+															? 'trainers'
+															: 'тренеров'}
 												</span>
 											)}
 										</div>
@@ -473,16 +537,20 @@ export default function StatisticsSection() {
 						<div className='flex items-center gap-2 text-gray-700 bg-blue-50/80 border border-blue-200/80 px-4 py-2.5 rounded-xl'>
 							<span className='w-2 h-2 rounded-full bg-blue-600 flex-shrink-0' />
 							<span>
-								<strong className='text-gray-900'>{t('stats.chart.qualification_note_title', 'Квалификационная структура:')}</strong>{' '}
+								<strong className='text-gray-900'>
+									{t('stats.chart.qualification_note_title', 'Квалификационная структура:')}
+								</strong>{' '}
 								{currentLang === 'ky'
 									? `Базада 134 баалоочу катталган, анын ичинде 63ү — иш берүүчүлөрдүн өкүлдөрү. 2025-жылы "Чебер" программасы боюнча 111 баалоочу окутулду.`
 									: currentLang === 'en'
-									? `134 assessors in database, of which 63 are employer representatives. 111 assessors were trained in 2025 under the Cheber project.`
-									: `В базе Центра числятся 134 оценщика, из них 63 — представители работодателей. В 2025 году по программе «Чебер» обучено 111 оценщиков.`}
+										? `134 assessors in database, of which 63 are employer representatives. 111 assessors were trained in 2025 under the Cheber project.`
+										: `В базе Центра числятся 134 оценщика, из них 63 — представители работодателей. В 2025 году по программе «Чебер» обучено 111 оценщиков.`}
 							</span>
 						</div>
 						<div className='text-gray-400 font-medium whitespace-nowrap'>
-							{t('stats.chart.total_counter', 'Всего в базе: {{total}} специалистов', { total: 134 })}
+							{t('stats.chart.total_counter', 'Всего в базе: {{total}} специалистов', {
+								total: 134,
+							})}
 						</div>
 					</div>
 				</div>
@@ -531,9 +599,12 @@ function StatCard({
 		return () => clearTimeout(timeout);
 	}, [isVisible, item.value, delay]);
 
-	const formattedCount = item.value !== undefined
-		? (item.value >= 1000 ? count.toLocaleString('ru-RU') : count)
-		: item.displayStr;
+	const formattedCount =
+		item.value !== undefined
+			? item.value >= 1000
+				? count.toLocaleString('ru-RU')
+				: count
+			: item.displayStr;
 
 	return (
 		<div className='group relative bg-white rounded-2xl p-6 border border-gray-100/90 shadow-sm hover:shadow-xl hover:border-blue-200 hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between overflow-hidden'>
@@ -550,7 +621,9 @@ function StatCard({
 				<div className='text-3xl sm:text-4xl font-extrabold text-gray-900 tracking-tight mb-2 group-hover:text-[#283375] transition-colors duration-300'>
 					{item.prefix && <span className='text-gray-400 font-bold mr-0.5'>{item.prefix}</span>}
 					<span>{formattedCount}</span>
-					{item.suffix && <span className='text-2xl sm:text-3xl font-bold text-gray-600 ml-1'>{item.suffix}</span>}
+					{item.suffix && (
+						<span className='text-2xl sm:text-3xl font-bold text-gray-600 ml-1'>{item.suffix}</span>
+					)}
 				</div>
 
 				<div className='text-sm text-gray-600 leading-snug font-normal'>

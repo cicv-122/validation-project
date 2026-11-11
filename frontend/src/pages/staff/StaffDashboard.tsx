@@ -1,5 +1,5 @@
 // frontend/src/pages/staff/StaffDashboard.tsx
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import {
 	staffApi,
@@ -245,6 +245,7 @@ export default function StaffDashboard() {
 					if (targetQ.trim()) next.set('q', targetQ.trim()); else next.delete('q');
 					if (targetInn) next.set('has_inn', targetInn); else next.delete('has_inn');
 					if (targetCluster) next.set('cluster', targetCluster); else next.delete('cluster');
+					next.delete('target');
 					return next;
 				},
 				{ replace: true }
@@ -256,23 +257,36 @@ export default function StaffDashboard() {
 		}
 	};
 
-	// Плавная прокрутка и фокус прямо к той строке кандидата, откуда переходили в карточку
+	// Плавная прокрутка и фокус прямо к той строке кандидата, откуда переходили в карточку (только 1 раз при возврате)
+	const hasScrolledTargetRef = useRef<string | null>(null);
+
 	useEffect(() => {
 		const targetId = searchParams.get('target');
-		if (targetId && certifiedList.length > 0) {
+		if (targetId && certifiedList.length > 0 && hasScrolledTargetRef.current !== targetId) {
 			const timer = setTimeout(() => {
 				const element = document.getElementById(`candidate-row-${targetId}`);
 				if (element) {
+					hasScrolledTargetRef.current = targetId;
 					element.scrollIntoView({ behavior: 'smooth', block: 'center' });
 					element.classList.add('bg-blue-100/70', 'ring-2', 'ring-[#283375]/40');
 					setTimeout(() => {
 						element.classList.remove('bg-blue-100/70', 'ring-2', 'ring-[#283375]/40');
 					}, 2500);
+
+					// Сразу очищаем target из URL, чтобы при дальнейших кликах по отраслям экран не прыгал
+					setSearchParams(
+						(prev) => {
+							const next = new URLSearchParams(prev);
+							next.delete('target');
+							return next;
+						},
+						{ replace: true }
+					);
 				}
 			}, 150);
 			return () => clearTimeout(timer);
 		}
-	}, [certifiedList, searchParams]);
+	}, [certifiedList, searchParams, setSearchParams]);
 
 	const candidateDossierState = (candidateId: number) => ({
 		from: 'registry',

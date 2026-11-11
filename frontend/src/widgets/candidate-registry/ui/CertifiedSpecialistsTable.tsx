@@ -44,15 +44,25 @@ export const CertifiedSpecialistsTable: React.FC<CertifiedSpecialistsTableProps>
 	onResetHasInn,
 	onResetSearch,
 }) => {
+	const isInitialLoading = loading && certifiedList.length === 0;
+	const isUpdating = loading && certifiedList.length > 0;
+
 	return (
-		<div className="bg-white rounded-2xl border border-slate-200 shadow-xs overflow-hidden">
-			{loading ? (
-				<div className="py-20 text-center text-slate-400 text-sm">
-					<div className="w-8 h-8 border-3 border-slate-200 border-t-[#283375] rounded-full animate-spin mx-auto mb-2" />
-					Загрузка базы специалистов...
+		<div className="bg-white rounded-2xl border border-slate-200 shadow-xs overflow-hidden relative min-h-[560px]">
+			{/* Индикатор фонового обновления данных при смене фильтра/отрасли */}
+			{isUpdating && (
+				<div className="absolute top-0 inset-x-0 z-20 h-1 bg-slate-100 overflow-hidden">
+					<div className="h-full bg-[#283375] animate-pulse w-full" />
+				</div>
+			)}
+
+			{isInitialLoading ? (
+				<div className="py-24 text-center text-slate-400 text-sm flex flex-col items-center justify-center min-h-[560px]">
+					<div className="w-9 h-9 border-3 border-slate-200 border-t-[#283375] rounded-full animate-spin mb-3" />
+					<span className="font-medium">Загрузка базы специалистов...</span>
 				</div>
 			) : certifiedList.length === 0 ? (
-				<div className="py-16 px-4 text-center max-w-lg mx-auto space-y-3">
+				<div className="py-20 px-4 text-center max-w-lg mx-auto space-y-3 flex flex-col items-center justify-center min-h-[560px]">
 					<div className="w-12 h-12 rounded-2xl bg-slate-100 border border-slate-200 text-slate-400 flex items-center justify-center mx-auto">
 						<svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
 							<path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
@@ -111,7 +121,7 @@ export const CertifiedSpecialistsTable: React.FC<CertifiedSpecialistsTableProps>
 					</div>
 				</div>
 			) : (
-				<>
+				<div className={`transition-opacity duration-150 ${isUpdating ? 'opacity-40 pointer-events-none' : 'opacity-100'}`}>
 					<div className="overflow-x-auto">
 						<table className="w-full text-left text-xs">
 							<thead className="bg-slate-50 border-b border-slate-200 text-slate-500 font-bold uppercase tracking-wider">
@@ -241,7 +251,7 @@ export const CertifiedSpecialistsTable: React.FC<CertifiedSpecialistsTableProps>
 							</button>
 						</div>
 					</div>
-				</>
+				</div>
 			)}
 		</div>
 	);
