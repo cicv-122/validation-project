@@ -1,15 +1,15 @@
 [
   {
-    "file": "pages/staff/StaffDashboard.tsx",
-    "lines": 2670,
+    "file": "pages/staff/StaffCandidateDossier.tsx",
+    "lines": 1887,
     "imports_count": 3,
     "suggested_layer": "widgets/features/entities",
     "priority": "high"
   },
   {
-    "file": "pages/staff/StaffCandidateDossier.tsx",
-    "lines": 1966,
-    "imports_count": 3,
+    "file": "pages/staff/StaffDashboard.tsx",
+    "lines": 1291,
+    "imports_count": 9,
     "suggested_layer": "widgets/features/entities",
     "priority": "high"
   },
@@ -43,8 +43,8 @@
   },
   {
     "file": "pages/Apply.tsx",
-    "lines": 461,
-    "imports_count": 9,
+    "lines": 463,
+    "imports_count": 5,
     "suggested_layer": "widgets/features/entities",
     "priority": "medium"
   },

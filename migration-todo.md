@@ -3,15 +3,15 @@
 **Общий аудит**: 56 файлов | 🔴 Высокий (>500 строк): 5 | 🟡 Средний (200-500): 19 | 🟢 Низкий (<200): 32
 
 ## 🔴 Фаза 1: Декомпозиция монолитов (Priority High)
-- [ ] `pages/staff/StaffDashboard.tsx` (2670 строк) → `widgets/features/entities`
-- [ ] `pages/staff/StaffCandidateDossier.tsx` (1966 строк) → `widgets/features/entities`
+- [ ] `pages/staff/StaffCandidateDossier.tsx` (1887 строк) → `widgets/features/entities`
+- [ ] `pages/staff/StaffDashboard.tsx` (1291 строк) → `widgets/features/entities`
 - [ ] `pages/VerifyCertificate.tsx` (1114 строк) → `pages`
 - [ ] `components/Navbar.tsx` (592 строк) → `widgets`
 - [ ] `components/home/StatisticsSection.tsx` (562 строк) → `widgets`
 
 ## 🟡 Фаза 2: Компоненты средней сложности (Priority Medium)
 - [ ] `pages/PartnerDetail.tsx` (471 строк) → `pages`
-- [ ] `pages/Apply.tsx` (461 строк) → `widgets/features/entities`
+- [ ] `pages/Apply.tsx` (463 строк) → `widgets/features/entities`
 - [ ] `pages/CertifiedUsers.tsx` (404 строк) → `pages`
 - [ ] `components/ui/CustomVideoPlayer.tsx` (367 строк) → `shared/ui`
 - [ ] `components/staff/StaffHeader.tsx` (361 строк) → `widgets/staff-header`
