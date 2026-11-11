@@ -1,2 +1,3 @@
-// Candidate entity
-export {};
+// frontend/src/entities/candidate/index.ts
+export * from './model/types';
+export * from './model/constants';

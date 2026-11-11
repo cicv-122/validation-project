@@ -1,2 +1,2 @@
-// Shared UI components barrel
-export {};
+// frontend/src/shared/ui/index.ts
+export * from '../../components/ui';
