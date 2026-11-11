@@ -15,89 +15,10 @@ import {
 	detectCitizenshipFromExistingInn,
 } from '../../utils/kyrgyzPinValidator';
 
-interface OfficialActSlot {
-	type: string;
-	title: string;
-	subtitle: string;
-	descriptionPlaceholder: string;
-	required: boolean;
-}
-
-const OFFICIAL_EXAM_SLOTS: OfficialActSlot[] = [
-	{
-		type: 'exam_protocol',
-		title: 'Протокол квалификационной комиссии',
-		subtitle: 'Итоговый официальный протокол заседания с решением о признании квалификации',
-		descriptionPlaceholder: 'Протокол заседания отраслевой квалификационной комиссии',
-		required: true,
-	},
-	{
-		type: 'evaluation_sheet',
-		title: 'Оценочный лист квалификационного экзамена',
-		subtitle: 'Ведомость баллов по теории, технике безопасности и практике',
-		descriptionPlaceholder: 'Официальный оценочный лист с подписями экспертов комиссии',
-		required: true,
-	},
-	{
-		type: 'exam_task',
-		title: 'Экзаменационный билет и практические задания',
-		subtitle: 'Билеты, тестовые задания и технические задания с ответами',
-		descriptionPlaceholder: 'Экзаменационные билеты и бланки выполнения заданий',
-		required: false,
-	},
-	{
-		type: 'assessment_photo',
-		title: 'Фотофиксация квалификационного экзамена',
-		subtitle: 'Фотографии с места аттестации: подтверждение выполнения практических заданий',
-		descriptionPlaceholder: 'Фото процесса прохождения практического экзамена',
-		required: false,
-	},
-];
-
-const PERSONAL_DOC_SLOTS: OfficialActSlot[] = [
-	{
-		type: 'passport',
-		title: 'Копия паспорта заявителя (ПИН / ID)',
-		subtitle: 'Удостоверение личности гражданина с персональным идентификационным номером',
-		descriptionPlaceholder: 'Копия паспорта заявителя',
-		required: true,
-	},
-	{
-		type: 'application_form',
-		title: 'Заявление кандидата на сертификацию',
-		subtitle: 'Официальное подписанное заявление установленного образца',
-		descriptionPlaceholder: 'Скан заявления кандидата',
-		required: true,
-	},
-	{
-		type: 'diploma',
-		title: 'Документ об образовании / Диплом',
-		subtitle: 'Диплом, свидетельство или аттестат о профессиональном образовании',
-		descriptionPlaceholder: 'Копия диплома или свидетельства об образовании',
-		required: false,
-	},
-	{
-		type: 'resume',
-		title: 'Трудовая книжка / Подтверждение стажа',
-		subtitle: 'Трудовая книжка, справка с места работы или подтвержденное резюме',
-		descriptionPlaceholder: 'Копия трудовой книжки / резюме',
-		required: false,
-	},
-	{
-		type: 'contract',
-		title: 'Договор на проведение сертификации',
-		subtitle: 'Подписанный двухсторонний договор между кандидатом и ЦНСВ',
-		descriptionPlaceholder: 'Копия подписанного договора',
-		required: false,
-	},
-	{
-		type: 'payment_receipt',
-		title: 'Квитанция об оплате процедуры',
-		subtitle: 'Банковский чек, квитанция или платежное поручение',
-		descriptionPlaceholder: 'Квитанция об оплате',
-		required: false,
-	},
-];
+import {
+	OFFICIAL_EXAM_SLOTS,
+	PERSONAL_DOC_SLOTS,
+} from '../../entities/candidate';
 
 const PERSONAL_DOC_TYPES = [
 	{ id: 'passport', label: 'Копия паспорта заявителя (ПИН / ID)' },
