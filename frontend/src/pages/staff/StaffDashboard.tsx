@@ -1,5 +1,5 @@
 // frontend/src/pages/staff/StaffDashboard.tsx
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useLayoutEffect, useState, useRef } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import {
 	staffApi,
@@ -177,6 +177,17 @@ export default function StaffDashboard() {
 	const [isDeletingSpecialist, setIsDeletingSpecialist] = useState(false);
 	const [appCitizenship, setAppCitizenship] = useState<CitizenshipCode>('');
 
+	// Предотвращение любых прыжков скролла при фильтрации и переключении отраслей
+	const scrollYBeforeUpdate = useRef<number | null>(null);
+
+	useLayoutEffect(() => {
+		if (scrollYBeforeUpdate.current !== null) {
+			const savedY = scrollYBeforeUpdate.current;
+			scrollYBeforeUpdate.current = null;
+			window.scrollTo({ top: savedY, behavior: 'instant' });
+		}
+	}, [certifiedList]);
+
 	useEffect(() => {
 		loadProfile();
 		loadCertifiedClusters();
@@ -190,7 +201,7 @@ export default function StaffDashboard() {
 				loadCertifiedList(certifiedPage);
 			}
 		}
-	}, [profile, activeMainTab, activeAppStatus, certifiedHasInn, certifiedCluster]);
+	}, [profile, activeMainTab, activeAppStatus]);
 
 	const loadProfile = async () => {
 		setLoadingProfile(true);
@@ -221,6 +232,9 @@ export default function StaffDashboard() {
 	};
 
 	const loadCertifiedList = async (page = 1, clusterOverride?: string, innOverride?: string, qOverride?: string) => {
+		if (scrollYBeforeUpdate.current === null) {
+			scrollYBeforeUpdate.current = window.scrollY;
+		}
 		setLoadingCertified(true);
 		const targetCluster = clusterOverride !== undefined ? clusterOverride : certifiedCluster;
 		const targetInn = innOverride !== undefined ? innOverride : certifiedHasInn;
@@ -258,32 +272,34 @@ export default function StaffDashboard() {
 	};
 
 	// Плавная прокрутка и фокус прямо к той строке кандидата, откуда переходили в карточку (только 1 раз при возврате)
-	const hasScrolledTargetRef = useRef<string | null>(null);
+	const hasScrolledTargetRef = useRef<boolean>(false);
 
 	useEffect(() => {
 		const targetId = searchParams.get('target');
-		if (targetId && certifiedList.length > 0 && hasScrolledTargetRef.current !== targetId) {
+		if (!targetId) return;
+
+		// Сразу же удаляем target из URL, чтобы он никогда не срабатывал повторно при фильтрациях и кликах по отраслям!
+		setSearchParams(
+			(prev) => {
+				const next = new URLSearchParams(prev);
+				next.delete('target');
+				return next;
+			},
+			{ replace: true }
+		);
+
+		if (!hasScrolledTargetRef.current && certifiedList.length > 0) {
+			hasScrolledTargetRef.current = true;
 			const timer = setTimeout(() => {
 				const element = document.getElementById(`candidate-row-${targetId}`);
 				if (element) {
-					hasScrolledTargetRef.current = targetId;
 					element.scrollIntoView({ behavior: 'smooth', block: 'center' });
 					element.classList.add('bg-blue-100/70', 'ring-2', 'ring-[#283375]/40');
 					setTimeout(() => {
 						element.classList.remove('bg-blue-100/70', 'ring-2', 'ring-[#283375]/40');
 					}, 2500);
-
-					// Сразу очищаем target из URL, чтобы при дальнейших кликах по отраслям экран не прыгал
-					setSearchParams(
-						(prev) => {
-							const next = new URLSearchParams(prev);
-							next.delete('target');
-							return next;
-						},
-						{ replace: true }
-					);
 				}
-			}, 150);
+			}, 100);
 			return () => clearTimeout(timer);
 		}
 	}, [certifiedList, searchParams, setSearchParams]);

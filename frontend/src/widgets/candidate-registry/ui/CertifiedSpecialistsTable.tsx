@@ -48,7 +48,7 @@ export const CertifiedSpecialistsTable: React.FC<CertifiedSpecialistsTableProps>
 	const isUpdating = loading && certifiedList.length > 0;
 
 	return (
-		<div className="bg-white rounded-2xl border border-slate-200 shadow-xs overflow-hidden relative min-h-[560px]">
+		<div className="bg-white rounded-2xl border border-slate-200 shadow-xs overflow-hidden relative min-h-[680px]">
 			{/* Индикатор фонового обновления данных при смене фильтра/отрасли */}
 			{isUpdating && (
 				<div className="absolute top-0 inset-x-0 z-20 h-1 bg-slate-100 overflow-hidden">
@@ -123,16 +123,16 @@ export const CertifiedSpecialistsTable: React.FC<CertifiedSpecialistsTableProps>
 			) : (
 				<div className={`transition-opacity duration-150 ${isUpdating ? 'opacity-40 pointer-events-none' : 'opacity-100'}`}>
 					<div className="overflow-x-auto">
-						<table className="w-full text-left text-xs">
+						<table className="w-full text-left text-xs table-fixed">
 							<thead className="bg-slate-50 border-b border-slate-200 text-slate-500 font-bold uppercase tracking-wider">
 								<tr>
-									<th className="py-3.5 px-4 w-12 text-center">Фото</th>
-									<th className="py-3.5 px-4 whitespace-nowrap">Номер сертификата</th>
-									<th className="py-3.5 px-4">ФИО специалиста</th>
-									<th className="py-3.5 px-4 whitespace-nowrap">ИНН / ПИН</th>
+									<th className="py-3.5 px-4 w-16 text-center">Фото</th>
+									<th className="py-3.5 px-4 w-36 whitespace-nowrap">Номер сертификата</th>
+									<th className="py-3.5 px-4 w-60">ФИО специалиста</th>
+									<th className="py-3.5 px-4 w-44 whitespace-nowrap">ИНН / ПИН</th>
 									<th className="py-3.5 px-4">Присвоенная профессия</th>
-									<th className="py-3.5 px-4 whitespace-nowrap">Дата выдачи</th>
-									<th className="py-3.5 px-4 text-right whitespace-nowrap">Действие</th>
+									<th className="py-3.5 px-4 w-28 whitespace-nowrap">Дата выдачи</th>
+									<th className="py-3.5 px-4 w-48 text-right whitespace-nowrap">Действие</th>
 								</tr>
 							</thead>
 							<tbody className="divide-y divide-slate-100">
@@ -140,9 +140,9 @@ export const CertifiedSpecialistsTable: React.FC<CertifiedSpecialistsTableProps>
 									<tr
 										key={item.id}
 										id={`candidate-row-${item.id}`}
-										className="hover:bg-slate-50/80 transition-all duration-300"
+										className="hover:bg-slate-50/80 transition-colors h-[62px]"
 									>
-										<td className="py-3.5 px-4 text-center">
+										<td className="py-2.5 px-4 text-center">
 											{item.image_url || item.image ? (
 												<img
 													src={item.image_url || item.image || ''}
@@ -155,20 +155,20 @@ export const CertifiedSpecialistsTable: React.FC<CertifiedSpecialistsTableProps>
 												</div>
 											)}
 										</td>
-										<td className="py-3.5 px-4 font-mono font-bold text-blue-900 whitespace-nowrap">
+										<td className="py-2.5 px-4 font-mono font-bold text-blue-900 whitespace-nowrap">
 											{item.registration_number}
 										</td>
-										<td className="py-3.5 px-4 font-bold text-slate-900 text-sm">
+										<td className="py-2.5 px-4 font-bold text-slate-900 text-sm truncate" title={item.full_name}>
 											<Link
 												to={`/staff/candidates/${item.id}`}
 												state={candidateDossierState(item.id)}
-												className="hover:text-[#283375] hover:underline transition-colors"
+												className="hover:text-[#283375] hover:underline transition-colors block truncate"
 												title="Открыть электронное дело специалиста"
 											>
 												{item.full_name}
 											</Link>
 										</td>
-										<td className="py-3.5 px-4 whitespace-nowrap font-mono">
+										<td className="py-2.5 px-4 whitespace-nowrap font-mono">
 											<Link
 												to={`/staff/candidates/${item.id}`}
 												state={candidateDossierState(item.id)}
@@ -188,13 +188,15 @@ export const CertifiedSpecialistsTable: React.FC<CertifiedSpecialistsTableProps>
 												)}
 											</Link>
 										</td>
-										<td className="py-3.5 px-4 font-medium text-slate-700">
-											{formatProfessionTitle(item.profession)}
+										<td className="py-2.5 px-4 font-medium text-slate-700">
+											<div className="line-clamp-2 leading-tight" title={item.profession}>
+												{formatProfessionTitle(item.profession)}
+											</div>
 										</td>
-										<td className="py-3.5 px-4 text-slate-500 whitespace-nowrap">
+										<td className="py-2.5 px-4 text-slate-500 whitespace-nowrap">
 											{item.issued_date || '—'}
 										</td>
-										<td className="py-3.5 px-4 text-right">
+										<td className="py-2.5 px-4 text-right">
 											<div className="flex items-center justify-end gap-2">
 												<Link
 													to={`/staff/candidates/${item.id}`}

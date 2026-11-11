@@ -39,10 +39,11 @@ export const CertifiedClustersBar: React.FC<CertifiedClustersBarProps> = ({
 					</span>
 					<button
 						type="button"
+						onMouseDown={(e) => e.preventDefault()}
 						onClick={() => onHasInnFilterChange('')}
 						className={`px-3 py-1.5 rounded-xl text-xs font-bold transition-all cursor-pointer flex items-center gap-1.5 ${
 							hasInnFilter === ''
-								? 'bg-[#283375] text-white shadow-xs'
+								? 'bg-[#283375] text-white shadow-xs border border-transparent'
 								: 'bg-slate-50 text-slate-600 hover:bg-slate-100 border border-slate-200'
 						}`}
 					>
@@ -60,10 +61,11 @@ export const CertifiedClustersBar: React.FC<CertifiedClustersBarProps> = ({
 
 					<button
 						type="button"
+						onMouseDown={(e) => e.preventDefault()}
 						onClick={() => onHasInnFilterChange('true')}
 						className={`px-3 py-1.5 rounded-xl text-xs font-bold transition-all cursor-pointer flex items-center gap-1.5 ${
 							hasInnFilter === 'true'
-								? 'bg-emerald-600 text-white shadow-xs'
+								? 'bg-emerald-600 text-white shadow-xs border border-transparent'
 								: 'bg-emerald-50 text-emerald-800 hover:bg-emerald-100 border border-emerald-200'
 						}`}
 					>
@@ -81,10 +83,11 @@ export const CertifiedClustersBar: React.FC<CertifiedClustersBarProps> = ({
 
 					<button
 						type="button"
+						onMouseDown={(e) => e.preventDefault()}
 						onClick={() => onHasInnFilterChange('false')}
 						className={`px-3 py-1.5 rounded-xl text-xs font-bold transition-all cursor-pointer flex items-center gap-1.5 ${
 							hasInnFilter === 'false'
-								? 'bg-amber-600 text-white shadow-xs'
+								? 'bg-amber-600 text-white shadow-xs border border-transparent'
 								: 'bg-amber-50 text-amber-800 hover:bg-amber-100 border border-amber-200'
 						}`}
 					>
@@ -134,10 +137,11 @@ export const CertifiedClustersBar: React.FC<CertifiedClustersBarProps> = ({
 							<button
 								key={c.key}
 								type="button"
+								onMouseDown={(e) => e.preventDefault()}
 								onClick={() => onClusterChange(isSel ? '' : c.key)}
-								className={`px-3 py-1.5 rounded-xl text-xs font-bold transition-all shrink-0 cursor-pointer flex items-center gap-1.5 ${
+								className={`px-3 py-1.5 rounded-xl text-xs font-bold transition-all shrink-0 cursor-pointer flex items-center gap-1.5 select-none ${
 									isSel
-										? 'bg-[#283375] text-white shadow-xs'
+										? 'bg-[#283375] text-white shadow-xs border border-transparent'
 										: 'bg-slate-50 text-slate-600 hover:bg-slate-100 border border-slate-200'
 								}`}
 							>
