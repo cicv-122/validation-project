@@ -86,6 +86,29 @@ export default function Navbar() {
 
 	const [activeDropdown, setActiveDropdown] = useState<string | null>(() => currentSection);
 
+	// Мобильные аккордеоны разделов
+	const [mobileNewsOpen, setMobileNewsOpen] = useState(isNewsActive);
+	const [mobileAboutOpen, setMobileAboutOpen] = useState(isAboutActive);
+	const [mobileDbOpen, setMobileDbOpen] = useState(isDbActive);
+
+	useEffect(() => {
+		if (isNewsActive) setMobileNewsOpen(true);
+		if (isAboutActive) setMobileAboutOpen(true);
+		if (isDbActive) setMobileDbOpen(true);
+	}, [location.pathname, isNewsActive, isAboutActive, isDbActive]);
+
+	useEffect(() => {
+		const handleKeyDown = (e: KeyboardEvent) => {
+			if (e.key === 'Escape') {
+				setIsOpen(false);
+				setActiveDropdown(null);
+				setIsLangOpen(false);
+			}
+		};
+		window.addEventListener('keydown', handleKeyDown);
+		return () => window.removeEventListener('keydown', handleKeyDown);
+	}, []);
+
 	// При переходе на новую страницу:
 	// Если это раздел меню (хаб) — держим открытым ("остается выпавшим")
 	// Если перешли на страницу отдельной новости или другой раздел — закрываем
@@ -454,7 +477,7 @@ export default function Navbar() {
 					</div>
 
 					{/* Drawer Content */}
-					<div className='flex-1 overflow-y-auto px-4 py-6 space-y-5'>
+					<div className='flex-1 overflow-y-auto px-4 py-5 space-y-4'>
 						<div className='space-y-1'>
 							<Link
 								to='/'
@@ -465,109 +488,167 @@ export default function Navbar() {
 							</Link>
 						</div>
 
-						{/* Новости */}
-						<div className='space-y-1'>
-							<div className='px-4 pb-1 text-xs font-bold text-blue-300 uppercase tracking-widest opacity-80'>
-								{t('Новости')}
-							</div>
-							<Link
-								to='/news'
-								onClick={() => setIsOpen(false)}
-								className={mobileLinkClass(isActive('/news'))}
+						{/* Новости (Аккордеон) */}
+						<div className='bg-white/5 rounded-2xl p-1.5 border border-white/5 space-y-1'>
+							<button
+								type='button'
+								onClick={() => setMobileNewsOpen((prev) => !prev)}
+								className='w-full flex items-center justify-between px-3 py-2 rounded-xl text-xs font-bold text-blue-200 uppercase tracking-wider hover:bg-white/10 transition-colors cursor-pointer select-none'
 							>
-								{t('Все новости')}
-							</Link>
-							<Link
-								to='/gallery/images'
-								onClick={() => setIsOpen(false)}
-								className={mobileLinkClass(isActive('/gallery/images'))}
-							>
-								{t('Фотогалерея')}
-							</Link>
-							<Link
-								to='/gallery/videos'
-								onClick={() => setIsOpen(false)}
-								className={mobileLinkClass(isActive('/gallery/videos'))}
-							>
-								{t('Видео галерея')}
-							</Link>
+								<span className='flex items-center gap-2'>
+									<span className={`w-1.5 h-1.5 rounded-full ${isNewsActive ? 'bg-amber-400' : 'bg-transparent'}`} />
+									{t('Новости')}
+								</span>
+								<svg
+									className={`w-4 h-4 opacity-75 transition-transform duration-200 ${mobileNewsOpen ? 'rotate-180' : ''}`}
+									fill='none'
+									stroke='currentColor'
+									viewBox='0 0 24 24'
+								>
+									<path strokeLinecap='round' strokeLinejoin='round' strokeWidth={2} d='M19 9l-7 7-7-7' />
+								</svg>
+							</button>
+							{mobileNewsOpen && (
+								<div className='space-y-1 pl-2 border-l-2 border-white/15 ml-2.5 my-1'>
+									<Link
+										to='/news'
+										onClick={() => setIsOpen(false)}
+										className={mobileLinkClass(location.pathname === '/news')}
+									>
+										{t('Все новости')}
+									</Link>
+									<Link
+										to='/gallery/images'
+										onClick={() => setIsOpen(false)}
+										className={mobileLinkClass(location.pathname === '/gallery/images')}
+									>
+										{t('Фотогалерея')}
+									</Link>
+									<Link
+										to='/gallery/videos'
+										onClick={() => setIsOpen(false)}
+										className={mobileLinkClass(location.pathname === '/gallery/videos')}
+									>
+										{t('Видео галерея')}
+									</Link>
+								</div>
+							)}
 						</div>
 
-						{/* О центре */}
-						<div className='space-y-1'>
-							<div className='px-4 pb-1 text-xs font-bold text-blue-300 uppercase tracking-widest opacity-80'>
-								{t('О центре')}
-							</div>
-							<Link
-								to='/about/management'
-								onClick={() => setIsOpen(false)}
-								className={mobileLinkClass(isActive('/about/management'))}
+						{/* О центре (Аккордеон) */}
+						<div className='bg-white/5 rounded-2xl p-1.5 border border-white/5 space-y-1'>
+							<button
+								type='button'
+								onClick={() => setMobileAboutOpen((prev) => !prev)}
+								className='w-full flex items-center justify-between px-3 py-2 rounded-xl text-xs font-bold text-blue-200 uppercase tracking-wider hover:bg-white/10 transition-colors cursor-pointer select-none'
 							>
-								{t('Руководство')}
-							</Link>
-							<Link
-								to='/documents/partners'
-								onClick={() => setIsOpen(false)}
-								className={mobileLinkClass(isActive('/documents/partners'))}
-							>
-								{t('Партнеры по развитию')}
-							</Link>
-							<Link
-								to='/about/additional-info'
-								onClick={() => setIsOpen(false)}
-								className={mobileLinkClass(isActive('/about/additional-info'))}
-							>
-								{t('Дополнительная информация')}
-							</Link>
+								<span className='flex items-center gap-2'>
+									<span className={`w-1.5 h-1.5 rounded-full ${isAboutActive ? 'bg-amber-400' : 'bg-transparent'}`} />
+									{t('О центре')}
+								</span>
+								<svg
+									className={`w-4 h-4 opacity-75 transition-transform duration-200 ${mobileAboutOpen ? 'rotate-180' : ''}`}
+									fill='none'
+									stroke='currentColor'
+									viewBox='0 0 24 24'
+								>
+									<path strokeLinecap='round' strokeLinejoin='round' strokeWidth={2} d='M19 9l-7 7-7-7' />
+								</svg>
+							</button>
+							{mobileAboutOpen && (
+								<div className='space-y-1 pl-2 border-l-2 border-white/15 ml-2.5 my-1'>
+									<Link
+										to='/about/management'
+										onClick={() => setIsOpen(false)}
+										className={mobileLinkClass(location.pathname === '/about/management')}
+									>
+										{t('Руководство')}
+									</Link>
+									<Link
+										to='/documents/partners'
+										onClick={() => setIsOpen(false)}
+										className={mobileLinkClass(location.pathname === '/documents/partners')}
+									>
+										{t('Партнеры по развитию')}
+									</Link>
+									<Link
+										to='/about/additional-info'
+										onClick={() => setIsOpen(false)}
+										className={mobileLinkClass(location.pathname === '/about/additional-info')}
+									>
+										{t('Дополнительная информация')}
+									</Link>
+								</div>
+							)}
 						</div>
 
-						{/* База данных */}
-						<div className='space-y-1'>
-							<div className='px-4 pb-1 text-xs font-bold text-blue-300 uppercase tracking-widest opacity-80'>
-								{t('База данных')}
-							</div>
-							<Link
-								to='/documents/assessment-centers'
-								onClick={() => setIsOpen(false)}
-								className={mobileLinkClass(isActive('/documents/assessment-centers'))}
+						{/* База данных (Аккордеон) */}
+						<div className='bg-white/5 rounded-2xl p-1.5 border border-white/5 space-y-1'>
+							<button
+								type='button'
+								onClick={() => setMobileDbOpen((prev) => !prev)}
+								className='w-full flex items-center justify-between px-3 py-2 rounded-xl text-xs font-bold text-blue-200 uppercase tracking-wider hover:bg-white/10 transition-colors cursor-pointer select-none'
 							>
-								{t('Центры оценки компетенций')}
-							</Link>
-							<Link
-								to='/documents/experts'
-								onClick={() => setIsOpen(false)}
-								className={mobileLinkClass(isActive('/documents/experts'))}
-							>
-								{t('База данных экспертов')}
-							</Link>
+								<span className='flex items-center gap-2'>
+									<span className={`w-1.5 h-1.5 rounded-full ${isDbActive ? 'bg-amber-400' : 'bg-transparent'}`} />
+									{t('База данных')}
+								</span>
+								<svg
+									className={`w-4 h-4 opacity-75 transition-transform duration-200 ${mobileDbOpen ? 'rotate-180' : ''}`}
+									fill='none'
+									stroke='currentColor'
+									viewBox='0 0 24 24'
+								>
+									<path strokeLinecap='round' strokeLinejoin='round' strokeWidth={2} d='M19 9l-7 7-7-7' />
+								</svg>
+							</button>
+							{mobileDbOpen && (
+								<div className='space-y-1 pl-2 border-l-2 border-white/15 ml-2.5 my-1'>
+									<Link
+										to='/documents/assessment-centers'
+										onClick={() => setIsOpen(false)}
+										className={mobileLinkClass(location.pathname === '/documents/assessment-centers')}
+									>
+										{t('Центры оценки компетенций')}
+									</Link>
+									<Link
+										to='/documents/experts'
+										onClick={() => setIsOpen(false)}
+										className={mobileLinkClass(location.pathname === '/documents/experts')}
+									>
+										{t('База данных экспертов')}
+									</Link>
+								</div>
+							)}
 						</div>
 
-						{/* Кнопки */}
-						<div className='pt-6 border-t border-blue-800/50 space-y-3'>
+						{/* Кнопки действий */}
+						<div className='pt-4 border-t border-blue-800/50 space-y-2.5'>
 							<Link
 								to='/apply'
 								onClick={() => setIsOpen(false)}
-								className='bg-white text-[#283375] block w-full text-center py-3 rounded-xl text-base font-bold shadow-lg'
+								className='bg-white text-[#283375] block w-full text-center py-3 rounded-xl text-sm font-bold shadow-lg hover:bg-slate-100 transition-colors'
 							>
 								{t('Подать заявку')}
 							</Link>
 							<Link
 								to='/apply/status'
 								onClick={() => setIsOpen(false)}
-								className='mt-3 bg-blue-800/40 text-white block w-full text-center py-3 rounded-xl text-base font-medium border border-white/10'
+								className='bg-blue-800/40 text-white block w-full text-center py-2.5 rounded-xl text-sm font-medium border border-white/10 hover:bg-white/10 transition-colors'
 							>
 								{t('Статус заявки')}
 							</Link>
 							<button
+								type='button'
 								onClick={() => { setIsOpen(false); setIsCallbackOpen(true); }}
-								className='mt-3 text-white block w-full text-center py-3 rounded-xl text-base font-medium border border-white/10 hover:bg-white/10'
+								className='text-white block w-full text-center py-2.5 rounded-xl text-sm font-medium border border-white/10 hover:bg-white/10 transition-colors cursor-pointer'
 							>
 								{t('Получить консультацию')}
 							</button>
 							<Link
 								to='/contacts'
 								onClick={() => setIsOpen(false)}
-								className='mt-3 bg-blue-800/40 text-white block w-full text-center py-3 rounded-xl text-base font-medium border border-white/10'
+								className='bg-blue-800/40 text-white block w-full text-center py-2.5 rounded-xl text-sm font-medium border border-white/10 hover:bg-white/10 transition-colors'
 							>
 								{t('Контакты')}
 							</Link>
