@@ -65,13 +65,30 @@ export default function Navbar() {
 		'/documents/experts',
 	]);
 
-	const currentSection = isNewsActive ? 'news' : isAboutActive ? 'about' : isDbActive ? 'db' : null;
+	// Проверяем, находится ли пользователь на детальной странице (конкретная новость, партнер или центр)
+	// На детальной странице выпадающее меню НЕ должно висеть открытым, перекрывая контент статьи.
+	const isDetailPage =
+		location.pathname.startsWith('/news/') ||
+		/^\/documents\/partners\/.+/.test(location.pathname) ||
+		/^\/documents\/assessment-centers\/.+/.test(location.pathname);
+
+	// Автоматически держим дропдаун открытым ТОЛЬКО на разделах-хабах (/news, /gallery/images, /gallery/videos и т.д.)
+	// Но НЕ на детальной странице конкретной новости
+	const currentSection = !isDetailPage
+		? isNewsActive
+			? 'news'
+			: isAboutActive
+			? 'about'
+			: isDbActive
+			? 'db'
+			: null
+		: null;
 
 	const [activeDropdown, setActiveDropdown] = useState<string | null>(() => currentSection);
 
 	// При переходе на новую страницу:
-	// Если раздел относится к выпадающему меню — держим его открытым ("остается выпавшим")
-	// Если перешли на страницу без дропдауна — закрываем
+	// Если это раздел меню (хаб) — держим открытым ("остается выпавшим")
+	// Если перешли на страницу отдельной новости или другой раздел — закрываем
 	useEffect(() => {
 		if (currentSection) {
 			setActiveDropdown(currentSection);
