@@ -1,12 +1,14 @@
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import apiClient from '../api/client';
-import StepConfirm from '../components/apply/StepConfirm';
-import StepDocuments from '../components/apply/StepDocuments';
-import StepPersonal from '../components/apply/StepPersonal';
-import StepProfession from '../components/apply/StepProfession';
-import { SEO } from '../components/ui';
-import { analyzeKyrgyzPin, CitizenshipCode } from '../utils/kyrgyzPinValidator';
+import {
+	StepConfirm,
+	StepDocuments,
+	StepPersonal,
+	StepProfession,
+} from '../features/apply-form';
+import { SEO } from '../shared/ui';
+import { analyzeKyrgyzPin, CitizenshipCode } from '../shared/lib';
 
 interface DocUpload {
 	file: File;
