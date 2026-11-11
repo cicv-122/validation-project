@@ -124,7 +124,7 @@ export default function NewsDetail() {
 							newsStore.fromDetail = true;
 							sessionStorage.setItem('from_news', 'true');
 						}}
-						className='text-blue-600 hover:text-blue-800 flex items-center text-sm font-medium transition-colors'
+						className='inline-flex items-center text-blue-600 hover:text-blue-800 text-sm font-medium transition-colors w-fit'
 					>
 						<svg className='w-4 h-4 mr-1' fill='none' stroke='currentColor' viewBox='0 0 24 24'>
 							<path
