@@ -122,7 +122,7 @@ export const CertifiedSpecialistsTable: React.FC<CertifiedSpecialistsTableProps>
 				</div>
 			) : (
 				<div className={`transition-opacity duration-150 ${isUpdating ? 'opacity-40 pointer-events-none' : 'opacity-100'}`}>
-					<div className="overflow-x-auto">
+					<div className="overflow-x-auto pb-1 [&::-webkit-scrollbar]:h-2 [&::-webkit-scrollbar-track]:bg-slate-50 [&::-webkit-scrollbar-track]:rounded-full [&::-webkit-scrollbar-thumb]:bg-slate-300 hover:[&::-webkit-scrollbar-thumb]:bg-slate-400 [&::-webkit-scrollbar-thumb]:rounded-full">
 						<table className="w-full text-left text-xs table-fixed">
 							<thead className="bg-slate-50 border-b border-slate-200 text-slate-500 font-bold uppercase tracking-wider">
 								<tr>
