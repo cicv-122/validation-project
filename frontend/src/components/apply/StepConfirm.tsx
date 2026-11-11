@@ -9,6 +9,7 @@ interface FormData {
 	email: string;
 	address: string;
 	profession: string;
+	specialization?: string;
 	qualification_level: string;
 	application_type: string;
 	data_consent: boolean;
@@ -24,7 +25,7 @@ interface StepConfirmProps {
 function Row({ label, value }: { label: string; value: string }) {
 	return (
 		<div className='flex gap-2 text-sm'>
-			<span className='text-gray-500 min-w-24'>{label}:</span>
+			<span className='text-gray-500 min-w-28'>{label}:</span>
 			<span className='text-gray-900 font-medium'>{value}</span>
 		</div>
 	);
@@ -36,21 +37,22 @@ export default function StepConfirm({ form, documentsCount, errorMsg, onChange }
 	return (
 		<div>
 			<h2 className='text-xl font-bold text-gray-800 mb-6 flex items-center gap-2'>
-				<span className='w-7 h-7 rounded-full bg-blue-600 text-white text-sm flex items-center justify-center'>4</span>
-				{t('Проверьте данные и подтвердите')}
+				<span className='w-7 h-7 rounded-full bg-blue-600 text-white text-sm flex items-center justify-center font-bold'>4</span>
+				{t('Проверка и подтверждение')}
 			</h2>
 
-			<div className='space-y-4 text-sm'>
-				<Row label='ФИО' value={form.full_name} />
+			<div className='space-y-4 text-sm bg-slate-50/80 p-6 rounded-2xl border border-slate-200/80'>
+				<Row label={t('ФИО')} value={form.full_name} />
 				<Row label={t('Год рождения')} value={form.birth_year || '—'} />
 				<Row label={t('Персональный номер')} value={form.inn} />
 				<Row label={t('Телефон')} value={form.phone} />
 				{form.whatsapp && <Row label='WhatsApp' value={form.whatsapp} />}
-				{form.address && <Row label='Адрес' value={form.address} />}
-				<Row label='Профессия' value={form.profession} />
-				{form.qualification_level && <Row label='Уровень' value={form.qualification_level} />}
-				<Row label='Тип' value={form.application_type === 'certification' ? 'Сертификация' : 'Валидация'} />
-				<Row label='Документов' value={`${documentsCount} файл(ов)`} />
+				{form.address && <Row label={t('Адрес')} value={form.address} />}
+				<Row label={t('Профессия')} value={form.profession} />
+				{form.specialization && <Row label={t('Специализация')} value={form.specialization} />}
+				{form.qualification_level && <Row label={t('Уровень / Разряд')} value={form.qualification_level} />}
+				<Row label={t('Тип')} value={form.application_type === 'certification' ? t('Сертификация') : t('Валидация')} />
+				<Row label={t('Документов')} value={`${documentsCount} ${t('файл(ов)')}`} />
 			</div>
 
 			<div className='bg-amber-50 border border-amber-200 rounded-xl p-4 mb-6 text-sm text-gray-700 mt-6'>

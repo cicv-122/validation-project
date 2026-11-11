@@ -1,0 +1,7592 @@
+[
+  {
+    "id": 26,
+    "registration_number": "ЦС № 000026",
+    "last_name": "Худоярова",
+    "first_name": "Зарифахан",
+    "sur_name": "",
+    "profession": "Портной с умением кроить",
+    "issued_date": "2024-07-03",
+    "inn": null
+  },
+  {
+    "id": 13,
+    "registration_number": "ЦС № 000016",
+    "last_name": "Абдуллажан",
+    "first_name": "Абдумалик уулу",
+    "sur_name": "",
+    "profession": "Слесарь по ремонту автомобилей 4 разряда",
+    "issued_date": "2024-07-10",
+    "inn": null
+  },
+  {
+    "id": 12,
+    "registration_number": "ЦС № 000017",
+    "last_name": "Акмедов",
+    "first_name": "Рустамжан",
+    "sur_name": "",
+    "profession": "Слесарь по ремонту автомобилей 4 разряда",
+    "issued_date": "2024-07-10",
+    "inn": null
+  },
+  {
+    "id": 11,
+    "registration_number": "ЦС № 000018",
+    "last_name": "Байматов",
+    "first_name": "Чолпонбай",
+    "sur_name": "",
+    "profession": "Слесарь по ремонту автомобилей 4 разряда",
+    "issued_date": "2024-07-10",
+    "inn": null
+  },
+  {
+    "id": 10,
+    "registration_number": "ЦС № 000019",
+    "last_name": "Галиаскаров",
+    "first_name": "Ринат",
+    "sur_name": "",
+    "profession": "Слесарь по ремонту автомобилей 4 разряда",
+    "issued_date": "2024-07-10",
+    "inn": null
+  },
+  {
+    "id": 9,
+    "registration_number": "ЦС № 000020",
+    "last_name": "Ибрагимов",
+    "first_name": "Асланбек",
+    "sur_name": "",
+    "profession": "Слесарь по ремонту автомобилей 4 разряда",
+    "issued_date": "2024-07-10",
+    "inn": null
+  },
+  {
+    "id": 8,
+    "registration_number": "ЦС № 000021",
+    "last_name": "Калмырзаев",
+    "first_name": "Жумабек",
+    "sur_name": "",
+    "profession": "Слесарь по ремонту автомобилей 4 разряда",
+    "issued_date": "2024-07-10",
+    "inn": null
+  },
+  {
+    "id": 7,
+    "registration_number": "ЦС № 000022",
+    "last_name": "Айтмамат",
+    "first_name": "Кабыл уулу",
+    "sur_name": "",
+    "profession": "Слесарь по ремонту автомобилей 4 разряда",
+    "issued_date": "2024-07-10",
+    "inn": null
+  },
+  {
+    "id": 27,
+    "registration_number": "ЦС № 0000",
+    "last_name": "Реджапай",
+    "first_name": "Абубакир уулу",
+    "sur_name": "",
+    "profession": "Слесарь по ремонту автомобилей 4 разряда",
+    "issued_date": "2024-07-10",
+    "inn": null
+  },
+  {
+    "id": 23,
+    "registration_number": "ЦС № 000023",
+    "last_name": "Мамасидиков",
+    "first_name": "Махмуджан",
+    "sur_name": "",
+    "profession": "Слесарь по ремонту автомобилей 4 разряда",
+    "issued_date": "2024-07-10",
+    "inn": null
+  },
+  {
+    "id": 25,
+    "registration_number": "ЦС № 000025",
+    "last_name": "Нарматов",
+    "first_name": "Доктурбек",
+    "sur_name": "",
+    "profession": "Слесарь по ремонту автомобилей 4 разряда",
+    "issued_date": "2024-07-10",
+    "inn": null
+  },
+  {
+    "id": 24,
+    "registration_number": "ЦС № 000024",
+    "last_name": "Рысбаев",
+    "first_name": "Мирланбек",
+    "sur_name": "",
+    "profession": "Слесарь по ремонту автомобилей 4 разряда",
+    "issued_date": "2024-07-10",
+    "inn": null
+  },
+  {
+    "id": 28,
+    "registration_number": "ЦС № 000028",
+    "last_name": "Таштанов",
+    "first_name": "Кубанычбек",
+    "sur_name": "",
+    "profession": "Слесарь по ремонту автомобилей 4 разряда",
+    "issued_date": "2024-07-10",
+    "inn": null
+  },
+  {
+    "id": 705,
+    "registration_number": "ЦС № 000000",
+    "last_name": "Танатаров",
+    "first_name": "Радил",
+    "sur_name": "",
+    "profession": "Слесарь по ремонту автомобилей 4 разряда",
+    "issued_date": "2024-07-10",
+    "inn": null
+  },
+  {
+    "id": 29,
+    "registration_number": "ЦС № 000029",
+    "last_name": "Таштемиров",
+    "first_name": "Расулжан",
+    "sur_name": "",
+    "profession": "Слесарь по ремонту автомобилей 4 разряда",
+    "issued_date": "2024-07-10",
+    "inn": null
+  },
+  {
+    "id": 30,
+    "registration_number": "ЦС № 000030",
+    "last_name": "Токтоматов",
+    "first_name": "Кенжебай",
+    "sur_name": "",
+    "profession": "Слесарь по ремонту автомобилей 4 разряда",
+    "issued_date": "2024-07-10",
+    "inn": null
+  },
+  {
+    "id": 31,
+    "registration_number": "ЦС № 000031",
+    "last_name": "Артюхов",
+    "first_name": "Александр",
+    "sur_name": "",
+    "profession": "Слесарь по ремонту автомобилей 4 разряда",
+    "issued_date": "2024-07-12",
+    "inn": null
+  },
+  {
+    "id": 32,
+    "registration_number": "ЦС № 000032",
+    "last_name": "Азамат",
+    "first_name": "Базарбек уулу",
+    "sur_name": "",
+    "profession": "Слесарь по ремонту автомобилей 4 разряда",
+    "issued_date": "2024-07-12",
+    "inn": null
+  },
+  {
+    "id": 33,
+    "registration_number": "ЦС № 000034",
+    "last_name": "Байбосунов",
+    "first_name": "Максат",
+    "sur_name": "",
+    "profession": "Слесарь по ремонту автомобилей 4 разряда",
+    "issued_date": "2024-07-12",
+    "inn": null
+  },
+  {
+    "id": 34,
+    "registration_number": "ЦС № 000033",
+    "last_name": "Бекталиев",
+    "first_name": "Чынгыз",
+    "sur_name": "",
+    "profession": "Слесарь по ремонту автомобилей 4 разряда",
+    "issued_date": "2024-07-12",
+    "inn": null
+  },
+  {
+    "id": 35,
+    "registration_number": "ЦС № 000035",
+    "last_name": "Максатбеков",
+    "first_name": "Адилет",
+    "sur_name": "",
+    "profession": "Слесарь по ремонту автомобилей 4 разряда",
+    "issued_date": "2024-07-12",
+    "inn": null
+  },
+  {
+    "id": 36,
+    "registration_number": "ЦС № 000036",
+    "last_name": "Меджитов",
+    "first_name": "Алексей",
+    "sur_name": "",
+    "profession": "Слесарь по ремонту автомобилей 4 разряда",
+    "issued_date": "2024-07-12",
+    "inn": null
+  },
+  {
+    "id": 38,
+    "registration_number": "ЦС № 000038",
+    "last_name": "Омуров",
+    "first_name": "Марс",
+    "sur_name": "",
+    "profession": "Слесарь по ремонту автомобилей 4 разряда",
+    "issued_date": "2024-07-12",
+    "inn": null
+  },
+  {
+    "id": 39,
+    "registration_number": "ЦС № 000039",
+    "last_name": "Шатемиров",
+    "first_name": "Медер",
+    "sur_name": "",
+    "profession": "Слесарь по ремонту автомобилей 4 разряда",
+    "issued_date": "2024-07-12",
+    "inn": null
+  },
+  {
+    "id": 40,
+    "registration_number": "ЦС № 000041",
+    "last_name": "Эрматов",
+    "first_name": "Зарылбек",
+    "sur_name": "",
+    "profession": "Слесарь по ремонту автомобилей 4 разряда",
+    "issued_date": "2024-07-12",
+    "inn": null
+  },
+  {
+    "id": 41,
+    "registration_number": "ЦС № 000040",
+    "last_name": "Эрматов",
+    "first_name": "Марат",
+    "sur_name": "",
+    "profession": "Слесарь по ремонту автомобилей 4 разряда",
+    "issued_date": "2024-07-12",
+    "inn": null
+  },
+  {
+    "id": 37,
+    "registration_number": "ЦС № 000037",
+    "last_name": "Якубов",
+    "first_name": "Жолдош",
+    "sur_name": "",
+    "profession": "Слесарь по ремонту автомобилей 4 разряда",
+    "issued_date": "2024-07-12",
+    "inn": null
+  },
+  {
+    "id": 6,
+    "registration_number": "ЦС № 000011",
+    "last_name": "Карагулов",
+    "first_name": "Адилет",
+    "sur_name": "",
+    "profession": "Оператор по ветеринарной обработке животных 4 разряда",
+    "issued_date": "2024-07-15",
+    "inn": null
+  },
+  {
+    "id": 17,
+    "registration_number": "ЦС № 000012",
+    "last_name": "Мамбеталиев",
+    "first_name": "Бекжан",
+    "sur_name": "",
+    "profession": "Оператор по ветеринарной обработке животных 4 разряда",
+    "issued_date": "2024-07-15",
+    "inn": null
+  },
+  {
+    "id": 14,
+    "registration_number": "ЦС № 000015",
+    "last_name": "Садыбаказов",
+    "first_name": "Омурзак",
+    "sur_name": "",
+    "profession": "Оператор по ветеринарной обработке животных 4 разряда",
+    "issued_date": "2024-07-15",
+    "inn": null
+  },
+  {
+    "id": 16,
+    "registration_number": "ЦС № 000013",
+    "last_name": "Ыдырысов",
+    "first_name": "Ырысбек",
+    "sur_name": "",
+    "profession": "Оператор по ветеринарной обработке животных 4 разряда",
+    "issued_date": "2024-07-15",
+    "inn": null
+  },
+  {
+    "id": 15,
+    "registration_number": "ЦС № 000014",
+    "last_name": "Кубатбек",
+    "first_name": "Эркинбек уулу",
+    "sur_name": "",
+    "profession": "Оператор по ветеринарной обработке животных 4 разряда",
+    "issued_date": "2024-07-15",
+    "inn": null
+  },
+  {
+    "id": 4,
+    "registration_number": "ЦС № 000009",
+    "last_name": "Зарлыкова",
+    "first_name": "Бегайым",
+    "sur_name": "",
+    "profession": "Горничная",
+    "issued_date": "2024-07-16",
+    "inn": null
+  },
+  {
+    "id": 3,
+    "registration_number": "ЦС № 000008",
+    "last_name": "Тилекова",
+    "first_name": "Айдай",
+    "sur_name": "",
+    "profession": "Горничная",
+    "issued_date": "2024-07-16",
+    "inn": null
+  },
+  {
+    "id": 22,
+    "registration_number": "ЦС № 000005",
+    "last_name": "Идирисова",
+    "first_name": "Райкан",
+    "sur_name": "",
+    "profession": "Горничная",
+    "issued_date": "2024-07-16",
+    "inn": null
+  },
+  {
+    "id": 5,
+    "registration_number": "ЦС № 000010",
+    "last_name": "Айбекова",
+    "first_name": "Сагида",
+    "sur_name": "",
+    "profession": "Горничная",
+    "issued_date": "2024-07-16",
+    "inn": null
+  },
+  {
+    "id": 1,
+    "registration_number": "ЦС № 000006",
+    "last_name": "Сапарбекова",
+    "first_name": "Бегайым",
+    "sur_name": "",
+    "profession": "Горничная",
+    "issued_date": "2024-07-16",
+    "inn": null
+  },
+  {
+    "id": 2,
+    "registration_number": "ЦС № 000007",
+    "last_name": "Муканбетова",
+    "first_name": "Гулбайра",
+    "sur_name": "",
+    "profession": "Горничная",
+    "issued_date": "2024-07-16",
+    "inn": null
+  },
+  {
+    "id": 21,
+    "registration_number": "ЦС № 000004",
+    "last_name": "Есентаева",
+    "first_name": "Бегимай",
+    "sur_name": "",
+    "profession": "Горничная",
+    "issued_date": "2024-07-16",
+    "inn": null
+  },
+  {
+    "id": 19,
+    "registration_number": "ЦС № 000002",
+    "last_name": "Джакыпова",
+    "first_name": "Эльмира",
+    "sur_name": "",
+    "profession": "Горничная",
+    "issued_date": "2024-07-16",
+    "inn": null
+  },
+  {
+    "id": 18,
+    "registration_number": "ЦС № 000001",
+    "last_name": "Жолдошева",
+    "first_name": "Турсунай",
+    "sur_name": "",
+    "profession": "Горничная",
+    "issued_date": "2024-07-16",
+    "inn": null
+  },
+  {
+    "id": 20,
+    "registration_number": "ЦС № 000003",
+    "last_name": "Джаамбаева",
+    "first_name": "Нурсель",
+    "sur_name": "",
+    "profession": "Горничная",
+    "issued_date": "2024-07-16",
+    "inn": null
+  },
+  {
+    "id": 42,
+    "registration_number": "ЦС № 000059",
+    "last_name": "Адина",
+    "first_name": "Абдыбек кызы",
+    "sur_name": "",
+    "profession": "Швея 3 разряда",
+    "issued_date": "2024-07-31",
+    "inn": null
+  },
+  {
+    "id": 43,
+    "registration_number": "ЦС № 000043",
+    "last_name": "Алиева",
+    "first_name": "Жылдыз",
+    "sur_name": "",
+    "profession": "Швея 3 разряда",
+    "issued_date": "2024-07-31",
+    "inn": null
+  },
+  {
+    "id": 44,
+    "registration_number": "ЦС № 000057",
+    "last_name": "Жазгул",
+    "first_name": "Бектурсун кызы",
+    "sur_name": "",
+    "profession": "Швея 3 разряда",
+    "issued_date": "2024-07-31",
+    "inn": null
+  },
+  {
+    "id": 45,
+    "registration_number": "ЦС № 000061",
+    "last_name": "Додогелдиева",
+    "first_name": "Махабат",
+    "sur_name": "",
+    "profession": "Швея 3 разряда",
+    "issued_date": "2024-07-31",
+    "inn": null
+  },
+  {
+    "id": 46,
+    "registration_number": "ЦС № 000045",
+    "last_name": "Жапаркулова",
+    "first_name": "Атыркул",
+    "sur_name": "",
+    "profession": "Швея 3 разряда",
+    "issued_date": "2024-07-31",
+    "inn": null
+  },
+  {
+    "id": 47,
+    "registration_number": "ЦС № 000048",
+    "last_name": "Динара",
+    "first_name": "Журсунбек кызы",
+    "sur_name": "",
+    "profession": "Швея 3 разряда",
+    "issued_date": "2024-07-31",
+    "inn": null
+  },
+  {
+    "id": 48,
+    "registration_number": "ЦС № 000051",
+    "last_name": "Кадырова",
+    "first_name": "Жанаркул",
+    "sur_name": "",
+    "profession": "Швея 3 разряда",
+    "issued_date": "2024-07-31",
+    "inn": null
+  },
+  {
+    "id": 49,
+    "registration_number": "ЦС № 000049",
+    "last_name": "Канбаева",
+    "first_name": "Каныгул",
+    "sur_name": "",
+    "profession": "Швея 3 разряда",
+    "issued_date": "2024-07-31",
+    "inn": null
+  },
+  {
+    "id": 50,
+    "registration_number": "ЦС № 000053",
+    "last_name": "Касыммакунова",
+    "first_name": "Жамиля",
+    "sur_name": "",
+    "profession": "Швея 3 разряда",
+    "issued_date": "2024-07-31",
+    "inn": null
+  },
+  {
+    "id": 51,
+    "registration_number": "ЦС № 000044",
+    "last_name": "Кенжетаева",
+    "first_name": "Зарифа",
+    "sur_name": "",
+    "profession": "Швея 3 разряда",
+    "issued_date": "2024-07-31",
+    "inn": null
+  },
+  {
+    "id": 52,
+    "registration_number": "ЦС № 000060",
+    "last_name": "Кубанычбекова",
+    "first_name": "Гулум",
+    "sur_name": "",
+    "profession": "Швея 3 разряда",
+    "issued_date": "2024-07-31",
+    "inn": null
+  },
+  {
+    "id": 53,
+    "registration_number": "ЦС № 000052",
+    "last_name": "Кулматова",
+    "first_name": "Жылдыз",
+    "sur_name": "",
+    "profession": "Швея 3 разряда",
+    "issued_date": "2024-07-31",
+    "inn": null
+  },
+  {
+    "id": 54,
+    "registration_number": "ЦС № 000055",
+    "last_name": "Мамбеткадырова",
+    "first_name": "Венера",
+    "sur_name": "",
+    "profession": "Швея 3 разряда",
+    "issued_date": "2024-07-31",
+    "inn": null
+  },
+  {
+    "id": 55,
+    "registration_number": "ЦС № 000056",
+    "last_name": "Озокеева",
+    "first_name": "Нуриса",
+    "sur_name": "",
+    "profession": "Швея 3 разряда",
+    "issued_date": "2024-07-31",
+    "inn": null
+  },
+  {
+    "id": 56,
+    "registration_number": "ЦС № 000050",
+    "last_name": "Өмүрбекова",
+    "first_name": "Нурзаада",
+    "sur_name": "",
+    "profession": "Швея 3 разряда",
+    "issued_date": "2024-07-31",
+    "inn": null
+  },
+  {
+    "id": 57,
+    "registration_number": "ЦС № 000047",
+    "last_name": "Сариева",
+    "first_name": "Чынара",
+    "sur_name": "",
+    "profession": "Швея 3 разряда",
+    "issued_date": "2024-07-31",
+    "inn": null
+  },
+  {
+    "id": 58,
+    "registration_number": "ЦС № 000058",
+    "last_name": "Шадыбаева",
+    "first_name": "Мадина",
+    "sur_name": "",
+    "profession": "Швея 3 разряда",
+    "issued_date": "2024-07-31",
+    "inn": null
+  },
+  {
+    "id": 59,
+    "registration_number": "ЦС № 000046",
+    "last_name": "Эдисова",
+    "first_name": "Кулиша",
+    "sur_name": "",
+    "profession": "Швея 3 разряда",
+    "issued_date": "2024-07-31",
+    "inn": null
+  },
+  {
+    "id": 60,
+    "registration_number": "ЦС № 000054",
+    "last_name": "Эликбаева",
+    "first_name": "Назира",
+    "sur_name": "",
+    "profession": "Швея 3 разряда",
+    "issued_date": "2024-07-31",
+    "inn": null
+  },
+  {
+    "id": 61,
+    "registration_number": "ЦС № 000062",
+    "last_name": "Айгул",
+    "first_name": "Абылжан кызы",
+    "sur_name": "",
+    "profession": "Швея, Портной с умением кроить",
+    "issued_date": "2024-08-13",
+    "inn": null
+  },
+  {
+    "id": 62,
+    "registration_number": "ЦС № 000063",
+    "last_name": "Ашымов",
+    "first_name": "Мелис",
+    "sur_name": "",
+    "profession": "Швея, Портной с умением кроить",
+    "issued_date": "2024-08-13",
+    "inn": null
+  },
+  {
+    "id": 63,
+    "registration_number": "ЦС № 000064",
+    "last_name": "Усенбаева",
+    "first_name": "Чынара",
+    "sur_name": "",
+    "profession": "Швея, Портной с умением кроить",
+    "issued_date": "2024-08-13",
+    "inn": null
+  },
+  {
+    "id": 64,
+    "registration_number": "ЦС № 000065",
+    "last_name": "Буйневич",
+    "first_name": "Кира",
+    "sur_name": "",
+    "profession": "Швея, Портной с умением кроить",
+    "issued_date": "2024-08-13",
+    "inn": null
+  },
+  {
+    "id": 65,
+    "registration_number": "ЦС № 000066",
+    "last_name": "Акматова",
+    "first_name": "Нуржан",
+    "sur_name": "",
+    "profession": "Повар 5 разряда (шеф-повар)",
+    "issued_date": "2024-08-27",
+    "inn": null
+  },
+  {
+    "id": 66,
+    "registration_number": "ЦС № 000067",
+    "last_name": "Айталиева",
+    "first_name": "Айжан",
+    "sur_name": "",
+    "profession": "Повар 5 разряда (шеф-повар)",
+    "issued_date": "2024-08-27",
+    "inn": null
+  },
+  {
+    "id": 67,
+    "registration_number": "ЦС № 000068",
+    "last_name": "Джамалова",
+    "first_name": "Роза",
+    "sur_name": "",
+    "profession": "Повар 5 разряда (шеф-повар)",
+    "issued_date": "2024-08-27",
+    "inn": null
+  },
+  {
+    "id": 68,
+    "registration_number": "ЦС № 000069",
+    "last_name": "Джеенбекова",
+    "first_name": "Толкун",
+    "sur_name": "",
+    "profession": "Повар 5 разряда (шеф-повар)",
+    "issued_date": "2024-08-27",
+    "inn": null
+  },
+  {
+    "id": 69,
+    "registration_number": "ЦС № 000070",
+    "last_name": "Джеенбекова",
+    "first_name": "Лира",
+    "sur_name": "",
+    "profession": "Повар 5 разряда (шеф-повар)",
+    "issued_date": "2024-08-27",
+    "inn": null
+  },
+  {
+    "id": 70,
+    "registration_number": "ЦС № 000071",
+    "last_name": "Чынаркул",
+    "first_name": "Жумадил кызы",
+    "sur_name": "",
+    "profession": "Повар 5 разряда (шеф-повар)",
+    "issued_date": "2024-08-27",
+    "inn": null
+  },
+  {
+    "id": 71,
+    "registration_number": "ЦС № 000072",
+    "last_name": "Маталиева",
+    "first_name": "Эркайым",
+    "sur_name": "",
+    "profession": "Повар 5 разряда (шеф-повар)",
+    "issued_date": "2024-08-27",
+    "inn": null
+  },
+  {
+    "id": 72,
+    "registration_number": "ЦС № 000073",
+    "last_name": "Толебаев",
+    "first_name": "Алмаз",
+    "sur_name": "",
+    "profession": "Электрогазосварщик",
+    "issued_date": "2024-10-31",
+    "inn": null
+  },
+  {
+    "id": 73,
+    "registration_number": "ЦС № 000074",
+    "last_name": "Калманбетов",
+    "first_name": "Толегон",
+    "sur_name": "",
+    "profession": "Электрогазосварщик",
+    "issued_date": "2024-10-31",
+    "inn": null
+  },
+  {
+    "id": 74,
+    "registration_number": "ЦС № 000075",
+    "last_name": "Кармиаев",
+    "first_name": "Алексей",
+    "sur_name": "",
+    "profession": "Электрогазосварщик",
+    "issued_date": "2024-11-15",
+    "inn": null
+  },
+  {
+    "id": 75,
+    "registration_number": "ЦС № 000076",
+    "last_name": "Айдай",
+    "first_name": "Нуридин кызы",
+    "sur_name": "",
+    "profession": "Повар детского и диетического питания",
+    "issued_date": "2024-11-03",
+    "inn": null
+  },
+  {
+    "id": 76,
+    "registration_number": "ЦС № 000077",
+    "last_name": "Нуридинов",
+    "first_name": "Уултай",
+    "sur_name": "",
+    "profession": "Повар детского и диетического питания",
+    "issued_date": "2024-11-03",
+    "inn": null
+  },
+  {
+    "id": 77,
+    "registration_number": "ЦС № 000111",
+    "last_name": "Бантабаев",
+    "first_name": "Амирхамза",
+    "sur_name": "",
+    "profession": "Мастер отделочных строительных работ",
+    "issued_date": "2024-12-16",
+    "inn": null
+  },
+  {
+    "id": 78,
+    "registration_number": "ЦС № 000108",
+    "last_name": "Иманалиев",
+    "first_name": "Хайдарали",
+    "sur_name": "",
+    "profession": "Мастер отделочных строительных работ",
+    "issued_date": "2024-12-16",
+    "inn": null
+  },
+  {
+    "id": 79,
+    "registration_number": "ЦС № 000109",
+    "last_name": "Иманалиев",
+    "first_name": "Жайлообай",
+    "sur_name": "",
+    "profession": "Мастер отделочных строительных работ",
+    "issued_date": "2024-12-16",
+    "inn": null
+  },
+  {
+    "id": 80,
+    "registration_number": "ЦС № 000110",
+    "last_name": "Имоналиев",
+    "first_name": "Бактияр",
+    "sur_name": "",
+    "profession": "Мастер отделочных строительных работ",
+    "issued_date": "2024-12-16",
+    "inn": null
+  },
+  {
+    "id": 81,
+    "registration_number": "ЦС № 000112",
+    "last_name": "Имомалиев",
+    "first_name": "Акылбек",
+    "sur_name": "",
+    "profession": "Мастер отделочных строительных работ",
+    "issued_date": "2024-12-16",
+    "inn": null
+  },
+  {
+    "id": 82,
+    "registration_number": "ЦС № 000113",
+    "last_name": "Жумабеков",
+    "first_name": "Азизбек",
+    "sur_name": "",
+    "profession": "Мастер отделочных строительных работ",
+    "issued_date": "2024-12-16",
+    "inn": null
+  },
+  {
+    "id": 83,
+    "registration_number": "ЦС № 000114",
+    "last_name": "Чокеев",
+    "first_name": "Жанболот",
+    "sur_name": "",
+    "profession": "Мастер отделочных строительных работ",
+    "issued_date": "2024-12-16",
+    "inn": null
+  },
+  {
+    "id": 84,
+    "registration_number": "ЦС № 000115",
+    "last_name": "Манасбек",
+    "first_name": "Камбаралы уулу",
+    "sur_name": "",
+    "profession": "Мастер отделочных строительных работ",
+    "issued_date": "2024-12-16",
+    "inn": null
+  },
+  {
+    "id": 85,
+    "registration_number": "ЦС № 000116",
+    "last_name": "Баялиев",
+    "first_name": "Манас",
+    "sur_name": "Нышанбаевич",
+    "profession": "Мастер отделочных строительных работ",
+    "issued_date": "2024-12-16",
+    "inn": null
+  },
+  {
+    "id": 86,
+    "registration_number": "ЦС № 000117",
+    "last_name": "Баялиев",
+    "first_name": "Урматбек",
+    "sur_name": "",
+    "profession": "Мастер отделочных строительных работ",
+    "issued_date": "2024-12-16",
+    "inn": null
+  },
+  {
+    "id": 87,
+    "registration_number": "ЦС № 000118",
+    "last_name": "Мадиев",
+    "first_name": "Кутман",
+    "sur_name": "",
+    "profession": "Мастер отделочных строительных работ",
+    "issued_date": "2024-12-16",
+    "inn": null
+  },
+  {
+    "id": 88,
+    "registration_number": "ЦС № 000119",
+    "last_name": "Казаков",
+    "first_name": "Талгат",
+    "sur_name": "",
+    "profession": "Мастер отделочных строительных работ",
+    "issued_date": "2024-12-16",
+    "inn": null
+  },
+  {
+    "id": 89,
+    "registration_number": "ЦС № 000120",
+    "last_name": "Бектуров",
+    "first_name": "Ариет",
+    "sur_name": "",
+    "profession": "Мастер отделочных строительных работ",
+    "issued_date": "2024-12-16",
+    "inn": null
+  },
+  {
+    "id": 90,
+    "registration_number": "ЦС № 000121",
+    "last_name": "Шарапидинов",
+    "first_name": "Сыймык",
+    "sur_name": "",
+    "profession": "Мастер отделочных строительных работ",
+    "issued_date": "2024-12-16",
+    "inn": null
+  },
+  {
+    "id": 91,
+    "registration_number": "ЦС № 000122",
+    "last_name": "Жыргалбек",
+    "first_name": "Ишенбай уулу",
+    "sur_name": "",
+    "profession": "Мастер отделочных строительных работ",
+    "issued_date": "2024-12-16",
+    "inn": null
+  },
+  {
+    "id": 92,
+    "registration_number": "ЦС № 000123",
+    "last_name": "Акматов",
+    "first_name": "Куштарбек",
+    "sur_name": "",
+    "profession": "Мастер отделочных строительных работ",
+    "issued_date": "2024-12-16",
+    "inn": null
+  },
+  {
+    "id": 93,
+    "registration_number": "ЦС № 000124",
+    "last_name": "Болтаев",
+    "first_name": "Бактыбек",
+    "sur_name": "",
+    "profession": "Мастер отделочных строительных работ",
+    "issued_date": "2024-12-16",
+    "inn": null
+  },
+  {
+    "id": 94,
+    "registration_number": "ЦС № 000125",
+    "last_name": "Камаров",
+    "first_name": "Сайфардин",
+    "sur_name": "",
+    "profession": "Мастер отделочных строительных работ",
+    "issued_date": "2024-12-16",
+    "inn": null
+  },
+  {
+    "id": 95,
+    "registration_number": "ЦС № 000126",
+    "last_name": "Таникулов",
+    "first_name": "Сулайман",
+    "sur_name": "",
+    "profession": "Мастер отделочных строительных работ",
+    "issued_date": "2024-12-16",
+    "inn": null
+  },
+  {
+    "id": 96,
+    "registration_number": "ЦС № 000127",
+    "last_name": "Махмуджанов",
+    "first_name": "Жоробек",
+    "sur_name": "",
+    "profession": "Мастер отделочных строительных работ",
+    "issued_date": "2024-12-16",
+    "inn": null
+  },
+  {
+    "id": 97,
+    "registration_number": "ЦС № 000128",
+    "last_name": "Насиров",
+    "first_name": "Асланбек",
+    "sur_name": "Муктарович",
+    "profession": "Мастер отделочных строительных работ",
+    "issued_date": "2024-12-16",
+    "inn": null
+  },
+  {
+    "id": 98,
+    "registration_number": "ЦС № 000129",
+    "last_name": "Насиров",
+    "first_name": "Ахматбек",
+    "sur_name": "Муктарович",
+    "profession": "Мастер отделочных строительных работ",
+    "issued_date": "2024-12-16",
+    "inn": null
+  },
+  {
+    "id": 99,
+    "registration_number": "ЦС № 000130",
+    "last_name": "Махмудов",
+    "first_name": "Мехмасола",
+    "sur_name": "Хашимович",
+    "profession": "Мастер отделочных строительных работ",
+    "issued_date": "2024-12-16",
+    "inn": null
+  },
+  {
+    "id": 100,
+    "registration_number": "ЦС № 000131",
+    "last_name": "Махмудов",
+    "first_name": "Хамид",
+    "sur_name": "Хашимович",
+    "profession": "Мастер отделочных строительных работ",
+    "issued_date": "2024-12-16",
+    "inn": null
+  },
+  {
+    "id": 101,
+    "registration_number": "ЦС № 000132",
+    "last_name": "Мурзаев",
+    "first_name": "Кайымжок",
+    "sur_name": "Бакирович",
+    "profession": "Мастер отделочных строительных работ",
+    "issued_date": "2024-12-16",
+    "inn": null
+  },
+  {
+    "id": 102,
+    "registration_number": "ЦС № 000133",
+    "last_name": "Мирлан",
+    "first_name": "Рыскелди уулу",
+    "sur_name": "",
+    "profession": "Мастер отделочных строительных работ",
+    "issued_date": "2024-12-16",
+    "inn": null
+  },
+  {
+    "id": 103,
+    "registration_number": "ЦС № 000134",
+    "last_name": "Момуналиев",
+    "first_name": "Бакыт",
+    "sur_name": "Мыктыбекович",
+    "profession": "Мастер отделочных строительных работ",
+    "issued_date": "2024-12-16",
+    "inn": null
+  },
+  {
+    "id": 104,
+    "registration_number": "ЦС № 000135",
+    "last_name": "Мукалиев",
+    "first_name": "Бакыт",
+    "sur_name": "Токторович",
+    "profession": "Мастер отделочных строительных работ",
+    "issued_date": "2024-12-16",
+    "inn": null
+  },
+  {
+    "id": 105,
+    "registration_number": "ЦС № 000136",
+    "last_name": "Иманкулов",
+    "first_name": "Абиджон",
+    "sur_name": "Умаркулович",
+    "profession": "Мастер отделочных строительных работ",
+    "issued_date": "2024-12-16",
+    "inn": null
+  },
+  {
+    "id": 106,
+    "registration_number": "ЦС № 000137",
+    "last_name": "Абдылдаев",
+    "first_name": "Бекзат",
+    "sur_name": "Акаарович",
+    "profession": "Мастер отделочных строительных работ",
+    "issued_date": "2024-12-16",
+    "inn": null
+  },
+  {
+    "id": 107,
+    "registration_number": "ЦС № 000138",
+    "last_name": "Тентимишов",
+    "first_name": "Автандил",
+    "sur_name": "Тургунович",
+    "profession": "Мастер отделочных строительных работ",
+    "issued_date": "2024-12-16",
+    "inn": null
+  },
+  {
+    "id": 108,
+    "registration_number": "ЦС № 000078",
+    "last_name": "Таштемиров",
+    "first_name": "Дилмурат",
+    "sur_name": "",
+    "profession": "Оператор по ветеринарной обработке животных",
+    "issued_date": "2024-12-11",
+    "inn": null
+  },
+  {
+    "id": 109,
+    "registration_number": "ЦС № 000079",
+    "last_name": "Райымжанова",
+    "first_name": "Курсанай",
+    "sur_name": "",
+    "profession": "Оператор по ветеринарной обработке животных",
+    "issued_date": "2024-12-11",
+    "inn": null
+  },
+  {
+    "id": 110,
+    "registration_number": "ЦС № 000080",
+    "last_name": "Юлдашов",
+    "first_name": "Омаджан",
+    "sur_name": "",
+    "profession": "Оператор по ветеринарной обработке животных",
+    "issued_date": "2024-12-11",
+    "inn": null
+  },
+  {
+    "id": 111,
+    "registration_number": "ЦС № 000081",
+    "last_name": "Мундузов",
+    "first_name": "Нурадил",
+    "sur_name": "",
+    "profession": "Оператор по ветеринарной обработке животных",
+    "issued_date": "2024-12-11",
+    "inn": null
+  },
+  {
+    "id": 112,
+    "registration_number": "ЦС № 000082",
+    "last_name": "Мамажанов",
+    "first_name": "Бекмамат",
+    "sur_name": "",
+    "profession": "Оператор по ветеринарной обработке животных",
+    "issued_date": "2024-12-11",
+    "inn": null
+  },
+  {
+    "id": 113,
+    "registration_number": "ЦС № 000083",
+    "last_name": "Кадыров",
+    "first_name": "Усон",
+    "sur_name": "",
+    "profession": "Оператор по ветеринарной обработке животных",
+    "issued_date": "2024-12-11",
+    "inn": null
+  },
+  {
+    "id": 114,
+    "registration_number": "ЦС № 000084",
+    "last_name": "Арыкбаев",
+    "first_name": "Бактияр",
+    "sur_name": "",
+    "profession": "Оператор по ветеринарной обработке животных",
+    "issued_date": "2024-12-11",
+    "inn": null
+  },
+  {
+    "id": 115,
+    "registration_number": "ЦС № 000085",
+    "last_name": "Бостонов",
+    "first_name": "Мирлан",
+    "sur_name": "",
+    "profession": "Оператор по ветеринарной обработке животных",
+    "issued_date": "2024-12-11",
+    "inn": null
+  },
+  {
+    "id": 116,
+    "registration_number": "ЦС № 000086",
+    "last_name": "Турашов",
+    "first_name": "Аскар",
+    "sur_name": "",
+    "profession": "Оператор по ветеринарной обработке животных",
+    "issued_date": "2024-12-11",
+    "inn": null
+  },
+  {
+    "id": 117,
+    "registration_number": "ЦС № 000087",
+    "last_name": "Сыдыкова",
+    "first_name": "Бактыгуль",
+    "sur_name": "",
+    "profession": "Оператор по ветеринарной обработке животных",
+    "issued_date": "2024-12-11",
+    "inn": null
+  },
+  {
+    "id": 118,
+    "registration_number": "ЦС № 000088",
+    "last_name": "Кааров",
+    "first_name": "Алманбет",
+    "sur_name": "",
+    "profession": "Оператор по ветеринарной обработке животных",
+    "issued_date": "2024-12-11",
+    "inn": null
+  },
+  {
+    "id": 119,
+    "registration_number": "ЦС № 000089",
+    "last_name": "Курбанов",
+    "first_name": "Айбек",
+    "sur_name": "",
+    "profession": "Оператор по ветеринарной обработке животных",
+    "issued_date": "2024-12-11",
+    "inn": null
+  },
+  {
+    "id": 120,
+    "registration_number": "ЦС № 000090",
+    "last_name": "Абдрасулов",
+    "first_name": "Нурсултан",
+    "sur_name": "",
+    "profession": "Оператор по ветеринарной обработке животных",
+    "issued_date": "2024-12-11",
+    "inn": null
+  },
+  {
+    "id": 121,
+    "registration_number": "ЦС № 000091",
+    "last_name": "Ахунжанов",
+    "first_name": "Тойчу",
+    "sur_name": "",
+    "profession": "Оператор по ветеринарной обработке животных",
+    "issued_date": "2024-12-11",
+    "inn": null
+  },
+  {
+    "id": 122,
+    "registration_number": "ЦС № 000092",
+    "last_name": "Маматкулов",
+    "first_name": "Самаган",
+    "sur_name": "",
+    "profession": "Оператор по ветеринарной обработке животных",
+    "issued_date": "2024-12-11",
+    "inn": null
+  },
+  {
+    "id": 123,
+    "registration_number": "ЦС № 000093",
+    "last_name": "Тешебаев",
+    "first_name": "Абдулхамид",
+    "sur_name": "",
+    "profession": "Оператор по ветеринарной обработке животных",
+    "issued_date": "2024-12-11",
+    "inn": null
+  },
+  {
+    "id": 124,
+    "registration_number": "ЦС № 000094",
+    "last_name": "Момуналиев",
+    "first_name": "Бектурсун",
+    "sur_name": "",
+    "profession": "Оператор по ветеринарной обработке животных",
+    "issued_date": "2024-12-11",
+    "inn": null
+  },
+  {
+    "id": 125,
+    "registration_number": "ЦС № 000095",
+    "last_name": "Полотов",
+    "first_name": "Умарбек",
+    "sur_name": "",
+    "profession": "Оператор по ветеринарной обработке животных",
+    "issued_date": "2024-12-11",
+    "inn": null
+  },
+  {
+    "id": 126,
+    "registration_number": "ЦС № 000096",
+    "last_name": "Ашираев",
+    "first_name": "Суймонкул",
+    "sur_name": "",
+    "profession": "Электромонтер по ремонту и обслуживанию электрооборудования",
+    "issued_date": "2024-12-11",
+    "inn": null
+  },
+  {
+    "id": 127,
+    "registration_number": "ЦС № 000097",
+    "last_name": "Аттокуров",
+    "first_name": "Заур",
+    "sur_name": "",
+    "profession": "Электромонтер по ремонту и обслуживанию электрооборудования",
+    "issued_date": "2024-12-11",
+    "inn": null
+  },
+  {
+    "id": 128,
+    "registration_number": "ЦС № 000098",
+    "last_name": "Баратов",
+    "first_name": "Роман",
+    "sur_name": "",
+    "profession": "Электромонтер по ремонту и обслуживанию электрооборудования",
+    "issued_date": "2024-12-11",
+    "inn": null
+  },
+  {
+    "id": 129,
+    "registration_number": "ЦС № 000099",
+    "last_name": "Быржыбаев",
+    "first_name": "Кубанычбек",
+    "sur_name": "",
+    "profession": "Электромонтер по ремонту и обслуживанию электрооборудования",
+    "issued_date": "2024-12-11",
+    "inn": null
+  },
+  {
+    "id": 130,
+    "registration_number": "ЦС № 000100",
+    "last_name": "Календеров",
+    "first_name": "Нурали",
+    "sur_name": "",
+    "profession": "Электромонтер по ремонту и обслуживанию электрооборудования",
+    "issued_date": "2024-12-11",
+    "inn": null
+  },
+  {
+    "id": 131,
+    "registration_number": "ЦС № 000101",
+    "last_name": "Кушуев",
+    "first_name": "Беку",
+    "sur_name": "",
+    "profession": "Электромонтер по ремонту и обслуживанию электрооборудования",
+    "issued_date": "2024-12-11",
+    "inn": null
+  },
+  {
+    "id": 132,
+    "registration_number": "ЦС № 000102",
+    "last_name": "Курманалиев",
+    "first_name": "Алтынбек",
+    "sur_name": "",
+    "profession": "Электромонтер по ремонту и обслуживанию электрооборудования",
+    "issued_date": "2024-12-11",
+    "inn": null
+  },
+  {
+    "id": 133,
+    "registration_number": "ЦС № 000103",
+    "last_name": "Сайназаров",
+    "first_name": "Бакыт",
+    "sur_name": "",
+    "profession": "Электромонтер по ремонту и обслуживанию электрооборудования",
+    "issued_date": "2024-12-11",
+    "inn": null
+  },
+  {
+    "id": 134,
+    "registration_number": "ЦС № 000104",
+    "last_name": "Токтоматов",
+    "first_name": "Ырыскелди",
+    "sur_name": "",
+    "profession": "Электромонтер по ремонту и обслуживанию электрооборудования",
+    "issued_date": "2024-12-11",
+    "inn": null
+  },
+  {
+    "id": 135,
+    "registration_number": "ЦС № 000105",
+    "last_name": "Шамикулов",
+    "first_name": "Самаган",
+    "sur_name": "",
+    "profession": "Электромонтер по ремонту и обслуживанию электрооборудования",
+    "issued_date": "2024-12-11",
+    "inn": null
+  },
+  {
+    "id": 136,
+    "registration_number": "ЦС № 000106",
+    "last_name": "Шамшиев",
+    "first_name": "Белик",
+    "sur_name": "",
+    "profession": "Электромонтер по ремонту и обслуживанию электрооборудования",
+    "issued_date": "2024-12-11",
+    "inn": null
+  },
+  {
+    "id": 137,
+    "registration_number": "ЦС № 000107",
+    "last_name": "Жунусов",
+    "first_name": "Кутманали",
+    "sur_name": "",
+    "profession": "Электромонтер по ремонту и обслуживанию электрооборудования",
+    "issued_date": "2024-12-11",
+    "inn": null
+  },
+  {
+    "id": 138,
+    "registration_number": "ЦС № 000183",
+    "last_name": "Байсалов",
+    "first_name": "Орозбек",
+    "sur_name": "",
+    "profession": "Слесарь по ремонту автомобилей",
+    "issued_date": "2024-12-18",
+    "inn": null
+  },
+  {
+    "id": 139,
+    "registration_number": "ЦС № 000184",
+    "last_name": "Байсалов",
+    "first_name": "Тууганбек",
+    "sur_name": "",
+    "profession": "Слесарь по ремонту автомобилей",
+    "issued_date": "2024-12-18",
+    "inn": null
+  },
+  {
+    "id": 140,
+    "registration_number": "ЦС № 000185",
+    "last_name": "Тынарбек",
+    "first_name": "Кубанычбек уулу",
+    "sur_name": "",
+    "profession": "Слесарь по ремонту автомобилей",
+    "issued_date": "2024-12-18",
+    "inn": null
+  },
+  {
+    "id": 141,
+    "registration_number": "ЦС № 000186",
+    "last_name": "Нурдинов",
+    "first_name": "Данияр",
+    "sur_name": "",
+    "profession": "Слесарь по ремонту автомобилей",
+    "issued_date": "2024-12-18",
+    "inn": null
+  },
+  {
+    "id": 142,
+    "registration_number": "ЦС № 000187",
+    "last_name": "Дегтяников",
+    "first_name": "Евгений",
+    "sur_name": "",
+    "profession": "Слесарь по ремонту автомобилей",
+    "issued_date": "2024-12-18",
+    "inn": null
+  },
+  {
+    "id": 143,
+    "registration_number": "ЦС № 000188",
+    "last_name": "Абдиев",
+    "first_name": "Урмат",
+    "sur_name": "",
+    "profession": "Слесарь по ремонту автомобилей",
+    "issued_date": "2024-12-18",
+    "inn": null
+  },
+  {
+    "id": 144,
+    "registration_number": "ЦС № 000189",
+    "last_name": "Максат",
+    "first_name": "Жумак уулу",
+    "sur_name": "",
+    "profession": "Слесарь по ремонту автомобилей",
+    "issued_date": "2024-12-18",
+    "inn": null
+  },
+  {
+    "id": 145,
+    "registration_number": "ЦС № 000190",
+    "last_name": "Тургумбаев",
+    "first_name": "Бакытбек",
+    "sur_name": "",
+    "profession": "Слесарь по ремонту автомобилей",
+    "issued_date": "2024-12-18",
+    "inn": null
+  },
+  {
+    "id": 146,
+    "registration_number": "ЦС № 000164",
+    "last_name": "Афлетонов",
+    "first_name": "Сергей",
+    "sur_name": "",
+    "profession": "Слесарь по ремонту автомобилей",
+    "issued_date": "2024-12-16",
+    "inn": null
+  },
+  {
+    "id": 147,
+    "registration_number": "ЦС № 000165",
+    "last_name": "Литвиненко",
+    "first_name": "Андрей",
+    "sur_name": "",
+    "profession": "Слесарь по ремонту автомобилей",
+    "issued_date": "2024-12-16",
+    "inn": null
+  },
+  {
+    "id": 148,
+    "registration_number": "ЦС № 000166",
+    "last_name": "Иргашев",
+    "first_name": "Шодиер",
+    "sur_name": "",
+    "profession": "Слесарь по ремонту автомобилей",
+    "issued_date": "2024-12-16",
+    "inn": null
+  },
+  {
+    "id": 149,
+    "registration_number": "ЦС № 000167",
+    "last_name": "Крюков",
+    "first_name": "Денис",
+    "sur_name": "",
+    "profession": "Слесарь по ремонту автомобилей",
+    "issued_date": "2024-12-16",
+    "inn": null
+  },
+  {
+    "id": 150,
+    "registration_number": "ЦС № 000168",
+    "last_name": "Мамбетбаев",
+    "first_name": "Бактыбек",
+    "sur_name": "",
+    "profession": "Слесарь по ремонту автомобилей",
+    "issued_date": "2024-12-16",
+    "inn": null
+  },
+  {
+    "id": 151,
+    "registration_number": "ЦС № 000169",
+    "last_name": "Матанов",
+    "first_name": "Данияр",
+    "sur_name": "",
+    "profession": "Слесарь по ремонту автомобилей",
+    "issued_date": "2024-12-16",
+    "inn": null
+  },
+  {
+    "id": 152,
+    "registration_number": "ЦС № 000170",
+    "last_name": "Макеев",
+    "first_name": "Канат",
+    "sur_name": "",
+    "profession": "Слесарь по ремонту автомобилей",
+    "issued_date": "2024-12-16",
+    "inn": null
+  },
+  {
+    "id": 153,
+    "registration_number": "ЦС № 000171",
+    "last_name": "Хорченко",
+    "first_name": "Дмитрий",
+    "sur_name": "",
+    "profession": "Слесарь по ремонту автомобилей",
+    "issued_date": "2024-12-16",
+    "inn": null
+  },
+  {
+    "id": 154,
+    "registration_number": "ЦС № 000172",
+    "last_name": "Чымырбаев",
+    "first_name": "Максат",
+    "sur_name": "",
+    "profession": "Слесарь по ремонту автомобилей",
+    "issued_date": "2024-12-16",
+    "inn": null
+  },
+  {
+    "id": 155,
+    "registration_number": "ЦС № 000173",
+    "last_name": "Лянахунов",
+    "first_name": "Шакир",
+    "sur_name": "",
+    "profession": "Слесарь по ремонту автомобилей",
+    "issued_date": "2024-12-16",
+    "inn": null
+  },
+  {
+    "id": 156,
+    "registration_number": "ЦС № 000139",
+    "last_name": "Каипова",
+    "first_name": "Элмира",
+    "sur_name": "",
+    "profession": "Портной с умением кроить 3-4 разряда",
+    "issued_date": "2024-12-12",
+    "inn": null
+  },
+  {
+    "id": 157,
+    "registration_number": "ЦС № 000140",
+    "last_name": "Махиро",
+    "first_name": "Кадирберди кызы",
+    "sur_name": "",
+    "profession": "Портной с умением кроить 3-4 разряда",
+    "issued_date": "2024-12-12",
+    "inn": null
+  },
+  {
+    "id": 158,
+    "registration_number": "ЦС № 000141",
+    "last_name": "Марупова",
+    "first_name": "Зарифахан",
+    "sur_name": "",
+    "profession": "Портной с умением кроить 3-4 разряда",
+    "issued_date": "2024-12-12",
+    "inn": null
+  },
+  {
+    "id": 159,
+    "registration_number": "ЦС № 000142",
+    "last_name": "Хайруллаева",
+    "first_name": "Турсунай",
+    "sur_name": "",
+    "profession": "Портной с умением кроить 3-4 разряда",
+    "issued_date": "2024-12-12",
+    "inn": null
+  },
+  {
+    "id": 160,
+    "registration_number": "ЦС № 000143",
+    "last_name": "Абдурамитова",
+    "first_name": "Айкол",
+    "sur_name": "",
+    "profession": "Портной с умением кроить 3-4 разряда",
+    "issued_date": "2024-12-12",
+    "inn": null
+  },
+  {
+    "id": 161,
+    "registration_number": "ЦС № 000144",
+    "last_name": "Айчурок",
+    "first_name": "Элинжан кызы",
+    "sur_name": "",
+    "profession": "Портной с умением кроить 3-4 разряда",
+    "issued_date": "2024-12-12",
+    "inn": null
+  },
+  {
+    "id": 162,
+    "registration_number": "ЦС № 000145",
+    "last_name": "Асылкан",
+    "first_name": "Эржин кызы",
+    "sur_name": "",
+    "profession": "Портной с умением кроить 3-4 разряда",
+    "issued_date": "2024-12-12",
+    "inn": null
+  },
+  {
+    "id": 163,
+    "registration_number": "ЦС № 000146",
+    "last_name": "Азиза",
+    "first_name": "Дажап кызы",
+    "sur_name": "",
+    "profession": "Портной с умением кроить 3-4 разряда",
+    "issued_date": "2024-12-12",
+    "inn": null
+  },
+  {
+    "id": 164,
+    "registration_number": "ЦС № 000147",
+    "last_name": "Рустамова",
+    "first_name": "Кыздархан",
+    "sur_name": "",
+    "profession": "Портной с умением кроить 3-4 разряда",
+    "issued_date": "2024-12-12",
+    "inn": null
+  },
+  {
+    "id": 165,
+    "registration_number": "ЦС № 000148",
+    "last_name": "Акматова",
+    "first_name": "Назгуль",
+    "sur_name": "",
+    "profession": "Портной с умением кроить 3-4 разряда",
+    "issued_date": "2024-12-12",
+    "inn": null
+  },
+  {
+    "id": 166,
+    "registration_number": "ЦС № 000149",
+    "last_name": "Саламбек кызы",
+    "first_name": "Мираида",
+    "sur_name": "",
+    "profession": "Портной с умением кроить 3-4 разряда",
+    "issued_date": "2024-12-12",
+    "inn": null
+  },
+  {
+    "id": 167,
+    "registration_number": "ЦС № 000150",
+    "last_name": "Длавалдиева",
+    "first_name": "Нилуфар",
+    "sur_name": "",
+    "profession": "Портной с умением кроить 3-4 разряда",
+    "issued_date": "2024-12-12",
+    "inn": null
+  },
+  {
+    "id": 168,
+    "registration_number": "ЦС № 000151",
+    "last_name": "Асанова",
+    "first_name": "Рахима",
+    "sur_name": "",
+    "profession": "Портной с умением кроить 3-4 разряда",
+    "issued_date": "2024-12-12",
+    "inn": null
+  },
+  {
+    "id": 169,
+    "registration_number": "ЦС № 000152",
+    "last_name": "Бегжалова",
+    "first_name": "Айнаш",
+    "sur_name": "",
+    "profession": "Портной с умением кроить 3-4 разряда",
+    "issued_date": "2024-12-12",
+    "inn": null
+  },
+  {
+    "id": 170,
+    "registration_number": "ЦС № 000153",
+    "last_name": "Ахунжанова",
+    "first_name": "Зарифахан",
+    "sur_name": "",
+    "profession": "Портной с умением кроить 3-4 разряда",
+    "issued_date": "2024-12-12",
+    "inn": null
+  },
+  {
+    "id": 171,
+    "registration_number": "ЦС № 000154",
+    "last_name": "Марупова",
+    "first_name": "Замирахон",
+    "sur_name": "",
+    "profession": "Портной с умением кроить 3-4 разряда",
+    "issued_date": "2024-12-12",
+    "inn": null
+  },
+  {
+    "id": 172,
+    "registration_number": "ЦС № 000155",
+    "last_name": "Миркадырова",
+    "first_name": "Нилюпар",
+    "sur_name": "",
+    "profession": "Портной с умением кроить 3-4 разряда",
+    "issued_date": "2024-12-12",
+    "inn": null
+  },
+  {
+    "id": 173,
+    "registration_number": "ЦС № 000156",
+    "last_name": "Хашимова",
+    "first_name": "Мейлихон",
+    "sur_name": "",
+    "profession": "Портной с умением кроить 3-4 разряда",
+    "issued_date": "2024-12-12",
+    "inn": null
+  },
+  {
+    "id": 174,
+    "registration_number": "ЦС № 000157",
+    "last_name": "Абдурахманова",
+    "first_name": "Сарвиноз",
+    "sur_name": "",
+    "profession": "Портной с умением кроить 3-4 разряда",
+    "issued_date": "2024-12-12",
+    "inn": null
+  },
+  {
+    "id": 175,
+    "registration_number": "ЦС № 000158",
+    "last_name": "Атаева",
+    "first_name": "Нурхон",
+    "sur_name": "",
+    "profession": "Портной с умением кроить 3-4 разряда",
+    "issued_date": "2024-12-12",
+    "inn": null
+  },
+  {
+    "id": 176,
+    "registration_number": "ЦС № 000159",
+    "last_name": "Абсатарова",
+    "first_name": "Шарифа",
+    "sur_name": "",
+    "profession": "Портной с умением кроить 3-4 разряда",
+    "issued_date": "2024-12-12",
+    "inn": null
+  },
+  {
+    "id": 177,
+    "registration_number": "ЦС № 000160",
+    "last_name": "Хожимаматова",
+    "first_name": "Ирода",
+    "sur_name": "",
+    "profession": "Портной с умением кроить 3-4 разряда",
+    "issued_date": "2024-12-12",
+    "inn": null
+  },
+  {
+    "id": 178,
+    "registration_number": "ЦС № 000161",
+    "last_name": "Райназарова",
+    "first_name": "Мафтура",
+    "sur_name": "",
+    "profession": "Портной с умением кроить 3-4 разряда",
+    "issued_date": "2024-12-12",
+    "inn": null
+  },
+  {
+    "id": 179,
+    "registration_number": "ЦС № 000162",
+    "last_name": "Хакимова",
+    "first_name": "Хадичабону",
+    "sur_name": "",
+    "profession": "Портной с умением кроить 3-4 разряда",
+    "issued_date": "2024-12-12",
+    "inn": null
+  },
+  {
+    "id": 180,
+    "registration_number": "ЦС № 000163",
+    "last_name": "Мадымарова",
+    "first_name": "Муххабат",
+    "sur_name": "",
+    "profession": "Портной с умением кроить 3-4 разряда",
+    "issued_date": "2024-12-12",
+    "inn": null
+  },
+  {
+    "id": 181,
+    "registration_number": "ЦС № 000220",
+    "last_name": "Абдыкеримова",
+    "first_name": "Нурила",
+    "sur_name": "",
+    "profession": "Портной с умением кроить 3-4 разряда",
+    "issued_date": "2024-12-10",
+    "inn": null
+  },
+  {
+    "id": 182,
+    "registration_number": "ЦС № 000221",
+    "last_name": "Жумагул",
+    "first_name": "Абдимажит кызы",
+    "sur_name": "",
+    "profession": "Портной с умением кроить 3-4 разряда",
+    "issued_date": "2024-12-10",
+    "inn": null
+  },
+  {
+    "id": 183,
+    "registration_number": "ЦС № 000222",
+    "last_name": "Айгерим",
+    "first_name": "Акылбек кызы",
+    "sur_name": "",
+    "profession": "Портной с умением кроить 3-4 разряда",
+    "issued_date": "2024-12-10",
+    "inn": null
+  },
+  {
+    "id": 184,
+    "registration_number": "ЦС № 000223",
+    "last_name": "Аматова",
+    "first_name": "Айбурак",
+    "sur_name": "",
+    "profession": "Портной с умением кроить 3-4 разряда",
+    "issued_date": "2024-12-10",
+    "inn": null
+  },
+  {
+    "id": 185,
+    "registration_number": "ЦС № 000224",
+    "last_name": "Дадашова",
+    "first_name": "Элиза",
+    "sur_name": "",
+    "profession": "Портной с умением кроить 3-4 разряда",
+    "issued_date": "2024-12-10",
+    "inn": null
+  },
+  {
+    "id": 186,
+    "registration_number": "ЦС № 000225",
+    "last_name": "Жоробекова",
+    "first_name": "Гулзада",
+    "sur_name": "",
+    "profession": "Портной с умением кроить 3-4 разряда",
+    "issued_date": "2024-12-10",
+    "inn": null
+  },
+  {
+    "id": 187,
+    "registration_number": "ЦС № 000226",
+    "last_name": "Карабаева",
+    "first_name": "Зымырат",
+    "sur_name": "",
+    "profession": "Портной с умением кроить 3-4 разряда",
+    "issued_date": "2024-12-10",
+    "inn": null
+  },
+  {
+    "id": 188,
+    "registration_number": "ЦС № 000227",
+    "last_name": "Козубаева",
+    "first_name": "Айсалкын",
+    "sur_name": "",
+    "profession": "Портной с умением кроить 3-4 разряда",
+    "issued_date": "2024-12-10",
+    "inn": null
+  },
+  {
+    "id": 189,
+    "registration_number": "ЦС № 000228",
+    "last_name": "Канышай",
+    "first_name": "Маматшукур кызы",
+    "sur_name": "",
+    "profession": "Портной с умением кроить 3-4 разряда",
+    "issued_date": "2024-12-10",
+    "inn": null
+  },
+  {
+    "id": 190,
+    "registration_number": "ЦС № 000229",
+    "last_name": "Мусакоджаева",
+    "first_name": "Махабат",
+    "sur_name": "",
+    "profession": "Портной с умением кроить 3-4 разряда",
+    "issued_date": "2024-12-10",
+    "inn": null
+  },
+  {
+    "id": 191,
+    "registration_number": "ЦС № 000230",
+    "last_name": "Дахманова",
+    "first_name": "Венера",
+    "sur_name": "",
+    "profession": "Портной с умением кроить 3-4 разряда",
+    "issued_date": "2024-12-10",
+    "inn": null
+  },
+  {
+    "id": 192,
+    "registration_number": "ЦС № 000231",
+    "last_name": "Темирова",
+    "first_name": "Насипа",
+    "sur_name": "",
+    "profession": "Портной с умением кроить 3-4 разряда",
+    "issued_date": "2024-12-10",
+    "inn": null
+  },
+  {
+    "id": 193,
+    "registration_number": "ЦС № 000232",
+    "last_name": "Эназарова",
+    "first_name": "Кутбу",
+    "sur_name": "",
+    "profession": "Портной с умением кроить 3-4 разряда",
+    "issued_date": "2024-12-10",
+    "inn": null
+  },
+  {
+    "id": 194,
+    "registration_number": "ЦС № 000233",
+    "last_name": "Юлдашова",
+    "first_name": "Замира",
+    "sur_name": "",
+    "profession": "Портной с умением кроить 3-4 разряда",
+    "issued_date": "2024-12-10",
+    "inn": null
+  },
+  {
+    "id": 195,
+    "registration_number": "ЦС № 000234",
+    "last_name": "Арыкова",
+    "first_name": "Мээрим",
+    "sur_name": "",
+    "profession": "Уй кызматчысы (Домработница)",
+    "issued_date": "2025-12-25",
+    "inn": null
+  },
+  {
+    "id": 196,
+    "registration_number": "ЦС № 000235",
+    "last_name": "Бекбоева",
+    "first_name": "Алина",
+    "sur_name": "",
+    "profession": "Уй кызматчысы (Домработница)",
+    "issued_date": "2025-12-25",
+    "inn": null
+  },
+  {
+    "id": 197,
+    "registration_number": "ЦС № 000236",
+    "last_name": "Дуйшенбиева",
+    "first_name": "Нуриза",
+    "sur_name": "",
+    "profession": "Уй кызматчысы (Домработница)",
+    "issued_date": "2025-12-25",
+    "inn": null
+  },
+  {
+    "id": 198,
+    "registration_number": "ЦС № 000237",
+    "last_name": "Жумабаева",
+    "first_name": "Айзада",
+    "sur_name": "",
+    "profession": "Уй кызматчысы (Домработница)",
+    "issued_date": "2025-12-25",
+    "inn": null
+  },
+  {
+    "id": 199,
+    "registration_number": "ЦС № 000238",
+    "last_name": "Аманова",
+    "first_name": "Назгул",
+    "sur_name": "",
+    "profession": "Уй кызматчысы (Домработница)",
+    "issued_date": "2025-12-25",
+    "inn": null
+  },
+  {
+    "id": 200,
+    "registration_number": "ЦС № 000239",
+    "last_name": "Кыдырова",
+    "first_name": "Назгуль",
+    "sur_name": "",
+    "profession": "Уй кызматчысы (Домработница)",
+    "issued_date": "2025-12-25",
+    "inn": null
+  },
+  {
+    "id": 201,
+    "registration_number": "ЦС № 000240",
+    "last_name": "Джыргалбаева",
+    "first_name": "Ирина",
+    "sur_name": "",
+    "profession": "Уй кызматчысы (Домработница)",
+    "issued_date": "2025-12-25",
+    "inn": null
+  },
+  {
+    "id": 202,
+    "registration_number": "ЦС № 000241",
+    "last_name": "Айнилчиева",
+    "first_name": "Жыпаргул",
+    "sur_name": "",
+    "profession": "Уй кызматчысы (Домработница)",
+    "issued_date": "2025-12-25",
+    "inn": null
+  },
+  {
+    "id": 203,
+    "registration_number": "ЦС № 000242",
+    "last_name": "Абдилдаева",
+    "first_name": "Жипаркул",
+    "sur_name": "",
+    "profession": "Уй кызматчысы (Домработница)",
+    "issued_date": "2025-12-25",
+    "inn": null
+  },
+  {
+    "id": 204,
+    "registration_number": "ЦС № 000243",
+    "last_name": "Муктарбекова",
+    "first_name": "Айпери",
+    "sur_name": "",
+    "profession": "Уй кызматчысы (Домработница)",
+    "issued_date": "2025-12-25",
+    "inn": null
+  },
+  {
+    "id": 205,
+    "registration_number": "ЦС № 000211",
+    "last_name": "Абдыкалыкова",
+    "first_name": "Роза",
+    "sur_name": "",
+    "profession": "Портной с умением кроить",
+    "issued_date": "2024-12-25",
+    "inn": null
+  },
+  {
+    "id": 206,
+    "registration_number": "ЦС № 000212",
+    "last_name": "Жанызакова",
+    "first_name": "Манзурат",
+    "sur_name": "",
+    "profession": "Портной с умением кроить",
+    "issued_date": "2024-12-25",
+    "inn": null
+  },
+  {
+    "id": 207,
+    "registration_number": "ЦС № 000213",
+    "last_name": "Мамбетова",
+    "first_name": "Айнура",
+    "sur_name": "",
+    "profession": "Портной с умением кроить",
+    "issued_date": "2024-12-25",
+    "inn": null
+  },
+  {
+    "id": 208,
+    "registration_number": "ЦС № 000214",
+    "last_name": "Омельченко",
+    "first_name": "Елена",
+    "sur_name": "",
+    "profession": "Портной с умением кроить",
+    "issued_date": "2024-12-25",
+    "inn": null
+  },
+  {
+    "id": 209,
+    "registration_number": "ЦС № 000215",
+    "last_name": "Жеребцова",
+    "first_name": "Надежда",
+    "sur_name": "",
+    "profession": "Портной с умением кроить",
+    "issued_date": "2024-12-25",
+    "inn": null
+  },
+  {
+    "id": 210,
+    "registration_number": "ЦС № 000216",
+    "last_name": "Кайгелдиева",
+    "first_name": "Майрамкул",
+    "sur_name": "",
+    "profession": "Портной с умением кроить",
+    "issued_date": "2024-12-25",
+    "inn": null
+  },
+  {
+    "id": 211,
+    "registration_number": "ЦС № 000217",
+    "last_name": "Азизова",
+    "first_name": "Гульмира",
+    "sur_name": "",
+    "profession": "Портной с умением кроить",
+    "issued_date": "2024-12-25",
+    "inn": null
+  },
+  {
+    "id": 212,
+    "registration_number": "ЦС № 000218",
+    "last_name": "Малькова",
+    "first_name": "Наталья",
+    "sur_name": "",
+    "profession": "Портной с умением кроить",
+    "issued_date": "2024-12-25",
+    "inn": null
+  },
+  {
+    "id": 213,
+    "registration_number": "ЦС № 000219",
+    "last_name": "Асаналиева",
+    "first_name": "Бактыгуль",
+    "sur_name": "",
+    "profession": "Портной с умением кроить",
+    "issued_date": "2024-12-25",
+    "inn": null
+  },
+  {
+    "id": 214,
+    "registration_number": "ЦС № 000191",
+    "last_name": "Шергазиева",
+    "first_name": "Нагима",
+    "sur_name": "",
+    "profession": "Швея",
+    "issued_date": "2024-12-26",
+    "inn": null
+  },
+  {
+    "id": 215,
+    "registration_number": "ЦС № 000192",
+    "last_name": "Кенжебаева",
+    "first_name": "Дамира",
+    "sur_name": "",
+    "profession": "Швея",
+    "issued_date": "2024-12-26",
+    "inn": null
+  },
+  {
+    "id": 216,
+    "registration_number": "ЦС № 000193",
+    "last_name": "Улнурбекова",
+    "first_name": "Жаныл",
+    "sur_name": "",
+    "profession": "Швея",
+    "issued_date": "2024-12-26",
+    "inn": null
+  },
+  {
+    "id": 217,
+    "registration_number": "ЦС № 000194",
+    "last_name": "Амангельдиева",
+    "first_name": "Алиля",
+    "sur_name": "",
+    "profession": "Швея",
+    "issued_date": "2024-12-26",
+    "inn": null
+  },
+  {
+    "id": 218,
+    "registration_number": "ЦС № 000195",
+    "last_name": "Налимова",
+    "first_name": "Анна",
+    "sur_name": "",
+    "profession": "Швея",
+    "issued_date": "2024-12-26",
+    "inn": null
+  },
+  {
+    "id": 219,
+    "registration_number": "ЦС № 000196",
+    "last_name": "Абдылдаева",
+    "first_name": "Алина",
+    "sur_name": "",
+    "profession": "Швея",
+    "issued_date": "2024-12-26",
+    "inn": null
+  },
+  {
+    "id": 220,
+    "registration_number": "ЦС № 000197",
+    "last_name": "Абдылдаева",
+    "first_name": "Сабина",
+    "sur_name": "",
+    "profession": "Швея",
+    "issued_date": "2024-12-26",
+    "inn": null
+  },
+  {
+    "id": 221,
+    "registration_number": "ЦС № 000198",
+    "last_name": "Исакова",
+    "first_name": "Айпери",
+    "sur_name": "",
+    "profession": "Швея",
+    "issued_date": "2024-12-26",
+    "inn": null
+  },
+  {
+    "id": 222,
+    "registration_number": "ЦС № 000199",
+    "last_name": "Хасанова",
+    "first_name": "Амина",
+    "sur_name": "",
+    "profession": "Швея",
+    "issued_date": "2024-12-26",
+    "inn": null
+  },
+  {
+    "id": 223,
+    "registration_number": "ЦС № 000200",
+    "last_name": "Мабо",
+    "first_name": "Замина",
+    "sur_name": "",
+    "profession": "Швея",
+    "issued_date": "2024-12-26",
+    "inn": null
+  },
+  {
+    "id": 224,
+    "registration_number": "ЦС № 000201",
+    "last_name": "Сагыналиева",
+    "first_name": "Зумурат",
+    "sur_name": "",
+    "profession": "Швея",
+    "issued_date": "2024-12-26",
+    "inn": null
+  },
+  {
+    "id": 225,
+    "registration_number": "ЦС № 000202",
+    "last_name": "Досумбекова",
+    "first_name": "Жаркын",
+    "sur_name": "",
+    "profession": "Швея",
+    "issued_date": "2024-12-26",
+    "inn": null
+  },
+  {
+    "id": 226,
+    "registration_number": "ЦС № 000203",
+    "last_name": "Андиренко",
+    "first_name": "Аксана",
+    "sur_name": "",
+    "profession": "Швея",
+    "issued_date": "2024-12-26",
+    "inn": null
+  },
+  {
+    "id": 227,
+    "registration_number": "ЦС № 000204",
+    "last_name": "Шамай",
+    "first_name": "Эрика",
+    "sur_name": "",
+    "profession": "Швея",
+    "issued_date": "2024-12-26",
+    "inn": null
+  },
+  {
+    "id": 228,
+    "registration_number": "ЦС № 000205",
+    "last_name": "Сиемонов",
+    "first_name": "Юрий",
+    "sur_name": "",
+    "profession": "Швея",
+    "issued_date": "2024-12-26",
+    "inn": null
+  },
+  {
+    "id": 229,
+    "registration_number": "ЦС № 000206",
+    "last_name": "Жибек",
+    "first_name": "Асыбек кызы",
+    "sur_name": "",
+    "profession": "Швея",
+    "issued_date": "2024-12-26",
+    "inn": null
+  },
+  {
+    "id": 230,
+    "registration_number": "ЦС № 000207",
+    "last_name": "Бурканова",
+    "first_name": "Айпери",
+    "sur_name": "",
+    "profession": "Швея",
+    "issued_date": "2024-12-26",
+    "inn": null
+  },
+  {
+    "id": 231,
+    "registration_number": "ЦС № 000208",
+    "last_name": "Сатиева",
+    "first_name": "Назгуль",
+    "sur_name": "",
+    "profession": "Швея",
+    "issued_date": "2024-12-26",
+    "inn": null
+  },
+  {
+    "id": 232,
+    "registration_number": "ЦС № 000209",
+    "last_name": "Алыкулова",
+    "first_name": "Гулбара",
+    "sur_name": "",
+    "profession": "Швея",
+    "issued_date": "2024-12-26",
+    "inn": null
+  },
+  {
+    "id": 233,
+    "registration_number": "ЦС № 000210",
+    "last_name": "Кыдырмышева",
+    "first_name": "Назгул",
+    "sur_name": "",
+    "profession": "Швея",
+    "issued_date": "2024-12-26",
+    "inn": null
+  },
+  {
+    "id": 234,
+    "registration_number": "ЦС № 000174",
+    "last_name": "Малабекова",
+    "first_name": "Эрмек",
+    "sur_name": "",
+    "profession": "Оператор по ветеринарной обработке животных 4 разряда",
+    "issued_date": "2024-12-17",
+    "inn": null
+  },
+  {
+    "id": 235,
+    "registration_number": "ЦС № 000175",
+    "last_name": "Кумусбеков",
+    "first_name": "Руслан",
+    "sur_name": "",
+    "profession": "Оператор по ветеринарной обработке животных 4 разряда",
+    "issued_date": "2024-12-17",
+    "inn": null
+  },
+  {
+    "id": 236,
+    "registration_number": "ЦС № 000176",
+    "last_name": "Койчуманов",
+    "first_name": "Мирлан",
+    "sur_name": "",
+    "profession": "Оператор по ветеринарной обработке животных 4 разряда",
+    "issued_date": "2024-12-17",
+    "inn": null
+  },
+  {
+    "id": 237,
+    "registration_number": "ЦС № 000177",
+    "last_name": "Кендирбаев",
+    "first_name": "Кубанычбек",
+    "sur_name": "",
+    "profession": "Оператор по ветеринарной обработке животных 4 разряда",
+    "issued_date": "2024-12-17",
+    "inn": null
+  },
+  {
+    "id": 238,
+    "registration_number": "ЦС № 000178",
+    "last_name": "Женишбеков",
+    "first_name": "Эрбол",
+    "sur_name": "",
+    "profession": "Оператор по ветеринарной обработке животных 4 разряда",
+    "issued_date": "2024-12-17",
+    "inn": null
+  },
+  {
+    "id": 239,
+    "registration_number": "ЦС № 000179",
+    "last_name": "Кожоналиев",
+    "first_name": "Самат",
+    "sur_name": "",
+    "profession": "Оператор по ветеринарной обработке животных 4 разряда",
+    "issued_date": "2024-12-17",
+    "inn": null
+  },
+  {
+    "id": 240,
+    "registration_number": "ЦС № 000180",
+    "last_name": "Адылбеков",
+    "first_name": "Актилек",
+    "sur_name": "",
+    "profession": "Оператор по ветеринарной обработке животных 4 разряда",
+    "issued_date": "2024-12-17",
+    "inn": null
+  },
+  {
+    "id": 241,
+    "registration_number": "ЦС № 000181",
+    "last_name": "Абдырасулов",
+    "first_name": "Бактыбек",
+    "sur_name": "",
+    "profession": "Оператор по ветеринарной обработке животных 4 разряда",
+    "issued_date": "2024-12-17",
+    "inn": null
+  },
+  {
+    "id": 242,
+    "registration_number": "ЦС № 000182",
+    "last_name": "Бабаканов",
+    "first_name": "Нурланбек",
+    "sur_name": "",
+    "profession": "Оператор по ветеринарной обработке животных 4 разряда",
+    "issued_date": "2024-12-17",
+    "inn": null
+  },
+  {
+    "id": 243,
+    "registration_number": "ЦС № 000244",
+    "last_name": "Тураев",
+    "first_name": "Алтынбек",
+    "sur_name": "",
+    "profession": "Слесарь-сантехник 4 разряда",
+    "issued_date": "2025-01-18",
+    "inn": null
+  },
+  {
+    "id": 244,
+    "registration_number": "ЦС № 000245",
+    "last_name": "Нурсултан",
+    "first_name": "Ноокенбай уулу",
+    "sur_name": "",
+    "profession": "Слесарь-сантехник 4 разряда",
+    "issued_date": "2025-01-18",
+    "inn": null
+  },
+  {
+    "id": 245,
+    "registration_number": "ЦС № 000246",
+    "last_name": "Харьковей",
+    "first_name": "Павел",
+    "sur_name": "",
+    "profession": "Слесарь-сантехник 4 разряда",
+    "issued_date": "2025-01-18",
+    "inn": null
+  },
+  {
+    "id": 246,
+    "registration_number": "ЦС № 000247",
+    "last_name": "Мусохранов",
+    "first_name": "Андрей",
+    "sur_name": "",
+    "profession": "Слесарь-сантехник 4 разряда",
+    "issued_date": "2025-01-18",
+    "inn": null
+  },
+  {
+    "id": 247,
+    "registration_number": "ЦС № 000248",
+    "last_name": "Рудницкий",
+    "first_name": "Владимир",
+    "sur_name": "",
+    "profession": "Слесарь-сантехник 4 разряда",
+    "issued_date": "2025-01-18",
+    "inn": null
+  },
+  {
+    "id": 248,
+    "registration_number": "ЦС № 000252",
+    "last_name": "Дорченко",
+    "first_name": "Восилий",
+    "sur_name": "",
+    "profession": "Слесарь-сантехник 3 разряда",
+    "issued_date": "2025-01-28",
+    "inn": null
+  },
+  {
+    "id": 249,
+    "registration_number": "ЦС № 000251",
+    "last_name": "Рузмикин",
+    "first_name": "Михаил",
+    "sur_name": "",
+    "profession": "Слесарь-сантехник 3 разряда",
+    "issued_date": "2025-01-28",
+    "inn": null
+  },
+  {
+    "id": 250,
+    "registration_number": "ЦС № 000249",
+    "last_name": "Джаилов",
+    "first_name": "Бакыт",
+    "sur_name": "",
+    "profession": "Слесарь по ремонту автомобилей",
+    "issued_date": "2025-01-21",
+    "inn": null
+  },
+  {
+    "id": 251,
+    "registration_number": "ЦС № 000250",
+    "last_name": "Адилет",
+    "first_name": "Мадылбек уулу",
+    "sur_name": "",
+    "profession": "Электрогазосварщик",
+    "issued_date": "2025-01-23",
+    "inn": null
+  },
+  {
+    "id": 252,
+    "registration_number": "ЦС № 000253",
+    "last_name": "Жуматаева",
+    "first_name": "Чынар",
+    "sur_name": "",
+    "profession": "Повар 3 разряда",
+    "issued_date": "2025-02-04",
+    "inn": null
+  },
+  {
+    "id": 253,
+    "registration_number": "ЦС № 000254",
+    "last_name": "Хушанов",
+    "first_name": "Махмадрузи",
+    "sur_name": "",
+    "profession": "Каменщик",
+    "issued_date": "2025-02-06",
+    "inn": null
+  },
+  {
+    "id": 254,
+    "registration_number": "ЦС № 000255",
+    "last_name": "Калилов",
+    "first_name": "Акобиру",
+    "sur_name": "",
+    "profession": "Каменщик",
+    "issued_date": "2025-02-06",
+    "inn": null
+  },
+  {
+    "id": 255,
+    "registration_number": "ЦС № 000256",
+    "last_name": "Хушанов",
+    "first_name": "Мирзовали",
+    "sur_name": "",
+    "profession": "Каменщик",
+    "issued_date": "2025-02-06",
+    "inn": null
+  },
+  {
+    "id": 256,
+    "registration_number": "ЦС № 000257",
+    "last_name": "Мухтаров",
+    "first_name": "Азизбек",
+    "sur_name": "",
+    "profession": "Каменщик",
+    "issued_date": "2025-02-06",
+    "inn": null
+  },
+  {
+    "id": 257,
+    "registration_number": "ЦС № 000258",
+    "last_name": "Талипов",
+    "first_name": "Эрали",
+    "sur_name": "",
+    "profession": "Каменщик",
+    "issued_date": "2025-02-06",
+    "inn": null
+  },
+  {
+    "id": 258,
+    "registration_number": "ЦС № 000259",
+    "last_name": "Осмоналиев",
+    "first_name": "Керезбек",
+    "sur_name": "",
+    "profession": "Электрогазосварщик",
+    "issued_date": "2025-03-10",
+    "inn": null
+  },
+  {
+    "id": 259,
+    "registration_number": "ЦС № 000260",
+    "last_name": "Артемов",
+    "first_name": "Евгений",
+    "sur_name": "",
+    "profession": "Слесарь-сантехник",
+    "issued_date": "2025-03-07",
+    "inn": null
+  },
+  {
+    "id": 260,
+    "registration_number": "ЦС № 000261",
+    "last_name": "Мухаммадабдурах",
+    "first_name": "Билимбек уулу",
+    "sur_name": "",
+    "profession": "Слесарь-сантехник",
+    "issued_date": "2025-03-07",
+    "inn": null
+  },
+  {
+    "id": 261,
+    "registration_number": "ЦС № 000262",
+    "last_name": "Голик",
+    "first_name": "Вячавлав",
+    "sur_name": "",
+    "profession": "Слесарь-сантехник",
+    "issued_date": "2025-03-07",
+    "inn": null
+  },
+  {
+    "id": 262,
+    "registration_number": "ЦС № 000263",
+    "last_name": "Носков",
+    "first_name": "Станислав",
+    "sur_name": "",
+    "profession": "Слесарь-сантехник",
+    "issued_date": "2025-03-07",
+    "inn": null
+  },
+  {
+    "id": 263,
+    "registration_number": "ЦС № 000264",
+    "last_name": "Сон",
+    "first_name": "Монид",
+    "sur_name": "",
+    "profession": "Слесарь-сантехник",
+    "issued_date": "2025-03-07",
+    "inn": null
+  },
+  {
+    "id": 264,
+    "registration_number": "ЦС № 000265",
+    "last_name": "Доминов",
+    "first_name": "Виталий",
+    "sur_name": "",
+    "profession": "Слесарь-сантехник",
+    "issued_date": "2025-03-07",
+    "inn": null
+  },
+  {
+    "id": 265,
+    "registration_number": "ЦС № 000266",
+    "last_name": "Надкин",
+    "first_name": "Алексей",
+    "sur_name": "",
+    "profession": "Слесарь-сантехник",
+    "issued_date": "2025-03-07",
+    "inn": null
+  },
+  {
+    "id": 266,
+    "registration_number": "ЦС № 000267",
+    "last_name": "Азамат",
+    "first_name": "Абдыкадыр уулу",
+    "sur_name": "",
+    "profession": "Электрогазосварщик",
+    "issued_date": "2025-03-11",
+    "inn": null
+  },
+  {
+    "id": 267,
+    "registration_number": "ЦС № 000270",
+    "last_name": "Сардалбеков",
+    "first_name": "Медербек",
+    "sur_name": "",
+    "profession": "Электрогазосварщик",
+    "issued_date": "2025-03-28",
+    "inn": null
+  },
+  {
+    "id": 268,
+    "registration_number": "ЦС № 000268",
+    "last_name": "Акматова",
+    "first_name": "Венера",
+    "sur_name": "",
+    "profession": "Повар",
+    "issued_date": "2025-03-25",
+    "inn": null
+  },
+  {
+    "id": 269,
+    "registration_number": "ЦС № 000269",
+    "last_name": "Оролов",
+    "first_name": "Нурисбек",
+    "sur_name": "",
+    "profession": "Повар",
+    "issued_date": "2025-03-27",
+    "inn": null
+  },
+  {
+    "id": 270,
+    "registration_number": "ЦС № 000271",
+    "last_name": "Алексеев",
+    "first_name": "Виталий",
+    "sur_name": "",
+    "profession": "Слесарь-сантехник",
+    "issued_date": "2025-03-28",
+    "inn": null
+  },
+  {
+    "id": 271,
+    "registration_number": "ЦС № 000272",
+    "last_name": "Волохов",
+    "first_name": "Павл",
+    "sur_name": "",
+    "profession": "Слесарь-сантехник",
+    "issued_date": "2025-03-28",
+    "inn": null
+  },
+  {
+    "id": 272,
+    "registration_number": "ЦС № 000273",
+    "last_name": "Ильин",
+    "first_name": "Александр",
+    "sur_name": "",
+    "profession": "Слесарь-сантехник",
+    "issued_date": "2025-03-28",
+    "inn": null
+  },
+  {
+    "id": 273,
+    "registration_number": "ЦС № 000274",
+    "last_name": "Исаков",
+    "first_name": "Алексей",
+    "sur_name": "",
+    "profession": "Слесарь-сантехник",
+    "issued_date": "2025-03-28",
+    "inn": null
+  },
+  {
+    "id": 274,
+    "registration_number": "ЦС № 000275",
+    "last_name": "Кызылтаев",
+    "first_name": "Абылай",
+    "sur_name": "",
+    "profession": "Слесарь-сантехник",
+    "issued_date": "2025-03-28",
+    "inn": null
+  },
+  {
+    "id": 275,
+    "registration_number": "ЦС № 000276",
+    "last_name": "Анваржан",
+    "first_name": "Палывжан уулу",
+    "sur_name": "",
+    "profession": "Слесарь-сантехник",
+    "issued_date": "2025-03-28",
+    "inn": null
+  },
+  {
+    "id": 276,
+    "registration_number": "ЦС № 000277",
+    "last_name": "Хлопков",
+    "first_name": "Денис",
+    "sur_name": "",
+    "profession": "Слесарь-сантехник",
+    "issued_date": "2025-03-28",
+    "inn": null
+  },
+  {
+    "id": 277,
+    "registration_number": "ЦС № 000278",
+    "last_name": "Мирбек",
+    "first_name": "Бактыбек уулу",
+    "sur_name": "",
+    "profession": "Электрогазосварщик",
+    "issued_date": "2025-04-01",
+    "inn": null
+  },
+  {
+    "id": 278,
+    "registration_number": "ЦС № 000279",
+    "last_name": "Абдрасаков",
+    "first_name": "Анывар",
+    "sur_name": "",
+    "profession": "Автоэлектрик",
+    "issued_date": "2025-04-04",
+    "inn": null
+  },
+  {
+    "id": 279,
+    "registration_number": "ЦС № 000280",
+    "last_name": "Суусарбек",
+    "first_name": "Курманбек уулу",
+    "sur_name": "",
+    "profession": "Электрогазосварщик",
+    "issued_date": "2025-04-03",
+    "inn": null
+  },
+  {
+    "id": 280,
+    "registration_number": "ЦС № 000281",
+    "last_name": "Шаминдинова",
+    "first_name": "Асель",
+    "sur_name": "",
+    "profession": "Повар",
+    "issued_date": "2025-04-03",
+    "inn": null
+  },
+  {
+    "id": 281,
+    "registration_number": "ЦС № 000282",
+    "last_name": "Абдраимова",
+    "first_name": "Жылдыз",
+    "sur_name": "",
+    "profession": "Повар",
+    "issued_date": "2025-04-03",
+    "inn": null
+  },
+  {
+    "id": 282,
+    "registration_number": "ЦС № 000283",
+    "last_name": "Абылкасымова",
+    "first_name": "Нургуль",
+    "sur_name": "",
+    "profession": "Повар",
+    "issued_date": "2025-04-03",
+    "inn": null
+  },
+  {
+    "id": 283,
+    "registration_number": "ЦС № 000284",
+    "last_name": "Акматова",
+    "first_name": "Дилбара",
+    "sur_name": "",
+    "profession": "Повар",
+    "issued_date": "2025-04-03",
+    "inn": null
+  },
+  {
+    "id": 284,
+    "registration_number": "ЦС № 000285",
+    "last_name": "Бутубаева",
+    "first_name": "Дамира",
+    "sur_name": "",
+    "profession": "Повар",
+    "issued_date": "2025-04-03",
+    "inn": null
+  },
+  {
+    "id": 285,
+    "registration_number": "ЦС № 000286",
+    "last_name": "Жумалиева",
+    "first_name": "Умут",
+    "sur_name": "",
+    "profession": "Повар",
+    "issued_date": "2025-04-03",
+    "inn": null
+  },
+  {
+    "id": 286,
+    "registration_number": "ЦС № 000287",
+    "last_name": "Искендерова",
+    "first_name": "Толобубу",
+    "sur_name": "",
+    "profession": "Повар",
+    "issued_date": "2025-04-03",
+    "inn": null
+  },
+  {
+    "id": 287,
+    "registration_number": "ЦС № 000288",
+    "last_name": "Курманбаева",
+    "first_name": "Рыскул",
+    "sur_name": "",
+    "profession": "Повар",
+    "issued_date": "2025-04-03",
+    "inn": null
+  },
+  {
+    "id": 288,
+    "registration_number": "ЦС № 000289",
+    "last_name": "Молдобаева",
+    "first_name": "Наргиза",
+    "sur_name": "",
+    "profession": "Повар",
+    "issued_date": "2025-04-03",
+    "inn": null
+  },
+  {
+    "id": 289,
+    "registration_number": "ЦС № 000290",
+    "last_name": "Райымбердиева",
+    "first_name": "Жайнагул",
+    "sur_name": "",
+    "profession": "Повар",
+    "issued_date": "2025-04-03",
+    "inn": null
+  },
+  {
+    "id": 290,
+    "registration_number": "ЦС № 000291",
+    "last_name": "Раманкулова",
+    "first_name": "Айзада",
+    "sur_name": "",
+    "profession": "Повар",
+    "issued_date": "2025-04-03",
+    "inn": null
+  },
+  {
+    "id": 291,
+    "registration_number": "ЦС № 000292",
+    "last_name": "Сартбаева",
+    "first_name": "Динара",
+    "sur_name": "",
+    "profession": "Повар",
+    "issued_date": "2025-04-03",
+    "inn": null
+  },
+  {
+    "id": 292,
+    "registration_number": "ЦС № 000293",
+    "last_name": "Нурланов",
+    "first_name": "Нуржигит",
+    "sur_name": "",
+    "profession": "Слесарь по ремонту автомобилей (моторист)",
+    "issued_date": "2025-04-18",
+    "inn": null
+  },
+  {
+    "id": 293,
+    "registration_number": "ЦС № 000294",
+    "last_name": "Улукман",
+    "first_name": "Камал уулу",
+    "sur_name": "",
+    "profession": "Слесарь по ремонту автомобилей (моторист)",
+    "issued_date": "2025-04-18",
+    "inn": null
+  },
+  {
+    "id": 294,
+    "registration_number": "ЦС № 000295",
+    "last_name": "Дуйшеев",
+    "first_name": "Адилет",
+    "sur_name": "",
+    "profession": "Электрогазосварщик",
+    "issued_date": "2025-04-22",
+    "inn": null
+  },
+  {
+    "id": 295,
+    "registration_number": "ЦС № 000296",
+    "last_name": "Толонов",
+    "first_name": "Баястан",
+    "sur_name": "",
+    "profession": "Электросварщик",
+    "issued_date": "2025-04-22",
+    "inn": null
+  },
+  {
+    "id": 296,
+    "registration_number": "ЦС № 000297",
+    "last_name": "Абитов",
+    "first_name": "Махаматали",
+    "sur_name": "",
+    "profession": "Швея 3-4 разряда",
+    "issued_date": "2025-04-24",
+    "inn": null
+  },
+  {
+    "id": 297,
+    "registration_number": "ЦС № 000298",
+    "last_name": "Айбашова",
+    "first_name": "Гулийпа",
+    "sur_name": "",
+    "profession": "Швея 3-4 разряда",
+    "issued_date": "2025-04-24",
+    "inn": null
+  },
+  {
+    "id": 298,
+    "registration_number": "ЦС № 000299",
+    "last_name": "Акимова",
+    "first_name": "Марифаткан",
+    "sur_name": "",
+    "profession": "Швея 3-4 разряда",
+    "issued_date": "2025-04-24",
+    "inn": null
+  },
+  {
+    "id": 299,
+    "registration_number": "ЦС № 000300",
+    "last_name": "Дадабаева",
+    "first_name": "Алмагул",
+    "sur_name": "",
+    "profession": "Швея 3-4 разряда",
+    "issued_date": "2025-04-24",
+    "inn": null
+  },
+  {
+    "id": 300,
+    "registration_number": "ЦС № 000301",
+    "last_name": "Омуркан",
+    "first_name": "Садырбек кызы",
+    "sur_name": "",
+    "profession": "Швея 3-4 разряда",
+    "issued_date": "2025-04-24",
+    "inn": null
+  },
+  {
+    "id": 301,
+    "registration_number": "ЦС № 000302",
+    "last_name": "Худайбердиева",
+    "first_name": "Гулиза",
+    "sur_name": "",
+    "profession": "Швея 3-4 разряда",
+    "issued_date": "2025-04-24",
+    "inn": null
+  },
+  {
+    "id": 302,
+    "registration_number": "ЦС № 000303",
+    "last_name": "Памизова",
+    "first_name": "Бактыгул",
+    "sur_name": "",
+    "profession": "Швея 3-4 разряда",
+    "issued_date": "2025-04-24",
+    "inn": null
+  },
+  {
+    "id": 303,
+    "registration_number": "ЦС № 000304",
+    "last_name": "Айдана",
+    "first_name": "Алтынбек кызы",
+    "sur_name": "",
+    "profession": "Швея 3-4 разряда",
+    "issued_date": "2025-04-24",
+    "inn": null
+  },
+  {
+    "id": 304,
+    "registration_number": "ЦС № 000305",
+    "last_name": "Кутубаева",
+    "first_name": "Элмира",
+    "sur_name": "",
+    "profession": "Швея 3-4 разряда",
+    "issued_date": "2025-04-24",
+    "inn": null
+  },
+  {
+    "id": 305,
+    "registration_number": "ЦС № 000306",
+    "last_name": "Маманова",
+    "first_name": "Мухабботжан",
+    "sur_name": "",
+    "profession": "Швея 3-4 разряда",
+    "issued_date": "2025-04-24",
+    "inn": null
+  },
+  {
+    "id": 306,
+    "registration_number": "ЦС № 000307",
+    "last_name": "Монкаева",
+    "first_name": "Орозгул",
+    "sur_name": "",
+    "profession": "Швея 3-4 разряда",
+    "issued_date": "2025-04-24",
+    "inn": null
+  },
+  {
+    "id": 307,
+    "registration_number": "ЦС № 000308",
+    "last_name": "Турганбаева",
+    "first_name": "Назира",
+    "sur_name": "",
+    "profession": "Швея 3-4 разряда",
+    "issued_date": "2025-04-24",
+    "inn": null
+  },
+  {
+    "id": 308,
+    "registration_number": "ЦС № 000309",
+    "last_name": "Мухлис",
+    "first_name": "Муталипжан кызы",
+    "sur_name": "",
+    "profession": "Швея 3-4 разряда",
+    "issued_date": "2025-04-24",
+    "inn": null
+  },
+  {
+    "id": 309,
+    "registration_number": "ЦС № 000310",
+    "last_name": "Атакулов",
+    "first_name": "Элмира",
+    "sur_name": "",
+    "profession": "Швея 3-4 разряда",
+    "issued_date": "2025-04-24",
+    "inn": null
+  },
+  {
+    "id": 310,
+    "registration_number": "ЦС № 000311",
+    "last_name": "Кадиев",
+    "first_name": "Алтынбек",
+    "sur_name": "",
+    "profession": "Мастер столярного и мебельного производства",
+    "issued_date": "2025-04-24",
+    "inn": null
+  },
+  {
+    "id": 311,
+    "registration_number": "ЦС № 000312",
+    "last_name": "Иманов",
+    "first_name": "Тагайбек",
+    "sur_name": "",
+    "profession": "Мастер столярного и мебельного производства",
+    "issued_date": "2025-04-24",
+    "inn": null
+  },
+  {
+    "id": 312,
+    "registration_number": "ЦС № 000313",
+    "last_name": "Тенирберди",
+    "first_name": "Жанторо уулу",
+    "sur_name": "",
+    "profession": "Мастер столярного и мебельного производства",
+    "issued_date": "2025-04-24",
+    "inn": null
+  },
+  {
+    "id": 313,
+    "registration_number": "ЦС № 000314",
+    "last_name": "Шамирзаев",
+    "first_name": "Мамирасул",
+    "sur_name": "",
+    "profession": "Мастер столярного и мебельного производства",
+    "issued_date": "2025-04-24",
+    "inn": null
+  },
+  {
+    "id": 314,
+    "registration_number": "ЦС № 000315",
+    "last_name": "Чингизхан",
+    "first_name": "Дайырбек уулу",
+    "sur_name": "",
+    "profession": "Мастер столярного и мебельного производства",
+    "issued_date": "2025-04-24",
+    "inn": null
+  },
+  {
+    "id": 315,
+    "registration_number": "ЦС № 000316",
+    "last_name": "Салымбеков",
+    "first_name": "Урмат",
+    "sur_name": "",
+    "profession": "Электромонтажник осветительных сетей",
+    "issued_date": "2025-04-28",
+    "inn": null
+  },
+  {
+    "id": 316,
+    "registration_number": "ЦС № 000317",
+    "last_name": "Таштанбеков",
+    "first_name": "Азамат",
+    "sur_name": "",
+    "profession": "Электросварщик",
+    "issued_date": "2025-04-29",
+    "inn": null
+  },
+  {
+    "id": 317,
+    "registration_number": "ЦС № 000318",
+    "last_name": "Турчак",
+    "first_name": "Сергей",
+    "sur_name": "",
+    "profession": "Слесарь-сантехник",
+    "issued_date": "2025-05-14",
+    "inn": null
+  },
+  {
+    "id": 318,
+    "registration_number": "ЦС № 000319",
+    "last_name": "Нарындыков",
+    "first_name": "Тилек",
+    "sur_name": "",
+    "profession": "Слесарь-электрик по ремонту электрооборудования",
+    "issued_date": "2025-05-14",
+    "inn": null
+  },
+  {
+    "id": 319,
+    "registration_number": "ЦС № 000320",
+    "last_name": "Ашихлеим",
+    "first_name": "Ефин",
+    "sur_name": "",
+    "profession": "Слесарь-сантехник",
+    "issued_date": "2025-05-14",
+    "inn": null
+  },
+  {
+    "id": 320,
+    "registration_number": "ЦС № 000321",
+    "last_name": "Попов",
+    "first_name": "Кирил",
+    "sur_name": "",
+    "profession": "Слесарь-сантехник",
+    "issued_date": "2025-06-03",
+    "inn": null
+  },
+  {
+    "id": 321,
+    "registration_number": "ЦС № 000322",
+    "last_name": "Ибраев",
+    "first_name": "Сейитказы",
+    "sur_name": "",
+    "profession": "Электросварщик",
+    "issued_date": "2025-06-09",
+    "inn": null
+  },
+  {
+    "id": 322,
+    "registration_number": "ЦС № 000323",
+    "last_name": "Арзиев",
+    "first_name": "Нарзилла",
+    "sur_name": "",
+    "profession": "Электромонтажник осветительных сетей",
+    "issued_date": "2025-06-11",
+    "inn": null
+  },
+  {
+    "id": 323,
+    "registration_number": "ЦС № 000324",
+    "last_name": "Кувандиков",
+    "first_name": "Бексултан",
+    "sur_name": "",
+    "profession": "Электромонтажник осветительных сетей",
+    "issued_date": "2025-06-11",
+    "inn": null
+  },
+  {
+    "id": 324,
+    "registration_number": "ЦС № 000325",
+    "last_name": "Текебаев",
+    "first_name": "Бексултан",
+    "sur_name": "",
+    "profession": "Электромонтажник осветительных сетей",
+    "issued_date": "2025-06-11",
+    "inn": null
+  },
+  {
+    "id": 325,
+    "registration_number": "ЦС № 000326",
+    "last_name": "Жапанова",
+    "first_name": "Лазат",
+    "sur_name": "",
+    "profession": "Швея, Портной с умением кроить",
+    "issued_date": "2025-06-13",
+    "inn": null
+  },
+  {
+    "id": 326,
+    "registration_number": "ЦС № 000327",
+    "last_name": "Абдуразакова",
+    "first_name": "Потмахан",
+    "sur_name": "",
+    "profession": "Швея, Портной с умением кроить",
+    "issued_date": "2025-06-10",
+    "inn": null
+  },
+  {
+    "id": 327,
+    "registration_number": "ЦС № 000328",
+    "last_name": "Алимова",
+    "first_name": "Мамакатжан",
+    "sur_name": "",
+    "profession": "Швея, Портной с умением кроить",
+    "issued_date": "2025-06-10",
+    "inn": null
+  },
+  {
+    "id": 328,
+    "registration_number": "ЦС № 000329",
+    "last_name": "Кебекова",
+    "first_name": "Чынара",
+    "sur_name": "",
+    "profession": "Швея, Портной с умением кроить",
+    "issued_date": "2025-06-10",
+    "inn": null
+  },
+  {
+    "id": 329,
+    "registration_number": "ЦС № 000330",
+    "last_name": "Касимова",
+    "first_name": "Мамакат",
+    "sur_name": "",
+    "profession": "Швея, Портной с умением кроить",
+    "issued_date": "2025-06-10",
+    "inn": null
+  },
+  {
+    "id": 330,
+    "registration_number": "ЦС № 000331",
+    "last_name": "Джураева",
+    "first_name": "Яркинай",
+    "sur_name": "",
+    "profession": "Швея, Портной с умением кроить",
+    "issued_date": "2025-06-10",
+    "inn": null
+  },
+  {
+    "id": 331,
+    "registration_number": "ЦС № 000332",
+    "last_name": "Исакова",
+    "first_name": "Махлие",
+    "sur_name": "",
+    "profession": "Швея, Портной с умением кроить",
+    "issued_date": "2025-06-10",
+    "inn": null
+  },
+  {
+    "id": 332,
+    "registration_number": "ЦС № 000333",
+    "last_name": "Хаитова",
+    "first_name": "Умидохан",
+    "sur_name": "",
+    "profession": "Швея, Портной с умением кроить",
+    "issued_date": "2025-06-10",
+    "inn": null
+  },
+  {
+    "id": 333,
+    "registration_number": "ЦС № 000334",
+    "last_name": "Сотвалдиева",
+    "first_name": "Шонра",
+    "sur_name": "",
+    "profession": "Швея, Портной с умением кроить",
+    "issued_date": "2025-06-10",
+    "inn": null
+  },
+  {
+    "id": 334,
+    "registration_number": "ЦС № 000335",
+    "last_name": "Мирзаева",
+    "first_name": "Манзура",
+    "sur_name": "",
+    "profession": "Швея, Портной с умением кроить",
+    "issued_date": "2025-06-10",
+    "inn": null
+  },
+  {
+    "id": 335,
+    "registration_number": "ЦС № 000336",
+    "last_name": "Бектемирова",
+    "first_name": "Айжаркын",
+    "sur_name": "",
+    "profession": "Швея, Портной с умением кроить",
+    "issued_date": "2025-06-10",
+    "inn": null
+  },
+  {
+    "id": 336,
+    "registration_number": "ЦС № 000337",
+    "last_name": "Худайбердиева",
+    "first_name": "Махбуба",
+    "sur_name": "",
+    "profession": "Швея, Портной с умением кроить",
+    "issued_date": "2025-06-10",
+    "inn": null
+  },
+  {
+    "id": 337,
+    "registration_number": "ЦС № 000338",
+    "last_name": "Балбаев",
+    "first_name": "Хусан",
+    "sur_name": "",
+    "profession": "Оператор швейного оборудования",
+    "issued_date": "2025-06-10",
+    "inn": null
+  },
+  {
+    "id": 338,
+    "registration_number": "ЦС № 000339",
+    "last_name": "Сидиков",
+    "first_name": "Самандар",
+    "sur_name": "",
+    "profession": "Мастер столярного и мебельного производства",
+    "issued_date": "2025-06-10",
+    "inn": null
+  },
+  {
+    "id": 339,
+    "registration_number": "ЦС № 000340",
+    "last_name": "Омурзак",
+    "first_name": "Асек уулу",
+    "sur_name": "",
+    "profession": "Мастер столярного и мебельного производства",
+    "issued_date": "2025-06-10",
+    "inn": null
+  },
+  {
+    "id": 340,
+    "registration_number": "ЦС № 000341",
+    "last_name": "Торобек",
+    "first_name": "Жумабек уулу",
+    "sur_name": "",
+    "profession": "Мастер столярного и мебельного производства",
+    "issued_date": "2025-06-10",
+    "inn": null
+  },
+  {
+    "id": 341,
+    "registration_number": "ЦС № 000342",
+    "last_name": "Абдуллаев",
+    "first_name": "Шерзод",
+    "sur_name": "",
+    "profession": "Мастер столярного и мебельного производства",
+    "issued_date": "2025-06-10",
+    "inn": null
+  },
+  {
+    "id": 342,
+    "registration_number": "ЦС № 000343",
+    "last_name": "Курчубекова",
+    "first_name": "Венера",
+    "sur_name": "",
+    "profession": "Швея",
+    "issued_date": "2025-06-11",
+    "inn": null
+  },
+  {
+    "id": 343,
+    "registration_number": "ЦС № 000344",
+    "last_name": "Темирбердиева",
+    "first_name": "Тажихан",
+    "sur_name": "",
+    "profession": "Швея",
+    "issued_date": "2025-06-11",
+    "inn": null
+  },
+  {
+    "id": 344,
+    "registration_number": "ЦС № 000345",
+    "last_name": "Халдарова",
+    "first_name": "Мукая",
+    "sur_name": "",
+    "profession": "Швея",
+    "issued_date": "2025-06-11",
+    "inn": null
+  },
+  {
+    "id": 345,
+    "registration_number": "ЦС № 000346",
+    "last_name": "Абдуллаева",
+    "first_name": "Роза",
+    "sur_name": "",
+    "profession": "Швея",
+    "issued_date": "2025-06-11",
+    "inn": null
+  },
+  {
+    "id": 346,
+    "registration_number": "ЦС № 000347",
+    "last_name": "Таджихожаева",
+    "first_name": "Анархан",
+    "sur_name": "",
+    "profession": "Швея",
+    "issued_date": "2025-06-11",
+    "inn": null
+  },
+  {
+    "id": 347,
+    "registration_number": "ЦС № 000348",
+    "last_name": "Асылканова",
+    "first_name": "Тинатин",
+    "sur_name": "",
+    "profession": "Швея",
+    "issued_date": "2025-06-11",
+    "inn": null
+  },
+  {
+    "id": 348,
+    "registration_number": "ЦС № 000349",
+    "last_name": "Воингуй",
+    "first_name": "Шахида",
+    "sur_name": "",
+    "profession": "Швея",
+    "issued_date": "2025-06-17",
+    "inn": null
+  },
+  {
+    "id": 349,
+    "registration_number": "ЦС № 000350",
+    "last_name": "Кутуева",
+    "first_name": "Сымбат",
+    "sur_name": "",
+    "profession": "Швея",
+    "issued_date": "2025-06-17",
+    "inn": null
+  },
+  {
+    "id": 350,
+    "registration_number": "ЦС № 000351",
+    "last_name": "Мантекова",
+    "first_name": "Айзада",
+    "sur_name": "",
+    "profession": "Швея",
+    "issued_date": "2025-06-17",
+    "inn": null
+  },
+  {
+    "id": 351,
+    "registration_number": "ЦС № 000352",
+    "last_name": "Сабаева",
+    "first_name": "Зенбе",
+    "sur_name": "",
+    "profession": "Швея",
+    "issued_date": "2025-06-17",
+    "inn": null
+  },
+  {
+    "id": 352,
+    "registration_number": "ЦС № 000353",
+    "last_name": "Сабаева",
+    "first_name": "Рамиля",
+    "sur_name": "",
+    "profession": "Швея",
+    "issued_date": "2025-06-17",
+    "inn": null
+  },
+  {
+    "id": 353,
+    "registration_number": "ЦС № 000354",
+    "last_name": "Санина",
+    "first_name": "Татьяна",
+    "sur_name": "",
+    "profession": "Швея",
+    "issued_date": "2025-06-17",
+    "inn": null
+  },
+  {
+    "id": 354,
+    "registration_number": "ЦС № 000355",
+    "last_name": "Хува",
+    "first_name": "Хамима",
+    "sur_name": "",
+    "profession": "Швея",
+    "issued_date": "2025-06-17",
+    "inn": null
+  },
+  {
+    "id": 355,
+    "registration_number": "ЦС № 000356",
+    "last_name": "Чин",
+    "first_name": "Зарина",
+    "sur_name": "",
+    "profession": "Швея",
+    "issued_date": "2025-06-17",
+    "inn": null
+  },
+  {
+    "id": 356,
+    "registration_number": "ЦС № 000357",
+    "last_name": "Абдугулова",
+    "first_name": "Рахат",
+    "sur_name": "",
+    "profession": "Швея",
+    "issued_date": "2025-06-17",
+    "inn": null
+  },
+  {
+    "id": 357,
+    "registration_number": "ЦС № 000358",
+    "last_name": "Джолдошбекова",
+    "first_name": "Майрамкуль",
+    "sur_name": "",
+    "profession": "Швея",
+    "issued_date": "2025-06-17",
+    "inn": null
+  },
+  {
+    "id": 358,
+    "registration_number": "ЦС № 000359",
+    "last_name": "Оморова",
+    "first_name": "Кульмира",
+    "sur_name": "",
+    "profession": "Швея",
+    "issued_date": "2025-06-23",
+    "inn": null
+  },
+  {
+    "id": 359,
+    "registration_number": "ЦС № 000360",
+    "last_name": "Джолдошбекова",
+    "first_name": "Жибек",
+    "sur_name": "",
+    "profession": "Швея",
+    "issued_date": "2025-06-23",
+    "inn": null
+  },
+  {
+    "id": 360,
+    "registration_number": "ЦС № 000361",
+    "last_name": "Исабекова",
+    "first_name": "Элмира",
+    "sur_name": "",
+    "profession": "Швея",
+    "issued_date": "2025-06-23",
+    "inn": null
+  },
+  {
+    "id": 361,
+    "registration_number": "ЦС № 000362",
+    "last_name": "Мамытова",
+    "first_name": "Гульмира",
+    "sur_name": "",
+    "profession": "Швея",
+    "issued_date": "2025-06-23",
+    "inn": null
+  },
+  {
+    "id": 362,
+    "registration_number": "ЦС № 000363",
+    "last_name": "Аскаркулова",
+    "first_name": "Айгуль",
+    "sur_name": "",
+    "profession": "Швея",
+    "issued_date": "2025-06-23",
+    "inn": null
+  },
+  {
+    "id": 363,
+    "registration_number": "ЦС № 000364",
+    "last_name": "Сапашова",
+    "first_name": "Эленура",
+    "sur_name": "",
+    "profession": "Швея",
+    "issued_date": "2025-06-23",
+    "inn": null
+  },
+  {
+    "id": 364,
+    "registration_number": "ЦС № 000365",
+    "last_name": "Ли",
+    "first_name": "Ажар",
+    "sur_name": "",
+    "profession": "Швея",
+    "issued_date": "2025-06-23",
+    "inn": null
+  },
+  {
+    "id": 365,
+    "registration_number": "ЦС № 000366",
+    "last_name": "Исмаилов",
+    "first_name": "Расул",
+    "sur_name": "",
+    "profession": "Слесарь по техническому обслуживанию и ремонту автотранспортных средств",
+    "issued_date": "2025-06-23",
+    "inn": null
+  },
+  {
+    "id": 366,
+    "registration_number": "ЦС № 000367",
+    "last_name": "Аманкулов",
+    "first_name": "Эмир",
+    "sur_name": "",
+    "profession": "Слесарь по техническому обслуживанию и ремонту автотранспортных средств",
+    "issued_date": "2025-06-23",
+    "inn": null
+  },
+  {
+    "id": 367,
+    "registration_number": "ЦС № 000368",
+    "last_name": "Абдибаев",
+    "first_name": "Айбек",
+    "sur_name": "",
+    "profession": "Слесарь-электрик по ремонту электрооборудования",
+    "issued_date": "2025-06-23",
+    "inn": null
+  },
+  {
+    "id": 368,
+    "registration_number": "ЦС № 000369",
+    "last_name": "Атабеков",
+    "first_name": "Марсбек",
+    "sur_name": "",
+    "profession": "Монтажник каркасно-обшивных конструкций, мастер сухого строительства",
+    "issued_date": "2025-06-18",
+    "inn": null
+  },
+  {
+    "id": 369,
+    "registration_number": "ЦС № 000370",
+    "last_name": "Айтолду",
+    "first_name": "Бактыбек уулу",
+    "sur_name": "",
+    "profession": "Монтажник каркасно-обшивных конструкций, мастер сухого строительства",
+    "issued_date": "2025-06-18",
+    "inn": null
+  },
+  {
+    "id": 370,
+    "registration_number": "ЦС № 000371",
+    "last_name": "Акматов",
+    "first_name": "Алымбек",
+    "sur_name": "",
+    "profession": "Монтажник каркасно-обшивных конструкций, мастер сухого строительства",
+    "issued_date": "2025-06-18",
+    "inn": null
+  },
+  {
+    "id": 371,
+    "registration_number": "ЦС № 000372",
+    "last_name": "Ажиматов",
+    "first_name": "Искендер",
+    "sur_name": "",
+    "profession": "Монтажник каркасно-обшивных конструкций, мастер сухого строительства",
+    "issued_date": "2025-06-18",
+    "inn": null
+  },
+  {
+    "id": 372,
+    "registration_number": "ЦС № 000373",
+    "last_name": "Дорбонов",
+    "first_name": "Нурис",
+    "sur_name": "",
+    "profession": "Монтажник каркасно-обшивных конструкций, мастер сухого строительства",
+    "issued_date": "2025-06-18",
+    "inn": null
+  },
+  {
+    "id": 373,
+    "registration_number": "ЦС № 000374",
+    "last_name": "Аскарбеков",
+    "first_name": "Адилет",
+    "sur_name": "",
+    "profession": "Мастер столярного и мебельного производства",
+    "issued_date": "2025-06-18",
+    "inn": null
+  },
+  {
+    "id": 374,
+    "registration_number": "ЦС № 000375",
+    "last_name": "Сабержанов",
+    "first_name": "Руслан",
+    "sur_name": "",
+    "profession": "Мастер столярного и мебельного производства",
+    "issued_date": "2025-06-18",
+    "inn": null
+  },
+  {
+    "id": 375,
+    "registration_number": "ЦС № 000376",
+    "last_name": "Апальков",
+    "first_name": "Николай",
+    "sur_name": "",
+    "profession": "Электрогазосварщик",
+    "issued_date": "2025-06-18",
+    "inn": null
+  },
+  {
+    "id": 376,
+    "registration_number": "ЦС № 000377",
+    "last_name": "Карагулов",
+    "first_name": "Элдар",
+    "sur_name": "",
+    "profession": "Электрогазосварщик",
+    "issued_date": "2025-06-18",
+    "inn": null
+  },
+  {
+    "id": 377,
+    "registration_number": "ЦС № 000378",
+    "last_name": "Мусанов",
+    "first_name": "Чингиз",
+    "sur_name": "",
+    "profession": "Электрогазосварщик",
+    "issued_date": "2025-06-18",
+    "inn": null
+  },
+  {
+    "id": 378,
+    "registration_number": "ЦС № 000379",
+    "last_name": "Зайырбек",
+    "first_name": "Нурбек уулу",
+    "sur_name": "",
+    "profession": "Электрогазосварщик",
+    "issued_date": "2025-06-18",
+    "inn": null
+  },
+  {
+    "id": 379,
+    "registration_number": "ЦС № 000380",
+    "last_name": "Арстанбек",
+    "first_name": "Турдалы уулу",
+    "sur_name": "",
+    "profession": "Электрогазосварщик",
+    "issued_date": "2025-06-18",
+    "inn": null
+  },
+  {
+    "id": 380,
+    "registration_number": "ЦС № 000381",
+    "last_name": "Кочкунбек",
+    "first_name": "Чынгыз уулу",
+    "sur_name": "",
+    "profession": "Электрогазосварщик",
+    "issued_date": "2025-06-18",
+    "inn": null
+  },
+  {
+    "id": 381,
+    "registration_number": "ЦС № 000382",
+    "last_name": "Жамгырчиев",
+    "first_name": "Абдумухамбед",
+    "sur_name": "",
+    "profession": "Мастер сухого строительства",
+    "issued_date": "2025-06-18",
+    "inn": null
+  },
+  {
+    "id": 382,
+    "registration_number": "ЦС № 000383",
+    "last_name": "Жолочиев",
+    "first_name": "Омурбек",
+    "sur_name": "",
+    "profession": "Мастер сухого строительства",
+    "issued_date": "2025-06-18",
+    "inn": null
+  },
+  {
+    "id": 383,
+    "registration_number": "ЦС № 000384",
+    "last_name": "Жусупов",
+    "first_name": "Таалайбек",
+    "sur_name": "",
+    "profession": "Мастер сухого строительства",
+    "issued_date": "2025-06-18",
+    "inn": null
+  },
+  {
+    "id": 384,
+    "registration_number": "ЦС № 000385",
+    "last_name": "Ляшенко",
+    "first_name": "Иван",
+    "sur_name": "",
+    "profession": "Мастер столярного и мебельного производства",
+    "issued_date": "2025-06-18",
+    "inn": null
+  },
+  {
+    "id": 385,
+    "registration_number": "ЦС № 000386",
+    "last_name": "Боронбаев",
+    "first_name": "Толобек",
+    "sur_name": "",
+    "profession": "Мастер столярного и мебельного производства",
+    "issued_date": "2025-06-18",
+    "inn": null
+  },
+  {
+    "id": 386,
+    "registration_number": "ЦС № 000387",
+    "last_name": "Абдылдаев",
+    "first_name": "Баатырбек",
+    "sur_name": "",
+    "profession": "Мастер столярного и мебельного производства",
+    "issued_date": "2025-06-20",
+    "inn": null
+  },
+  {
+    "id": 387,
+    "registration_number": "ЦС № 000388",
+    "last_name": "Жумагулов",
+    "first_name": "Атай",
+    "sur_name": "",
+    "profession": "Мастер столярного и мебельного производства",
+    "issued_date": "2025-06-20",
+    "inn": null
+  },
+  {
+    "id": 388,
+    "registration_number": "ЦС № 000389",
+    "last_name": "Ливенщев",
+    "first_name": "Антон",
+    "sur_name": "",
+    "profession": "Мастер столярного и мебельного производства",
+    "issued_date": "2025-06-20",
+    "inn": null
+  },
+  {
+    "id": 389,
+    "registration_number": "ЦС № 000390",
+    "last_name": "Медилов",
+    "first_name": "Саматбек",
+    "sur_name": "",
+    "profession": "Мастер столярного и мебельного производства",
+    "issued_date": "2025-06-20",
+    "inn": null
+  },
+  {
+    "id": 390,
+    "registration_number": "ЦС № 000391",
+    "last_name": "Нурбеков",
+    "first_name": "Дастан",
+    "sur_name": "",
+    "profession": "Мастер столярного и мебельного производства",
+    "issued_date": "2025-06-20",
+    "inn": null
+  },
+  {
+    "id": 391,
+    "registration_number": "ЦС № 000392",
+    "last_name": "Токторбаев",
+    "first_name": "Бекболсун",
+    "sur_name": "",
+    "profession": "Мастер столярного и мебельного производства",
+    "issued_date": "2025-06-20",
+    "inn": null
+  },
+  {
+    "id": 392,
+    "registration_number": "ЦС № 000393",
+    "last_name": "Таалайбеков",
+    "first_name": "Эрмек",
+    "sur_name": "",
+    "profession": "Мастер столярного и мебельного производства",
+    "issued_date": "2025-06-20",
+    "inn": null
+  },
+  {
+    "id": 393,
+    "registration_number": "ЦС № 000394",
+    "last_name": "Эрболов",
+    "first_name": "Нурбол",
+    "sur_name": "",
+    "profession": "Мастер столярного и мебельного производства",
+    "issued_date": "2025-06-20",
+    "inn": null
+  },
+  {
+    "id": 394,
+    "registration_number": "ЦС № 000395",
+    "last_name": "Твшбаев",
+    "first_name": "Туголбай",
+    "sur_name": "",
+    "profession": "Мастер столярного и мебельного производства",
+    "issued_date": "2025-06-20",
+    "inn": null
+  },
+  {
+    "id": 395,
+    "registration_number": "ЦС № 000396",
+    "last_name": "Аалиев",
+    "first_name": "Мирбек",
+    "sur_name": "",
+    "profession": "Станочник в деревообработке",
+    "issued_date": "2025-06-20",
+    "inn": null
+  },
+  {
+    "id": 396,
+    "registration_number": "ЦС № 000397",
+    "last_name": "Айтахунов",
+    "first_name": "Мухамеджан",
+    "sur_name": "",
+    "profession": "Станочник в деревообработке",
+    "issued_date": "2025-06-20",
+    "inn": null
+  },
+  {
+    "id": 397,
+    "registration_number": "ЦС № 000398",
+    "last_name": "Эржан",
+    "first_name": "Жаныбек уулу",
+    "sur_name": "",
+    "profession": "Станочник в деревообработке",
+    "issued_date": "2025-06-20",
+    "inn": null
+  },
+  {
+    "id": 398,
+    "registration_number": "ЦС № 000399",
+    "last_name": "Ким",
+    "first_name": "Эдуард",
+    "sur_name": "",
+    "profession": "Станочник в деревообработке",
+    "issued_date": "2025-06-20",
+    "inn": null
+  },
+  {
+    "id": 399,
+    "registration_number": "ЦС № 000400",
+    "last_name": "Оражанов",
+    "first_name": "Ертай",
+    "sur_name": "",
+    "profession": "Электросварщик",
+    "issued_date": "2025-06-20",
+    "inn": null
+  },
+  {
+    "id": 400,
+    "registration_number": "ЦС № 000401",
+    "last_name": "Дуйшеев",
+    "first_name": "Кенжебек",
+    "sur_name": "",
+    "profession": "Электросварщик",
+    "issued_date": "2025-06-20",
+    "inn": null
+  },
+  {
+    "id": 401,
+    "registration_number": "ЦС № 000402",
+    "last_name": "Абаева",
+    "first_name": "Татьяна",
+    "sur_name": "",
+    "profession": "Швея",
+    "issued_date": "2025-06-30",
+    "inn": null
+  },
+  {
+    "id": 402,
+    "registration_number": "ЦС № 000403",
+    "last_name": "Ан",
+    "first_name": "Лариса",
+    "sur_name": "",
+    "profession": "Швея",
+    "issued_date": "2025-06-30",
+    "inn": null
+  },
+  {
+    "id": 403,
+    "registration_number": "ЦС № 000404",
+    "last_name": "Женалиева",
+    "first_name": "Кундуз",
+    "sur_name": "",
+    "profession": "Швея",
+    "issued_date": "2025-06-30",
+    "inn": null
+  },
+  {
+    "id": 404,
+    "registration_number": "ЦС № 000405",
+    "last_name": "Казиева",
+    "first_name": "Канипа",
+    "sur_name": "",
+    "profession": "Швея",
+    "issued_date": "2025-06-30",
+    "inn": null
+  },
+  {
+    "id": 405,
+    "registration_number": "ЦС № 000406",
+    "last_name": "Каримова",
+    "first_name": "Гулай",
+    "sur_name": "",
+    "profession": "Швея",
+    "issued_date": "2025-06-30",
+    "inn": null
+  },
+  {
+    "id": 406,
+    "registration_number": "ЦС № 000407",
+    "last_name": "Кочербаева",
+    "first_name": "Гулнара",
+    "sur_name": "",
+    "profession": "Швея",
+    "issued_date": "2025-06-30",
+    "inn": null
+  },
+  {
+    "id": 407,
+    "registration_number": "ЦС № 000408",
+    "last_name": "Омурова",
+    "first_name": "Назира",
+    "sur_name": "",
+    "profession": "Швея",
+    "issued_date": "2025-06-30",
+    "inn": null
+  },
+  {
+    "id": 408,
+    "registration_number": "ЦС № 000409",
+    "last_name": "Сейитказиева",
+    "first_name": "Жыргалбубу",
+    "sur_name": "",
+    "profession": "Швея",
+    "issued_date": "2025-06-30",
+    "inn": null
+  },
+  {
+    "id": 409,
+    "registration_number": "ЦС № 000410",
+    "last_name": "Турдуева",
+    "first_name": "Авахан",
+    "sur_name": "",
+    "profession": "Швея",
+    "issued_date": "2025-06-30",
+    "inn": null
+  },
+  {
+    "id": 410,
+    "registration_number": "ЦС № 000411",
+    "last_name": "Шыгаева",
+    "first_name": "Эркингул",
+    "sur_name": "",
+    "profession": "Швея",
+    "issued_date": "2025-06-30",
+    "inn": null
+  },
+  {
+    "id": 411,
+    "registration_number": "ЦС № 000412",
+    "last_name": "Каныкей",
+    "first_name": "Эралы кызы",
+    "sur_name": "",
+    "profession": "Швея",
+    "issued_date": "2025-06-30",
+    "inn": null
+  },
+  {
+    "id": 412,
+    "registration_number": "ЦС № 000413",
+    "last_name": "Аширалиева",
+    "first_name": "Нурила",
+    "sur_name": "",
+    "profession": "Швея",
+    "issued_date": "2025-06-30",
+    "inn": null
+  },
+  {
+    "id": 413,
+    "registration_number": "ЦС № 000414",
+    "last_name": "Эгембердиева",
+    "first_name": "Уулай",
+    "sur_name": "",
+    "profession": "Швея",
+    "issued_date": "2025-06-30",
+    "inn": null
+  },
+  {
+    "id": 414,
+    "registration_number": "ЦС № 000415",
+    "last_name": "Орозбекова",
+    "first_name": "Назира",
+    "sur_name": "",
+    "profession": "Швея",
+    "issued_date": "2025-06-30",
+    "inn": null
+  },
+  {
+    "id": 415,
+    "registration_number": "ЦС № 000416",
+    "last_name": "Токтогулова",
+    "first_name": "Калмира",
+    "sur_name": "",
+    "profession": "Швея",
+    "issued_date": "2025-06-30",
+    "inn": null
+  },
+  {
+    "id": 416,
+    "registration_number": "ЦС № 000417",
+    "last_name": "Джапекова",
+    "first_name": "Мадина",
+    "sur_name": "",
+    "profession": "Швея",
+    "issued_date": "2025-06-30",
+    "inn": null
+  },
+  {
+    "id": 417,
+    "registration_number": "ЦС № 000418",
+    "last_name": "Исаева",
+    "first_name": "Куланда",
+    "sur_name": "",
+    "profession": "Швея",
+    "issued_date": "2025-06-30",
+    "inn": null
+  },
+  {
+    "id": 418,
+    "registration_number": "ЦС № 000419",
+    "last_name": "Илиязова",
+    "first_name": "Нурийла",
+    "sur_name": "",
+    "profession": "Швея",
+    "issued_date": "2025-06-30",
+    "inn": null
+  },
+  {
+    "id": 419,
+    "registration_number": "ЦС № 000420",
+    "last_name": "Абдылдаева",
+    "first_name": "Мира",
+    "sur_name": "",
+    "profession": "Швея",
+    "issued_date": "2025-06-30",
+    "inn": null
+  },
+  {
+    "id": 420,
+    "registration_number": "ЦС № 000421",
+    "last_name": "Даниярова",
+    "first_name": "Гульнара",
+    "sur_name": "",
+    "profession": "Швея",
+    "issued_date": "2025-06-30",
+    "inn": null
+  },
+  {
+    "id": 421,
+    "registration_number": "ЦС № 000422",
+    "last_name": "Мырзабекова",
+    "first_name": "Азиза",
+    "sur_name": "",
+    "profession": "Швея",
+    "issued_date": "2025-06-30",
+    "inn": null
+  },
+  {
+    "id": 422,
+    "registration_number": "ЦС № 000423",
+    "last_name": "Владимерова",
+    "first_name": "Валерия",
+    "sur_name": "",
+    "profession": "Швея",
+    "issued_date": "2025-06-30",
+    "inn": null
+  },
+  {
+    "id": 423,
+    "registration_number": "ЦС № 000424",
+    "last_name": "Чолпонай",
+    "first_name": "Нурбек кызы",
+    "sur_name": "",
+    "profession": "Швея",
+    "issued_date": "2025-06-30",
+    "inn": null
+  },
+  {
+    "id": 424,
+    "registration_number": "ЦС № 000425",
+    "last_name": "Касымкулова",
+    "first_name": "Мира",
+    "sur_name": "",
+    "profession": "Швея",
+    "issued_date": "2025-06-30",
+    "inn": null
+  },
+  {
+    "id": 425,
+    "registration_number": "ЦС № 000426",
+    "last_name": "Масынканова",
+    "first_name": "Асель",
+    "sur_name": "",
+    "profession": "Швея",
+    "issued_date": "2025-06-30",
+    "inn": null
+  },
+  {
+    "id": 426,
+    "registration_number": "ЦС № 000427",
+    "last_name": "Тентимишова",
+    "first_name": "Гулмира",
+    "sur_name": "",
+    "profession": "Швея",
+    "issued_date": "2025-06-30",
+    "inn": null
+  },
+  {
+    "id": 427,
+    "registration_number": "ЦС № 000428",
+    "last_name": "Козмиренко",
+    "first_name": "Лилия",
+    "sur_name": "",
+    "profession": "Закройщик",
+    "issued_date": "2025-06-30",
+    "inn": null
+  },
+  {
+    "id": 428,
+    "registration_number": "ЦС № 000429",
+    "last_name": "Пашкова",
+    "first_name": "Светлана",
+    "sur_name": "",
+    "profession": "Оператор швейного оборудования",
+    "issued_date": "2025-06-30",
+    "inn": null
+  },
+  {
+    "id": 429,
+    "registration_number": "ЦС № 000430",
+    "last_name": "Осмонов",
+    "first_name": "Саламат",
+    "sur_name": "",
+    "profession": "Оператор швейного оборудования",
+    "issued_date": "2025-06-30",
+    "inn": null
+  },
+  {
+    "id": 430,
+    "registration_number": "ЦС № 000431",
+    "last_name": "Жумашов",
+    "first_name": "Урматбек",
+    "sur_name": "",
+    "profession": "Контролер технического состояния автотранспортных средств",
+    "issued_date": "2025-06-27",
+    "inn": null
+  },
+  {
+    "id": 431,
+    "registration_number": "ЦС № 000432",
+    "last_name": "Токтоболотов",
+    "first_name": "Бактыбек",
+    "sur_name": "",
+    "profession": "Контролер технического состояния автотранспортных средств",
+    "issued_date": "2025-06-27",
+    "inn": null
+  },
+  {
+    "id": 432,
+    "registration_number": "ЦС № 000433",
+    "last_name": "Шамшиев",
+    "first_name": "Адылбек",
+    "sur_name": "",
+    "profession": "Контролер технического состояния автотранспортных средств",
+    "issued_date": "2025-06-27",
+    "inn": null
+  },
+  {
+    "id": 433,
+    "registration_number": "ЦС № 000434",
+    "last_name": "Белеков",
+    "first_name": "Алмамбет",
+    "sur_name": "",
+    "profession": "Контролер технического состояния автотранспортных средств",
+    "issued_date": "2025-07-02",
+    "inn": null
+  },
+  {
+    "id": 434,
+    "registration_number": "ЦС № 000435",
+    "last_name": "Беловолова",
+    "first_name": "Елена",
+    "sur_name": "",
+    "profession": "Портной",
+    "issued_date": "2025-07-02",
+    "inn": null
+  },
+  {
+    "id": 435,
+    "registration_number": "ЦС № 000436",
+    "last_name": "Хасанова",
+    "first_name": "Нуиссано",
+    "sur_name": "",
+    "profession": "Портной",
+    "issued_date": "2025-07-02",
+    "inn": null
+  },
+  {
+    "id": 436,
+    "registration_number": "ЦС № 000437",
+    "last_name": "Тургуналиева",
+    "first_name": "Джылдызгуль",
+    "sur_name": "",
+    "profession": "Портной",
+    "issued_date": "2025-07-02",
+    "inn": null
+  },
+  {
+    "id": 437,
+    "registration_number": "ЦС № 000438",
+    "last_name": "Байзакова",
+    "first_name": "Назира",
+    "sur_name": "",
+    "profession": "Портной",
+    "issued_date": "2025-07-02",
+    "inn": null
+  },
+  {
+    "id": 438,
+    "registration_number": "ЦС № 000439",
+    "last_name": "Курманова",
+    "first_name": "Мария",
+    "sur_name": "",
+    "profession": "Портной",
+    "issued_date": "2025-07-02",
+    "inn": null
+  },
+  {
+    "id": 439,
+    "registration_number": "ЦС № 000440",
+    "last_name": "Сулайманова",
+    "first_name": "Гульмария",
+    "sur_name": "",
+    "profession": "Портной",
+    "issued_date": "2025-07-02",
+    "inn": null
+  },
+  {
+    "id": 440,
+    "registration_number": "ЦС № 000441",
+    "last_name": "Аысбаев",
+    "first_name": "Азиз",
+    "sur_name": "",
+    "profession": "Мастер столярного и мебельного производства",
+    "issued_date": "2025-07-02",
+    "inn": null
+  },
+  {
+    "id": 441,
+    "registration_number": "ЦС № 000442",
+    "last_name": "Ниязов",
+    "first_name": "Алымжан",
+    "sur_name": "",
+    "profession": "Мастер столярного и мебельного производства",
+    "issued_date": "2025-07-02",
+    "inn": null
+  },
+  {
+    "id": 442,
+    "registration_number": "ЦС № 000443",
+    "last_name": "Шинизар",
+    "first_name": "Ибрагим",
+    "sur_name": "",
+    "profession": "Мастер столярного и мебельного производства",
+    "issued_date": "2025-07-02",
+    "inn": null
+  },
+  {
+    "id": 443,
+    "registration_number": "ЦС № 000444",
+    "last_name": "Ахметова",
+    "first_name": "Жанара",
+    "sur_name": "",
+    "profession": "Швея",
+    "issued_date": "2025-07-07",
+    "inn": null
+  },
+  {
+    "id": 444,
+    "registration_number": "ЦС № 000445",
+    "last_name": "Айперим",
+    "first_name": "Куванычбек кызы",
+    "sur_name": "",
+    "profession": "Швея",
+    "issued_date": "2025-07-07",
+    "inn": null
+  },
+  {
+    "id": 445,
+    "registration_number": "ЦС № 000446",
+    "last_name": "Маатова",
+    "first_name": "Толкун",
+    "sur_name": "",
+    "profession": "Швея",
+    "issued_date": "2025-07-07",
+    "inn": null
+  },
+  {
+    "id": 446,
+    "registration_number": "ЦС № 000447",
+    "last_name": "Мукашева",
+    "first_name": "Айгуль",
+    "sur_name": "",
+    "profession": "Швея",
+    "issued_date": "2025-07-07",
+    "inn": null
+  },
+  {
+    "id": 447,
+    "registration_number": "ЦС № 000448",
+    "last_name": "Сулайманова",
+    "first_name": "Онолкан",
+    "sur_name": "",
+    "profession": "Швея",
+    "issued_date": "2025-07-07",
+    "inn": null
+  },
+  {
+    "id": 448,
+    "registration_number": "ЦС № 000449",
+    "last_name": "Хоменко",
+    "first_name": "Галина",
+    "sur_name": "",
+    "profession": "Швея",
+    "issued_date": "2025-07-07",
+    "inn": null
+  },
+  {
+    "id": 449,
+    "registration_number": "ЦС № 000450",
+    "last_name": "Озубекова",
+    "first_name": "Венера",
+    "sur_name": "",
+    "profession": "Закройщик",
+    "issued_date": "2025-07-07",
+    "inn": null
+  },
+  {
+    "id": 450,
+    "registration_number": "ЦС № 000451",
+    "last_name": "Асанова",
+    "first_name": "Элиза",
+    "sur_name": "",
+    "profession": "Закройщик",
+    "issued_date": "2025-07-07",
+    "inn": null
+  },
+  {
+    "id": 451,
+    "registration_number": "ЦС № 000453",
+    "last_name": "Асаналиева",
+    "first_name": "Эркингул",
+    "sur_name": "",
+    "profession": "Оператор швейного оборудования",
+    "issued_date": "2025-07-07",
+    "inn": null
+  },
+  {
+    "id": 452,
+    "registration_number": "ЦС № 000454",
+    "last_name": "Мукабаева",
+    "first_name": "Рафкат",
+    "sur_name": "",
+    "profession": "Оператор швейного оборудования",
+    "issued_date": "2025-07-07",
+    "inn": null
+  },
+  {
+    "id": 453,
+    "registration_number": "ЦС № 000455",
+    "last_name": "Исагалиева",
+    "first_name": "Гульнара",
+    "sur_name": "",
+    "profession": "Оператор швейного оборудования",
+    "issued_date": "2025-07-07",
+    "inn": null
+  },
+  {
+    "id": 454,
+    "registration_number": "ЦС № 000456",
+    "last_name": "Оморов",
+    "first_name": "Тилек",
+    "sur_name": "",
+    "profession": "Оператор швейного оборудования",
+    "issued_date": "2025-07-07",
+    "inn": null
+  },
+  {
+    "id": 455,
+    "registration_number": "ЦС № 000457",
+    "last_name": "Кадыракунов",
+    "first_name": "Кожояр",
+    "sur_name": "",
+    "profession": "Мастер столярного и мебельного производства",
+    "issued_date": "2025-07-07",
+    "inn": null
+  },
+  {
+    "id": 456,
+    "registration_number": "ЦС № 000458",
+    "last_name": "Толомушов",
+    "first_name": "Мирлан",
+    "sur_name": "",
+    "profession": "Мастер столярного и мебельного производства",
+    "issued_date": "2025-07-07",
+    "inn": null
+  },
+  {
+    "id": 457,
+    "registration_number": "ЦС № 000459",
+    "last_name": "Асылбеков",
+    "first_name": "Омурбек",
+    "sur_name": "",
+    "profession": "Мастер столярного и мебельного производства",
+    "issued_date": "2025-07-07",
+    "inn": null
+  },
+  {
+    "id": 458,
+    "registration_number": "ЦС № 000460",
+    "last_name": "Ахметов",
+    "first_name": "Марс",
+    "sur_name": "",
+    "profession": "Мастер столярного и мебельного производства",
+    "issued_date": "2025-07-07",
+    "inn": null
+  },
+  {
+    "id": 459,
+    "registration_number": "ЦС № 000461",
+    "last_name": "Абдыкадыров",
+    "first_name": "Адилет",
+    "sur_name": "",
+    "profession": "Мастер столярного и мебельного производства",
+    "issued_date": "2025-07-07",
+    "inn": null
+  },
+  {
+    "id": 460,
+    "registration_number": "ЦС № 000462",
+    "last_name": "Орозалиев",
+    "first_name": "Омурбек",
+    "sur_name": "",
+    "profession": "Мастер столярного и мебельного производства",
+    "issued_date": "2025-07-07",
+    "inn": null
+  },
+  {
+    "id": 461,
+    "registration_number": "ЦС № 000463",
+    "last_name": "Батырбеков",
+    "first_name": "Ислам",
+    "sur_name": "",
+    "profession": "Мастер столярного и мебельного производства",
+    "issued_date": "2025-07-07",
+    "inn": null
+  },
+  {
+    "id": 462,
+    "registration_number": "ЦС № 000464",
+    "last_name": "Батыров",
+    "first_name": "Хаким",
+    "sur_name": "",
+    "profession": "Электросварщик",
+    "issued_date": "2025-07-07",
+    "inn": null
+  },
+  {
+    "id": 463,
+    "registration_number": "ЦС № 000465",
+    "last_name": "Деркембаев",
+    "first_name": "Эрмек",
+    "sur_name": "",
+    "profession": "Мастер столярного и мебельного производства",
+    "issued_date": "2025-07-07",
+    "inn": null
+  },
+  {
+    "id": 464,
+    "registration_number": "ЦС № 000466",
+    "last_name": "Осмоналиев",
+    "first_name": "Алмазбек",
+    "sur_name": "",
+    "profession": "Мастер столярного и мебельного производства",
+    "issued_date": "2025-07-07",
+    "inn": null
+  },
+  {
+    "id": 465,
+    "registration_number": "ЦС № 000467",
+    "last_name": "Озумкулов",
+    "first_name": "Жолдошбек",
+    "sur_name": "",
+    "profession": "Мастер сухого строительства",
+    "issued_date": "2025-07-07",
+    "inn": null
+  },
+  {
+    "id": 466,
+    "registration_number": "ЦС № 000468",
+    "last_name": "Сталбек",
+    "first_name": "Азамат уулу",
+    "sur_name": "",
+    "profession": "Монтажник строительных конструкций и поливинилхлоридного профиля",
+    "issued_date": "2025-07-07",
+    "inn": null
+  },
+  {
+    "id": 468,
+    "registration_number": "ЦС № 000469",
+    "last_name": "Азимкулов",
+    "first_name": "Нургазы",
+    "sur_name": "",
+    "profession": "Мастер отделочных строительных работ",
+    "issued_date": "2025-07-08",
+    "inn": null
+  },
+  {
+    "id": 469,
+    "registration_number": "ЦС № 000470",
+    "last_name": "Азимкулов",
+    "first_name": "Нурсултан",
+    "sur_name": "",
+    "profession": "Мастер отделочных строительных работ",
+    "issued_date": "2025-07-08",
+    "inn": null
+  },
+  {
+    "id": 470,
+    "registration_number": "ЦС № 000471",
+    "last_name": "Бараков",
+    "first_name": "Мазанбек",
+    "sur_name": "",
+    "profession": "Мастер отделочных строительных работ",
+    "issued_date": "2025-07-08",
+    "inn": null
+  },
+  {
+    "id": 471,
+    "registration_number": "ЦС № 000472",
+    "last_name": "Мырзакулов",
+    "first_name": "Маратбек",
+    "sur_name": "",
+    "profession": "Мастер отделочных строительных работ",
+    "issued_date": "2025-07-08",
+    "inn": null
+  },
+  {
+    "id": 467,
+    "registration_number": "ЦС № 000473",
+    "last_name": "Дорофеев",
+    "first_name": "Михайил",
+    "sur_name": "",
+    "profession": "Слесарь-сантехник",
+    "issued_date": "2025-08-01",
+    "inn": null
+  },
+  {
+    "id": 472,
+    "registration_number": "ЦС № 000474",
+    "last_name": "Лохуза",
+    "first_name": "Махмуд",
+    "sur_name": "",
+    "profession": "Слесарь-сантехник",
+    "issued_date": "2025-08-01",
+    "inn": null
+  },
+  {
+    "id": 473,
+    "registration_number": "ЦС № 000475",
+    "last_name": "Шмелевский",
+    "first_name": "Дмитрий",
+    "sur_name": "",
+    "profession": "Слесарь-сантехник",
+    "issued_date": "2025-08-01",
+    "inn": null
+  },
+  {
+    "id": 474,
+    "registration_number": "ЦС № 000476",
+    "last_name": "Кабаев",
+    "first_name": "Бакир",
+    "sur_name": "",
+    "profession": "Слесарь по ремонту автотранспортных средств",
+    "issued_date": "2025-08-11",
+    "inn": null
+  },
+  {
+    "id": 475,
+    "registration_number": "ЦС № 000477",
+    "last_name": "Маргузиев",
+    "first_name": "Талайбек",
+    "sur_name": "",
+    "profession": "Мастер столярного и мебельного производства",
+    "issued_date": "2025-08-11",
+    "inn": null
+  },
+  {
+    "id": 476,
+    "registration_number": "ЦС № 000478",
+    "last_name": "Орозбаев",
+    "first_name": "Нурсултан",
+    "sur_name": "",
+    "profession": "Мастер столярного и мебельного производства",
+    "issued_date": "2025-08-11",
+    "inn": null
+  },
+  {
+    "id": 477,
+    "registration_number": "ЦС № 000479",
+    "last_name": "Эсенбаев",
+    "first_name": "Ызатбек",
+    "sur_name": "",
+    "profession": "Мастер столярного и мебельного производства",
+    "issued_date": "2025-08-11",
+    "inn": null
+  },
+  {
+    "id": 478,
+    "registration_number": "ЦС № 000480",
+    "last_name": "Абдуразаков",
+    "first_name": "Эмир",
+    "sur_name": "",
+    "profession": "Мастер столярного и мебельного производства",
+    "issued_date": "2025-08-11",
+    "inn": null
+  },
+  {
+    "id": 479,
+    "registration_number": "ЦС № 000481",
+    "last_name": "Айтбаев",
+    "first_name": "Тилек",
+    "sur_name": "",
+    "profession": "Мастер столярного и мебельного производства",
+    "issued_date": "2025-08-11",
+    "inn": null
+  },
+  {
+    "id": 480,
+    "registration_number": "ЦС № 000482",
+    "last_name": "Сива",
+    "first_name": "Арафат",
+    "sur_name": "",
+    "profession": "Мастер столярного и мебельного производства",
+    "issued_date": "2025-08-11",
+    "inn": null
+  },
+  {
+    "id": 481,
+    "registration_number": "ЦС № 000483",
+    "last_name": "Токталиев",
+    "first_name": "Азамат",
+    "sur_name": "",
+    "profession": "Мастер столярного и мебельного производства",
+    "issued_date": "2025-08-11",
+    "inn": null
+  },
+  {
+    "id": 482,
+    "registration_number": "ЦС № 000484",
+    "last_name": "Бакиев",
+    "first_name": "Айбек",
+    "sur_name": "",
+    "profession": "Станочник в деревообработке",
+    "issued_date": "2025-08-11",
+    "inn": null
+  },
+  {
+    "id": 483,
+    "registration_number": "ЦС № 000485",
+    "last_name": "Садырбаев",
+    "first_name": "Сталбек",
+    "sur_name": "",
+    "profession": "Станочник в деревообработке",
+    "issued_date": "2025-08-11",
+    "inn": null
+  },
+  {
+    "id": 484,
+    "registration_number": "ЦС № 000486",
+    "last_name": "Ерса",
+    "first_name": "Алим",
+    "sur_name": "",
+    "profession": "Станочник в деревообработке",
+    "issued_date": "2025-08-11",
+    "inn": null
+  },
+  {
+    "id": 485,
+    "registration_number": "ЦС № 000487",
+    "last_name": "Чин",
+    "first_name": "Владислав",
+    "sur_name": "",
+    "profession": "Станочник в деревообработке",
+    "issued_date": "2025-08-11",
+    "inn": null
+  },
+  {
+    "id": 486,
+    "registration_number": "ЦС № 000488",
+    "last_name": "Кошоев",
+    "first_name": "Асылбек",
+    "sur_name": "",
+    "profession": "Шлифовщик по дереву",
+    "issued_date": "2025-08-11",
+    "inn": null
+  },
+  {
+    "id": 487,
+    "registration_number": "ЦС № 000489",
+    "last_name": "Аскат",
+    "first_name": "Эркин уулу",
+    "sur_name": "",
+    "profession": "Шлифовщик по дереву",
+    "issued_date": "2025-08-11",
+    "inn": null
+  },
+  {
+    "id": 488,
+    "registration_number": "ЦС № 000490",
+    "last_name": "Бейшеналиев",
+    "first_name": "Насипбек",
+    "sur_name": "",
+    "profession": "Сварщик (электросварочные и газосварочные работы)",
+    "issued_date": "2025-08-11",
+    "inn": null
+  },
+  {
+    "id": 489,
+    "registration_number": "ЦС № 000491",
+    "last_name": "Асаналиев",
+    "first_name": "Эриндис",
+    "sur_name": "",
+    "profession": "Мастер общестроительных работ",
+    "issued_date": "2025-08-11",
+    "inn": null
+  },
+  {
+    "id": 490,
+    "registration_number": "ЦС № 000492",
+    "last_name": "Буркутбаев",
+    "first_name": "Максут",
+    "sur_name": "",
+    "profession": "Швея",
+    "issued_date": "2025-08-13",
+    "inn": null
+  },
+  {
+    "id": 491,
+    "registration_number": "ЦС № 000493",
+    "last_name": "Кенжебаев",
+    "first_name": "Бейшебай",
+    "sur_name": "",
+    "profession": "Швея",
+    "issued_date": "2025-08-13",
+    "inn": null
+  },
+  {
+    "id": 492,
+    "registration_number": "ЦС № 000494",
+    "last_name": "Миталиев",
+    "first_name": "Жаныш",
+    "sur_name": "",
+    "profession": "Швея",
+    "issued_date": "2025-08-13",
+    "inn": null
+  },
+  {
+    "id": 493,
+    "registration_number": "ЦС № 000495",
+    "last_name": "Нугаева",
+    "first_name": "Эркингуль",
+    "sur_name": "",
+    "profession": "Швея",
+    "issued_date": "2025-08-13",
+    "inn": null
+  },
+  {
+    "id": 494,
+    "registration_number": "ЦС № 000496",
+    "last_name": "Шодмонбекова",
+    "first_name": "Дамира",
+    "sur_name": "",
+    "profession": "Швея",
+    "issued_date": "2025-08-13",
+    "inn": null
+  },
+  {
+    "id": 495,
+    "registration_number": "ЦС № 000497",
+    "last_name": "Исаев",
+    "first_name": "Бактыбек",
+    "sur_name": "",
+    "profession": "Мастер сухого строительства",
+    "issued_date": "2025-08-13",
+    "inn": null
+  },
+  {
+    "id": 496,
+    "registration_number": "ЦС № 000498",
+    "last_name": "Назаралиев",
+    "first_name": "Каныбек",
+    "sur_name": "",
+    "profession": "Электромонтер по ремонту и обслуживанию электрооборудования",
+    "issued_date": "2025-08-15",
+    "inn": null
+  },
+  {
+    "id": 497,
+    "registration_number": "ЦС № 000499",
+    "last_name": "Иманалиев",
+    "first_name": "Эламан",
+    "sur_name": "",
+    "profession": "Слесарь-сантехник",
+    "issued_date": "2025-08-15",
+    "inn": null
+  },
+  {
+    "id": 498,
+    "registration_number": "ЦС № 000500",
+    "last_name": "Сагынбаева",
+    "first_name": "Мадира",
+    "sur_name": "",
+    "profession": "Повар",
+    "issued_date": "2025-08-21",
+    "inn": null
+  },
+  {
+    "id": 499,
+    "registration_number": "ЦС № 000501",
+    "last_name": "Азимкулов",
+    "first_name": "Бексултан",
+    "sur_name": "",
+    "profession": "Электромонтажник осветительных сетей",
+    "issued_date": "2025-08-25",
+    "inn": null
+  },
+  {
+    "id": 500,
+    "registration_number": "ЦС № 000502",
+    "last_name": "Женишбек",
+    "first_name": "Акматалы уулу",
+    "sur_name": "",
+    "profession": "Электросварщик",
+    "issued_date": "2025-08-28",
+    "inn": null
+  },
+  {
+    "id": 501,
+    "registration_number": "ЦС № 000503",
+    "last_name": "Токтоболотова",
+    "first_name": "Назгул",
+    "sur_name": "",
+    "profession": "Повар",
+    "issued_date": "2025-08-30",
+    "inn": null
+  },
+  {
+    "id": 502,
+    "registration_number": "ЦС № 000504",
+    "last_name": "Бантабаев",
+    "first_name": "Медер",
+    "sur_name": "",
+    "profession": "Слесарь-электрик по ремонту и обслуживанию электрооборудования",
+    "issued_date": "2025-09-11",
+    "inn": null
+  },
+  {
+    "id": 503,
+    "registration_number": "ЦС № 000505",
+    "last_name": "Орозбекова",
+    "first_name": "Дариха",
+    "sur_name": "",
+    "profession": "Повар",
+    "issued_date": "2025-09-12",
+    "inn": null
+  },
+  {
+    "id": 504,
+    "registration_number": "ЦС № 000506",
+    "last_name": "Кушубеков",
+    "first_name": "Алмазбек",
+    "sur_name": "",
+    "profession": "Электросварщик",
+    "issued_date": "2025-09-19",
+    "inn": null
+  },
+  {
+    "id": 505,
+    "registration_number": "ЦС № 000507",
+    "last_name": "Акимова",
+    "first_name": "Кульнара",
+    "sur_name": "",
+    "profession": "Портной, мастер народных промыслов",
+    "issued_date": "2025-09-22",
+    "inn": null
+  },
+  {
+    "id": 506,
+    "registration_number": "ЦС № 000508",
+    "last_name": "Анасекнко",
+    "first_name": "Павел",
+    "sur_name": "",
+    "profession": "Слесарь по ремонту автотранспортных средств",
+    "issued_date": "2025-09-29",
+    "inn": null
+  },
+  {
+    "id": 507,
+    "registration_number": "ЦС № 000509",
+    "last_name": "Булатов",
+    "first_name": "Рауф",
+    "sur_name": "",
+    "profession": "Слесарь по ремонту автотранспортных средств",
+    "issued_date": "2025-09-29",
+    "inn": null
+  },
+  {
+    "id": 508,
+    "registration_number": "ЦС № 000510",
+    "last_name": "Малиновский",
+    "first_name": "Александр",
+    "sur_name": "",
+    "profession": "Слесарь по ремонту автотранспортных средств",
+    "issued_date": "2025-09-29",
+    "inn": null
+  },
+  {
+    "id": 509,
+    "registration_number": "ЦС № 000511",
+    "last_name": "Пыпченко",
+    "first_name": "Александр",
+    "sur_name": "",
+    "profession": "Слесарь по ремонту автотранспортных средств",
+    "issued_date": "2025-09-29",
+    "inn": null
+  },
+  {
+    "id": 510,
+    "registration_number": "ЦС № 000512",
+    "last_name": "Эрматов",
+    "first_name": "Рустам",
+    "sur_name": "",
+    "profession": "Слесарь по ремонту автотранспортных средств",
+    "issued_date": "2025-09-29",
+    "inn": null
+  },
+  {
+    "id": 511,
+    "registration_number": "ЦС № 000513",
+    "last_name": "Эсеналиева",
+    "first_name": "Айгуль",
+    "sur_name": "",
+    "profession": "Портной с умением кроить",
+    "issued_date": "2025-09-08",
+    "inn": null
+  },
+  {
+    "id": 512,
+    "registration_number": "ЦС № 000514",
+    "last_name": "Джумабаева",
+    "first_name": "Зыйнат",
+    "sur_name": "",
+    "profession": "Мастер отделочных строительных работ",
+    "issued_date": "2025-10-06",
+    "inn": null
+  },
+  {
+    "id": 513,
+    "registration_number": "ЦС № 000515",
+    "last_name": "Шералиева",
+    "first_name": "Айгул",
+    "sur_name": "",
+    "profession": "Повар",
+    "issued_date": "2025-10-16",
+    "inn": null
+  },
+  {
+    "id": 514,
+    "registration_number": "ЦС № 000516",
+    "last_name": "Эрлан",
+    "first_name": "Джайлообек уулу",
+    "sur_name": "",
+    "profession": "Слесарь-сантехник",
+    "issued_date": "2025-10-22",
+    "inn": null
+  },
+  {
+    "id": 515,
+    "registration_number": "ЦС № 000517",
+    "last_name": "Карабагышов",
+    "first_name": "Алтынбек",
+    "sur_name": "",
+    "profession": "Мастер столярного и мебельного производства",
+    "issued_date": "2025-10-28",
+    "inn": null
+  },
+  {
+    "id": 516,
+    "registration_number": "ЦС № 000518",
+    "last_name": "Тургуналиев",
+    "first_name": "Шугурбек",
+    "sur_name": "",
+    "profession": "Повар",
+    "issued_date": "2025-11-06",
+    "inn": null
+  },
+  {
+    "id": 517,
+    "registration_number": "ЦС № 000519",
+    "last_name": "Шерматов",
+    "first_name": "Калкабай",
+    "sur_name": "",
+    "profession": "Электромонтер по ремонту и обслуживанию электрооборудования",
+    "issued_date": "2025-11-08",
+    "inn": null
+  },
+  {
+    "id": 518,
+    "registration_number": "ЦС № 000520",
+    "last_name": "Бекбоо",
+    "first_name": "Акылбек уулу",
+    "sur_name": "",
+    "profession": "Электросварщик",
+    "issued_date": "2025-11-12",
+    "inn": null
+  },
+  {
+    "id": 519,
+    "registration_number": "ЦС № 000521",
+    "last_name": "Абдраимов",
+    "first_name": "Чолпонбек",
+    "sur_name": "",
+    "profession": "Электросварщик",
+    "issued_date": "2025-11-12",
+    "inn": null
+  },
+  {
+    "id": 520,
+    "registration_number": "ЦС № 000522",
+    "last_name": "Бексултан",
+    "first_name": "Маратбек уулу",
+    "sur_name": "",
+    "profession": "Электросварщик",
+    "issued_date": "2025-11-12",
+    "inn": null
+  },
+  {
+    "id": 521,
+    "registration_number": "ЦС № 000523",
+    "last_name": "Шакирова",
+    "first_name": "Бурулча",
+    "sur_name": "",
+    "profession": "Портной с умением кроить",
+    "issued_date": "2025-11-17",
+    "inn": null
+  },
+  {
+    "id": 522,
+    "registration_number": "ЦС № 000524",
+    "last_name": "Мажитов",
+    "first_name": "Таалай",
+    "sur_name": "",
+    "profession": "Мастер отделочных строительных работ",
+    "issued_date": "2025-11-24",
+    "inn": null
+  },
+  {
+    "id": 523,
+    "registration_number": "ЦС № 000525",
+    "last_name": "Мажитов",
+    "first_name": "Исо",
+    "sur_name": "",
+    "profession": "Мастер отделочных строительных работ",
+    "issued_date": "2025-11-24",
+    "inn": null
+  },
+  {
+    "id": 524,
+    "registration_number": "ЦС № 000526",
+    "last_name": "Кененбаева",
+    "first_name": "Жылдызкан",
+    "sur_name": "",
+    "profession": "Горничная",
+    "issued_date": "2025-11-25",
+    "inn": null
+  },
+  {
+    "id": 525,
+    "registration_number": "ЦС № 000527",
+    "last_name": "Бердибеков",
+    "first_name": "Бекболот",
+    "sur_name": "",
+    "profession": "Электросварщик",
+    "issued_date": "2025-12-02",
+    "inn": null
+  },
+  {
+    "id": 526,
+    "registration_number": "ЦС № 000528",
+    "last_name": "Джумубаева",
+    "first_name": "Асель",
+    "sur_name": "",
+    "profession": "Повар-кондитер",
+    "issued_date": "2025-12-12",
+    "inn": null
+  },
+  {
+    "id": 527,
+    "registration_number": "ЦС № 000529",
+    "last_name": "Асаналиева",
+    "first_name": "Аяна",
+    "sur_name": "",
+    "profession": "Мастер перманентного макияжа",
+    "issued_date": "2025-12-16",
+    "inn": null
+  },
+  {
+    "id": 528,
+    "registration_number": "ЦС № 000530",
+    "last_name": "Базарбекова",
+    "first_name": "Касиет",
+    "sur_name": "",
+    "profession": "Мастер перманентного макияжа",
+    "issued_date": "2025-12-16",
+    "inn": null
+  },
+  {
+    "id": 529,
+    "registration_number": "ЦС № 000531",
+    "last_name": "Бердикулова",
+    "first_name": "Тахмина",
+    "sur_name": "",
+    "profession": "Мастер перманентного макияжа",
+    "issued_date": "2025-12-16",
+    "inn": null
+  },
+  {
+    "id": 530,
+    "registration_number": "ЦС № 000532",
+    "last_name": "Калчаева",
+    "first_name": "Айжамал",
+    "sur_name": "",
+    "profession": "Мастер перманентного макияжа",
+    "issued_date": "2025-12-16",
+    "inn": null
+  },
+  {
+    "id": 531,
+    "registration_number": "ЦС № 000533",
+    "last_name": "Жанабаева",
+    "first_name": "Алтынай",
+    "sur_name": "",
+    "profession": "Мастер перманентного макияжа",
+    "issued_date": "2025-12-16",
+    "inn": null
+  },
+  {
+    "id": 532,
+    "registration_number": "ЦС № 000534",
+    "last_name": "Абдылдаева",
+    "first_name": "Гулзат",
+    "sur_name": "",
+    "profession": "Мастер перманентного макияжа",
+    "issued_date": "2025-12-16",
+    "inn": null
+  },
+  {
+    "id": 533,
+    "registration_number": "ЦС № 000535",
+    "last_name": "Бекболотова",
+    "first_name": "Айтурган",
+    "sur_name": "",
+    "profession": "Мастер перманентного макияжа",
+    "issued_date": "2025-12-17",
+    "inn": null
+  },
+  {
+    "id": 534,
+    "registration_number": "ЦС № 000536",
+    "last_name": "Жунусова",
+    "first_name": "Жылдыз",
+    "sur_name": "",
+    "profession": "Мастер перманентного макияжа",
+    "issued_date": "2025-12-17",
+    "inn": null
+  },
+  {
+    "id": 535,
+    "registration_number": "ЦС № 000537",
+    "last_name": "Мойдунбекова",
+    "first_name": "Мээрим",
+    "sur_name": "",
+    "profession": "Мастер перманентного макияжа",
+    "issued_date": "2025-12-17",
+    "inn": null
+  },
+  {
+    "id": 536,
+    "registration_number": "ЦС № 000538",
+    "last_name": "Акылай",
+    "first_name": "Сагынбек кызы",
+    "sur_name": "",
+    "profession": "Мастер перманентного макияжа",
+    "issued_date": "2025-12-17",
+    "inn": null
+  },
+  {
+    "id": 537,
+    "registration_number": "ЦС № 000539",
+    "last_name": "Усенова",
+    "first_name": "Кенжегуль",
+    "sur_name": "",
+    "profession": "Мастер перманентного макияжа",
+    "issued_date": "2025-12-17",
+    "inn": null
+  },
+  {
+    "id": 538,
+    "registration_number": "ЦС № 000540",
+    "last_name": "Иманалиев",
+    "first_name": "Каныбек",
+    "sur_name": "",
+    "profession": "Электромонтер по ремонту и обслуживанию электрооборудования",
+    "issued_date": "2025-12-17",
+    "inn": null
+  },
+  {
+    "id": 539,
+    "registration_number": "ЦС № 000541",
+    "last_name": "Байгельдиев",
+    "first_name": "Руслан",
+    "sur_name": "",
+    "profession": "Электромонтер по ремонту и обслуживанию электрооборудования",
+    "issued_date": "2025-12-17",
+    "inn": null
+  },
+  {
+    "id": 540,
+    "registration_number": "ЦС № 000542",
+    "last_name": "Джумакадыров",
+    "first_name": "Канатбек",
+    "sur_name": "",
+    "profession": "Электромонтер по ремонту и обслуживанию электрооборудования",
+    "issued_date": "2025-12-17",
+    "inn": null
+  },
+  {
+    "id": 541,
+    "registration_number": "ЦС № 000543",
+    "last_name": "Абдуллаев",
+    "first_name": "Мээримбек",
+    "sur_name": "",
+    "profession": "Электромонтажник электросетей и электрооборудования",
+    "issued_date": "2025-12-17",
+    "inn": null
+  },
+  {
+    "id": 542,
+    "registration_number": "ЦС № 000544",
+    "last_name": "Солдатенко",
+    "first_name": "Сергей",
+    "sur_name": "",
+    "profession": "Слесарь-сантехник",
+    "issued_date": "2025-12-17",
+    "inn": null
+  },
+  {
+    "id": 543,
+    "registration_number": "ЦС № 000545",
+    "last_name": "Кожогулов",
+    "first_name": "Нурбек",
+    "sur_name": "",
+    "profession": "Электросварщик",
+    "issued_date": "2025-12-23",
+    "inn": null
+  },
+  {
+    "id": 544,
+    "registration_number": "ЦС № 000546",
+    "last_name": "Мокеев",
+    "first_name": "Жакшылык",
+    "sur_name": "",
+    "profession": "Электросварщик",
+    "issued_date": "2025-12-23",
+    "inn": null
+  },
+  {
+    "id": 545,
+    "registration_number": "ЦС № 000547",
+    "last_name": "Азис",
+    "first_name": "Самудин уулу",
+    "sur_name": "",
+    "profession": "Слесарь по ремонту автомобилей (моторист)",
+    "issued_date": "2025-12-24",
+    "inn": null
+  },
+  {
+    "id": 546,
+    "registration_number": "ЦС № 000548",
+    "last_name": "Самаганов",
+    "first_name": "Бакытбек",
+    "sur_name": "",
+    "profession": "Электросварщик",
+    "issued_date": "2025-12-26",
+    "inn": null
+  },
+  {
+    "id": 547,
+    "registration_number": "ЦС № 000549",
+    "last_name": "Абдыкеримов",
+    "first_name": "Руслан",
+    "sur_name": "",
+    "profession": "Электросварщик",
+    "issued_date": "2025-12-26",
+    "inn": null
+  },
+  {
+    "id": 548,
+    "registration_number": "ЦС № 000550",
+    "last_name": "Азим",
+    "first_name": "Сагынбек уулу",
+    "sur_name": "",
+    "profession": "Электросварщик",
+    "issued_date": "2025-12-26",
+    "inn": null
+  },
+  {
+    "id": 549,
+    "registration_number": "ЦС № 000551",
+    "last_name": "Жаманкулова",
+    "first_name": "Жанаркул",
+    "sur_name": "",
+    "profession": "Повар",
+    "issued_date": "2025-12-25",
+    "inn": null
+  },
+  {
+    "id": 550,
+    "registration_number": "ЦС № 000553",
+    "last_name": "Исакова",
+    "first_name": "Махабат",
+    "sur_name": "",
+    "profession": "Повар",
+    "issued_date": "2025-12-25",
+    "inn": null
+  },
+  {
+    "id": 551,
+    "registration_number": "ЦС № 000554",
+    "last_name": "Кашанова",
+    "first_name": "Гульмира",
+    "sur_name": "",
+    "profession": "Повар",
+    "issued_date": "2025-12-25",
+    "inn": null
+  },
+  {
+    "id": 552,
+    "registration_number": "ЦС № 000555",
+    "last_name": "Турсуналиева",
+    "first_name": "Аида",
+    "sur_name": "",
+    "profession": "Повар",
+    "issued_date": "2025-12-25",
+    "inn": null
+  },
+  {
+    "id": 553,
+    "registration_number": "ЦС № 000556",
+    "last_name": "Бакаева",
+    "first_name": "Айсалтанат",
+    "sur_name": "",
+    "profession": "Повар",
+    "issued_date": "2025-12-25",
+    "inn": null
+  },
+  {
+    "id": 554,
+    "registration_number": "ЦС № 000557",
+    "last_name": "Абдылдаева",
+    "first_name": "Гулзат",
+    "sur_name": "",
+    "profession": "Повар",
+    "issued_date": "2025-12-25",
+    "inn": null
+  },
+  {
+    "id": 555,
+    "registration_number": "ЦС № 000558",
+    "last_name": "Закирова",
+    "first_name": "Динара",
+    "sur_name": "",
+    "profession": "Швея",
+    "issued_date": "2025-12-26",
+    "inn": null
+  },
+  {
+    "id": 556,
+    "registration_number": "ЦС № 000559",
+    "last_name": "Изабаева",
+    "first_name": "Уулкелсин",
+    "sur_name": "",
+    "profession": "Швея",
+    "issued_date": "2025-12-26",
+    "inn": null
+  },
+  {
+    "id": 557,
+    "registration_number": "ЦС № 000560",
+    "last_name": "Сотволдиева",
+    "first_name": "Гульнура",
+    "sur_name": "",
+    "profession": "Швея",
+    "issued_date": "2025-12-26",
+    "inn": null
+  },
+  {
+    "id": 558,
+    "registration_number": "ЦС № 000561",
+    "last_name": "Сатыбалдиева",
+    "first_name": "Минура",
+    "sur_name": "",
+    "profession": "Швея",
+    "issued_date": "2025-12-26",
+    "inn": null
+  },
+  {
+    "id": 559,
+    "registration_number": "ЦС № 000562",
+    "last_name": "Нурзада",
+    "first_name": "Турусбек кызы",
+    "sur_name": "",
+    "profession": "Швея",
+    "issued_date": "2025-12-26",
+    "inn": null
+  },
+  {
+    "id": 560,
+    "registration_number": "ЦС № 000563",
+    "last_name": "Тургунбаева",
+    "first_name": "Дилора",
+    "sur_name": "",
+    "profession": "Портной",
+    "issued_date": "2025-12-26",
+    "inn": null
+  },
+  {
+    "id": 561,
+    "registration_number": "ЦС № 000564",
+    "last_name": "Пайизова",
+    "first_name": "Айпери",
+    "sur_name": "",
+    "profession": "Швея",
+    "issued_date": "2025-12-26",
+    "inn": null
+  },
+  {
+    "id": 562,
+    "registration_number": "ЦС № 000565",
+    "last_name": "Айтикулова",
+    "first_name": "Камила",
+    "sur_name": "",
+    "profession": "Швея",
+    "issued_date": "2025-12-26",
+    "inn": null
+  },
+  {
+    "id": 563,
+    "registration_number": "ЦС № 000566",
+    "last_name": "Кадирова",
+    "first_name": "Набира",
+    "sur_name": "",
+    "profession": "Швея",
+    "issued_date": "2025-12-26",
+    "inn": null
+  },
+  {
+    "id": 564,
+    "registration_number": "ЦС № 000567",
+    "last_name": "Эрнас",
+    "first_name": "Сиезбек уулу",
+    "sur_name": "",
+    "profession": "Повар",
+    "issued_date": "2025-12-27",
+    "inn": null
+  },
+  {
+    "id": 565,
+    "registration_number": "ЦС № 000568",
+    "last_name": "Жиянова",
+    "first_name": "Асель",
+    "sur_name": "",
+    "profession": "Повар",
+    "issued_date": "2025-12-27",
+    "inn": null
+  },
+  {
+    "id": 566,
+    "registration_number": "ЦС № 000569",
+    "last_name": "Мамадиева",
+    "first_name": "Айдай",
+    "sur_name": "",
+    "profession": "Парикмахер-стилист, специалист индустрии красоты",
+    "issued_date": "2025-12-24",
+    "inn": null
+  },
+  {
+    "id": 567,
+    "registration_number": "ЦС № 000570",
+    "last_name": "Кан",
+    "first_name": "Инесса",
+    "sur_name": "",
+    "profession": "Парикмахер-стилист, специалист индустрии красоты",
+    "issued_date": "2025-12-24",
+    "inn": null
+  },
+  {
+    "id": 568,
+    "registration_number": "ЦС № 000571",
+    "last_name": "Медербекова",
+    "first_name": "Нуриля",
+    "sur_name": "",
+    "profession": "Парикмахер-стилист, специалист индустрии красоты",
+    "issued_date": "2025-12-24",
+    "inn": null
+  },
+  {
+    "id": 569,
+    "registration_number": "ЦС № 000572",
+    "last_name": "Балыбаева",
+    "first_name": "Динара",
+    "sur_name": "",
+    "profession": "Парикмахер-стилист, специалист индустрии красоты",
+    "issued_date": "2025-12-24",
+    "inn": null
+  },
+  {
+    "id": 570,
+    "registration_number": "ЦС № 000573",
+    "last_name": "Абдылдаева",
+    "first_name": "Алина",
+    "sur_name": "",
+    "profession": "Повар",
+    "issued_date": "2025-12-30",
+    "inn": null
+  },
+  {
+    "id": 571,
+    "registration_number": "ЦС № 000574",
+    "last_name": "Айзаада",
+    "first_name": "Камчыбек кызы",
+    "sur_name": "",
+    "profession": "Повар",
+    "issued_date": "2025-12-30",
+    "inn": null
+  },
+  {
+    "id": 572,
+    "registration_number": "ЦС № 000575",
+    "last_name": "Уланбеков",
+    "first_name": "Келдибек",
+    "sur_name": "",
+    "profession": "Слесарь-сантехник",
+    "issued_date": "2025-12-30",
+    "inn": null
+  },
+  {
+    "id": 573,
+    "registration_number": "ЦС № 000576",
+    "last_name": "Эрнис",
+    "first_name": "Жыргалбек уулу",
+    "sur_name": "",
+    "profession": "Электрогазосварщик",
+    "issued_date": "2026-01-16",
+    "inn": null
+  },
+  {
+    "id": 574,
+    "registration_number": "ЦС № 000577",
+    "last_name": "Кыйкынбаева",
+    "first_name": "Азиза",
+    "sur_name": "",
+    "profession": "Повар",
+    "issued_date": "2025-12-30",
+    "inn": null
+  },
+  {
+    "id": 575,
+    "registration_number": "ЦС № 000578",
+    "last_name": "Умаров",
+    "first_name": "Бакыт",
+    "sur_name": "",
+    "profession": "Электромонтер по ремонту и обслуживанию электрооборудования",
+    "issued_date": "2026-01-19",
+    "inn": null
+  },
+  {
+    "id": 576,
+    "registration_number": "ЦС № 000579",
+    "last_name": "Мирзарахимова",
+    "first_name": "Гулбахар",
+    "sur_name": "",
+    "profession": "Повар-кондитер",
+    "issued_date": "2026-01-26",
+    "inn": null
+  },
+  {
+    "id": 577,
+    "registration_number": "ЦС № 000580",
+    "last_name": "Тагаева",
+    "first_name": "Нургул",
+    "sur_name": "",
+    "profession": "Повар-кондитер",
+    "issued_date": "2026-01-26",
+    "inn": null
+  },
+  {
+    "id": 578,
+    "registration_number": "ЦС № 000581",
+    "last_name": "Жарматова",
+    "first_name": "Айзада",
+    "sur_name": "",
+    "profession": "Повар-кондитер",
+    "issued_date": "2026-01-26",
+    "inn": null
+  },
+  {
+    "id": 579,
+    "registration_number": "ЦС № 000582",
+    "last_name": "Сапалова",
+    "first_name": "Мунара",
+    "sur_name": "",
+    "profession": "Мастер народных промыслов",
+    "issued_date": "2026-01-28",
+    "inn": null
+  },
+  {
+    "id": 580,
+    "registration_number": "ЦС № 000583",
+    "last_name": "Кадырбеков",
+    "first_name": "Акимжан",
+    "sur_name": "",
+    "profession": "Сварщик",
+    "issued_date": "2026-01-29",
+    "inn": null
+  },
+  {
+    "id": 581,
+    "registration_number": "ЦС № 000584",
+    "last_name": "Адинай",
+    "first_name": "Токтогул кызы",
+    "sur_name": "",
+    "profession": "Повар",
+    "issued_date": "2026-02-03",
+    "inn": null
+  },
+  {
+    "id": 582,
+    "registration_number": "ЦС № 000585",
+    "last_name": "Иванов",
+    "first_name": "Максим",
+    "sur_name": "",
+    "profession": "Слесарь-сантехник",
+    "issued_date": "2026-02-05",
+    "inn": null
+  },
+  {
+    "id": 583,
+    "registration_number": "ЦС № 000586",
+    "last_name": "Зарипов",
+    "first_name": "Рафаэль",
+    "sur_name": "",
+    "profession": "Слесарь-сантехник",
+    "issued_date": "2026-02-05",
+    "inn": null
+  },
+  {
+    "id": 584,
+    "registration_number": "ЦС № 000587",
+    "last_name": "Толобеков",
+    "first_name": "Орозобек",
+    "sur_name": "",
+    "profession": "Слесарь-сантехник",
+    "issued_date": "2026-02-05",
+    "inn": null
+  },
+  {
+    "id": 585,
+    "registration_number": "ЦС № 000588",
+    "last_name": "Сарыбаева",
+    "first_name": "Бактыгуль",
+    "sur_name": "",
+    "profession": "Информационно-коммуникационные технологии",
+    "issued_date": "2026-02-09",
+    "inn": null
+  },
+  {
+    "id": 586,
+    "registration_number": "ЦС № 000589",
+    "last_name": "Хамраев",
+    "first_name": "Жолдош",
+    "sur_name": "",
+    "profession": "Автомеханик автоколонн",
+    "issued_date": "2026-02-09",
+    "inn": null
+  },
+  {
+    "id": 587,
+    "registration_number": "ЦС № 000590",
+    "last_name": "Эдилбек",
+    "first_name": "Ишен уулу",
+    "sur_name": "",
+    "profession": "Слесарь по ремонту автомобилей",
+    "issued_date": "2026-02-10",
+    "inn": null
+  },
+  {
+    "id": 588,
+    "registration_number": "ЦС № 000591",
+    "last_name": "Маразыкова",
+    "first_name": "Нуржамал",
+    "sur_name": "",
+    "profession": "Повар",
+    "issued_date": "2026-02-11",
+    "inn": null
+  },
+  {
+    "id": 589,
+    "registration_number": "ЦС № 000592",
+    "last_name": "Исаматов",
+    "first_name": "Тилек",
+    "sur_name": "",
+    "profession": "Слесарь по ремонту автотранспортных средств",
+    "issued_date": "2026-02-10",
+    "inn": null
+  },
+  {
+    "id": 590,
+    "registration_number": "ЦС № 000593",
+    "last_name": "Щвец",
+    "first_name": "Дмитрий",
+    "sur_name": "",
+    "profession": "Слесарь-сантехник",
+    "issued_date": "2026-02-13",
+    "inn": null
+  },
+  {
+    "id": 591,
+    "registration_number": "ЦС № 000594",
+    "last_name": "Кашкарбаев",
+    "first_name": "Талгат",
+    "sur_name": "",
+    "profession": "Слесарь-сантехник",
+    "issued_date": "2026-02-13",
+    "inn": null
+  },
+  {
+    "id": 592,
+    "registration_number": "ЦС № 000595",
+    "last_name": "Элеман",
+    "first_name": "Батырбек уулу",
+    "sur_name": "",
+    "profession": "Электромонтер по ремонту электросетей",
+    "issued_date": "2026-02-16",
+    "inn": null
+  },
+  {
+    "id": 593,
+    "registration_number": "ЦС № 000596",
+    "last_name": "Эшенкулова",
+    "first_name": "Гулсайра",
+    "sur_name": "",
+    "profession": "Повар",
+    "issued_date": "2026-02-17",
+    "inn": null
+  },
+  {
+    "id": 594,
+    "registration_number": "ЦС № 000597",
+    "last_name": "Кыдырбаева",
+    "first_name": "Динара",
+    "sur_name": "",
+    "profession": "Повар",
+    "issued_date": "2026-02-17",
+    "inn": null
+  },
+  {
+    "id": 595,
+    "registration_number": "ЦС № 000598",
+    "last_name": "Назарова",
+    "first_name": "Рыскул",
+    "sur_name": "",
+    "profession": "Повар",
+    "issued_date": "2026-02-17",
+    "inn": null
+  },
+  {
+    "id": 596,
+    "registration_number": "ЦС № 000599",
+    "last_name": "Атамбеков",
+    "first_name": "Шаршенбек",
+    "sur_name": "",
+    "profession": "Слесарь-сантехник",
+    "issued_date": "2026-02-23",
+    "inn": null
+  },
+  {
+    "id": 597,
+    "registration_number": "ЦС № 000600",
+    "last_name": "Майрыков",
+    "first_name": "Эрнис",
+    "sur_name": "",
+    "profession": "Слесарь-сантехник",
+    "issued_date": "2026-02-13",
+    "inn": null
+  },
+  {
+    "id": 598,
+    "registration_number": "ЦС № 0005601",
+    "last_name": "Бообек",
+    "first_name": "Тагайбек уулу",
+    "sur_name": "",
+    "profession": "Электромонтажник-наладчик",
+    "issued_date": "2026-02-25",
+    "inn": null
+  },
+  {
+    "id": 599,
+    "registration_number": "ЦС № 000602",
+    "last_name": "Марсбек",
+    "first_name": "Жумабай уулу",
+    "sur_name": "",
+    "profession": "Электромонтер по ремонту электросетей",
+    "issued_date": "2026-02-25",
+    "inn": null
+  },
+  {
+    "id": 600,
+    "registration_number": "ЦС № 000603",
+    "last_name": "Алыбаев",
+    "first_name": "Алмаз",
+    "sur_name": "",
+    "profession": "Электромонтер по техническому обслуживанию электростанций и сетей",
+    "issued_date": "2026-02-25",
+    "inn": null
+  },
+  {
+    "id": 601,
+    "registration_number": "ЦС № 000604",
+    "last_name": "Беккалнур",
+    "first_name": "Ишеналы уулу",
+    "sur_name": "",
+    "profession": "Электромонтажник-наладчик",
+    "issued_date": "2026-02-25",
+    "inn": null
+  },
+  {
+    "id": 602,
+    "registration_number": "ЦС № 000605",
+    "last_name": "Беккалнур",
+    "first_name": "Ишеналы уулу",
+    "sur_name": "",
+    "profession": "Сварщик",
+    "issued_date": "2026-02-27",
+    "inn": null
+  },
+  {
+    "id": 603,
+    "registration_number": "ЦС № 000606",
+    "last_name": "Актилек",
+    "first_name": "Акыш уулу",
+    "sur_name": "",
+    "profession": "Сварщик",
+    "issued_date": "2026-02-27",
+    "inn": null
+  },
+  {
+    "id": 604,
+    "registration_number": "ЦС № 000607",
+    "last_name": "Кыпчакоы",
+    "first_name": "Абдужамил",
+    "sur_name": "",
+    "profession": "Электромонтажник-наладчик",
+    "issued_date": "2026-03-05",
+    "inn": null
+  },
+  {
+    "id": 605,
+    "registration_number": "ЦС № 000608",
+    "last_name": "Эргешов",
+    "first_name": "Мухамедали",
+    "sur_name": "",
+    "profession": "Электромонтажник-наладчик",
+    "issued_date": "2026-03-05",
+    "inn": null
+  },
+  {
+    "id": 606,
+    "registration_number": "ЦС № 000609",
+    "last_name": "Умаров",
+    "first_name": "Даиржан",
+    "sur_name": "",
+    "profession": "Электромонтажник-наладчик",
+    "issued_date": "2026-03-05",
+    "inn": null
+  },
+  {
+    "id": 607,
+    "registration_number": "ЦС № 000610",
+    "last_name": "Билалов",
+    "first_name": "Алтынбек",
+    "sur_name": "",
+    "profession": "Электромонтажник-наладчик",
+    "issued_date": "2026-03-30",
+    "inn": null
+  },
+  {
+    "id": 608,
+    "registration_number": "ЦС № 000611",
+    "last_name": "Дуйшенбик",
+    "first_name": "Тариэль",
+    "sur_name": "",
+    "profession": "Электромонтажник-наладчик",
+    "issued_date": "2026-03-30",
+    "inn": null
+  },
+  {
+    "id": 609,
+    "registration_number": "ЦС № 000612",
+    "last_name": "Мирбек",
+    "first_name": "Бектен уулу",
+    "sur_name": "",
+    "profession": "Электромонтер по ремонту электросетей",
+    "issued_date": "2026-03-09",
+    "inn": null
+  },
+  {
+    "id": 610,
+    "registration_number": "ЦС № 000613",
+    "last_name": "Султанов",
+    "first_name": "Максат",
+    "sur_name": "",
+    "profession": "Слесарь по ремонту дорожно-строительных машин и тракторов",
+    "issued_date": "2026-03-10",
+    "inn": null
+  },
+  {
+    "id": 611,
+    "registration_number": "ЦС № 000614",
+    "last_name": "Абдусаматова",
+    "first_name": "Угулай",
+    "sur_name": "",
+    "profession": "Повар-кондитер",
+    "issued_date": "2026-03-12",
+    "inn": null
+  },
+  {
+    "id": 612,
+    "registration_number": "ЦС № 000615",
+    "last_name": "Дадабаева",
+    "first_name": "Фатима",
+    "sur_name": "",
+    "profession": "Повар-кондитер",
+    "issued_date": "2026-03-12",
+    "inn": null
+  },
+  {
+    "id": 613,
+    "registration_number": "ЦС № 000616",
+    "last_name": "Абдумуталиева",
+    "first_name": "Назокат",
+    "sur_name": "",
+    "profession": "Повар-кондитер",
+    "issued_date": "2026-03-12",
+    "inn": null
+  },
+  {
+    "id": 614,
+    "registration_number": "ЦС № 000617",
+    "last_name": "Калыбекова",
+    "first_name": "Жибек",
+    "sur_name": "",
+    "profession": "Швея",
+    "issued_date": "2026-03-16",
+    "inn": null
+  },
+  {
+    "id": 615,
+    "registration_number": "ЦС № 000618",
+    "last_name": "Курманбекова",
+    "first_name": "Жанаркул",
+    "sur_name": "",
+    "profession": "Швея",
+    "issued_date": "2026-03-16",
+    "inn": null
+  },
+  {
+    "id": 616,
+    "registration_number": "ЦС № 000619",
+    "last_name": "Жунусова",
+    "first_name": "Эльзада",
+    "sur_name": "",
+    "profession": "Швея",
+    "issued_date": "2026-03-16",
+    "inn": null
+  },
+  {
+    "id": 617,
+    "registration_number": "ЦС № 000620",
+    "last_name": "Карыбаев",
+    "first_name": "Намаз",
+    "sur_name": "",
+    "profession": "Мастер общестроительных работ",
+    "issued_date": "2026-03-16",
+    "inn": null
+  },
+  {
+    "id": 618,
+    "registration_number": "ЦС № 000621",
+    "last_name": "Азамат",
+    "first_name": "Авазбек уулу",
+    "sur_name": "",
+    "profession": "Мастер общестроительных работ",
+    "issued_date": "2026-03-16",
+    "inn": null
+  },
+  {
+    "id": 619,
+    "registration_number": "ЦС № 000622",
+    "last_name": "Борукеев",
+    "first_name": "Таалайбек",
+    "sur_name": "",
+    "profession": "Дизайнер-оформитель",
+    "issued_date": "2026-03-19",
+    "inn": null
+  },
+  {
+    "id": 620,
+    "registration_number": "ЦС № 000623",
+    "last_name": "Мамекова",
+    "first_name": "Элмира",
+    "sur_name": "",
+    "profession": "Мастер народных промыслов",
+    "issued_date": "2026-03-24",
+    "inn": null
+  },
+  {
+    "id": 621,
+    "registration_number": "ЦС № 000624",
+    "last_name": "Оскомбаева",
+    "first_name": "Гулмира",
+    "sur_name": "",
+    "profession": "Мастер народных промыслов",
+    "issued_date": "2026-03-24",
+    "inn": null
+  },
+  {
+    "id": 622,
+    "registration_number": "ЦС № 000625",
+    "last_name": "Кашкаралива",
+    "first_name": "Айнура",
+    "sur_name": "",
+    "profession": "Повар-кондитер",
+    "issued_date": "2026-03-25",
+    "inn": null
+  },
+  {
+    "id": 623,
+    "registration_number": "ЦС № 000626",
+    "last_name": "Самсиева",
+    "first_name": "Нурила",
+    "sur_name": "",
+    "profession": "Повар",
+    "issued_date": "2026-03-25",
+    "inn": null
+  },
+  {
+    "id": 624,
+    "registration_number": "ЦС № 000627",
+    "last_name": "Борубаев",
+    "first_name": "Марат",
+    "sur_name": "",
+    "profession": "Электромонтажник-наладчик",
+    "issued_date": "2026-03-26",
+    "inn": null
+  },
+  {
+    "id": 625,
+    "registration_number": "ЦС № 000628",
+    "last_name": "Макешов",
+    "first_name": "Уланбек",
+    "sur_name": "",
+    "profession": "Электромонтер по техническому обслуживанию электростанций",
+    "issued_date": "2026-03-26",
+    "inn": null
+  },
+  {
+    "id": 626,
+    "registration_number": "ЦС № 000629",
+    "last_name": "Макешов",
+    "first_name": "Уланбек",
+    "sur_name": "",
+    "profession": "Слесарь-сантехник",
+    "issued_date": "2026-03-26",
+    "inn": null
+  },
+  {
+    "id": 627,
+    "registration_number": "ЦС № 000630",
+    "last_name": "Мусаев",
+    "first_name": "Улан",
+    "sur_name": "",
+    "profession": "Слесарь по ремонту автотранспортных средств",
+    "issued_date": "2026-03-26",
+    "inn": null
+  },
+  {
+    "id": 628,
+    "registration_number": "ЦС № 000631",
+    "last_name": "Жумалиев",
+    "first_name": "Урмат",
+    "sur_name": "",
+    "profession": "Повар",
+    "issued_date": "2026-03-19",
+    "inn": null
+  },
+  {
+    "id": 629,
+    "registration_number": "ЦС № 000632",
+    "last_name": "Бабанов",
+    "first_name": "Кубанычбек",
+    "sur_name": "",
+    "profession": "Электросварщик",
+    "issued_date": "2026-04-02",
+    "inn": null
+  },
+  {
+    "id": 630,
+    "registration_number": "ЦС № 000633",
+    "last_name": "Токтогулова",
+    "first_name": "Жанылай",
+    "sur_name": "",
+    "profession": "Повар",
+    "issued_date": "2026-04-13",
+    "inn": null
+  },
+  {
+    "id": 631,
+    "registration_number": "ЦС № 000634",
+    "last_name": "Шарипов",
+    "first_name": "Махманазар",
+    "sur_name": "",
+    "profession": "Электросварщик",
+    "issued_date": "2026-04-08",
+    "inn": null
+  },
+  {
+    "id": 632,
+    "registration_number": "ЦС № 000635",
+    "last_name": "Рогожинский",
+    "first_name": "Сергей",
+    "sur_name": "",
+    "profession": "Электромонтажник электросетей и электрооборудования",
+    "issued_date": "2026-04-15",
+    "inn": null
+  },
+  {
+    "id": 633,
+    "registration_number": "ЦС № 000636",
+    "last_name": "Уралиев",
+    "first_name": "Мирлан",
+    "sur_name": "",
+    "profession": "Электромонтажник электросетей и электрооборудования",
+    "issued_date": "2026-04-15",
+    "inn": null
+  },
+  {
+    "id": 634,
+    "registration_number": "ЦС № 000637",
+    "last_name": "Сонунбеков",
+    "first_name": "Самаган",
+    "sur_name": "",
+    "profession": "Слесарь-сантехник",
+    "issued_date": "2026-04-17",
+    "inn": null
+  },
+  {
+    "id": 635,
+    "registration_number": "ЦС № 000638",
+    "last_name": "Цыс",
+    "first_name": "Ригина",
+    "sur_name": "",
+    "profession": "Парикмахер",
+    "issued_date": "2026-04-28",
+    "inn": null
+  },
+  {
+    "id": 636,
+    "registration_number": "ЦС № 000639",
+    "last_name": "Абылова",
+    "first_name": "Жыпар",
+    "sur_name": "",
+    "profession": "Мастер народных промыслов",
+    "issued_date": "2026-04-29",
+    "inn": null
+  },
+  {
+    "id": 637,
+    "registration_number": "ЦС № 000640",
+    "last_name": "Молотов",
+    "first_name": "Бактияр",
+    "sur_name": "",
+    "profession": "Мастер общестроительных работ",
+    "issued_date": "2026-04-29",
+    "inn": null
+  },
+  {
+    "id": 638,
+    "registration_number": "ЦС № 000641",
+    "last_name": "Лавров",
+    "first_name": "Никита",
+    "sur_name": "",
+    "profession": "Слесарь-сантехник",
+    "issued_date": "2026-05-14",
+    "inn": null
+  },
+  {
+    "id": 639,
+    "registration_number": "ЦС № 000642",
+    "last_name": "Серко",
+    "first_name": "Владислав",
+    "sur_name": "",
+    "profession": "Слесарь-сантехник",
+    "issued_date": "2026-05-14",
+    "inn": null
+  },
+  {
+    "id": 640,
+    "registration_number": "ЦС № 000644",
+    "last_name": "Садиров",
+    "first_name": "Нурсултан",
+    "sur_name": "",
+    "profession": "Сварщик",
+    "issued_date": "2021-05-21",
+    "inn": null
+  },
+  {
+    "id": 641,
+    "registration_number": "ЦС № 000643",
+    "last_name": "Кудайбердиев",
+    "first_name": "Талант",
+    "sur_name": "",
+    "profession": "Электромонтажник электросетей и электрооборудования",
+    "issued_date": "2026-05-14",
+    "inn": null
+  },
+  {
+    "id": 642,
+    "registration_number": "ЦС № 000645",
+    "last_name": "Евтушенко",
+    "first_name": "Викентий",
+    "sur_name": "",
+    "profession": "Сварщик",
+    "issued_date": "2026-05-22",
+    "inn": null
+  },
+  {
+    "id": 643,
+    "registration_number": "ЦС № 000646",
+    "last_name": "Бактыбеков",
+    "first_name": "Нурсултан",
+    "sur_name": "",
+    "profession": "Слесарь-сантехник",
+    "issued_date": "2026-05-25",
+    "inn": null
+  },
+  {
+    "id": 644,
+    "registration_number": "ЦС № 000647",
+    "last_name": "Калдашев",
+    "first_name": "Данияр",
+    "sur_name": "",
+    "profession": "Контролер технического состояния автомототранспортных средств",
+    "issued_date": "2026-05-26",
+    "inn": null
+  },
+  {
+    "id": 645,
+    "registration_number": "ЦС № 000648",
+    "last_name": "Эсенжан",
+    "first_name": "Шабданбек уулу",
+    "sur_name": "",
+    "profession": "Электромонтажник-наладчик",
+    "issued_date": "2026-05-26",
+    "inn": null
+  },
+  {
+    "id": 646,
+    "registration_number": "ЦС № 000649",
+    "last_name": "Абдираимов",
+    "first_name": "Заиркул",
+    "sur_name": "Имамович",
+    "profession": "Электросварщик на полуавтоматической машине",
+    "issued_date": "2026-05-28",
+    "inn": null
+  },
+  {
+    "id": 647,
+    "registration_number": "ЦС № 000650",
+    "last_name": "Мурзакулова",
+    "first_name": "Мээрим",
+    "sur_name": "Токтобековна",
+    "profession": "Повар",
+    "issued_date": "2026-05-29",
+    "inn": null
+  },
+  {
+    "id": 648,
+    "registration_number": "ЦС № 000651",
+    "last_name": "Молдалиев",
+    "first_name": "Шумкарбек",
+    "sur_name": "",
+    "profession": "Электросварщик 2 разряда",
+    "issued_date": "2026-06-03",
+    "inn": null
+  },
+  {
+    "id": 649,
+    "registration_number": "ЦС № 000652",
+    "last_name": "Усеналиев",
+    "first_name": "Тагайбек",
+    "sur_name": "Бусурманович",
+    "profession": "Слесарь-сантехник",
+    "issued_date": "2026-06-04",
+    "inn": null
+  },
+  {
+    "id": 650,
+    "registration_number": "ЦС № 000653",
+    "last_name": "Токолов",
+    "first_name": "Замирбек",
+    "sur_name": "Таатканович",
+    "profession": "Электросварщик 2 разряда",
+    "issued_date": "2026-06-05",
+    "inn": null
+  },
+  {
+    "id": 651,
+    "registration_number": "ЦС № 000654",
+    "last_name": "Нуркулов",
+    "first_name": "Токтобек",
+    "sur_name": "Көкөнович",
+    "profession": "Электросварщик 3 разряда",
+    "issued_date": "2026-06-05",
+    "inn": null
+  },
+  {
+    "id": 652,
+    "registration_number": "ЦС № 000655",
+    "last_name": "Жаныкулов",
+    "first_name": "Айбек",
+    "sur_name": "Чолпонович",
+    "profession": "Электросварщик",
+    "issued_date": "2026-06-05",
+    "inn": null
+  },
+  {
+    "id": 653,
+    "registration_number": "ЦС № 000656",
+    "last_name": "Романенко",
+    "first_name": "Илья",
+    "sur_name": "Антонович",
+    "profession": "Электросварщик на полуавтоматической машине",
+    "issued_date": "2026-06-05",
+    "inn": null
+  },
+  {
+    "id": 654,
+    "registration_number": "ЦС № 000657",
+    "last_name": "Баршугуров",
+    "first_name": "Эрлан",
+    "sur_name": "Бейшенбекович",
+    "profession": "Электрогазосварщик 5 разряда",
+    "issued_date": "2026-06-05",
+    "inn": null
+  },
+  {
+    "id": 655,
+    "registration_number": "ЦС № 000658",
+    "last_name": "Тынымбеков",
+    "first_name": "Бекулан",
+    "sur_name": "Тилекович",
+    "profession": "Слесарь-сантехник 3 разряда",
+    "issued_date": "2026-06-11",
+    "inn": null
+  },
+  {
+    "id": 656,
+    "registration_number": "ЦС № 000659",
+    "last_name": "Мамбетказиев",
+    "first_name": "Өмүркул",
+    "sur_name": "",
+    "profession": "Электромонтажник 3 разряда",
+    "issued_date": "2026-06-11",
+    "inn": null
+  },
+  {
+    "id": 657,
+    "registration_number": "ЦС № 000660",
+    "last_name": "Сыдыкбеков",
+    "first_name": "Даулет",
+    "sur_name": "Бахытбекович",
+    "profession": "Слесарь-сантехник 3 разряда",
+    "issued_date": "2026-06-13",
+    "inn": null
+  },
+  {
+    "id": 658,
+    "registration_number": "ЦС № 000661",
+    "last_name": "Улугбекова",
+    "first_name": "Мохидил",
+    "sur_name": "Тиллевалд-на",
+    "profession": "Повар 3 разряда",
+    "issued_date": "2026-06-16",
+    "inn": null
+  },
+  {
+    "id": 706,
+    "registration_number": "ЦС № 000662",
+    "last_name": "Казыбекова",
+    "first_name": "Ырыс",
+    "sur_name": "",
+    "profession": "Повар 3 разряда",
+    "issued_date": "2026-06-18",
+    "inn": null
+  },
+  {
+    "id": 707,
+    "registration_number": "ЦС № 000663",
+    "last_name": "Эгембердиев",
+    "first_name": "Жоробек",
+    "sur_name": "",
+    "profession": "Слесарь-сантехник 3 разряда",
+    "issued_date": "2026-06-23",
+    "inn": null
+  },
+  {
+    "id": 708,
+    "registration_number": "ЦС № 000664",
+    "last_name": "Каримов",
+    "first_name": "Кубанычбек",
+    "sur_name": "",
+    "profession": "Слесарь-сантехник 3 разряда",
+    "issued_date": "2026-06-23",
+    "inn": null
+  },
+  {
+    "id": 709,
+    "registration_number": "ЦС № 000665",
+    "last_name": "Чилмомбетов",
+    "first_name": "Тилек",
+    "sur_name": "",
+    "profession": "Мастер отделочных строительных работ 4 разряда",
+    "issued_date": "2026-06-24",
+    "inn": null
+  },
+  {
+    "id": 710,
+    "registration_number": "ЦС № 000666",
+    "last_name": "Садыков",
+    "first_name": "Чынгыз",
+    "sur_name": "",
+    "profession": "Мастер отделочных строительных работ 4 разряда",
+    "issued_date": "2026-06-24",
+    "inn": null
+  },
+  {
+    "id": 711,
+    "registration_number": "ЦС № 000667",
+    "last_name": "Молдокеев",
+    "first_name": "Нурбек",
+    "sur_name": "",
+    "profession": "Мастер отделочных строительных работ 4 разряда",
+    "issued_date": "2026-06-24",
+    "inn": null
+  },
+  {
+    "id": 659,
+    "registration_number": "ЦС № 000668",
+    "last_name": "Бектурганова",
+    "first_name": "Раиса",
+    "sur_name": "Болотбековна",
+    "profession": "Повар 3 разряда",
+    "issued_date": "2026-06-25",
+    "inn": null
+  },
+  {
+    "id": 660,
+    "registration_number": "ЦС № 000669",
+    "last_name": "Бектурган",
+    "first_name": "Жайлообек уулу",
+    "sur_name": "",
+    "profession": "Оператор по ветеринарной обработке животных 4 разряда",
+    "issued_date": "2026-05-25",
+    "inn": null
+  },
+  {
+    "id": 661,
+    "registration_number": "ЦС № 000670",
+    "last_name": "Шамурзаев",
+    "first_name": "Доктурбек",
+    "sur_name": "",
+    "profession": "Оператор по ветеринарной обработке животных 4 разряда",
+    "issued_date": "2026-05-25",
+    "inn": null
+  },
+  {
+    "id": 662,
+    "registration_number": "ЦС № 000671",
+    "last_name": "Арген",
+    "first_name": "Азамат уулу",
+    "sur_name": "",
+    "profession": "Слесарь-сантехник 3 разряда",
+    "issued_date": "2026-06-30",
+    "inn": null
+  },
+  {
+    "id": 663,
+    "registration_number": "ЦС № 000672",
+    "last_name": "Рахматуулаева",
+    "first_name": "Умида",
+    "sur_name": "",
+    "profession": "Мастер перманентного макияжа 5 разряда",
+    "issued_date": "2026-07-01",
+    "inn": null
+  },
+  {
+    "id": 664,
+    "registration_number": "ЦС № 000673",
+    "last_name": "Токтаим",
+    "first_name": "Мыйманбай кызы",
+    "sur_name": "",
+    "profession": "Мастер перманентного макияжа 5 разряда",
+    "issued_date": "2026-07-01",
+    "inn": null
+  },
+  {
+    "id": 665,
+    "registration_number": "ЦС № 000674",
+    "last_name": "Журавлева",
+    "first_name": "Алена",
+    "sur_name": "Сергеевна",
+    "profession": "Мастер перманентного макияжа 5 разряда",
+    "issued_date": "2026-07-01",
+    "inn": null
+  },
+  {
+    "id": 666,
+    "registration_number": "ЦС № 000675",
+    "last_name": "Кочкорова",
+    "first_name": "Эльвира",
+    "sur_name": "Жунусалиевна",
+    "profession": "Мастер перманентного макияжа 5 разряда",
+    "issued_date": "2026-07-01",
+    "inn": null
+  },
+  {
+    "id": 667,
+    "registration_number": "ЦС № 000676",
+    "last_name": "ТИщенко",
+    "first_name": "Олег",
+    "sur_name": "Викторович",
+    "profession": "Электромонтажник-наладчик 4 разряда",
+    "issued_date": "2026-07-02",
+    "inn": null
+  },
+  {
+    "id": 668,
+    "registration_number": "ЦС № 000677",
+    "last_name": "Абакиров",
+    "first_name": "Нурлан",
+    "sur_name": "Жумабекович",
+    "profession": "Электромонтажник-наладчик 4 разряда",
+    "issued_date": "2026-07-02",
+    "inn": null
+  },
+  {
+    "id": 669,
+    "registration_number": "ЦС № 000678",
+    "last_name": "Кутман",
+    "first_name": "Таашыбек уулу",
+    "sur_name": "",
+    "profession": "Электромонтажник-наладчик 3 разряда",
+    "issued_date": "2026-07-02",
+    "inn": null
+  },
+  {
+    "id": 670,
+    "registration_number": "ЦС № 000679",
+    "last_name": "Орозбек",
+    "first_name": "Жылдызбек уулу",
+    "sur_name": "",
+    "profession": "Электромонтер по ремонту электросетей 4 разряда",
+    "issued_date": "2026-07-02",
+    "inn": null
+  },
+  {
+    "id": 671,
+    "registration_number": "ЦС № 000680",
+    "last_name": "Ибрахимов",
+    "first_name": "Эржан",
+    "sur_name": "Эркинбекович",
+    "profession": "Повар 3 разряда",
+    "issued_date": "2026-07-02",
+    "inn": null
+  },
+  {
+    "id": 672,
+    "registration_number": "ЦС № 000681",
+    "last_name": "Кыргызбаев",
+    "first_name": "Алишер",
+    "sur_name": "Абылгазиевич",
+    "profession": "Сварщик ручной сварки 3 разряда",
+    "issued_date": "2026-07-03",
+    "inn": null
+  },
+  {
+    "id": 673,
+    "registration_number": "ЦС № 000682",
+    "last_name": "Кожакматова",
+    "first_name": "Шарипа",
+    "sur_name": "",
+    "profession": "Повар",
+    "issued_date": "2026-07-03",
+    "inn": null
+  },
+  {
+    "id": 674,
+    "registration_number": "ЦС № 000683",
+    "last_name": "Бектур",
+    "first_name": "Жапар уулу",
+    "sur_name": "",
+    "profession": "Слесарь-сантехник",
+    "issued_date": "2026-07-08",
+    "inn": null
+  },
+  {
+    "id": 675,
+    "registration_number": "ЦС № 000684",
+    "last_name": "Мамасадыков",
+    "first_name": "Тургунали",
+    "sur_name": "",
+    "profession": "Электрогазосварщик 5 разряда",
+    "issued_date": "2026-07-10",
+    "inn": null
+  },
+  {
+    "id": 676,
+    "registration_number": "ЦС № 000685",
+    "last_name": "Ураимов",
+    "first_name": "Омурбек",
+    "sur_name": "",
+    "profession": "Слесарь-сантехник 4 разряда",
+    "issued_date": "2026-07-13",
+    "inn": null
+  },
+  {
+    "id": 677,
+    "registration_number": "ЦС № 000686",
+    "last_name": "Аттокуров",
+    "first_name": "Зайирдин",
+    "sur_name": "",
+    "profession": "Слесарь-сантехник 3 разряда",
+    "issued_date": "2026-07-13",
+    "inn": null
+  },
+  {
+    "id": 678,
+    "registration_number": "ЦС № 000687",
+    "last_name": "Байзаков",
+    "first_name": "Кайрат",
+    "sur_name": "Болотбекович",
+    "profession": "Электрик по ремонту автомобильного оборудования",
+    "issued_date": "2026-07-13",
+    "inn": null
+  },
+  {
+    "id": 679,
+    "registration_number": "ЦС № 000688",
+    "last_name": "Назарбаева",
+    "first_name": "Толкун",
+    "sur_name": "Адиловна",
+    "profession": "Повар-кондитер 5 разряда",
+    "issued_date": "2026-07-14",
+    "inn": null
+  },
+  {
+    "id": 680,
+    "registration_number": "ЦС № 000689",
+    "last_name": "Абиба",
+    "first_name": "Турдумамат кызы",
+    "sur_name": "",
+    "profession": "Повар-кондитер 5 разряда",
+    "issued_date": "2026-07-14",
+    "inn": null
+  },
+  {
+    "id": 681,
+    "registration_number": "ЦС № 000690",
+    "last_name": "Сагынбаева",
+    "first_name": "Инабат",
+    "sur_name": "",
+    "profession": "Повар-кондитер 5 разряда",
+    "issued_date": "2026-07-14",
+    "inn": null
+  },
+  {
+    "id": 682,
+    "registration_number": "ЦС № 000691",
+    "last_name": "Калданова",
+    "first_name": "Гулзат",
+    "sur_name": "",
+    "profession": "Повар-кондитер 5 разряда",
+    "issued_date": "2026-07-14",
+    "inn": null
+  },
+  {
+    "id": 683,
+    "registration_number": "ЦС № 000692",
+    "last_name": "Кудайбердиева",
+    "first_name": "Буушарипа",
+    "sur_name": "",
+    "profession": "Портной с умением кроить 5 разряда",
+    "issued_date": "2026-07-14",
+    "inn": null
+  },
+  {
+    "id": 684,
+    "registration_number": "ЦС № 000693",
+    "last_name": "Хасанова",
+    "first_name": "Мухабатхан",
+    "sur_name": "",
+    "profession": "Портной с умением кроить 5 разряда",
+    "issued_date": "2026-07-14",
+    "inn": null
+  },
+  {
+    "id": 685,
+    "registration_number": "ЦС № 000694",
+    "last_name": "Абдулазов",
+    "first_name": "Жамалидин",
+    "sur_name": "",
+    "profession": "Электрогазосварщик 5 разряда",
+    "issued_date": "2026-07-17",
+    "inn": null
+  },
+  {
+    "id": 686,
+    "registration_number": "ЦС № 000695",
+    "last_name": "Тронин",
+    "first_name": "Александр",
+    "sur_name": "Викторович",
+    "profession": "Облицовщик-плиточник",
+    "issued_date": "2026-07-20",
+    "inn": null
+  },
+  {
+    "id": 687,
+    "registration_number": "ЦС № 000696",
+    "last_name": "Калыгул",
+    "first_name": "Догдурбай уулу",
+    "sur_name": "",
+    "profession": "Специалист по безопасности информационных технологий",
+    "issued_date": "2026-07-22",
+    "inn": null
+  },
+  {
+    "id": 688,
+    "registration_number": "ЦС № 000697",
+    "last_name": "Усупов",
+    "first_name": "Эсен",
+    "sur_name": "Таалайбекович",
+    "profession": "Электросварщик 2 разряда",
+    "issued_date": "2026-07-29",
+    "inn": null
+  },
+  {
+    "id": 689,
+    "registration_number": "ЦС № 000698",
+    "last_name": "Саитгареев",
+    "first_name": "Рафаэль",
+    "sur_name": "Ахсанович",
+    "profession": "Сборщик электрических машин и аппаратов V разряда",
+    "issued_date": "2026-07-29",
+    "inn": null
+  },
+  {
+    "id": 690,
+    "registration_number": "ЦС № 000699",
+    "last_name": "Чеңкилова",
+    "first_name": "Алтынбү",
+    "sur_name": "Базаркуловна",
+    "profession": "Санитар ветеринарный 4 разряда",
+    "issued_date": "2026-07-29",
+    "inn": null
+  },
+  {
+    "id": 691,
+    "registration_number": "ЦС № 000700",
+    "last_name": "Сатымкулова",
+    "first_name": "Мира",
+    "sur_name": "Балтабаевна",
+    "profession": "Санитар ветеринарный 4 разряда",
+    "issued_date": "2026-07-29",
+    "inn": null
+  },
+  {
+    "id": 692,
+    "registration_number": "ЦС № 000701",
+    "last_name": "Туратбек уулу",
+    "first_name": "Өмүрбек",
+    "sur_name": "",
+    "profession": "Слесарь-сантехник 3 разряда",
+    "issued_date": "2026-08-03",
+    "inn": null
+  },
+  {
+    "id": 693,
+    "registration_number": "ЦС № 000702",
+    "last_name": "Назаралиева",
+    "first_name": "Сабырбү",
+    "sur_name": "",
+    "profession": "Повар 4 разряда",
+    "issued_date": "2026-08-05",
+    "inn": null
+  },
+  {
+    "id": 694,
+    "registration_number": "ЦС № 000703",
+    "last_name": "Бекмамат",
+    "first_name": "Акылбек уулу",
+    "sur_name": "",
+    "profession": "Электромонтер по ремонту воздушных линий электропередачи III разряда",
+    "issued_date": "2026-08-06",
+    "inn": null
+  },
+  {
+    "id": 695,
+    "registration_number": "ЦС № 000704",
+    "last_name": "Аманбаев",
+    "first_name": "Нурмухаммбетали",
+    "sur_name": "",
+    "profession": "Мастер жилищно-коммунального хозяйства III разряда",
+    "issued_date": "2026-08-07",
+    "inn": null
+  },
+  {
+    "id": 696,
+    "registration_number": "ЦС № 000705",
+    "last_name": "Айдаралиев",
+    "first_name": "Арген",
+    "sur_name": "Русланович",
+    "profession": "Электромонтажник 3 разряда",
+    "issued_date": "2026-07-29",
+    "inn": null
+  },
+  {
+    "id": 697,
+    "registration_number": "ЦС № 000706",
+    "last_name": "Абдурахманов",
+    "first_name": "Азиз",
+    "sur_name": "Рустамович",
+    "profession": "Слесарь-сантехник 3 разряда",
+    "issued_date": "2026-08-10",
+    "inn": null
+  },
+  {
+    "id": 698,
+    "registration_number": "ЦС № 000707",
+    "last_name": "Болотбеков",
+    "first_name": "Майрамбек",
+    "sur_name": "",
+    "profession": "Слесарь-сантехник 3 разряда",
+    "issued_date": "2026-08-11",
+    "inn": null
+  },
+  {
+    "id": 699,
+    "registration_number": "ЦС № 000708",
+    "last_name": "Карабекова",
+    "first_name": "Анаркан",
+    "sur_name": "Кайсарбаевна",
+    "profession": "Оператор швейного оборудования",
+    "issued_date": "2026-08-14",
+    "inn": null
+  },
+  {
+    "id": 700,
+    "registration_number": "ЦС № 000709",
+    "last_name": "Сейдалиев",
+    "first_name": "Санжар",
+    "sur_name": "Сарыпбекович",
+    "profession": "Электросварщик 4 разряда",
+    "issued_date": "2026-08-18",
+    "inn": null
+  },
+  {
+    "id": 701,
+    "registration_number": "ЦС № 000710",
+    "last_name": "Буслаева",
+    "first_name": "Валентина",
+    "sur_name": "Валентиновна",
+    "profession": "Сыродел 4 разряда",
+    "issued_date": "2026-08-19",
+    "inn": null
+  },
+  {
+    "id": 702,
+    "registration_number": "ЦС № 000711",
+    "last_name": "Жапашова",
+    "first_name": "Элмира",
+    "sur_name": "Назирбековна",
+    "profession": "Повар-кондитер 5 разряда",
+    "issued_date": "2026-08-20",
+    "inn": null
+  },
+  {
+    "id": 703,
+    "registration_number": "ЦС № 000712",
+    "last_name": "Жайсанова",
+    "first_name": "Фатима",
+    "sur_name": "Абдыбековна",
+    "profession": "Портной с умением кроить 3 разряда",
+    "issued_date": "2026-08-20",
+    "inn": null
+  },
+  {
+    "id": 704,
+    "registration_number": "ЦС № 000713",
+    "last_name": "Орунбекова",
+    "first_name": "Назгүл",
+    "sur_name": "Сонунбековна",
+    "profession": "Повар-кондитер 4 разряда",
+    "issued_date": "2026-08-24",
+    "inn": null
+  },
+  {
+    "id": 712,
+    "registration_number": "ЦС № 000714",
+    "last_name": "Тургуналиева",
+    "first_name": "Гулимкан",
+    "sur_name": "Турукбаевна",
+    "profession": "Санитар ветеринарный 4 разряда",
+    "issued_date": "2026-08-28",
+    "inn": null
+  },
+  {
+    "id": 713,
+    "registration_number": "ЦС № 000715",
+    "last_name": "Рыскелдиев",
+    "first_name": "Тилек",
+    "sur_name": "Рыскелдиевич",
+    "profession": "Электромонтер по ремонту и облс.электрооб/я 4 разряда",
+    "issued_date": "2026-09-05",
+    "inn": null
+  },
+  {
+    "id": 714,
+    "registration_number": "ЦС № 000716",
+    "last_name": "Шумихина",
+    "first_name": "Ольга",
+    "sur_name": "Анатольевна",
+    "profession": "Повар-кондитер 5 разряда",
+    "issued_date": "2026-09-07",
+    "inn": null
+  },
+  {
+    "id": 715,
+    "registration_number": "ЦС № 000717",
+    "last_name": "Акылжан",
+    "first_name": "Максат кызы",
+    "sur_name": "",
+    "profession": "Повар-кондитер 5 разряда",
+    "issued_date": "2026-09-07",
+    "inn": null
+  },
+  {
+    "id": 716,
+    "registration_number": "ЦС № 000718",
+    "last_name": "Бегайым",
+    "first_name": "Майрамбек кызы",
+    "sur_name": "",
+    "profession": "Повар 3 разряда",
+    "issued_date": "2026-09-08",
+    "inn": null
+  },
+  {
+    "id": 717,
+    "registration_number": "ЦС № 000719",
+    "last_name": "Канатбеков",
+    "first_name": "Тилек",
+    "sur_name": "Канатбекович",
+    "profession": "Слесарь-сантехник 3 разряда",
+    "issued_date": "2026-09-08",
+    "inn": null
+  },
+  {
+    "id": 718,
+    "registration_number": "ЦС № 000720",
+    "last_name": "Дөлөтбаев",
+    "first_name": "Данияр",
+    "sur_name": "Нурбекович",
+    "profession": "Слесарь-сантехник 4 разряда",
+    "issued_date": "2026-09-08",
+    "inn": null
+  },
+  {
+    "id": 719,
+    "registration_number": "ЦС № 000721",
+    "last_name": "Сооромбаев",
+    "first_name": "Рустам",
+    "sur_name": "",
+    "profession": "Системный администратор",
+    "issued_date": "2026-09-08",
+    "inn": null
+  },
+  {
+    "id": 720,
+    "registration_number": "ЦС № 000722",
+    "last_name": "Юсубалиев",
+    "first_name": "Рахманберди",
+    "sur_name": "Айтматович",
+    "profession": "Электросварщик ручной сварки 2 разряда",
+    "issued_date": "2026-09-10",
+    "inn": null
+  },
+  {
+    "id": 721,
+    "registration_number": "ЦС № 000723",
+    "last_name": "Погребняк",
+    "first_name": "Владимир",
+    "sur_name": "Олегович",
+    "profession": "Повар 5 разряда",
+    "issued_date": "2026-09-11",
+    "inn": null
+  },
+  {
+    "id": 722,
+    "registration_number": "ЦС № 000724",
+    "last_name": "Бакасов",
+    "first_name": "Азамат",
+    "sur_name": "Талайбекович",
+    "profession": "Повар 4 разряда",
+    "issued_date": "2026-09-11",
+    "inn": null
+  },
+  {
+    "id": 723,
+    "registration_number": "ЦС № 000725",
+    "last_name": "Кыдыков",
+    "first_name": "Тынчтыкалы",
+    "sur_name": "Кулубекович",
+    "profession": "Слесарь-сантехник 3 разряда",
+    "issued_date": "2026-09-11",
+    "inn": null
+  },
+  {
+    "id": 724,
+    "registration_number": "ЦС № 000726",
+    "last_name": "Усенканов",
+    "first_name": "Эрмек",
+    "sur_name": "Шарабидинович",
+    "profession": "Слесарь-сантехник 3 разряда",
+    "issued_date": "2026-09-14",
+    "inn": null
+  },
+  {
+    "id": 725,
+    "registration_number": "ЦС № 000727",
+    "last_name": "Жуманалиев",
+    "first_name": "Кубанычбек",
+    "sur_name": "",
+    "profession": "Электросварщик 3 разряда",
+    "issued_date": "2026-09-16",
+    "inn": null
+  },
+  {
+    "id": 726,
+    "registration_number": "ЦС № 000728",
+    "last_name": "Карабаева",
+    "first_name": "Жылдыз",
+    "sur_name": "Бактыбековна",
+    "profession": "Повар 4 разряда",
+    "issued_date": "2026-09-18",
+    "inn": null
+  },
+  {
+    "id": 727,
+    "registration_number": "ЦС № 000729",
+    "last_name": "Элзат",
+    "first_name": "Тынштык кызы",
+    "sur_name": "",
+    "profession": "Повар 4 разряда",
+    "issued_date": "2026-09-18",
+    "inn": null
+  },
+  {
+    "id": 728,
+    "registration_number": "ЦС № 000730",
+    "last_name": "Өскөнбек",
+    "first_name": "Нурдөөлөт уулу",
+    "sur_name": "",
+    "profession": "Швея 3 разряда",
+    "issued_date": "2026-09-18",
+    "inn": null
+  },
+  {
+    "id": 729,
+    "registration_number": "ЦС № 000731",
+    "last_name": "Каримова",
+    "first_name": "Назгүл",
+    "sur_name": "Кубанычбековна",
+    "profession": "Швея 3 разряда",
+    "issued_date": "2026-09-18",
+    "inn": null
+  },
+  {
+    "id": 730,
+    "registration_number": "ЦС № 000732",
+    "last_name": "Казбеков",
+    "first_name": "Бекболсун",
+    "sur_name": "Джаныбекович",
+    "profession": "Швея 3 разряда",
+    "issued_date": "2026-09-18",
+    "inn": null
+  },
+  {
+    "id": 731,
+    "registration_number": "ЦС № 000733",
+    "last_name": "Бакирова",
+    "first_name": "Айпери",
+    "sur_name": "Замирбековна",
+    "profession": "Швея 3 разряда",
+    "issued_date": "2026-09-18",
+    "inn": null
+  },
+  {
+    "id": 732,
+    "registration_number": "ЦС № 000734",
+    "last_name": "Муминжонова",
+    "first_name": "Нозима",
+    "sur_name": "Ганижон кызы",
+    "profession": "Швея 3 разряда",
+    "issued_date": "2026-09-18",
+    "inn": null
+  },
+  {
+    "id": 733,
+    "registration_number": "ЦС № 000735",
+    "last_name": "Токтомамбетов",
+    "first_name": "Нуржигит",
+    "sur_name": "Нурдөөлөтович",
+    "profession": "Швея 3 разряда",
+    "issued_date": "2026-09-18",
+    "inn": null
+  },
+  {
+    "id": 734,
+    "registration_number": "ЦС № 000736",
+    "last_name": "Манасов",
+    "first_name": "Кенжебек",
+    "sur_name": "",
+    "profession": "Швея 3 разряда",
+    "issued_date": "2026-09-18",
+    "inn": null
+  },
+  {
+    "id": 735,
+    "registration_number": "ЦС № 000737",
+    "last_name": "Гулзада",
+    "first_name": "Авазбек кызы",
+    "sur_name": "",
+    "profession": "Швея 3 разряда",
+    "issued_date": "2026-09-18",
+    "inn": null
+  },
+  {
+    "id": 736,
+    "registration_number": "ЦС № 000738",
+    "last_name": "Сүйүнбекова",
+    "first_name": "Нурмырза",
+    "sur_name": "Сүйүнбековна",
+    "profession": "Швея 3 разряда",
+    "issued_date": "2026-09-18",
+    "inn": null
+  },
+  {
+    "id": 737,
+    "registration_number": "ЦС № 000739",
+    "last_name": "Кубанычбеков",
+    "first_name": "Айбек",
+    "sur_name": "Кыялбекович",
+    "profession": "Швея 3 разряда",
+    "issued_date": "2026-09-18",
+    "inn": null
+  },
+  {
+    "id": 738,
+    "registration_number": "ЦС № 000740",
+    "last_name": "Айылчиев",
+    "first_name": "Тилегим",
+    "sur_name": "Кемелбекович",
+    "profession": "Швея 3 разряда",
+    "issued_date": "2026-09-18",
+    "inn": null
+  },
+  {
+    "id": 739,
+    "registration_number": "ЦС № 000741",
+    "last_name": "Адылова",
+    "first_name": "Азиза",
+    "sur_name": "Тимуровна",
+    "profession": "Швея 3 разряда",
+    "issued_date": "2026-09-18",
+    "inn": null
+  },
+  {
+    "id": 740,
+    "registration_number": "ЦС № 000742",
+    "last_name": "Алмагүл",
+    "first_name": "Кудайберген кызы",
+    "sur_name": "",
+    "profession": "Швея 3 разряда",
+    "issued_date": "2026-09-18",
+    "inn": null
+  },
+  {
+    "id": 741,
+    "registration_number": "ЦС № 000743",
+    "last_name": "Асакеева",
+    "first_name": "Сулайка",
+    "sur_name": "Кубандыковна",
+    "profession": "Швея 3 разряда",
+    "issued_date": "2026-09-18",
+    "inn": null
+  },
+  {
+    "id": 742,
+    "registration_number": "ЦС № 000744",
+    "last_name": "Эркинай",
+    "first_name": "Сагынбек кызы",
+    "sur_name": "",
+    "profession": "Швея 3 разряда",
+    "issued_date": "2026-09-18",
+    "inn": null
+  },
+  {
+    "id": 743,
+    "registration_number": "ЦС № 000745",
+    "last_name": "Эсенбек",
+    "first_name": "Самыйбек уулу",
+    "sur_name": "",
+    "profession": "Швея 3 разряда",
+    "issued_date": "2026-09-18",
+    "inn": null
+  },
+  {
+    "id": 744,
+    "registration_number": "ЦС № 000746",
+    "last_name": "Бактыгүл",
+    "first_name": "Олжобай кызы",
+    "sur_name": "",
+    "profession": "Швея 3 разряда",
+    "issued_date": "2026-09-18",
+    "inn": null
+  },
+  {
+    "id": 745,
+    "registration_number": "ЦС № 000747",
+    "last_name": "Жумабеков",
+    "first_name": "Жоомарт",
+    "sur_name": "Жумабекович",
+    "profession": "Швея 3 разряда",
+    "issued_date": "2026-09-18",
+    "inn": null
+  },
+  {
+    "id": 746,
+    "registration_number": "ЦС № 000748",
+    "last_name": "Сүйүнбекова",
+    "first_name": "Жаннат",
+    "sur_name": "Сүйүнбековна",
+    "profession": "Швея 3 разряда",
+    "issued_date": "2026-09-18",
+    "inn": null
+  },
+  {
+    "id": 747,
+    "registration_number": "ЦС № 000749",
+    "last_name": "Абдылдаева",
+    "first_name": "Нуржазы",
+    "sur_name": "Нурбековна",
+    "profession": "Швея 3 разряда",
+    "issued_date": "2026-09-18",
+    "inn": null
+  },
+  {
+    "id": 748,
+    "registration_number": "ЦС № 000750",
+    "last_name": "Агыбаева",
+    "first_name": "Перизат",
+    "sur_name": "",
+    "profession": "Швея 3 разряда",
+    "issued_date": "2026-09-18",
+    "inn": null
+  },
+  {
+    "id": 749,
+    "registration_number": "ЦС № 000751",
+    "last_name": "Апышова",
+    "first_name": "Мээржан",
+    "sur_name": "Асанбаевна",
+    "profession": "Швея 3 разряда",
+    "issued_date": "2026-09-18",
+    "inn": null
+  },
+  {
+    "id": 750,
+    "registration_number": "ЦС № 000752",
+    "last_name": "Жазгүл",
+    "first_name": "Курманбек кызы",
+    "sur_name": "",
+    "profession": "Швея 3 разряда",
+    "issued_date": "2026-09-18",
+    "inn": null
+  },
+  {
+    "id": 751,
+    "registration_number": "ЦС № 000753",
+    "last_name": "Миталипова",
+    "first_name": "Назбийке",
+    "sur_name": "Ыманбековна",
+    "profession": "Швея 3 разряда",
+    "issued_date": "2026-09-18",
+    "inn": null
+  },
+  {
+    "id": 752,
+    "registration_number": "ЦС № 000754",
+    "last_name": "Кызжибек",
+    "first_name": "Олмарсбек кызы",
+    "sur_name": "",
+    "profession": "Швея 3 разряда",
+    "issued_date": "2026-09-18",
+    "inn": null
+  },
+  {
+    "id": 753,
+    "registration_number": "ЦС № 000755",
+    "last_name": "Умарова",
+    "first_name": "Ферузе",
+    "sur_name": "Зафарбек кызы",
+    "profession": "Швея 3 разряда",
+    "issued_date": "2026-09-18",
+    "inn": null
+  },
+  {
+    "id": 754,
+    "registration_number": "ЦС № 000756",
+    "last_name": "Амазбаев",
+    "first_name": "Бакай",
+    "sur_name": "Саламатович",
+    "profession": "Мастер столярного и мебельного производства 3 разряда",
+    "issued_date": "2026-09-18",
+    "inn": null
+  },
+  {
+    "id": 755,
+    "registration_number": "ЦС № 000757",
+    "last_name": "Элдос",
+    "first_name": "Эрболот уулу",
+    "sur_name": "",
+    "profession": "Мастер столярного и мебельного производства 3 разряда",
+    "issued_date": "2026-09-18",
+    "inn": null
+  },
+  {
+    "id": 756,
+    "registration_number": "ЦС № 000758",
+    "last_name": "Осокеев",
+    "first_name": "Бектур",
+    "sur_name": "Бектенович",
+    "profession": "Мастер столярного и мебельного производства 3 разряда",
+    "issued_date": "2026-09-18",
+    "inn": null
+  },
+  {
+    "id": 757,
+    "registration_number": "ЦС № 000759",
+    "last_name": "Алтынбек",
+    "first_name": "Аскат уулу",
+    "sur_name": "",
+    "profession": "Мастер столярного и мебельного производства",
+    "issued_date": "2026-09-18",
+    "inn": null
+  },
+  {
+    "id": 758,
+    "registration_number": "ЦС № 000760",
+    "last_name": "Эмил",
+    "first_name": "Аскат",
+    "sur_name": "уулу",
+    "profession": "Мастер столярного и мебельного производства",
+    "issued_date": "2026-09-18",
+    "inn": ""
+  },
+  {
+    "id": 759,
+    "registration_number": "ЦС № 000761",
+    "last_name": "Джумабаев",
+    "first_name": "Мунарбек",
+    "sur_name": "Бактыбекович",
+    "profession": "Мастер столярного и мебельного производства",
+    "issued_date": "2026-09-18",
+    "inn": null
+  }
+]

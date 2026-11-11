@@ -13,6 +13,7 @@ from apps.certification.models import (
     CertificateVerification,
     AuditLog,
     CallbackRequest,
+    StaffProfile,
 )
 
 # ---------------------------------------------------------------------------
@@ -118,12 +119,13 @@ class CertificationApplicationAdmin(admin.ModelAdmin):
         'short_reg_number',
         'full_name',
         'profession',
+        'assigned_staff',
         'application_type',
         'status_badge',
         'phone_with_whatsapp',
         'created_at',
     ]
-    list_filter = ['application_type', 'status', 'created_at', 'submitted_at']
+    list_filter = ['application_type', 'status', 'assigned_staff', 'created_at', 'submitted_at']
     search_fields = ['full_name', 'profession', 'email', 'phone', 'whatsapp', 'inn', 'registration_number']
     readonly_fields = ['registration_number', 'created_at', 'updated_at', 'submitted_at', 'reviewed_at', 'deleted_at']
     inlines = [ApplicationDocumentInline, AssessmentInline]
@@ -152,8 +154,8 @@ class CertificationApplicationAdmin(admin.ModelAdmin):
         ('Опыт', {
             'fields': ('experience_years', 'experience_desc')
         }),
-        ('Оценщик', {
-            'fields': ('assessor_name',)
+        ('Оценщик и ответственность', {
+            'fields': ('assigned_staff', 'assessor_name', 'certificate_number_issued')
         }),
         ('Планирование оценки', {
             'fields': ('scheduled_date', 'scheduled_location', 'submitted_at', 'reviewed_at')
@@ -374,4 +376,40 @@ class CallbackRequestAdmin(admin.ModelAdmin):
         color, bg = CALLBACK_STATUS_COLORS.get(obj.status, ('#374151', '#f3f4f6'))
         return badge(obj.get_status_display(), color, bg)
     status_badge.short_description = 'Статус'
+
+
+@admin.register(StaffProfile)
+class StaffProfileAdmin(admin.ModelAdmin):
+    list_display = ('full_name', 'user', 'role', 'phone', 'professions_count', 'is_active', 'created_at')
+    list_filter = ('role', 'is_active')
+    search_fields = ('full_name', 'phone', 'user__username', 'user__email')
+    filter_horizontal = ('assigned_professions',)
+
+    def professions_count(self, obj):
+        count = obj.assigned_professions.count()
+        return format_html('<b>{}</b> профессий', count)
+    professions_count.short_description = "Закреплено профессий"
+
+
+from django.contrib.auth.models import User
+from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
+
+
+class StaffProfileInline(admin.StackedInline):
+    model = StaffProfile
+    can_delete = False
+    verbose_name = "Профиль сотрудника ЦНСВ"
+    verbose_name_plural = "Профиль сотрудника ЦНСВ"
+    filter_horizontal = ('assigned_professions',)
+    extra = 0
+
+
+admin.site.unregister(User)
+
+
+@admin.register(User)
+class CustomUserAdmin(BaseUserAdmin):
+    inlines = (StaffProfileInline,)
+
+
 

@@ -6,6 +6,7 @@ import StepDocuments from '../components/apply/StepDocuments';
 import StepPersonal from '../components/apply/StepPersonal';
 import StepProfession from '../components/apply/StepProfession';
 import { SEO } from '../components/ui';
+import { analyzeKyrgyzPin, CitizenshipCode } from '../utils/kyrgyzPinValidator';
 
 interface DocUpload {
 	file: File;
@@ -29,12 +30,16 @@ export default function Apply() {
 	const [form, setForm] = useState({
 		full_name: '',
 		birth_year: '',
+		citizenship: '' as CitizenshipCode,
 		inn: '',
 		phone: '',
 		whatsapp: '',
 		email: '',
 		address: '',
+		profession_id: undefined as number | undefined,
 		profession: '',
+		specialization_id: undefined as number | undefined,
+		specialization: '',
 		qualification_level: '',
 		application_type: 'certification',
 		data_consent: false,
@@ -54,8 +59,7 @@ export default function Apply() {
 		}
 	};
 
-	const handleDocAdd = (e: React.ChangeEvent<HTMLInputElement>, doc_type: string) => {
-		const file = e.target.files?.[0];
+	const handleDocAdd = (file: File, doc_type: string) => {
 		if (!file) return;
 		setDocuments((prev) => {
 			const filtered = prev.filter((d) => d.doc_type !== doc_type);
@@ -68,8 +72,41 @@ export default function Apply() {
 		if (!form.full_name.trim()) {
 			return { isValid: false, stepIndex: 0, error: 'Укажите ФИО кандидата (Шаг 1)' };
 		}
-		if (!form.inn || form.inn.length !== 14 || !/^\d+$/.test(form.inn)) {
-			return { isValid: false, stepIndex: 0, error: 'Укажите корректный 14-значный персональный номер (Шаг 1)' };
+		if (form.birth_year) {
+			const by = parseInt(form.birth_year, 10);
+			const currentYear = new Date().getFullYear();
+			if (isNaN(by) || by < 1935 || by > currentYear - 14) {
+				return {
+					isValid: false,
+					stepIndex: 0,
+					error: `Укажите реальный год рождения (от 1935 до ${currentYear - 14}) (Шаг 1)`,
+				};
+			}
+		}
+		if (!form.citizenship) {
+			return { isValid: false, stepIndex: 0, error: 'Выберите гражданство (Шаг 1)' };
+		}
+		if (!form.inn.trim()) {
+			return { isValid: false, stepIndex: 0, error: 'Укажите персональный номер (ПИН / ИНН) (Шаг 1)' };
+		}
+		const pinCheck = analyzeKyrgyzPin(form.inn, form.full_name, form.citizenship);
+		if (!pinCheck.isValid) {
+			return {
+				isValid: false,
+				stepIndex: 0,
+				error: 'Неправильный ПИН / ИНН (Шаг 1)',
+			};
+		}
+		if (
+			form.birth_year &&
+			pinCheck.birthYear &&
+			parseInt(form.birth_year, 10) !== pinCheck.birthYear
+		) {
+			return {
+				isValid: false,
+				stepIndex: 0,
+				error: `Указанный год рождения (${form.birth_year}) не совпадает с годом рождения в ПИН (${pinCheck.birthYear}) (Шаг 1)`,
+			};
 		}
 		if (!form.phone.trim()) {
 			return { isValid: false, stepIndex: 0, error: 'Укажите номер телефона для связи (Шаг 1)' };
@@ -81,6 +118,57 @@ export default function Apply() {
 			return { isValid: false, stepIndex: 3, error: 'Необходимо подтвердить согласие на обработку данных (Шаг 4)' };
 		}
 		return { isValid: true, stepIndex: 3, error: null };
+	};
+
+	const handleNext = () => {
+		setValidationError(null);
+		if (step === 0) {
+			if (!form.full_name.trim()) {
+				setValidationError('Укажите ФИО кандидата');
+				return;
+			}
+			if (form.birth_year) {
+				const by = parseInt(form.birth_year, 10);
+				const currentYear = new Date().getFullYear();
+				if (isNaN(by) || by < 1935 || by > currentYear - 14) {
+					setValidationError(`Укажите реальный год рождения (от 1935 до ${currentYear - 14})`);
+					return;
+				}
+			}
+			if (!form.citizenship) {
+				setValidationError('Выберите гражданство');
+				return;
+			}
+			if (!form.inn.trim()) {
+				setValidationError('Укажите персональный номер (ПИН / ИНН)');
+				return;
+			}
+			const pinCheck = analyzeKyrgyzPin(form.inn, form.full_name, form.citizenship);
+			if (!pinCheck.isValid) {
+				setValidationError('Неправильный ПИН / ИНН');
+				return;
+			}
+			if (
+				form.birth_year &&
+				pinCheck.birthYear &&
+				parseInt(form.birth_year, 10) !== pinCheck.birthYear
+			) {
+				setValidationError(
+					`Указанный год рождения (${form.birth_year}) не совпадает с годом рождения в ПИН (${pinCheck.birthYear})`
+				);
+				return;
+			}
+			if (!form.phone.trim()) {
+				setValidationError('Укажите номер телефона для связи');
+				return;
+			}
+		} else if (step === 1) {
+			if (!form.profession.trim()) {
+				setValidationError('Укажите вашу профессию');
+				return;
+			}
+		}
+		setStep((s) => s + 1);
 	};
 
 	const handleSubmit = async () => {
@@ -95,7 +183,11 @@ export default function Apply() {
 		setValidationError(null);
 		try {
 			const data = new FormData();
-			Object.entries(form).forEach(([key, val]) => data.append(key, String(val)));
+			Object.entries(form).forEach(([key, val]) => {
+				if (val !== undefined && val !== null && val !== '') {
+					data.append(key, String(val));
+				}
+			});
 
 			const docTypes: string[] = [];
 			documents.forEach((doc, i) => {
@@ -166,7 +258,10 @@ export default function Apply() {
 								rel='noopener noreferrer'
 								className='px-5 py-2.5 bg-green-600 text-white rounded-lg text-sm font-medium hover:bg-green-700 transition-colors flex items-center gap-2'
 							>
-								<span>💬 Сохранить в WhatsApp</span>
+								<svg className='w-4 h-4 fill-white flex-shrink-0' viewBox='0 0 24 24'>
+									<path d='M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.711 2.598 2.669-.699c.969.539 1.77.828 2.791.828 3.18 0 5.767-2.587 5.767-5.766.001-3.181-2.586-5.766-5.767-5.766zm3.385 8.163c-.144.405-.837.774-1.17.822-.312.043-.683.07-1.107-.069-.252-.083-.578-.204-1.002-.387-1.799-.778-2.96-2.6-3.05-2.72-.089-.12-.733-.976-.733-1.86 0-.885.464-1.32.629-1.5.165-.18.36-.225.48-.225.12 0 .24.002.345.007.111.005.26-.042.405.308.15.36.51 1.246.555 1.336.045.09.075.195.015.315-.06.12-.09.195-.18.3-.09.105-.189.234-.27.315-.09.09-.184.188-.079.368.105.18.468.772 1.004 1.25.688.614 1.27.804 1.45.894.18.09.285.075.39-.045.105-.12.45-.525.57-.705.12-.18.24-.15.405-.09.165.06 1.05.495 1.23.585.18.09.3.135.345.21.045.075.045.435-.099.84z' />
+								</svg>
+								<span>{t('Сохранить в WhatsApp')}</span>
 							</a>
 						)}
 						<a
@@ -188,7 +283,7 @@ export default function Apply() {
 	}
 
 	return (
-		<div className='min-h-screen bg-gradient-to-br from-slate-50 to-blue-50 py-12 px-4'>
+		<div className='min-h-screen bg-gradient-to-br from-slate-50 to-blue-50 pt-28 pb-12 px-4'>
 			<SEO
 				title={`${t('Подача заявки')} — ${t('ЦНСВ при МП КР')}`}
 				description={t(
@@ -244,7 +339,9 @@ export default function Apply() {
 				{validationError && (
 					<div className='mb-6 p-4 bg-red-50 border border-red-200 rounded-xl text-sm text-red-700 flex items-center justify-between animate-shake'>
 						<div className='flex items-center gap-2'>
-							<span className='text-red-500 font-bold'>⚠️</span>
+							<svg className='w-4 h-4 text-red-500 flex-shrink-0' fill='none' viewBox='0 0 24 24' stroke='currentColor'>
+								<path strokeLinecap='round' strokeLinejoin='round' strokeWidth={2} d='M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z' />
+							</svg>
 							<span>{t(validationError)}</span>
 						</div>
 						<button
@@ -264,9 +361,35 @@ export default function Apply() {
 							form={form}
 							onChange={handleChange}
 							onInnChange={(val) => setForm((prev) => ({ ...prev, inn: val }))}
+							onCitizenshipChange={(cit) => {
+								setValidationError(null);
+								setForm((prev) => ({ ...prev, citizenship: cit }));
+							}}
 						/>
 					)}
-					{step === 1 && <StepProfession form={form} onChange={handleChange} />}
+					{step === 1 && (
+						<StepProfession
+							form={form}
+							onChange={handleChange}
+							onSelectProfession={(prof) =>
+								setForm((prev) => ({
+									...prev,
+									profession_id: prof.id,
+									profession: prof.name_ru,
+									qualification_level: prof.qual_level_min ? String(prof.qual_level_min) : prev.qualification_level,
+									specialization_id: undefined,
+									specialization: '',
+								}))
+							}
+							onSelectSpecialization={(spec, customText) =>
+								setForm((prev) => ({
+									...prev,
+									specialization_id: spec ? spec.id : undefined,
+									specialization: spec ? spec.title_ru : (customText || ''),
+								}))
+							}
+						/>
+					)}
 					{step === 2 && <StepDocuments documents={documents} onDocAdd={handleDocAdd} />}
 					{step === 3 && (
 						<StepConfirm
@@ -291,11 +414,9 @@ export default function Apply() {
 						</button>
 						{step < STEPS.length - 1 ? (
 							<button
-								onClick={() => {
-									setValidationError(null);
-									setStep((s) => s + 1);
-								}}
-								className='px-6 py-2.5 rounded-lg text-sm font-semibold text-white bg-blue-600 hover:bg-blue-700 transition-colors'
+								type='button'
+								onClick={handleNext}
+								className='px-6 py-2.5 rounded-lg text-sm font-semibold text-white bg-blue-600 hover:bg-blue-700 transition-colors cursor-pointer shadow-sm'
 							>
 								{t('Далее →')}
 							</button>

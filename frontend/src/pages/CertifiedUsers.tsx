@@ -378,7 +378,11 @@ export default function CertifiedUsers() {
 					/* Empty state — different message when searching vs no data at all */
 					search ? (
 						<div className='text-center py-20'>
-							<div className='text-5xl mb-4'>🔍</div>
+							<div className='w-16 h-16 rounded-full bg-slate-100 flex items-center justify-center mx-auto mb-4 text-slate-400'>
+								<svg className='w-8 h-8' fill='none' viewBox='0 0 24 24' stroke='currentColor'>
+									<path strokeLinecap='round' strokeLinejoin='round' strokeWidth={1.8} d='M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z' />
+								</svg>
+							</div>
 							<h3 className='text-xl font-bold text-gray-800 mb-2'>{t('Ничего не найдено')}</h3>
 							<p className='text-gray-500'>{t('Попробуйте изменить поисковый запрос.')}</p>
 						</div>

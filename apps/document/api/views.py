@@ -1,4 +1,6 @@
-from rest_framework import generics, filters
+from rest_framework import generics, filters, status
+from rest_framework.views import APIView
+from rest_framework.response import Response
 from rest_framework.pagination import PageNumberPagination
 from django.db.models import Q
 from apps.document.models import (
@@ -73,7 +75,80 @@ class CertifiedUserListView(generics.ListAPIView):
             queryset = queryset.filter(q_filter)
         return queryset
 
-class CertifiedUserVerifyView(generics.RetrieveAPIView):
-    queryset = CertifiedUser.objects.all()
-    serializer_class = CertifiedUserSerializer
-    lookup_field = 'registration_number'
+class CertifiedUserVerifyView(APIView):
+    """
+    Проверка подлинности сертификата:
+    1. По прямому GET-запросу из QR-кода: /verify/<registration_number>/ или ?token=...
+    2. По публичному поиску: /verify/?reg=...&inn=...
+    """
+    def get(self, request, registration_number=None, *args, **kwargs):
+        reg = (registration_number or request.query_params.get('reg', '')).strip()
+        inn = request.query_params.get('inn', '').strip()
+        token = request.query_params.get('token', '').strip()
+
+        if not reg:
+            return Response(
+                {'detail': 'Укажите номер документа о признании квалификации.'},
+                status=status.HTTP_400_BAD_REQUEST
+            )
+
+        # Normalize search: allow '000026', 'ЦС № 000026', 'ЦС-000026'
+        digits_only = ''.join(c for c in reg if c.isdigit())
+        
+        # Exact match or number match
+        q_reg = Q(registration_number__iexact=reg)
+        if digits_only:
+            q_reg |= Q(registration_number__icontains=digits_only)
+
+        user = CertifiedUser.objects.filter(q_reg).first()
+
+        if not user:
+            return Response(
+                {'detail': 'Документ с указанным номером не найден в официальном реестре.'},
+                status=status.HTTP_404_NOT_FOUND
+            )
+
+        # Прямой переход по ссылке / QR-сканирование:
+        # 1) token совпадает
+        # 2) номер передан в URL пути
+        # 3) параметр direct=1 (прямой просмотр из QR / реестра)
+        # 4) у записи в реестре нет ИНН (архивные документы 2024-2025)
+        is_direct = bool(
+            (token and user.verification_token and str(user.verification_token).lower() == token.lower()) or
+            (registration_number and not inn) or
+            request.query_params.get('direct') == '1' or
+            not user.inn
+        )
+
+        clean_inn = ''.join(c for c in inn if c.isdigit())
+
+        # Если ИНН указан в форме поиска — сверяем
+        if clean_inn:
+            if user.inn:
+                user_clean_inn = ''.join(c for c in user.inn if c.isdigit())
+                if user_clean_inn != clean_inn:
+                    return Response(
+                        {'detail': 'Документ с указанным номером и ИНН не найден в официальном реестре.'},
+                        status=status.HTTP_404_NOT_FOUND
+                    )
+        elif not is_direct and user.inn:
+            # Требуем ИНН только для ручного поиска новых документов, где в базе внесен ИНН
+            return Response(
+                {'detail': 'Для подтверждения документа укажите 14-значный ИНН/ПИН владельца.'},
+                status=status.HTTP_400_BAD_REQUEST
+            )
+
+        serializer = CertifiedUserSerializer(user, context={'request': request})
+        data = dict(serializer.data)
+
+        # Отображение ИНН
+        target_inn = ''.join(c for c in (user.inn or inn) if c.isdigit())
+        if len(target_inn) == 14:
+            data['inn'] = target_inn
+            data['inn_masked'] = f"{target_inn[:3]}••••••••{target_inn[-3:]}"
+        else:
+            data['inn'] = user.inn
+            data['inn_masked'] = None
+
+        data['is_qr_scan'] = is_direct
+        return Response(data)

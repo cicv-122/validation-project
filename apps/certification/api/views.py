@@ -5,16 +5,63 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 from django.core.mail import send_mail
 from django.conf import settings
+from django.db.models import Q
 
 logger = logging.getLogger(__name__)
 
-from apps.certification.models import CertificationApplication, ApplicationDocument, CallbackRequest
+from apps.certification.models import (
+    CertificationApplication,
+    ApplicationDocument,
+    CallbackRequest,
+    Profession,
+)
 from apps.certification.api.serializers import (
     CertificationApplicationSerializer,
     ApplicationDocumentSerializer,
     ApplicationStatusSerializer,
     CallbackRequestSerializer,
+    ProfessionSerializer,
 )
+
+
+class ProfessionListView(APIView):
+    """
+    GET /api/v1/certification/professions/?q=&lang=ru&active=true
+    Выбор профессий из справочника ПКМ КР № 252 с поиском и специализациями.
+    """
+    permission_classes = [permissions.AllowAny]
+    authentication_classes = []
+
+    def get(self, request, *args, **kwargs):
+        q = request.query_params.get('q', '').strip()
+        lang = request.query_params.get('lang', 'ru').lower()
+        active = request.query_params.get('active', 'true').lower() == 'true'
+
+        qs = Profession.objects.prefetch_related('specializations').all()
+        if active:
+            qs = qs.filter(is_active=True)
+
+        if q:
+            # Note: SQLite LIKE is case-sensitive for non-ASCII characters; query both lower, title and upper variants
+            q_lower = q.lower()
+            q_title = q.title()
+            q_upper = q.upper()
+
+            qs = qs.filter(
+                Q(name_ru__icontains=q_lower) | Q(name_ru__icontains=q_title) | Q(name_ru__icontains=q_upper) |
+                Q(name_ky__icontains=q_lower) | Q(name_ky__icontains=q_title) | Q(name_ky__icontains=q_upper) |
+                Q(okz_code__icontains=q) |
+                Q(section__icontains=q_lower) | Q(section__icontains=q_title)
+            )
+
+        # Ordering
+        if lang == 'ky':
+            qs = qs.order_by('name_ky', 'name_ru')
+        else:
+            qs = qs.order_by('name_ru')
+
+        serializer = ProfessionSerializer(qs, many=True)
+        return Response(serializer.data)
 
 
 class ApplicationCreateView(generics.CreateAPIView):
@@ -31,7 +78,7 @@ class ApplicationCreateView(generics.CreateAPIView):
     def create(self, request, *args, **kwargs):
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
-        application = serializer.save()
+        application = serializer.save(status='submitted', submitted_at=timezone.now())
 
         # Handle document uploads (multipart)
         doc_files = request.FILES
@@ -46,6 +93,21 @@ class ApplicationCreateView(generics.CreateAPIView):
                     file=doc_files[file_key],
                     description=request.data.get(f'doc_desc_{i}', ''),
                 )
+
+        # Автоматическое распределение ответственному сотруднику по профессии
+        assigned = application.auto_assign_staff()
+        try:
+            from services.telegram import notify_staff_new_application
+            if assigned and assigned.telegram_chat_id:
+                notify_staff_new_application(application, assigned)
+            else:
+                # Если конкретный сотрудник еще не закреплен за профессией в админке,
+                # отправляем заявку активным сотрудникам с подключенным Telegram
+                connected_staff = StaffProfile.objects.filter(is_active=True).exclude(telegram_chat_id__isnull=True).exclude(telegram_chat_id='')
+                for st in connected_staff:
+                    notify_staff_new_application(application, st)
+        except Exception as tg_err:
+            logger.error('Failed to send Telegram notification to staff: %s', tg_err)
 
         headers = self.get_success_headers(serializer.data)
         return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)

@@ -4,7 +4,7 @@ import { Link, useParams } from 'react-router-dom';
 import Lightbox from 'yet-another-react-lightbox';
 import 'yet-another-react-lightbox/styles.css';
 import CertifiedUserModal from '../components/CertifiedUserModal';
-import { ErrorMessage, SEO } from '../components/ui';
+import { CustomVideoPlayer, ErrorMessage, SEO } from '../components/ui';
 import { useNewsItem } from '../hooks/useApi';
 import { CertifiedUser } from '../types';
 import { newsStore } from '../utils/newsStore';
@@ -164,14 +164,11 @@ export default function NewsDetail() {
 							/>
 						</div>
 					) : news.videos && news.videos.length > 0 ? (
-						<div className='rounded-2xl overflow-hidden shadow-lg mb-10 bg-black aspect-video max-h-[600px] flex items-center justify-center'>
-							<video
-								controls
-								className='w-full h-full max-h-[600px] object-contain'
-								src={news.videos[0].file}
-								preload='metadata'
-							/>
-						</div>
+						<CustomVideoPlayer
+							src={news.videos[0].file}
+							containerClassName='rounded-2xl shadow-lg mb-10 aspect-video max-h-[600px] flex items-center justify-center'
+							className='w-full h-full max-h-[600px] object-contain'
+						/>
 					) : null}
 				</header>
 
@@ -210,17 +207,12 @@ export default function NewsDetail() {
 						</h3>
 						<div className='grid grid-cols-1 md:grid-cols-2 gap-6'>
 							{bottomVideos.map((vid) => (
-								<div
+								<CustomVideoPlayer
 									key={vid.id}
-									className='rounded-xl overflow-hidden shadow border border-gray-100 bg-black aspect-w-16 aspect-h-9'
-								>
-									<video
-										controls
-										className='w-full h-full object-cover'
-										src={vid.file}
-										preload='metadata'
-									/>
-								</div>
+									src={vid.file}
+									containerClassName='rounded-xl shadow border border-gray-100 aspect-video w-full'
+									className='w-full h-full object-cover'
+								/>
 							))}
 						</div>
 					</div>

@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Регламентные работы — Центр независимой сертификации и валидации</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background-color: #f1f5f9;
+            color: #1e293b;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 24px 16px;
+        }
+        .card {
+            background: #ffffff;
+            border-radius: 24px;
+            box-shadow: 0 20px 40px -15px rgba(15, 23, 42, 0.12);
+            border: 1px solid #e2e8f0;
+            max-width: 620px;
+            width: 100%;
+            overflow: hidden;
+            text-align: center;
+        }
+        .header {
+            background: linear-gradient(135deg, #172052 0%, #283375 100%);
+            color: #ffffff;
+            padding: 36px 24px 28px;
+            border-bottom: 4px solid #f59e0b;
+        }
+        .ministry {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #fde68a;
+            font-weight: 800;
+            margin-bottom: 8px;
+        }
+        .title {
+            font-size: 20px;
+            font-weight: 900;
+            line-height: 1.3;
+        }
+        .body {
+            padding: 36px 32px;
+        }
+        .icon-badge {
+            width: 64px;
+            height: 64px;
+            border-radius: 20px;
+            background: #eff6ff;
+            color: #283375;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+            border: 1px solid #bfdbfe;
+        }
+        .body h2 {
+            font-size: 22px;
+            font-weight: 800;
+            color: #0f172a;
+            margin-bottom: 12px;
+        }
+        .body p {
+            font-size: 14px;
+            line-height: 1.6;
+            color: #64748b;
+            margin-bottom: 24px;
+        }
+        .info-box {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 16px;
+            padding: 16px 20px;
+            margin-bottom: 28px;
+            text-align: left;
+            font-size: 13px;
+            color: #475569;
+        }
+        .info-box strong {
+            color: #1e293b;
+        }
+        .actions {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        .btn-primary {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 24px;
+            background: #283375;
+            color: #ffffff;
+            border-radius: 12px;
+            font-weight: 700;
+            font-size: 13px;
+            text-decoration: none;
+            transition: all 0.2s;
+            cursor: pointer;
+            border: none;
+        }
+        .btn-primary:hover {
+            background: #1e2759;
+        }
+        .btn-secondary {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 20px;
+            background: #f1f5f9;
+            color: #334155;
+            border-radius: 12px;
+            font-weight: 700;
+            font-size: 13px;
+            text-decoration: none;
+            border: 1px solid #cbd5e1;
+            transition: all 0.2s;
+        }
+        .btn-secondary:hover {
+            background: #e2e8f0;
+        }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <div class="header">
+            <div class="ministry">Министерство просвещения Кыргызской Республики (МП КР)</div>
+            <div class="title">Центр независимой сертификации и валидации</div>
+        </div>
+        <div class="body">
+            <div class="icon-badge">
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <line x1="12" y1="8" x2="12" y2="12"></line>
+                    <line x1="12" y1="16" x2="12.01" y2="16"></line>
+                </svg>
+            </div>
+            <h2>Плановые регламентные работы</h2>
+            <p>
+                В настоящий момент на серверах единого реестра сертификатов квалификации проводятся технические регламентные работы по обновлению системы. Доступ будет восстановлен в ближайшие минуты.
+            </p>
+            <div class="info-box">
+                <div><strong>Приёмная ЦНСВ МП КР:</strong> +996 312 59 14 01</div>
+                <div style="margin-top: 6px;"><strong>Адрес:</strong> г. Бишкек, ул. Байтик баатыра, 122</div>
+            </div>
+            <div class="actions">
+                <button onclick="window.location.reload();" class="btn-primary">
+                    Обновить страницу
+                </button>
+                <a href="/" class="btn-secondary">
+                    На главную
+                </a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

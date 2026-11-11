@@ -14,9 +14,19 @@ env.read_env('.env')
 
 SECRET_KEY = os.environ.get('SECRET_KEY')
 
-DEBUG = eval(os.environ.get('DEBUG'))
+DEBUG = os.environ.get('DEBUG', 'False').lower() in ('true', '1', 't', 'yes')
 
-ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS').split(' ')
+_allowed_hosts_env = os.environ.get('ALLOWED_HOSTS', '')
+ALLOWED_HOSTS = list(set([
+    'validation.kg',
+    'www.validation.kg',
+    '195.38.165.127',
+    'localhost',
+    '127.0.0.1',
+    '0.0.0.0',
+    'backend',
+    '*',
+] + [h for h in _allowed_hosts_env.split(' ') if h]))
 
 SITE_ID = 1
 
@@ -58,6 +68,7 @@ INSTALLED_APPS = [
 
     # API
     'rest_framework',
+    'rest_framework.authtoken',
     'corsheaders',
 ]
 
@@ -135,6 +146,12 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+# Case-insensitive authentication for Django Admin and Staff
+AUTHENTICATION_BACKENDS = [
+    'apps.core.auth_backend.CaseInsensitiveModelBackend',
+    'django.contrib.auth.backends.ModelBackend',
+]
+
 # Internationalization
 # https://docs.djangoproject.com/en/4.2/topics/i18n/
 
@@ -188,6 +205,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 CSRF_COOKIE_SECURE = not DEBUG
 SESSION_COOKIE_SECURE = not DEBUG
+SECURE_REFERRER_POLICY = 'strict-origin-when-cross-origin'
 
 # Send Mail
 EMAIL_USE_TLS = True

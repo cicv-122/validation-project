@@ -12,5 +12,6 @@ urlpatterns = [
     path('assessment-centers/<int:pk>/', AssessmentCenterDetailView.as_view(), name='api-assessment-centers-detail'),
     path('experts/', AppraisersExpertListView.as_view(), name='api-experts'),
     path('certified-users/', CertifiedUserListView.as_view(), name='api-certified-users'),
+    path('certified-users/verify/', CertifiedUserVerifyView.as_view(), name='api-certified-user-verify-query'),
     path('certified-users/verify/<str:registration_number>/', CertifiedUserVerifyView.as_view(), name='api-certified-user-verify'),
 ]

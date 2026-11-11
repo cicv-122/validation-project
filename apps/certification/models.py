@@ -1,3 +1,5 @@
+import os
+import io
 import uuid
 from django.db import models
 from django.utils.translation import gettext_lazy as _
@@ -25,28 +27,88 @@ def certificate_qr_upload(instance, filename):
 # ---------------------------------------------------------------------------
 
 class Profession(models.Model):
-    """Профессия / специальность"""
+    """Профессия согласно Постановлению КМ КР № 252 (2023)"""
 
-    name_ru = models.CharField(max_length=255, verbose_name=_('Название (рус)'))
-    name_ky = models.CharField(max_length=255, blank=True, verbose_name=_('Название (кыр)'))
+    okz_code = models.CharField(
+        max_length=50,
+        blank=True,
+        default='',
+        verbose_name=_('Код по ОКЗ КР'),
+        help_text=_('Например: 7512, 7212'),
+        db_index=True,
+    )
+    name_ru = models.CharField(max_length=255, verbose_name=_('Название (рус)'), db_index=True)
+    name_ky = models.CharField(max_length=255, blank=True, verbose_name=_('Название (кыр)'), db_index=True)
+    section = models.CharField(
+        max_length=255,
+        blank=True,
+        default='',
+        verbose_name=_('Раздел Перечня (I–XVIII)'),
+        help_text=_('Отрасль/раздел Перечня № 252'),
+    )
+    qual_level_min = models.PositiveSmallIntegerField(
+        null=True, blank=True, default=2,
+        verbose_name=_('Мин. уровень квалификации'),
+    )
+    qual_level_max = models.PositiveSmallIntegerField(
+        null=True, blank=True, default=4,
+        verbose_name=_('Макс. уровень квалификации'),
+    )
     code = models.CharField(
-        max_length=50, unique=True,
-        verbose_name=_('Код профессии'),
-        help_text=_('Например: COOK-001'),
+        max_length=50, blank=True, default='',
+        verbose_name=_('Внутренний код профессии'),
+        help_text=_('Например: 7512-001'),
     )
     description = models.TextField(blank=True, verbose_name=_('Описание'))
     category = models.CharField(max_length=100, blank=True, verbose_name=_('Категория'))
-    is_active = models.BooleanField(default=True, verbose_name=_('Активна'))
+    is_active = models.BooleanField(
+        default=True,
+        verbose_name=_('Активна (аккредитована ЦНСВ)'),
+        db_index=True,
+    )
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
     class Meta:
-        ordering = ('name_ru',)
-        verbose_name = _('Профессия')
-        verbose_name_plural = _('Профессии')
+        ordering = ('okz_code', 'name_ru')
+        verbose_name = _('Профессия (ПКМ № 252)')
+        verbose_name_plural = _('Профессии (ПКМ № 252)')
 
     def __str__(self):
-        return f'{self.name_ru} ({self.code})'
+        code_str = f' [{self.okz_code}]' if self.okz_code else ''
+        return f'{self.name_ru}{code_str}'
+
+    def save(self, *args, **kwargs):
+        if self.name_ru:
+            from apps.document.profession_cleaner import clean_profession_name
+            self.name_ru = clean_profession_name(self.name_ru)
+        if self.name_ky:
+            import re
+            self.name_ky = re.sub(r'\s+', ' ', re.sub(r'\s*-\s*', '-', self.name_ky)).strip()
+        super().save(*args, **kwargs)
+
+
+class Specialization(models.Model):
+    """Специализация внутри базовой профессии (не меняет официальное название квалификации)"""
+
+    profession = models.ForeignKey(
+        Profession,
+        on_delete=models.CASCADE,
+        related_name='specializations',
+        verbose_name=_('Базовая профессия'),
+    )
+    title_ru = models.CharField(max_length=255, verbose_name=_('Специализация (рус)'))
+    title_ky = models.CharField(max_length=255, blank=True, default='', verbose_name=_('Специализация (кыр)'))
+    is_active = models.BooleanField(default=True, verbose_name=_('Активна'))
+    order = models.PositiveSmallIntegerField(default=0, verbose_name=_('Порядок сортировки'))
+
+    class Meta:
+        ordering = ('profession', 'order', 'title_ru')
+        verbose_name = _('Специализация')
+        verbose_name_plural = _('Специализации')
+
+    def __str__(self):
+        return f'{self.profession.name_ru} — {self.title_ru}'
 
 
 class QualificationLevel(models.Model):
@@ -123,15 +185,49 @@ class CertificationApplication(models.Model):
         verbose_name=_('Профессия (справочник)'),
     )
     profession = models.CharField(max_length=255, verbose_name=_('Профессия'))
+    specialization_ref = models.ForeignKey(
+        Specialization,
+        null=True, blank=True,
+        on_delete=models.SET_NULL,
+        related_name='applications',
+        verbose_name=_('Специализация (справочник)'),
+    )
+    specialization = models.CharField(
+        max_length=255,
+        blank=True,
+        default='',
+        verbose_name=_('Специализация'),
+        help_text=_('Не влияет на официальное название квалификации'),
+    )
     qualification_level = models.CharField(
         max_length=100, blank=True,
         verbose_name=_('Квалификационный уровень'),
+    )
+    structured_resume = models.JSONField(
+        null=True, blank=True, default=dict,
+        verbose_name=_('Структурированное резюме'),
+        help_text=_('Опыт работы, образование, сертификаты, самооценка навыков'),
     )
 
     # Назначенный оценщик
     assessor_name = models.CharField(
         max_length=255, blank=True,
         verbose_name=_('Оценщик'),
+    )
+    assigned_staff = models.ForeignKey(
+        'StaffProfile',
+        null=True, blank=True,
+        on_delete=models.SET_NULL,
+        related_name='assigned_applications',
+        verbose_name=_('Ответственный сотрудник'),
+        help_text=_('Сотрудник Центра, ведущий данное дело по закреплённой профессии'),
+    )
+    certificate_number_issued = models.CharField(
+        max_length=50,
+        blank=True,
+        default='',
+        verbose_name=_('Номер выданного сертификата ЦС'),
+        help_text=_('Официальный номер бланка ЦС № XXXXXX'),
     )
 
     # Данные кандидата
@@ -169,11 +265,23 @@ class CertificationApplication(models.Model):
         verbose_name=_('Согласие на обработку данных'),
     )
 
+    ORIGIN_CHOICES = [
+        ('online', _('Электронная приёмная (онлайн)')),
+        ('registry_archive', _('Архив реестра (выданные сертификаты)')),
+    ]
+    origin = models.CharField(
+        max_length=30,
+        choices=ORIGIN_CHOICES,
+        default='online',
+        verbose_name=_('Источник дела'),
+        db_index=True,
+    )
+
     # Статус
     status = models.CharField(
         max_length=30,
         choices=STATUS_CHOICES,
-        default='draft',
+        default='submitted',
         verbose_name=_('Статус'),
         db_index=True,
     )
@@ -205,6 +313,15 @@ class CertificationApplication(models.Model):
     def __str__(self):
         return f'{self.full_name} — {self.profession} ({self.get_status_display()})'
 
+    def save(self, *args, **kwargs):
+        if self.full_name:
+            from apps.document.kyrgyz_name_normalizer import normalize_kyrgyz_full_name
+            self.full_name = normalize_kyrgyz_full_name(self.full_name)
+        if self.profession:
+            from apps.document.profession_cleaner import clean_profession_name
+            self.profession = clean_profession_name(self.profession)
+        super().save(*args, **kwargs)
+
     @property
     def short_registration_number(self):
         return str(self.registration_number).upper()[:8]
@@ -223,6 +340,29 @@ class CertificationApplication(models.Model):
         self.status = 'submitted'
         self.submitted_at = timezone.now()
         self.save(update_fields=['status', 'submitted_at'])
+        self.auto_assign_staff()
+
+    def auto_assign_staff(self):
+        """
+        Автоматически находит и прикрепляет ответственного сотрудника ЦНСВ
+        по закреплённой за ним профессии.
+        """
+        if self.assigned_staff_id:
+            return self.assigned_staff
+
+        prof = self.profession_ref
+        if not prof and self.profession:
+            prof = Profession.objects.filter(name_ru__iexact=self.profession.strip()).first()
+            if not prof:
+                prof = Profession.objects.filter(name_ky__iexact=self.profession.strip()).first()
+
+        if prof:
+            staff = StaffProfile.objects.filter(is_active=True, assigned_professions=prof).first()
+            if staff:
+                self.assigned_staff = staff
+                self.save(update_fields=['assigned_staff'])
+                return staff
+        return None
 
 
 # ---------------------------------------------------------------------------
@@ -233,16 +373,31 @@ class ApplicationDocument(models.Model):
     """Документы портфолио, прикреплённые к заявке"""
 
     DOC_TYPE_CHOICES = [
+        # Личные документы кандидата
+        ('application_form',   _('Заявление кандидата')),
+        ('passport',           _('Паспорт (ID-карта)')),
+        ('contract',           _('Договор на сертификацию / валидацию')),
+        ('payment_receipt',    _('Квитанция об оплате')),
+        ('photo',              _('Цифровое фото 3×4')),
+        ('resume',             _('Резюме / Трудовая книжка')),
+        ('diploma',            _('Диплом / Документы об образовании')),
+        ('portfolio',          _('Портфолио кандидата')),
+
+        # Процедура оценки и экзамен
+        ('evaluation_sheet',   _('Оценочный лист')),
+        ('exam_task',          _('Техническое задание / Экзаменационный билет')),
+        ('exam_protocol',      _('Протокол квалификационной комиссии')),
+        ('assessment_photo',   _('Фотофиксация квалификационного экзамена')),
+
+        # Итоговые документы
+        ('certificate_scan',   _('Скан выданного сертификата ЦС')),
+
+        # Совместимость
         ('id_card',            _('Удостоверение личности')),
-        ('resume',             _('Резюме')),
-        ('passport',           _('Паспорт (копия)')),
-        ('photo',              _('Фото 3.5×4.5')),
-        ('diploma',            _('Диплом / Сертификат / Свидетельство')),
         ('work_experience',    _('Трудовая книжка / Справка об опыте')),
         ('course_certificate', _('Сертификат о курсах')),
         ('work_sample',        _('Образец работы / Фото / Видео')),
-        ('portfolio',          _('Портфолио')),
-        ('other',              _('Другое')),
+        ('other',              _('Прочие документы')),
     ]
 
     application = models.ForeignKey(
@@ -252,7 +407,7 @@ class ApplicationDocument(models.Model):
         verbose_name=_('Заявка'),
     )
     doc_type = models.CharField(
-        max_length=25,
+        max_length=50,
         choices=DOC_TYPE_CHOICES,
         verbose_name=_('Тип документа'),
     )
@@ -275,6 +430,36 @@ class ApplicationDocument(models.Model):
     def save(self, *args, **kwargs):
         if self.file and not self.file_name:
             self.file_name = self.file.name.split('/')[-1]
+
+        # Автоматическая оптимизация фотографий при загрузке:
+        # Уменьшает фото с телефонов (10-15 МБ) до ~200-300 КБ с разрешением 1600px,
+        # чтобы даже десятки загруженных фото не перегружали сайт и память сервера.
+        if self.file and hasattr(self.file, 'file'):
+            ext = os.path.splitext(self.file.name)[1].lower()
+            if ext in ['.jpg', '.jpeg', '.png', '.webp']:
+                try:
+                    from PIL import Image, ImageOps
+                    from django.core.files.base import ContentFile
+
+                    img = Image.open(self.file)
+                    img = ImageOps.exif_transpose(img)
+
+                    if img.mode in ('RGBA', 'P'):
+                        img = img.convert('RGB')
+
+                    max_size = (1600, 1600)
+                    if img.width > max_size[0] or img.height > max_size[1]:
+                        img.thumbnail(max_size, Image.Resampling.LANCZOS)
+
+                    output = io.BytesIO()
+                    img.save(output, format='JPEG', quality=82, optimize=True)
+                    output.seek(0)
+
+                    new_name = os.path.splitext(os.path.basename(self.file.name))[0] + '.jpg'
+                    self.file.save(new_name, ContentFile(output.getvalue()), save=False)
+                except Exception:
+                    pass
+
         if self.file and not self.file_size:
             try:
                 self.file_size = self.file.size
@@ -549,3 +734,60 @@ class CallbackRequest(models.Model):
 
     def __str__(self):
         return f'{self.name} ({self.phone}) — {self.get_status_display()}'
+
+
+# ---------------------------------------------------------------------------
+# Кабинет сотрудника ЦНСВ (Staff Profile)
+# ---------------------------------------------------------------------------
+
+class StaffProfile(models.Model):
+    """
+    Профиль сотрудника ЦНСВ (координатора / ответственного за профессии).
+    Сотрудник имеет доступ к кабинету на сайте (/staff) и обрабатывает
+    заявки по закреплённым за ним профессиям.
+    """
+
+    ROLE_CHOICES = [
+        ('officer',        _('Сотрудник / Координатор')),
+        ('senior_officer', _('Старший специалист')),
+        ('supervisor',     _('Руководитель направления')),
+    ]
+
+    user = models.OneToOneField(
+        'auth.User',
+        on_delete=models.CASCADE,
+        related_name='staff_profile',
+        verbose_name=_('Пользователь'),
+    )
+    full_name = models.CharField(max_length=255, verbose_name=_('ФИО сотрудника'))
+    phone = models.CharField(max_length=50, blank=True, default='', verbose_name=_('Рабочий телефон'))
+    role = models.CharField(max_length=30, choices=ROLE_CHOICES, default='officer', verbose_name=_('Роль'))
+    assigned_professions = models.ManyToManyField(
+        Profession,
+        blank=True,
+        related_name='assigned_staff_members',
+        verbose_name=_('Закреплённые профессии'),
+        help_text=_('Профессии, заявки по которым автоматически направляются данному сотруднику'),
+    )
+    is_active = models.BooleanField(default=True, verbose_name=_('Активен'))
+    telegram_chat_id = models.CharField(max_length=50, blank=True, null=True, verbose_name=_('Telegram Chat ID'))
+    telegram_username = models.CharField(max_length=100, blank=True, null=True, verbose_name=_('Telegram Username'))
+    telegram_auth_code = models.CharField(max_length=32, blank=True, null=True, unique=True, verbose_name=_('Код привязки Telegram'))
+    created_at = models.DateTimeField(auto_now_add=True, verbose_name=_('Создан'))
+    updated_at = models.DateTimeField(auto_now=True, verbose_name=_('Обновлен'))
+
+    class Meta:
+        ordering = ('full_name',)
+        verbose_name = _('Сотрудник ЦНСВ')
+        verbose_name_plural = _('Сотрудники ЦНСВ')
+
+    def __str__(self):
+        return f'{self.full_name} ({self.get_role_display()})'
+
+    def get_or_create_auth_code(self):
+        if not self.telegram_auth_code:
+            import secrets
+            self.telegram_auth_code = secrets.token_hex(8)
+            self.save(update_fields=['telegram_auth_code'])
+        return self.telegram_auth_code
+

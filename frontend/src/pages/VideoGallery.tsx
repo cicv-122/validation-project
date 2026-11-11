@@ -1,6 +1,31 @@
 import { useTranslation } from 'react-i18next';
-import { EmptyState, ErrorMessage, PageHero, SEO, Spinner } from '../components/ui';
+import { CustomVideoPlayer, EmptyState, ErrorMessage, PageHero, SEO, Spinner } from '../components/ui';
 import { useVideoGallery } from '../hooks/useApi';
+
+function VideoItem({ video }: { video: any }) {
+	return (
+		<div className='bg-black rounded-2xl overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300 border border-slate-200/80 group'>
+			<div className='w-full aspect-video bg-black flex items-center justify-center overflow-hidden relative'>
+				{video.embed_url ? (
+					<iframe
+						className='w-full h-full'
+						src={video.embed_url}
+						title='YouTube video player'
+						frameBorder='0'
+						allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture'
+						allowFullScreen
+					/>
+				) : video.file_url ? (
+					<CustomVideoPlayer
+						src={video.file_url}
+						containerClassName='w-full h-full'
+						className='w-full h-full object-contain'
+					/>
+				) : null}
+			</div>
+		</div>
+	);
+}
 
 export default function VideoGallery() {
 	const { t } = useTranslation();
@@ -33,33 +58,7 @@ export default function VideoGallery() {
 					<>
 						<div className='grid grid-cols-1 lg:grid-cols-2 gap-8'>
 							{allVideos.map((video: any) => (
-								<div
-									key={video.id}
-									className='bg-black rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-shadow'
-								>
-									<div
-										className='w-full relative overflow-hidden'
-										style={{ paddingTop: '56.25%' }}
-									>
-										{video.embed_url ? (
-											<iframe
-												className='absolute top-0 left-0 w-full h-full'
-												src={video.embed_url}
-												title='YouTube video player'
-												frameBorder='0'
-												allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture'
-												allowFullScreen
-											/>
-										) : video.file_url ? (
-											<video
-												className='absolute top-0 left-0 w-full h-full object-cover'
-												controls
-												src={video.file_url}
-												preload='metadata'
-											/>
-										) : null}
-									</div>
-								</div>
+								<VideoItem key={video.id} video={video} />
 							))}
 						</div>
 						{hasNextPage && (

@@ -1,5 +1,4 @@
 import { useTranslation } from 'react-i18next';
-import ContactsSection from '../components/home/ContactsSection';
 import HeroSection from '../components/home/HeroSection';
 import NewsSection from '../components/home/NewsSection';
 import StatisticsSection from '../components/home/StatisticsSection';
@@ -20,7 +19,7 @@ export default function Home() {
 	const { data: news, isLoading: newsLoading } = useHomeNews();
 
 	return (
-		<div className='bg-white dark:bg-[#0c0f24] transition-colors duration-200'>
+		<div className='bg-white'>
 			<SEO
 				title={t('seo.home.title')}
 				description={t('seo.home.description')}
@@ -29,7 +28,6 @@ export default function Home() {
 			<HeroSection sliders={sliders} isLoading={slidersLoading} />
 			<StatisticsSection />
 			<NewsSection news={news} isLoading={newsLoading} />
-			<ContactsSection />
 		</div>
 	);
 }

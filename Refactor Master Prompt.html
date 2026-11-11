@@ -1,0 +1,959 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Refactor Master Prompt</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Inter:wght@400;500;600&display=swap">
+
+<style>
+/* Layout: single-column reader with sticky nav, code-editor aesthetic */
+:root {
+  --bg: #f7f8fa;
+  --bg2: #ffffff;
+  --bg3: #eef0f5;
+  --border: #e2e5ec;
+  --fg: #1a1d26;
+  --fg2: #4a5068;
+  --fg3: #8891aa;
+  --accent: #3b5bdb;
+  --accent-soft: #eef2ff;
+  --accent-border: #c5d0fa;
+  --green: #2f9e44;
+  --green-soft: #ebfbee;
+  --mono: 'JetBrains Mono', 'Fira Code', monospace;
+  --sans: 'Inter', system-ui, sans-serif;
+  --tag-bg: #e8ecf5;
+  --tag-fg: #3b5bdb;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0f1117;
+    --bg2: #161b27;
+    --bg3: #1e2435;
+    --border: #262d3f;
+    --fg: #e8eaf2;
+    --fg2: #9aa3bc;
+    --fg3: #5a6380;
+    --accent: #748ffc;
+    --accent-soft: #1a2140;
+    --accent-border: #2d3f7a;
+    --green: #51cf66;
+    --green-soft: #0d2918;
+    --tag-bg: #1e2a4a;
+    --tag-fg: #748ffc;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0f1117; --bg2: #161b27; --bg3: #1e2435;
+  --border: #262d3f; --fg: #e8eaf2; --fg2: #9aa3bc;
+  --fg3: #5a6380; --accent: #748ffc; --accent-soft: #1a2140;
+  --accent-border: #2d3f7a; --green: #51cf66; --green-soft: #0d2918;
+  --tag-bg: #1e2a4a; --tag-fg: #748ffc;
+  color-scheme: dark;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--sans);
+  font-size: 14px;
+  line-height: 1.6;
+  min-height: 100%;
+}
+
+/* ── Header ── */
+.header {
+  position: sticky;
+  top: env(safe-area-inset-top, 0px);
+  z-index: 50;
+  background: var(--bg2);
+  border-bottom: 1px solid var(--border);
+  padding-block: 12px;
+  padding-left: max(20px, env(safe-area-inset-left, 0px));
+  padding-right: max(20px, env(safe-area-inset-right, 0px));
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0 0 auto;
+  height: env(safe-area-inset-top, 0px);
+  background: var(--bg2);
+  z-index: 51;
+}
+
+.header-left { display: flex; align-items: center; gap: 10px; }
+
+.logo {
+  display: flex; align-items: center; gap: 8px;
+  font-weight: 600; font-size: 15px; color: var(--fg);
+}
+
+.logo-icon {
+  width: 28px; height: 28px; border-radius: 7px;
+  background: var(--accent); display: flex; align-items: center; justify-content: center;
+  font-size: 14px; color: white; font-family: var(--mono); font-weight: 500;
+}
+
+.badge {
+  font-size: 11px; font-weight: 500; letter-spacing: 0.04em;
+  background: var(--tag-bg); color: var(--tag-fg);
+  padding: 2px 8px; border-radius: 20px;
+  font-family: var(--mono);
+}
+
+.header-actions { display: flex; gap: 8px; align-items: center; }
+
+.btn {
+  font-family: var(--sans); font-size: 13px; font-weight: 500;
+  padding: 7px 14px; border-radius: 8px; cursor: pointer;
+  border: 1px solid var(--border); background: var(--bg3);
+  color: var(--fg2); transition: all 0.15s; white-space: nowrap;
+}
+.btn:hover { background: var(--accent-soft); border-color: var(--accent-border); color: var(--accent); }
+.btn.primary { background: var(--accent); color: white; border-color: var(--accent); }
+.btn.primary:hover { opacity: 0.88; }
+.btn.success { background: var(--green-soft); color: var(--green); border-color: var(--green); }
+
+/* ── Layout ── */
+.layout {
+  display: grid;
+  grid-template-columns: 220px 1fr;
+  min-height: calc(100vh - 53px);
+}
+
+.sidebar {
+  position: sticky;
+  top: calc(53px + env(safe-area-inset-top, 0px));
+  height: calc(100vh - 53px - env(safe-area-inset-top, 0px));
+  overflow-y: auto;
+  background: var(--bg2);
+  border-right: 1px solid var(--border);
+  padding: 16px 0;
+  padding-left: max(0px, env(safe-area-inset-left, 0px));
+}
+
+.sidebar-section { padding: 0 12px; margin-bottom: 4px; }
+
+.sidebar-label {
+  font-size: 10px; font-weight: 600; letter-spacing: 0.08em;
+  text-transform: uppercase; color: var(--fg3);
+  padding: 8px 8px 4px; display: block;
+}
+
+.nav-item {
+  display: flex; align-items: center; gap: 8px;
+  padding: 6px 8px; border-radius: 6px;
+  font-size: 12.5px; color: var(--fg2); cursor: pointer;
+  transition: all 0.1s; border: none; background: none;
+  width: 100%; text-align: left; font-family: var(--sans);
+  text-decoration: none;
+}
+.nav-item:hover { background: var(--bg3); color: var(--fg); }
+.nav-item.active { background: var(--accent-soft); color: var(--accent); font-weight: 500; }
+
+.nav-num {
+  font-family: var(--mono); font-size: 10px;
+  color: var(--fg3); min-width: 16px; text-align: right;
+}
+
+/* ── Main content ── */
+.main {
+  padding: 32px;
+  padding-left: max(32px, env(safe-area-inset-left, 0px));
+  padding-right: max(32px, env(safe-area-inset-right, 0px));
+  max-width: 860px;
+  min-width: 0;
+}
+
+/* ── Prompt block ── */
+.prompt-container {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  overflow: hidden;
+  margin-bottom: 20px;
+}
+
+.prompt-header {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 10px 16px;
+  background: var(--bg3);
+  border-bottom: 1px solid var(--border);
+  gap: 12px;
+}
+
+.prompt-title {
+  font-size: 12px; font-weight: 600; color: var(--fg2);
+  font-family: var(--mono); letter-spacing: 0.03em;
+  display: flex; align-items: center; gap: 8px;
+}
+
+.dot { width: 8px; height: 8px; border-radius: 50%; }
+.dot-red { background: #ff5f57; }
+.dot-yellow { background: #febc2e; }
+.dot-green { background: #28c840; }
+
+.prompt-body {
+  padding: 20px;
+  font-family: var(--mono);
+  font-size: 12.5px;
+  line-height: 1.75;
+  color: var(--fg);
+  white-space: pre-wrap;
+  word-break: break-word;
+  overflow-x: auto;
+  max-height: 420px;
+  overflow-y: auto;
+}
+
+.prompt-body .kw { color: #ae3ec9; }
+.prompt-body .str { color: var(--green); }
+.prompt-body .comment { color: var(--fg3); }
+.prompt-body .heading { color: var(--accent); font-weight: 500; }
+.prompt-body .bracket { color: #e8590c; }
+
+/* ── Section ── */
+.section { margin-bottom: 40px; scroll-margin-top: 72px; }
+
+.section-eyebrow {
+  font-size: 11px; font-weight: 600; letter-spacing: 0.08em;
+  text-transform: uppercase; color: var(--accent);
+  font-family: var(--mono); margin-bottom: 6px;
+}
+
+.section-title {
+  font-size: 20px; font-weight: 600; color: var(--fg);
+  margin-bottom: 12px; text-wrap: balance;
+}
+
+.section-desc {
+  color: var(--fg2); line-height: 1.65; margin-bottom: 20px;
+  max-width: 640px;
+}
+
+/* ── Info callout ── */
+.callout {
+  background: var(--accent-soft);
+  border: 1px solid var(--accent-border);
+  border-radius: 8px;
+  padding: 12px 16px;
+  font-size: 13px;
+  color: var(--fg2);
+  margin-bottom: 16px;
+  display: flex; gap: 10px; align-items: flex-start;
+}
+.callout-icon { font-size: 15px; flex-shrink: 0; margin-top: 1px; }
+
+/* ── Tags ── */
+.tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 16px; }
+.tag {
+  font-family: var(--mono); font-size: 11px; font-weight: 500;
+  background: var(--tag-bg); color: var(--tag-fg);
+  padding: 3px 10px; border-radius: 20px;
+  border: 1px solid var(--accent-border);
+}
+
+/* ── Full prompt textarea ── */
+.full-prompt-wrap {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.full-prompt-head {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 10px 16px;
+  background: var(--bg3);
+  border-bottom: 1px solid var(--border);
+}
+
+.full-prompt-head span {
+  font-family: var(--mono); font-size: 12px; color: var(--fg2); font-weight: 500;
+}
+
+#fullPromptText {
+  width: 100%; border: none; outline: none; resize: none;
+  background: var(--bg2); color: var(--fg);
+  font-family: var(--mono); font-size: 12px; line-height: 1.75;
+  padding: 20px; min-height: 500px;
+}
+
+/* ── Progress ── */
+.progress-bar {
+  height: 3px; background: var(--border); border-radius: 2px;
+  margin-bottom: 24px; overflow: hidden;
+}
+.progress-fill {
+  height: 100%; background: var(--accent); border-radius: 2px;
+  transition: width 0.3s;
+}
+
+/* ── Responsive ── */
+@media (max-width: 700px) {
+  .layout { grid-template-columns: 1fr; }
+  .sidebar { display: none; }
+  .main { padding: 20px max(16px, env(safe-area-inset-left, 0px)); }
+  .prompt-body { font-size: 11.5px; max-height: 320px; }
+}
+</style>
+
+<!-- sections nav data -->
+<script>
+const SECTIONS = [
+  { id: 'context',    num: '01', label: 'Контекст проекта' },
+  { id: 'frontend',   num: '02', label: 'FSD Frontend' },
+  { id: 'components', num: '03', label: 'Декомпозиция' },
+  { id: 'state',      num: '04', label: 'Zustand + Query' },
+  { id: 'backend',    num: '05', label: 'Service Layer' },
+  { id: 'migration',  num: '06', label: 'Скрипт миграции' },
+  { id: 'full',       num: '∞',  label: 'Полный промпт' },
+];
+</script>
+
+<!-- ── MARKUP ── -->
+<div class="header">
+  <div class="header-left">
+    <div class="logo">
+      <div class="logo-icon">R</div>
+      Refactor Prompt Kit
+    </div>
+    <span class="badge">v1.0 · FSD + DRF</span>
+  </div>
+  <div class="header-actions">
+    <button class="btn" onclick="copyFull(this)">📋 Скопировать всё</button>
+  </div>
+</div>
+
+<div class="layout">
+  <nav class="sidebar" id="sidebar"></nav>
+
+  <main class="main">
+
+    <!-- 01 Context -->
+    <div class="section" id="context">
+      <div class="section-eyebrow">01 / context</div>
+      <div class="section-title">Контекст проекта</div>
+      <div class="section-desc">Вставляй этот блок в начало каждого промпта — он даёт AI полную картину стека и ограничений.</div>
+      <div class="tags">
+        <span class="tag">React 18</span><span class="tag">TypeScript</span>
+        <span class="tag">Vite</span><span class="tag">Tailwind CSS</span>
+        <span class="tag">Django DRF</span><span class="tag">PostgreSQL</span>
+        <span class="tag">Docker</span><span class="tag">Monorepo</span>
+      </div>
+      <div class="prompt-container">
+        <div class="prompt-header">
+          <div class="prompt-title">
+            <div class="dot dot-red"></div><div class="dot dot-yellow"></div><div class="dot dot-green"></div>
+            context.prompt
+          </div>
+          <button class="btn" onclick="copyBlock('ctx')">Копировать</button>
+        </div>
+        <div class="prompt-body" id="ctx"
+>## КОНТЕКСТ ПРОЕКТА
+
+Монорепозиторий: бэкенд Django/DRF в корне (`apps/`, `manage.py`), фронтенд в `/frontend` (React 18 + TypeScript + Vite + Tailwind CSS).
+
+<span class="comment">### Текущее состояние фронтенда</span>
+- 22 страницы (19 публичных + 3 кабинета сотрудника ЦНСВ)
+- 26 компонентов, из которых критически монолитны:
+  · StaffDashboard.tsx (~2600 строк)
+  · StaffCandidateDossier.tsx (~1300 строк)
+  · Apply.tsx (~850 строк)
+- Стейт: хаотичный useState/useEffect, нет единой стратегии
+- API: TanStack Query v5 + axios установлены, но используются непоследовательно
+- Локализация: react-i18next (RU / KG), двуязычные словари профессий
+- Тестов нет → рефакторинг должен сохранять все сигнатуры и контракты
+
+<span class="comment">### Текущее состояние бэкенда</span>
+- Django REST Framework, PostgreSQL, Docker
+- Приложения: apps/certification, apps/document, apps/news, apps/partner и др.
+- Проблема: "Fat Views" — бизнес-логика внутри views.py
+- Фоновые сервисы: запущен Telegram-бот (`run_telegram_bot.py`), опрашивающий API и сервисы
+- <span class="kw">ВАЖНО</span>: URL эндпоинтов менять нельзя (на них завязаны мобильные клиенты, QR-коды сертификатов и Telegram-бот)
+- <span class="kw">ПРАВИЛО ВЕДОМСТВА</span>: Наименование родительского министерства строго «Министерство просвещения Кыргызской Республики (МП КР)» / «Кыргыз Республикасынын Агартуу министрлиги»
+
+<span class="comment">### Целевой стек</span>
+Frontend: FSD (Feature-Sliced Design) + Zustand (UI-стейт) + TanStack Query v5 (серверный стейт)
+Backend: Service Layer pattern (services/, selectors/, api/serializers/, api/views/)</div>
+      </div>
+    </div>
+
+    <!-- 02 FSD -->
+    <div class="section" id="frontend">
+      <div class="section-eyebrow">02 / frontend</div>
+      <div class="section-title">FSD архитектура фронтенда</div>
+      <div class="section-desc">Промпт для реструктуризации папок по Feature-Sliced Design. Вставляй после блока контекста.</div>
+      <div class="callout">
+        <span class="callout-icon">💡</span>
+        <span>Правило FSD: импорты идут только сверху вниз по слоям: <code>app → pages → widgets → features → entities → shared</code>. Импорт из нижнего слоя в верхний — запрещён.</span>
+      </div>
+      <div class="prompt-container">
+        <div class="prompt-header">
+          <div class="prompt-title">
+            <div class="dot dot-red"></div><div class="dot dot-yellow"></div><div class="dot dot-green"></div>
+            fsd-structure.prompt
+          </div>
+          <button class="btn" onclick="copyBlock('fsd')">Копировать</button>
+        </div>
+        <div class="prompt-body" id="fsd"
+>## ЗАДАЧА: РЕСТРУКТУРИЗАЦИЯ ФРОНТЕНДА ПО FSD
+
+Переведи `/frontend/src` на Feature-Sliced Design. Создай следующую структуру:
+
+<span class="str">src/
+├── app/                    # инициализация, провайдеры, роутер
+│   ├── providers/          # QueryClientProvider, RouterProvider, ZustandProvider
+│   ├── router/             # маршруты с lazy-loading
+│   └── styles/             # глобальные стили, Tailwind base
+│
+├── pages/                  # тонкие страницы — только сборка виджетов
+│   ├── home/
+│   ├── apply/
+│   ├── staff-dashboard/
+│   └── ...
+│
+├── widgets/                # самодостаточные UI-блоки страницы
+│   ├── candidate-registry/ # таблица реестра кандидатов с пагинацией
+│   ├── dossier-viewer/     # просмотр досье кандидата (документы, фото)
+│   ├── assessment-form/    # форма оценки
+│   └── ...
+│
+├── features/               # действия пользователя
+│   ├── apply-form/         # подача заявки (форма Apply.tsx → сюда)
+│   ├── auth-staff/         # авторизация сотрудника
+│   ├── candidate-filter/   # фильтры реестра (с синхронизацией URL)
+│   ├── upload-documents/   # загрузка сканов и фото (FormData)
+│   └── ...
+│
+├── entities/               # бизнес-сущности
+│   ├── candidate/          # model, types, api, ui
+│   ├── assessment/
+│   ├── certificate/
+│   └── ...
+│
+└── shared/                 # переиспользуемое без бизнес-логики
+    ├── ui/                 # Button, Input, Modal, Badge, Spinner...
+    ├── api/                # axios instance, interceptors, error handling
+    ├── lib/                # утилиты, валидаторы (PIN КР, транслит)
+    ├── hooks/              # useDebounce, usePagination, useLocalStorage
+    └── config/             # env-переменные, i18n (RU/KG), словари профессий</span>
+
+<span class="comment">### Настройка путей (Path Aliases)</span>
+В tsconfig.json и vite.config.ts настраиваются алиасы:
+`@app/*`, `@pages/*`, `@widgets/*`, `@features/*`, `@entities/*`, `@shared/*` (или общий `@/*`).
+
+<span class="comment">### Правила именования файлов</span>
+- index.ts — публичный API слайса (экспорты наружу)
+- model.ts — типы TypeScript + Zod-схемы
+- api.ts — TanStack Query хуки для этой сущности
+- ui/ — компоненты только этого слайса
+
+<span class="comment">### Что перенести куда</span>
+StaffDashboard.tsx → разбить на:
+  widgets/candidate-registry (таблица + пагинация)
+  widgets/assessment-queue (очередь заданий)
+  features/candidate-filter (фильтры + сортировка)
+  features/status-change (смена статуса кандидата)
+
+StaffCandidateDossier.tsx → разбить на:
+  widgets/dossier-viewer (просмотр документов)
+  features/dossier-approve (утверждение досье)
+  entities/candidate (карточка кандидата)
+
+Apply.tsx → разбить на:
+  features/apply-form (логика формы + валидация)
+  widgets/apply-wizard (шаги формы)
+  entities/profession (выбор профессии)</div>
+      </div>
+    </div>
+
+    <!-- 03 Components -->
+    <div class="section" id="components">
+      <div class="section-eyebrow">03 / decomposition</div>
+      <div class="section-title">Декомпозиция монолитных компонентов</div>
+      <div class="section-desc">Правила нарезки файлов >300 строк. Используй для каждого монолита отдельно.</div>
+      <div class="prompt-container">
+        <div class="prompt-header">
+          <div class="prompt-title">
+            <div class="dot dot-red"></div><div class="dot dot-yellow"></div><div class="dot dot-green"></div>
+            decompose.prompt
+          </div>
+          <button class="btn" onclick="copyBlock('decomp')">Копировать</button>
+        </div>
+        <div class="prompt-body" id="decomp"
+>## ЗАДАЧА: ДЕКОМПОЗИЦИЯ КОМПОНЕНТА [ВСТАВЬ ИМЯ ФАЙЛА]
+
+Правила декомпозиции (обязательны):
+
+<span class="heading">1. ПОРОГ РАЗМЕРА</span>
+- Компонент > 300 строк → обязательно декомпозировать
+- Один компонент = одна ответственность (Single Responsibility)
+- Хук > 80 строк → выносить в отдельный файл use*.ts
+
+<span class="heading">2. ВЫНОСИ В КАСТОМНЫЙ ХУК ЕСЛИ</span>
+- Есть 3+ useState связанных с одной сущностью → useEntityName()
+- Есть useEffect с fetch-логикой → заменить на TanStack Query хук
+- Есть сложная логика фильтров/сортировки → useFilters()
+- Есть обработка форм → useForm() или react-hook-form
+
+<span class="heading">3. ВЫНОСИ В ОТДЕЛЬНЫЙ КОМПОНЕНТ ЕСЛИ</span>
+- Блок > 50 строк JSX с собственным смыслом
+- Элемент повторяется 2+ раза
+- У блока есть собственное локальное состояние
+
+<span class="heading">4. ЗАПРЕЩЕНО</span>
+- Менять props-интерфейсы компонентов (нет тестов, нельзя ломать)
+- Менять URL-пути и вызовы API
+- Переносить бизнес-логику бэкенда
+- Менять поведение — только структура
+
+<span class="heading">5. АЛГОРИТМ ДЕКОМПОЗИЦИИ</span>
+Шаг 1: Прочитай весь файл и выпиши все useState — сгруппируй по домену
+Шаг 2: Определи все fetch/axios вызовы → замени на useQuery/useMutation
+Шаг 3: Выдели визуальные блоки JSX → создай именованные компоненты
+Шаг 4: Создай index.ts с публичными экспортами
+Шаг 5: Убедись что TypeScript types явно прописаны (no implicit any)
+
+<span class="comment">Результат: список файлов которые нужно создать с кратким описанием каждого.</span></div>
+      </div>
+    </div>
+
+    <!-- 04 State -->
+    <div class="section" id="state">
+      <div class="section-eyebrow">04 / state</div>
+      <div class="section-title">Zustand + TanStack Query v5</div>
+      <div class="section-desc">Шаблоны сторов и query-хуков. Главное правило: Zustand — только UI-стейт, Query — весь серверный стейт.</div>
+      <div class="prompt-container">
+        <div class="prompt-header">
+          <div class="prompt-title">
+            <div class="dot dot-red"></div><div class="dot dot-yellow"></div><div class="dot dot-green"></div>
+            state.prompt
+          </div>
+          <button class="btn" onclick="copyBlock('state')">Копировать</button>
+        </div>
+        <div class="prompt-body" id="state"
+>## ЗАДАЧА: ВНЕДРЕНИЕ ZUSTAND + TANSTACK QUERY V5
+
+<span class="heading">ZUSTAND — только UI-стейт (не серверные данные!)</span>
+
+Создай 4 стора в `src/app/stores/`:
+
+<span class="str">// stores/session.store.ts — сессия сотрудника
+interface SessionStore {
+  staff: StaffProfile | null
+  permissions: Permission[]
+  pinnedProfessions: string[]
+  setStaff: (staff: StaffProfile) => void
+  clearSession: () => void
+}
+
+// stores/ui.store.ts — глобальные модалки и тосты
+interface UIStore {
+  modal: { type: ModalType; props: unknown } | null
+  toasts: Toast[]
+  openModal: (type: ModalType, props?: unknown) => void
+  closeModal: () => void
+  addToast: (toast: Omit<Toast, 'id'>) => void
+  removeToast: (id: string) => void
+}
+
+// stores/registry.store.ts — стейт реестра (вкладки, локальный UI-выбор)
+// ВАЖНО: фильтры, поисковая строка и пагинация синхронизируются с URL SearchParams
+// (?tab=registry&page=2&has_inn=true&target=827), чтобы работали Deep Linking,
+// закладки, кнопка "Назад" в браузере и точный возврат из дела специалиста.
+interface RegistryStore {
+  activeTab: 'applications' | 'certified_registry'
+  selectedCandidateId: number | null
+  setSelectedCandidateId: (id: number | null) => void
+  setTab: (tab: 'applications' | 'certified_registry') => void
+}
+
+// stores/notifications.store.ts — уведомления
+interface NotificationsStore {
+  items: Notification[]
+  unreadCount: number
+  markAsRead: (id: string) => void
+}</span>
+
+<span class="heading">TANSTACK QUERY V5 — кэширование с пагинацией</span>
+
+Паттерн для всех пагинированных запросов:
+
+<span class="str">// entities/candidate/api.ts
+export const useCandidates = (filters: Filters, page: number) => {
+  return useQuery({
+    queryKey: ['candidates', filters, page],
+    queryFn: () => api.getCandidates({ ...filters, page }),
+    placeholderData: keepPreviousData,  // ← нет прыжков при смене страницы
+    staleTime: 3 * 60 * 1000,           // ← 3 минуты кэш без рефетча
+    gcTime: 10 * 60 * 1000,             // ← 10 минут в памяти
+  })
+}
+
+// Prefetch следующей страницы (вставляется в пагинатор)
+const queryClient = useQueryClient()
+useEffect(() => {
+  queryClient.prefetchQuery({
+    queryKey: ['candidates', filters, page + 1],
+    queryFn: () => api.getCandidates({ ...filters, page: page + 1 }),
+    staleTime: 3 * 60 * 1000,
+  })
+}, [page, filters])</span>
+
+<span class="heading">ИНВАЛИДАЦИЯ КЭША ПОСЛЕ МУТАЦИЙ И MULTIPART FORMDATA</span>
+
+<span class="str">// features/status-change/api.ts — обычная JSON-мутация
+export const useUpdateCandidateStatus = () => {
+  const queryClient = useQueryClient()
+  return useMutation({
+    mutationFn: (data: UpdateStatusDto) => api.updateStatus(data),
+    onSuccess: (_, variables) => {
+      queryClient.invalidateQueries({ queryKey: ['candidates'] })
+      queryClient.invalidateQueries({
+        queryKey: ['candidate', variables.candidateId]
+      })
+    },
+  })
+}
+
+// features/upload-documents/api.ts — загрузка сканов/фото (Multipart FormData)
+export const useUploadCandidateDocuments = () => {
+  const queryClient = useQueryClient()
+  return useMutation({
+    mutationFn: ({ candidateId, formData }: { candidateId: number; formData: FormData }) =>
+      api.uploadDocuments(candidateId, formData),
+    onSuccess: (_, { candidateId }) => {
+      // Обновляем список документов в досье и статус кандидата
+      queryClient.invalidateQueries({ queryKey: ['candidate-dossier', candidateId] })
+      queryClient.invalidateQueries({ queryKey: ['candidates'] })
+    },
+  })
+}</span>
+
+<span class="comment">Правило: queryKey всегда массив [сущность, фильтры, страница]
+Это гарантирует правильную инвалидацию и изоляцию кэшей.</span></div>
+      </div>
+    </div>
+
+    <!-- 05 Backend -->
+    <div class="section" id="backend">
+      <div class="section-eyebrow">05 / backend</div>
+      <div class="section-title">Service Layer для Django DRF</div>
+      <div class="section-desc">Вынос логики из Fat Views в сервисы и селекторы. URL эндпоинтов не меняются.</div>
+      <div class="prompt-container">
+        <div class="prompt-header">
+          <div class="prompt-title">
+            <div class="dot dot-red"></div><div class="dot dot-yellow"></div><div class="dot dot-green"></div>
+            backend.prompt
+          </div>
+          <button class="btn" onclick="copyBlock('backend')">Копировать</button>
+        </div>
+        <div class="prompt-body" id="backend"
+>## ЗАДАЧА: SERVICE LAYER ДЛЯ DJANGO DRF
+
+<span class="comment">ВАЖНО: URL-маршруты не меняются. Рефакторинг только внутри.</span>
+
+<span class="heading">ЦЕЛЕВАЯ СТРУКТУРА каждого Django-приложения</span>
+
+<span class="str">apps/certification/
+├── api/
+│   ├── views.py        # только HTTP: get request → call service → return response
+│   ├── serializers/
+│   │   ├── input.py    # сериализаторы для записи (валидация входных данных)
+│   │   └── output.py   # сериализаторы для чтения (представление данных)
+│   └── urls.py         # маршруты — не трогаем
+├── services.py         # бизнес-логика (create_assessment, approve_candidate...)
+├── selectors.py        # запросы к БД (get_candidates_by_filter, get_dossier...)
+├── models.py
+└── admin.py</span>
+
+<span class="heading">ПРАВИЛА РЕФАКТОРИНГА</span>
+
+1. <span class="kw">views.py</span> должен содержать только:
+   - Получение данных из request
+   - Вызов одного сервиса или селектора
+   - Возврат Response
+
+2. <span class="kw">services.py</span> — бизнес-логика:
+   - Принимает plain Python объекты (не request, не queryset)
+   - Возвращает plain Python объекты или model instance
+   - Содержит транзакции (@transaction.atomic)
+   - Выбрасывает доменные исключения (ValidationError, PermissionDenied)
+
+3. <span class="kw">selectors.py</span> — запросы к БД:
+   - Только select/filter/annotate — никаких изменений данных
+   - Принимает параметры фильтрации
+   - Возвращает QuerySet или конкретные значения
+
+4. <span class="kw">serializers/input.py</span> — валидация входных данных:
+   - Вынеси общую логику (например, валидация 14-значного ПИН КР)
+   - Используй validate_<field> методы
+
+5. <span class="kw">Telegram-бот и фоновые команды</span>:
+   - Команды типа `python manage.py run_telegram_bot` и `services/telegram.py` обязаны использовать новые `selectors.py` и `services.py`
+   - Сигнатуры поиска по ИНН/ФИО и выдачи статистики должны оставаться строго обратно совместимыми
+
+<span class="heading">ПРИМЕР РЕФАКТОРИНГА</span>
+
+<span class="str"># ДО: Fat View
+class AssessmentView(APIView):
+    def post(self, request):
+        pin = request.data.get('pin')
+        if len(pin) != 14 or not pin.isdigit():
+            return Response({'error': '...'}, 400)
+        candidate = Candidate.objects.filter(pin=pin).first()
+        if not candidate:
+            candidate = Candidate.objects.create(pin=pin, ...)
+        assessment = Assessment.objects.create(candidate=candidate, ...)
+        # ... 50 строк логики
+        return Response(AssessmentSerializer(assessment).data)
+
+# ПОСЛЕ: Thin View
+class AssessmentView(APIView):
+    def post(self, request):
+        serializer = CreateAssessmentInputSerializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        assessment = assessment_service.create_assessment(
+            validated_data=serializer.validated_data,
+            created_by=request.user,
+        )
+        return Response(AssessmentOutputSerializer(assessment).data, 201)</span>
+
+<span class="comment">Type hints обязательны везде: def create_assessment(data: dict, user: User) -> Assessment</span></div>
+      </div>
+    </div>
+
+    <!-- 06 Migration script -->
+    <div class="section" id="migration">
+      <div class="section-eyebrow">06 / migration</div>
+      <div class="section-title">Скрипт безопасной миграции</div>
+      <div class="section-desc">Промпт для генерации Python-скрипта который создаёт FSD-структуру папок без удаления существующих файлов.</div>
+      <div class="prompt-container">
+        <div class="prompt-header">
+          <div class="prompt-title">
+            <div class="dot dot-red"></div><div class="dot dot-yellow"></div><div class="dot dot-green"></div>
+            migration.prompt
+          </div>
+          <button class="btn" onclick="copyBlock('migration')">Копировать</button>
+        </div>
+        <div class="prompt-body" id="migration"
+>## ЗАДАЧА: СКРИПТ ПОЭТАПНОЙ МИГРАЦИИ НА FSD
+
+Напиши Python-скрипт `scripts/migrate_to_fsd.py` который:
+
+<span class="heading">0. ПРОВЕРКА И НАСТРОЙКА PATH ALIASES</span>
+- Проверяет `tsconfig.json` и `vite.config.ts` на наличие alias путей:
+  `@/*` -> `./src/*` (или `@app`, `@pages`, `@widgets`, `@features`, `@entities`, `@shared`)
+- При отсутствии — аккуратно добавляет их, чтобы TypeScript и Vite могли сразу резолвить модули
+
+<span class="heading">1. СОЗДАЁТ НОВУЮ СТРУКТУРУ ПАПОК</span>
+- Создаёт все директории FSD (`app/`, `pages/`, `widgets/`, `features/`, `entities/`, `shared/`)
+- Для каждого слайса создаёт: `index.ts`, `model.ts` (пустой с TODO), `ui/` папку
+- НЕ трогает существующие файлы в `/src/components/` и `/src/pages/`
+
+<span class="heading">2. АНАЛИЗИРУЕТ СУЩЕСТВУЮЩИЕ ФАЙЛЫ</span>
+- Читает все .tsx/.ts файлы в `/frontend/src`
+- Считает строки, импорты, экспорты
+- Генерирует отчёт: `migration-audit.json` с полями:
+  · file: путь к файлу
+  · lines: количество строк
+  · imports: список импортируемых модулей
+  · suggested_layer: куда переместить по FSD (pages/widgets/features/entities/shared)
+  · priority: 'high' (>500 строк), 'medium' (200-500), 'low' (<200)
+
+<span class="heading">3. ГЕНЕРИРУЕТ TODO-СПИСОК</span>
+Файл `migration-todo.md` — упорядоченный список файлов по приоритету:
+  [ ] StaffDashboard.tsx (2600 строк) → разбить на widgets + features
+  [ ] StaffCandidateDossier.tsx (1300 строк) → ...
+  ...
+
+<span class="heading">4. СОЗДАЁТ BARREL EXPORTS</span>
+Для каждой существующей группы компонентов создаёт временный
+`/src/legacy/index.ts` с re-exports — чтобы старые импорты не сломались
+пока идёт постепенная миграция.
+
+<span class="heading">ТРЕБОВАНИЯ К СКРИПТУ</span>
+- Python 3.10+, только стандартная библиотека (pathlib, json, ast)
+- Запускать из корня монорепо: `python scripts/migrate_to_fsd.py`
+- Идемпотентный — повторный запуск не ломает прогресс
+- Выводить в консоль прогресс: "✓ Создано 47 файлов, найдено 8 монолитов"
+- НЕ удалять файлы, только создавать и читать
+
+<span class="comment">После скрипта: мигрировать файлы вручную по todo-листу, по одному, с проверкой `npm run build` после каждого.</span></div>
+      </div>
+    </div>
+
+    <!-- 07 Rules -->
+    <div class="section" id="rules">
+      <div class="section-eyebrow">07 / rules</div>
+      <div class="section-title">Правила рефакторинга</div>
+      <div class="section-desc">Главный принцип: переписываем КАК сделано, но не меняем ЧТО происходит с точки зрения пользователя и API.</div>
+      <div class="callout">
+        <span class="callout-icon">⚠️</span>
+        <span>Граница одна: <strong>поведение пользователя и API-контракты неприкосновенны</strong>. Всё внутри — переписывается под новую архитектуру.</span>
+      </div>
+      <div class="prompt-container">
+        <div class="prompt-header">
+          <div class="prompt-title">
+            <div class="dot dot-red"></div><div class="dot dot-yellow"></div><div class="dot dot-green"></div>
+            refactor-rules.prompt
+          </div>
+          <button class="btn" onclick="copyBlock('rules')">Копировать</button>
+        </div>
+        <div class="prompt-body" id="rules"
+>## ПРАВИЛА РЕФАКТОРИНГА
+
+<span class="heading">ЧТО НЕЛЬЗЯ МЕНЯТЬ (поведение)</span>
+- URL-маршруты и эндпоинты API (на них завязаны мобильные, QR-коды, Telegram-бот)
+- Props-интерфейсы компонентов, которые используются в других местах (нет тестов → нельзя рисковать)
+- Пользовательские сценарии: если раньше кнопка делала X, после рефакторинга она делает X
+- Форматы данных в запросах/ответах (JSON-контракты с бэком)
+- Маршруты React Router (пути страниц)
+- Синхронизацию параметров фильтрации и пагинации с URL (?tab=registry&page=...&target=...)
+- Официальные наименования ведомств: только «Министерство просвещения Кыргызской Республики (МП КР)» / «Кыргыз Республикасынын Агартуу министрлиги»
+- Работу Telegram-бота и фоновых демонов бэкенда
+
+<span class="heading">ЧТО НУЖНО ПЕРЕПИСАТЬ (реализация)</span>
+- <span class="kw">useState × 15</span> → сгруппировать в кастомные хуки или Zustand-стор
+- <span class="kw">useEffect + fetch/axios</span> → заменить на useQuery/useMutation (TanStack Query v5)
+- <span class="kw">Монолитный JSX</span> → декомпозировать на именованные компоненты по ответственности
+- <span class="kw">Fat Views (Django)</span> → вынести логику в services.py + selectors.py
+- <span class="kw">Дублирующаяся валидация</span> → общие валидаторы в shared/ (например, validateKyrgyzPin())
+- <span class="kw">implicit any</span> → явные TypeScript-типы и Zod-схемы
+- <span class="kw">Ручные флаги loading/error</span> → isLoading, isError из useQuery
+
+<span class="heading">АЛГОРИТМ БЕЗОПАСНОГО РЕФАКТОРИНГА</span>
+
+Шаг 1: <span class="str">git checkout -b refactor/feature-name</span>  ← всегда в отдельной ветке
+Шаг 2: Сделай изменение в одном файле
+Шаг 3: <span class="str">npm run build</span>  ← убедись что TypeScript не ругается
+Шаг 4: Вручную проверь пользовательский сценарий в браузере
+Шаг 5: Коммит → следующий файл
+
+<span class="heading">КРИТЕРИЙ «ГОТОВО»</span>
+Файл отрефакторен корректно если:
+✓ npm run build проходит без ошибок
+✓ Поведение в браузере идентично оригиналу
+✓ Нет implicit any (tsconfig: strict: true)
+✓ Файл не превышает 300 строк
+✓ Каждая функция делает одно дело
+
+<span class="comment">Правило большого пальца: если не уверен — сначала перенеси файл как есть,
+потом рефактори внутри. Два маленьких PR лучше одного огромного.</span></div>
+      </div>
+    </div>
+
+    <!-- Full prompt -->
+    <div class="section" id="full">
+      <div class="section-eyebrow">∞ / full</div>
+      <div class="section-title">Полный промпт — всё вместе</div>
+      <div class="section-desc">Все блоки объединены. Вставляй целиком когда работаешь с одним большим контекстом.</div>
+      <div class="full-prompt-wrap">
+        <div class="full-prompt-head">
+          <span>full-refactor.prompt</span>
+          <button class="btn primary" onclick="copyFull(this)">📋 Скопировать полный промпт</button>
+        </div>
+        <textarea id="fullPromptText" readonly spellcheck="false"></textarea>
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<script>
+// Build sidebar nav
+const sidebar = document.getElementById('sidebar');
+sidebar.innerHTML = `<span class="sidebar-label">Разделы</span>` +
+  SECTIONS.map(s => `
+    <div class="sidebar-section">
+      <a class="nav-item" href="#${s.id}" onclick="setActive(this)">
+        <span class="nav-num">${s.num}</span>
+        ${s.label}
+      </a>
+    </div>`).join('');
+
+function setActive(el) {
+  document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+  el.classList.add('active');
+}
+
+// Intersection observer for active nav
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      const id = e.target.id;
+      document.querySelectorAll('.nav-item').forEach(n => {
+        n.classList.toggle('active', n.getAttribute('href') === '#' + id);
+      });
+    }
+  });
+}, { threshold: 0.3 });
+
+SECTIONS.forEach(s => {
+  const el = document.getElementById(s.id);
+  if (el) observer.observe(el);
+});
+
+// Copy single block
+function copyBlock(id) {
+  const el = document.getElementById(id);
+  if (!el) return;
+  const text = el.innerText || el.textContent;
+  const btn = el.closest('.prompt-container')?.querySelector('button');
+  navigator.clipboard.writeText(text).then(() => {
+    if (btn) { btn.textContent = '✓ Скопировано'; btn.classList.add('success'); }
+    setTimeout(() => {
+      if (btn) { btn.textContent = 'Копировать'; btn.classList.remove('success'); }
+    }, 2000);
+  }).catch(() => {
+    const range = document.createRange();
+    range.selectNode(el);
+    window.getSelection()?.removeAllRanges();
+    window.getSelection()?.addRange(range);
+  });
+}
+
+// Build full prompt text
+function buildFullPrompt() {
+  const ids = ['ctx','fsd','decomp','state','backend','migration','rules'];
+  return ids.map(id => {
+    const el = document.getElementById(id);
+    return el ? (el.innerText || el.textContent) : '';
+  }).join('\n\n' + '─'.repeat(60) + '\n\n');
+}
+
+// Populate textarea
+window.addEventListener('DOMContentLoaded', () => {
+  const ta = document.getElementById('fullPromptText');
+  if (ta) ta.value = buildFullPrompt();
+});
+
+// Copy full
+function copyFull(btn) {
+  const text = buildFullPrompt();
+  navigator.clipboard.writeText(text).then(() => {
+    btn.textContent = '✓ Скопировано!';
+    btn.classList.remove('primary');
+    btn.classList.add('success');
+    setTimeout(() => {
+      btn.textContent = '📋 Скопировать всё';
+      btn.classList.remove('success');
+      btn.classList.add('primary');
+    }, 2500);
+  }).catch(() => {
+    const ta = document.getElementById('fullPromptText');
+    if (ta) { ta.select(); document.execCommand('copy'); }
+  });
+}
+</script>
+
+</body></html>

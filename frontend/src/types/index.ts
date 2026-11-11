@@ -111,6 +111,36 @@ export interface AssessmentCenter {
 	experts?: AssessmentCenterExpert[];
 }
 
+export interface AssessmentEvidenceDoc {
+	id: number;
+	doc_type: string;
+	doc_type_display: string;
+	file_url: string;
+	file_name: string;
+	description?: string;
+}
+
+export interface AssessmentPhotoItem {
+	id: number;
+	file_url: string;
+	description?: string;
+}
+
+export interface AssessmentDetails {
+	is_archived_record?: boolean;
+	application_type: 'certification' | 'validation';
+	application_type_display: string;
+	qualification_level?: string | null;
+	specialization?: string | null;
+	scheduled_date?: string | null;
+	scheduled_location?: string | null;
+	assessor_name?: string | null;
+	evaluation_documents: AssessmentEvidenceDoc[];
+	exam_photos: AssessmentPhotoItem[];
+	candidate_documents?: AssessmentEvidenceDoc[];
+	certificate_scan_url?: string | null;
+}
+
 export interface CertifiedUser {
 	id: number;
 	registration_number: string;
@@ -119,7 +149,15 @@ export interface CertifiedUser {
 	profession: string | null;
 	issued_date: string | null;
 	qr_code: string | null;
+	inn?: string | null;
+	inn_masked?: string | null;
+	has_inn?: boolean;
+	is_qr_scan?: boolean;
+	is_masked?: boolean;
+	created_at?: string;
+	updated_at?: string;
 	news_articles?: NewsItem[];
+	assessment_details?: AssessmentDetails | null;
 }
 
 export interface PaginatedCertifiedUsers {
@@ -127,6 +165,24 @@ export interface PaginatedCertifiedUsers {
 	next: string | null;
 	previous: string | null;
 	results: CertifiedUser[];
+}
+
+export interface SpecializationItem {
+	id: number;
+	title_ru: string;
+	title_ky: string;
+	order: number;
+}
+
+export interface ProfessionCatalogItem {
+	id: number;
+	okz_code: string;
+	name_ru: string;
+	name_ky: string;
+	section: string;
+	qual_level_min: number;
+	qual_level_max: number;
+	specializations: SpecializationItem[];
 }
 
 // ── Gallery ───────────────────────────────────────────────────────────

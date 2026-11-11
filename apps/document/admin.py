@@ -52,14 +52,17 @@ class AppraisersExpertAdmin(TabbedTranslationAdmin):
 
 @admin.register(CertifiedUser)
 class CertifiedUserAdmin(admin.ModelAdmin):
-    list_display = ('get_tag_image', 'get_full_name', 'registration_number', 'profession', 'issued_date', 'order', 'created_at')
+    list_display = ('get_tag_image', 'get_full_name', 'registration_number', 'inn', 'profession', 'issued_date', 'order', 'created_at')
     list_editable = ('order',)
-    search_fields = ('last_name', 'first_name', 'registration_number', 'profession')
-    readonly_fields = ('qr_code_display',)
+    search_fields = ('last_name', 'first_name', 'registration_number', 'inn', 'profession')
+    readonly_fields = ('verification_token', 'qr_code_display')
     
     fieldsets = (
         ('Основные данные', {
-            'fields': ('registration_number', 'last_name', 'first_name', 'sur_name', 'profession', 'issued_date', 'image')
+            'fields': ('registration_number', 'inn', 'last_name', 'first_name', 'sur_name', 'profession', 'issued_date', 'image', 'application')
+        }),
+        ('Безопасность и токен', {
+            'fields': ('verification_token',)
         }),
         ('Настройки', {
             'fields': ('order',)

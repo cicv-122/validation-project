@@ -170,17 +170,29 @@ export function useCertifiedUsers(search: string = '', page: number = 1) {
 	});
 }
 
-export function useCertifiedUserVerification(registrationNumber: string | undefined) {
+export function useCertifiedUserVerification(
+	registrationNumber: string | undefined,
+	inn?: string,
+	token?: string,
+	isDirectScan?: boolean
+) {
 	const { i18n } = useTranslation();
+	const shouldFetch = !!registrationNumber;
 	return useQuery<CertifiedUser>({
-		queryKey: ['certified-user-verify', registrationNumber, i18n.language],
+		queryKey: ['certified-user-verify', registrationNumber, inn, token, isDirectScan, i18n.language],
 		queryFn: async () => {
-			const { data } = await apiClient.get(`/documents/certified-users/verify/${registrationNumber}/`, {
-				params: { lang: i18n.language },
+			const { data } = await apiClient.get(`/documents/certified-users/verify/`, {
+				params: { 
+					reg: registrationNumber,
+					inn: inn || undefined,
+					token: token || undefined,
+					direct: isDirectScan ? '1' : undefined,
+					lang: i18n.language 
+				},
 			});
 			return data;
 		},
-		enabled: !!registrationNumber,
+		enabled: shouldFetch,
 		retry: false, // Don't retry if it fails (e.g. 404 not found)
 	});
 }

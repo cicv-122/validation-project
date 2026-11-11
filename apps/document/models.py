@@ -1,3 +1,4 @@
+import uuid
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 
@@ -135,6 +136,16 @@ class AppraisersExpert(models.Model):
 class CertifiedUser(models.Model):
     """ Сертифицированный пользователь """
     registration_number = models.CharField("Регистрационный номер", max_length=255, unique=True)
+    inn = models.CharField(_("ИНН / ПИН"), max_length=14, blank=True, null=True, db_index=True)
+    verification_token = models.UUIDField(_("Токен верификации"), default=uuid.uuid4, editable=False, null=True, blank=True, db_index=True)
+    application = models.OneToOneField(
+        'certification.CertificationApplication',
+        null=True, blank=True,
+        on_delete=models.SET_NULL,
+        related_name='certified_profile',
+        verbose_name=_("Связанная заявка кандидата"),
+        help_text=_("Связь с пре-кабинетом кандидата и результатами экзаменов")
+    )
     last_name = models.CharField(_("Фамилия"), max_length=55)
     first_name = models.CharField(_("Имя"), max_length=55)
     sur_name = models.CharField(_("Отчество"), max_length=55, blank=True, null=True)
@@ -157,6 +168,20 @@ class CertifiedUser(models.Model):
 
     objects = models.Manager()
 
+    def clean(self):
+        super().clean()
+        if self.last_name:
+            from apps.document.kyrgyz_name_normalizer import split_kyrgyz_fio
+            full = f"{self.last_name} {self.first_name or ''} {self.sur_name or ''}".strip()
+            self.last_name, self.first_name, self.sur_name = split_kyrgyz_fio(full)
+
+    def save(self, *args, **kwargs):
+        if self.last_name:
+            from apps.document.kyrgyz_name_normalizer import split_kyrgyz_fio
+            full = f"{self.last_name} {self.first_name or ''} {self.sur_name or ''}".strip()
+            self.last_name, self.first_name, self.sur_name = split_kyrgyz_fio(full)
+        super().save(*args, **kwargs)
+
     def __str__(self):
         return self.get_full_name()
 
@@ -165,20 +190,31 @@ class CertifiedUser(models.Model):
             return f"{self.last_name} {self.first_name} {self.sur_name}"
         return f"{self.last_name} {self.first_name}"
 
-    def save(self, *args, **kwargs):
-        # Если QR код еще не сгенерирован, но есть рег. номер
-        if not self.qr_code and self.registration_number:
-            import qrcode
-            from io import BytesIO
-            from django.core.files import File
-            
-            # URL для сканирования: страница верификации конкретного человека
-            from django.conf import settings
+    def generate_qr_code(self, force=False):
+        if not self.registration_number:
+            return None
+        import os
+        import qrcode
+        from io import BytesIO
+        from django.core.files import File
+        from django.conf import settings
+
+        if not self.verification_token:
+            self.verification_token = uuid.uuid4()
+
+        has_file = False
+        try:
+            if self.qr_code and hasattr(self.qr_code, 'path'):
+                has_file = os.path.exists(self.qr_code.path)
+        except Exception:
+            has_file = False
+
+        if not has_file or force:
             base_url = getattr(settings, 'CURRENT_SITE_URL', None) or 'https://validation.kg'
             if settings.DEBUG and not getattr(settings, 'CURRENT_SITE_URL', None):
                 base_url = 'http://localhost:5173'
-            qr_data = f"{base_url}/verify/{self.registration_number}"
-            
+            qr_data = f"{base_url}/verify/{self.registration_number}?token={self.verification_token}"
+
             qr = qrcode.QRCode(
                 version=1,
                 error_correction=qrcode.constants.ERROR_CORRECT_M,
@@ -187,14 +223,23 @@ class CertifiedUser(models.Model):
             )
             qr.add_data(qr_data)
             qr.make(fit=True)
-            
+
             img = qr.make_image(fill_color="black", back_color="white")
             buffer = BytesIO()
             img.save(buffer, format="PNG")
-            
-            file_name = f'qr_{self.registration_number}.png'
+
+            safe_num = "".join(c for c in self.registration_number if c.isalnum() or c in ('-', '_')) or str(self.verification_token)[:8]
+            file_name = f'qr_{safe_num}.png'
             self.qr_code.save(file_name, File(buffer), save=False)
-            
+        return self.qr_code
+
+    def save(self, *args, **kwargs):
+        if not self.verification_token:
+            self.verification_token = uuid.uuid4()
+        if self.profession:
+            from apps.document.profession_cleaner import clean_profession_name
+            self.profession = clean_profession_name(self.profession)
+        self.generate_qr_code()
         super().save(*args, **kwargs)
 
     class Meta:

@@ -51,10 +51,10 @@ export default function AssessmentCenters() {
 									sessionStorage.setItem('from_centers', 'true');
 									sessionStorage.setItem('centers_scroll_pos', window.scrollY.toString());
 								}}
-								className='group bg-white rounded-xl shadow-sm hover:shadow-md transition-all duration-300 p-6 border border-gray-100 border-l-4 border-l-blue-500 flex flex-col justify-between hover:border-l-blue-600'
+								className='group bg-white rounded-2xl shadow-xs hover:shadow-lg transition-all duration-200 ease-out p-6 border-2 border-slate-100 hover:border-[#283375] hover:-translate-y-1 active:scale-[0.98] flex flex-col justify-between cursor-pointer'
 							>
 								<div>
-									<h3 className='text-xl font-bold text-gray-900 mb-6 group-hover:text-blue-600 transition-colors duration-300 leading-tight min-h-28 flex items-start'>
+									<h3 className='text-xl font-bold text-gray-900 mb-6 group-hover:text-[#283375] transition-colors duration-200 leading-tight min-h-28 flex items-start'>
 										{center.id === 4
 											? (i18n.language.startsWith('k') || i18n.language === 'ky'
 												? 'С. Нааматов атындагы Нарын мамлекеттик университетинин Агрардык техникалык-экономикалык колледжи'
@@ -99,7 +99,7 @@ export default function AssessmentCenters() {
 									</div>
 								</div>
 
-								<div className='mt-6 pt-4 border-t border-gray-100 flex items-center justify-between text-sm font-semibold text-blue-600 group-hover:text-blue-700 transition-colors duration-300'>
+								<div className='mt-6 pt-4 border-t border-slate-100 flex items-center justify-between text-sm font-semibold text-[#283375] group-hover:text-blue-700 transition-colors duration-200'>
 									<span>{t('Подробнее')}</span>
 									<svg
 										xmlns='http://www.w3.org/2000/svg'

@@ -6,20 +6,19 @@ export default defineConfig({
 	server: {
 		proxy: {
 			'/api': {
-				target: 'http://127.0.0.1:8000',
+				target: 'https://validation.kg',
 				changeOrigin: true,
+				secure: false,
 			},
 			'/media': {
-				target: 'http://127.0.0.1:8000',
+				target: 'https://validation.kg',
 				changeOrigin: true,
+				secure: false,
 			},
 			'/static': {
-				target: 'http://127.0.0.1:8000',
+				target: 'https://validation.kg',
 				changeOrigin: true,
-			},
-			'/admin': {
-				target: 'http://127.0.0.1:8000',
-				changeOrigin: true,
+				secure: false,
 			},
 		},
 	},
