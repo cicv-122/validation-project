@@ -1,2 +1,2 @@
 // Shared configuration
-export {};
+export * from './i18n';
