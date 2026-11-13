@@ -16,7 +16,7 @@
 - [x] `components/ui/CustomVideoPlayer.tsx` (367 → 4 строки) → декомпозирован в `shared/ui/video-player`
 - [x] `components/staff/StaffHeader.tsx` (390 → 4 строки) → декомпозирован в `widgets/staff-header`
 - [x] `api/staff.ts` (360 → 4 строки) → декомпозирован в `entities/staff/api`
-- [ ] `pages/Experts.tsx` (337 строк) → `pages`
+- [x] `pages/Experts.tsx` (337 → 142 строк) → декомпозирован в `widgets/experts-registry`
 - [ ] `utils/kyrgyzPinValidator.ts` (336 строк) → `shared/lib`
 - [x] `components/apply/StepProfession.tsx` (335 строк) → перенесен в `features/apply-form`
 - [ ] `pages/AssessmentCenterDetail.tsx` (322 строк) → `pages`
