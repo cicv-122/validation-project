@@ -1,7 +1,7 @@
 import { useTranslation } from 'react-i18next';
 import HeroSection from '../components/home/HeroSection';
 import NewsSection from '../components/home/NewsSection';
-import StatisticsSection from '../components/home/StatisticsSection';
+import { StatisticsSection } from '../widgets/statistics';
 import { SEO } from '../components/ui';
 import { useHomeNews, useSliders } from '../hooks/useApi';
 
