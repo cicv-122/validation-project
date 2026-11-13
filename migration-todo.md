@@ -10,7 +10,7 @@
 - [x] `components/home/StatisticsSection.tsx` (562 → 37 строк) → декомпозирован в `widgets/statistics`
 
 ## 🟡 Фаза 2: Компоненты средней сложности (Priority Medium)
-- [ ] `pages/PartnerDetail.tsx` (471 строк) → `pages`
+- [x] `pages/PartnerDetail.tsx` (471 → 118 строк) → декомпозирован в `widgets/partner-detail`
 - [x] `pages/Apply.tsx` (463 → 264 строк) → декомпозирован в `widgets/apply-wizard` и `features/apply-form`
 - [x] `pages/CertifiedUsers.tsx` (404 → 240 строк) → декомпозирован в `widgets/candidate-registry`
 - [x] `components/ui/CustomVideoPlayer.tsx` (367 → 4 строки) → декомпозирован в `shared/ui/video-player`
