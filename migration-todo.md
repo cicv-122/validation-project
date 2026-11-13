@@ -3,7 +3,7 @@
 **Общий аудит**: 56 файлов | 🔴 Высокий (>500 строк): 5 | 🟡 Средний (200-500): 19 | 🟢 Низкий (<200): 32
 
 ## 🔴 Фаза 1: Декомпозиция монолитов (Priority High)
-- [ ] `pages/staff/StaffCandidateDossier.tsx` (1887 строк) → `widgets/features/entities`
+- [x] `pages/staff/StaffCandidateDossier.tsx` (1887 → 653 строк) → декомпозирован в `widgets/dossier-viewer` и `features/dossier-modals`
 - [x] `pages/staff/StaffDashboard.tsx` (1291 → 435 строк) → декомпозирован в `features/application-edit` и `widgets/candidate-registry`
 - [x] `pages/VerifyCertificate.tsx` (1114 → 179 строк) → декомпозирован в `widgets/certificate-verification`
 - [x] `components/Navbar.tsx` (592 → 4 строки) → декомпозирован в `widgets/navbar`
@@ -14,7 +14,7 @@
 - [x] `pages/Apply.tsx` (463 → 264 строк) → декомпозирован в `widgets/apply-wizard` и `features/apply-form`
 - [x] `pages/CertifiedUsers.tsx` (404 → 240 строк) → декомпозирован в `widgets/candidate-registry`
 - [ ] `components/ui/CustomVideoPlayer.tsx` (367 строк) → `shared/ui`
-- [ ] `components/staff/StaffHeader.tsx` (361 строк) → `widgets/staff-header`
+- [x] `components/staff/StaffHeader.tsx` (390 → 4 строки) → декомпозирован в `widgets/staff-header`
 - [ ] `api/staff.ts` (360 строк) → `entities/api`
 - [ ] `pages/Experts.tsx` (337 строк) → `pages`
 - [ ] `utils/kyrgyzPinValidator.ts` (336 строк) → `shared/lib`
