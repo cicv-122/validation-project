@@ -1,5 +1,6 @@
 import { DossierDocumentSlots } from '../../../widgets/dossier-viewer';
 import { ConfirmDeleteDialog } from '../../status-change';
+import { StatusBadge } from '../../../shared/ui';
 import { useEditApplication } from '../model/useEditApplication';
 import { AssessmentScheduleFields } from './AssessmentScheduleFields';
 import { IssueCertificateForm } from './IssueCertificateForm';
@@ -14,16 +15,7 @@ interface EditApplicationModalProps {
 	onDeleted?: () => void;
 }
 
-const STATUS_BADGES: Record<string, { bg: string; text: string; border: string }> = {
-	draft: { bg: 'bg-slate-100', text: 'text-slate-700', border: 'border-slate-200' },
-	submitted: { bg: 'bg-blue-50', text: 'text-blue-700', border: 'border-blue-200' },
-	under_review: { bg: 'bg-amber-50', text: 'text-amber-700', border: 'border-amber-200' },
-	assessment_scheduled: { bg: 'bg-cyan-50', text: 'text-cyan-700', border: 'border-cyan-200' },
-	assessment_in_progress: { bg: 'bg-purple-50', text: 'text-purple-700', border: 'border-purple-200' },
-	approved: { bg: 'bg-purple-50', text: 'text-purple-700', border: 'border-purple-200' },
-	rejected: { bg: 'bg-red-50', text: 'text-red-700', border: 'border-red-200' },
-	completed: { bg: 'bg-emerald-50', text: 'text-emerald-700', border: 'border-emerald-300' },
-};
+
 
 function formatAppDateTime(dateStr?: string): string {
 	if (!dateStr) return '—';
@@ -127,15 +119,11 @@ export function EditApplicationModal({
 									Дело кандидата • {appDetail?.short_registration_number}
 								</span>
 								{appDetail && (
-									<span
-										className={`px-2 py-0.5 rounded-md text-[10px] font-bold border ${
-											STATUS_BADGES[appDetail.status]?.bg
-										} ${STATUS_BADGES[appDetail.status]?.text} ${
-											STATUS_BADGES[appDetail.status]?.border
-										}`}
-									>
-										{appDetail.status_display}
-									</span>
+									<StatusBadge
+										status={appDetail.status}
+										label={appDetail.status_display}
+										size='xs'
+									/>
 								)}
 								{appDetail?.created_at && (
 									<span className='px-2 py-0.5 rounded-md text-[10px] font-bold bg-slate-100 text-slate-600 border border-slate-200 flex items-center gap-1'>

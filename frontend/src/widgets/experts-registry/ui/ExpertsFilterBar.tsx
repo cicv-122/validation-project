@@ -1,5 +1,6 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
+import { SearchInput } from '../../../shared/ui';
 import { RegionMeta } from '../model/types';
 import localExpertsData from '../../../data/experts_database.json';
 
@@ -34,27 +35,13 @@ export const ExpertsFilterBar: React.FC<ExpertsFilterBarProps> = ({
 		<div className='bg-white p-6 rounded-xl shadow-sm border border-gray-200 space-y-5'>
 			<div className='flex flex-col md:flex-row gap-4 justify-between items-stretch md:items-center'>
 				{/* Search Input */}
-				<div className='relative flex-1'>
-					<input
-						type='text'
+				<div className='flex-1'>
+					<SearchInput
 						value={searchQuery}
-						onChange={(e) => onSearchChange(e.target.value)}
+						onChange={onSearchChange}
 						placeholder={t('Поиск по ФИО, организации или городу...')}
-						className='w-full pl-10 pr-4 py-2.5 bg-gray-50 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-600 focus:bg-white transition-all'
+						size='md'
 					/>
-					<svg
-						className='w-5 h-5 text-gray-400 absolute left-3 top-1/2 -translate-y-1/2'
-						fill='none'
-						stroke='currentColor'
-						viewBox='0 0 24 24'
-					>
-						<path
-							strokeLinecap='round'
-							strokeLinejoin='round'
-							strokeWidth='2'
-							d='M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z'
-						/>
-					</svg>
 				</div>
 
 				{/* Profession Filter */}

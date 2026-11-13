@@ -1,6 +1,7 @@
 // frontend/src/widgets/assessment-queue/ui/ApplicationsQueueTable.tsx
 import React from 'react';
 import type { StaffApplicationItem, StaffProfile } from '../../../api/staff';
+import { StatusBadge } from '../../../shared/ui';
 
 const APPLICATION_STATUS_TABS = [
 	{ id: '', label: 'Все заявки', statKey: 'total' },
@@ -9,16 +10,7 @@ const APPLICATION_STATUS_TABS = [
 	{ id: 'completed', label: 'Выдано', statKey: 'completed' },
 ];
 
-const STATUS_BADGES: Record<string, { bg: string; text: string; border: string }> = {
-	draft: { bg: 'bg-slate-100', text: 'text-slate-700', border: 'border-slate-200' },
-	submitted: { bg: 'bg-blue-50', text: 'text-blue-700', border: 'border-blue-200' },
-	under_review: { bg: 'bg-amber-50', text: 'text-amber-700', border: 'border-amber-200' },
-	assessment_scheduled: { bg: 'bg-cyan-50', text: 'text-cyan-700', border: 'border-cyan-200' },
-	assessment_in_progress: { bg: 'bg-purple-50', text: 'text-purple-700', border: 'border-purple-200' },
-	approved: { bg: 'bg-purple-50', text: 'text-purple-700', border: 'border-purple-200' },
-	rejected: { bg: 'bg-red-50', text: 'text-red-700', border: 'border-red-200' },
-	completed: { bg: 'bg-emerald-50', text: 'text-emerald-700', border: 'border-emerald-300' },
-};
+
 
 function formatAppDate(dateStr?: string): string {
 	if (!dateStr) return '—';
@@ -151,7 +143,6 @@ export const ApplicationsQueueTable: React.FC<ApplicationsQueueTableProps> = ({
 							</thead>
 							<tbody className="divide-y divide-slate-100">
 								{applications.map((app) => {
-									const badgeStyle = STATUS_BADGES[app.status] || STATUS_BADGES.draft;
 									const rawPhone = app.phone || '';
 									const rawWhatsapp = app.whatsapp || '';
 									const cleanPhone = rawWhatsapp.replace(/[^0-9]/g, '') || rawPhone.replace(/[^0-9]/g, '');
@@ -211,11 +202,7 @@ export const ApplicationsQueueTable: React.FC<ApplicationsQueueTableProps> = ({
 												</div>
 											</td>
 											<td className="py-3.5 px-4">
-												<span
-													className={`px-2.5 py-1 rounded-full text-[11px] font-bold border ${badgeStyle.bg} ${badgeStyle.text} ${badgeStyle.border}`}
-												>
-													{app.status_display}
-												</span>
+												<StatusBadge status={app.status} label={app.status_display} size="sm" />
 											</td>
 											<td className="py-3.5 px-4 text-right">
 												<button

@@ -1,5 +1,6 @@
 // frontend/src/features/status-change/ui/ConfirmDeleteDialog.tsx
 import React from 'react';
+import { Modal, TrashIcon } from '../../../shared/ui';
 
 interface ConfirmDeleteDialogProps {
 	isOpen: boolean;
@@ -22,20 +23,11 @@ export const ConfirmDeleteDialog: React.FC<ConfirmDeleteDialogProps> = ({
 	onConfirm,
 	onCancel,
 }) => {
-	if (!isOpen) return null;
-
 	return (
-		<div className="fixed inset-0 z-60 bg-slate-900/70 backdrop-blur-xs flex items-center justify-center p-4">
-			<div className="bg-white rounded-3xl max-w-md w-full p-6 shadow-2xl border border-slate-100 space-y-4">
+		<Modal isOpen={isOpen} onClose={onCancel} maxWidth="md" showCloseButton={false} zIndex={220}>
+			<div className="space-y-4">
 				<div className="w-12 h-12 rounded-2xl bg-red-100 text-red-600 flex items-center justify-center mx-auto">
-					<svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-						<path
-							strokeLinecap="round"
-							strokeLinejoin="round"
-							strokeWidth={2}
-							d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"
-						/>
-					</svg>
+					<TrashIcon className="w-6 h-6" />
 				</div>
 				<div className="text-center space-y-1.5">
 					<h3 className="text-lg font-black text-slate-900">{title}</h3>
@@ -60,6 +52,6 @@ export const ConfirmDeleteDialog: React.FC<ConfirmDeleteDialogProps> = ({
 					</button>
 				</div>
 			</div>
-		</div>
+		</Modal>
 	);
 };

@@ -1,7 +1,8 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { formatLocalizedDate } from '../../../shared/lib';
-import { StatusData, STATUS_COLORS } from '../model/types';
+import { StatusBadge } from '../../../shared/ui';
+import { StatusData } from '../model/types';
 
 export interface ApplicationResultCardProps {
 	result: StatusData;
@@ -19,13 +20,7 @@ export const ApplicationResultCard: React.FC<ApplicationResultCardProps> = ({ re
 						{result.profession} · {result.type_display}
 					</p>
 				</div>
-				<span
-					className={`text-xs font-semibold px-3 py-1 rounded-full border ${
-						STATUS_COLORS[result.status] || 'bg-gray-100 text-gray-600 border-gray-200'
-					}`}
-				>
-					{result.status_display}
-				</span>
+				<StatusBadge status={result.status} label={result.status_display} size="sm" />
 			</div>
 			<div className='space-y-3 text-sm'>
 				<div className='flex justify-between'>
