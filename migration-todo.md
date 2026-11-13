@@ -4,21 +4,21 @@
 
 ## 🔴 Фаза 1: Декомпозиция монолитов (Priority High)
 - [ ] `pages/staff/StaffCandidateDossier.tsx` (1887 строк) → `widgets/features/entities`
-- [ ] `pages/staff/StaffDashboard.tsx` (1291 строк) → `widgets/features/entities`
-- [ ] `pages/VerifyCertificate.tsx` (1114 строк) → `pages`
-- [ ] `components/Navbar.tsx` (592 строк) → `widgets`
+- [x] `pages/staff/StaffDashboard.tsx` (1291 → 435 строк) → декомпозирован в `features/application-edit` и `widgets/candidate-registry`
+- [x] `pages/VerifyCertificate.tsx` (1114 → 179 строк) → декомпозирован в `widgets/certificate-verification`
+- [x] `components/Navbar.tsx` (592 → 4 строки) → декомпозирован в `widgets/navbar`
 - [ ] `components/home/StatisticsSection.tsx` (562 строк) → `widgets`
 
 ## 🟡 Фаза 2: Компоненты средней сложности (Priority Medium)
 - [ ] `pages/PartnerDetail.tsx` (471 строк) → `pages`
-- [ ] `pages/Apply.tsx` (463 строк) → `widgets/features/entities`
-- [ ] `pages/CertifiedUsers.tsx` (404 строк) → `pages`
+- [x] `pages/Apply.tsx` (463 → 264 строк) → декомпозирован в `widgets/apply-wizard` и `features/apply-form`
+- [x] `pages/CertifiedUsers.tsx` (404 → 240 строк) → декомпозирован в `widgets/candidate-registry`
 - [ ] `components/ui/CustomVideoPlayer.tsx` (367 строк) → `shared/ui`
 - [ ] `components/staff/StaffHeader.tsx` (361 строк) → `widgets/staff-header`
 - [ ] `api/staff.ts` (360 строк) → `entities/api`
 - [ ] `pages/Experts.tsx` (337 строк) → `pages`
 - [ ] `utils/kyrgyzPinValidator.ts` (336 строк) → `shared/lib`
-- [ ] `components/apply/StepProfession.tsx` (335 строк) → `features/apply-form`
+- [x] `components/apply/StepProfession.tsx` (335 строк) → перенесен в `features/apply-form`
 - [ ] `pages/AssessmentCenterDetail.tsx` (322 строк) → `pages`
 - [ ] `components/ui/CallbackModal.tsx` (292 строк) → `shared/ui`
 - [ ] `pages/ApplicationStatus.tsx` (287 строк) → `pages`
@@ -26,12 +26,12 @@
 - [ ] `pages/Contacts.tsx` (258 строк) → `pages`
 - [ ] `hooks/useApi.ts` (250 строк) → `shared/hooks`
 - [ ] `pages/NewsList.tsx` (241 строк) → `pages`
-- [ ] `components/apply/StepPersonal.tsx` (233 строк) → `features/apply-form`
-- [ ] `components/apply/PhotoCropperModal.tsx` (220 строк) → `features/apply-form`
-- [ ] `components/CertifiedUserModal.tsx` (212 строк) → `widgets`
+- [x] `components/apply/StepPersonal.tsx` (233 строк) → перенесен в `features/apply-form`
+- [x] `components/apply/PhotoCropperModal.tsx` (220 строк) → перенесен в `features/apply-form`
+- [x] `components/CertifiedUserModal.tsx` (212 строк) → перенесен в `widgets/candidate-registry`
 
 ## 🟢 Фаза 3: Мелкие компоненты и утилиты (Priority Low)
-- [ ] `components/apply/StepDocuments.tsx` (178 строк) → `features/apply-form`
+- [x] `components/apply/StepDocuments.tsx` (178 строк) → перенесен в `features/apply-form`
 - [ ] `pages/staff/StaffLogin.tsx` (153 строк) → `pages`
 - [ ] `pages/AdditionalInfo.tsx` (150 строк) → `pages`
 - [ ] `pages/AssessmentCenters.tsx` (128 строк) → `pages`
@@ -43,7 +43,7 @@
 - [ ] `components/home/ContactsSection.tsx` (94 строк) → `widgets`
 - [ ] `pages/ProfStandards.tsx` (92 строк) → `pages`
 - [ ] `pages/VideoGallery.tsx` (92 строк) → `pages`
-- [ ] `components/apply/StepConfirm.tsx` (86 строк) → `features/apply-form`
+- [x] `components/apply/StepConfirm.tsx` (86 строк) → перенесен в `features/apply-form`
 - [ ] `components/home/NewsSection.tsx` (73 строк) → `widgets`
 - [ ] `components/Toolbar.tsx` (61 строк) → `widgets`
 - [ ] `components/ui/NewsCard.tsx` (60 строк) → `shared/ui`
