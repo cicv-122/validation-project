@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { LANGUAGES } from './NavLanguageDropdown';
+import { NavMobileAccordion } from './NavMobileAccordion';
 
 interface NavMobileDrawerProps {
 	isOpen: boolean;
@@ -47,6 +48,23 @@ export function NavMobileDrawer({
 			? 'bg-white text-[#283375] block px-4 py-2 text-base font-bold rounded-xl transition-colors'
 			: 'text-white hover:bg-white/5 block px-4 py-2 text-base font-medium rounded-xl transition-colors';
 
+	const newsItems = [
+		{ to: '/news', label: t('Все новости'), isActive: location.pathname === '/news' },
+		{ to: '/gallery/images', label: t('Фотогалерея'), isActive: location.pathname === '/gallery/images' },
+		{ to: '/gallery/videos', label: t('Видео галерея'), isActive: location.pathname === '/gallery/videos' },
+	];
+
+	const aboutItems = [
+		{ to: '/about/management', label: t('Руководство'), isActive: location.pathname === '/about/management' },
+		{ to: '/documents/partners', label: t('Партнеры по развитию'), isActive: location.pathname === '/documents/partners' },
+		{ to: '/about/additional-info', label: t('Дополнительная информация'), isActive: location.pathname === '/about/additional-info' },
+	];
+
+	const dbItems = [
+		{ to: '/documents/assessment-centers', label: t('Центры оценки компетенций'), isActive: location.pathname === '/documents/assessment-centers' },
+		{ to: '/documents/experts', label: t('База данных экспертов'), isActive: location.pathname === '/documents/experts' },
+	];
+
 	return (
 		<>
 			{/* Backdrop Overlay */}
@@ -88,139 +106,35 @@ export function NavMobileDrawer({
 						</Link>
 					</div>
 
-					{/* Новости (Аккордеон) */}
-					<div className='bg-white/5 rounded-2xl p-1.5 border border-white/5 space-y-1'>
-						<button
-							type='button'
-							onClick={() => setMobileNewsOpen((prev) => !prev)}
-							className='w-full flex items-center justify-between px-3 py-2 rounded-xl text-xs font-bold text-blue-200 uppercase tracking-wider hover:bg-white/10 transition-colors cursor-pointer select-none'
-						>
-							<span className='flex items-center gap-2'>
-								<span className={`w-1.5 h-1.5 rounded-full ${isNewsActive ? 'bg-amber-400' : 'bg-transparent'}`} />
-								{t('Новости')}
-							</span>
-							<svg
-								className={`w-4 h-4 opacity-75 transition-transform duration-200 ${mobileNewsOpen ? 'rotate-180' : ''}`}
-								fill='none'
-								stroke='currentColor'
-								viewBox='0 0 24 24'
-							>
-								<path strokeLinecap='round' strokeLinejoin='round' strokeWidth={2} d='M19 9l-7 7-7-7' />
-							</svg>
-						</button>
-						{mobileNewsOpen && (
-							<div className='space-y-1 pl-2 border-l-2 border-white/15 ml-2.5 my-1'>
-								<Link
-									to='/news'
-									onClick={onClose}
-									className={mobileLinkClass(location.pathname === '/news')}
-								>
-									{t('Все новости')}
-								</Link>
-								<Link
-									to='/gallery/images'
-									onClick={onClose}
-									className={mobileLinkClass(location.pathname === '/gallery/images')}
-								>
-									{t('Фотогалерея')}
-								</Link>
-								<Link
-									to='/gallery/videos'
-									onClick={onClose}
-									className={mobileLinkClass(location.pathname === '/gallery/videos')}
-								>
-									{t('Видео галерея')}
-								</Link>
-							</div>
-						)}
-					</div>
+					<NavMobileAccordion
+						title={t('Новости')}
+						isSectionActive={isNewsActive}
+						isOpen={mobileNewsOpen}
+						onToggle={() => setMobileNewsOpen((prev) => !prev)}
+						items={newsItems}
+						onClose={onClose}
+						mobileLinkClass={mobileLinkClass}
+					/>
 
-					{/* О центре (Аккордеон) */}
-					<div className='bg-white/5 rounded-2xl p-1.5 border border-white/5 space-y-1'>
-						<button
-							type='button'
-							onClick={() => setMobileAboutOpen((prev) => !prev)}
-							className='w-full flex items-center justify-between px-3 py-2 rounded-xl text-xs font-bold text-blue-200 uppercase tracking-wider hover:bg-white/10 transition-colors cursor-pointer select-none'
-						>
-							<span className='flex items-center gap-2'>
-								<span className={`w-1.5 h-1.5 rounded-full ${isAboutActive ? 'bg-amber-400' : 'bg-transparent'}`} />
-								{t('О центре')}
-							</span>
-							<svg
-								className={`w-4 h-4 opacity-75 transition-transform duration-200 ${mobileAboutOpen ? 'rotate-180' : ''}`}
-								fill='none'
-								stroke='currentColor'
-								viewBox='0 0 24 24'
-							>
-								<path strokeLinecap='round' strokeLinejoin='round' strokeWidth={2} d='M19 9l-7 7-7-7' />
-							</svg>
-						</button>
-						{mobileAboutOpen && (
-							<div className='space-y-1 pl-2 border-l-2 border-white/15 ml-2.5 my-1'>
-								<Link
-									to='/about/management'
-									onClick={onClose}
-									className={mobileLinkClass(location.pathname === '/about/management')}
-								>
-									{t('Руководство')}
-								</Link>
-								<Link
-									to='/documents/partners'
-									onClick={onClose}
-									className={mobileLinkClass(location.pathname === '/documents/partners')}
-								>
-									{t('Партнеры по развитию')}
-								</Link>
-								<Link
-									to='/about/additional-info'
-									onClick={onClose}
-									className={mobileLinkClass(location.pathname === '/about/additional-info')}
-								>
-									{t('Дополнительная информация')}
-								</Link>
-							</div>
-						)}
-					</div>
+					<NavMobileAccordion
+						title={t('О центре')}
+						isSectionActive={isAboutActive}
+						isOpen={mobileAboutOpen}
+						onToggle={() => setMobileAboutOpen((prev) => !prev)}
+						items={aboutItems}
+						onClose={onClose}
+						mobileLinkClass={mobileLinkClass}
+					/>
 
-					{/* База данных (Аккордеон) */}
-					<div className='bg-white/5 rounded-2xl p-1.5 border border-white/5 space-y-1'>
-						<button
-							type='button'
-							onClick={() => setMobileDbOpen((prev) => !prev)}
-							className='w-full flex items-center justify-between px-3 py-2 rounded-xl text-xs font-bold text-blue-200 uppercase tracking-wider hover:bg-white/10 transition-colors cursor-pointer select-none'
-						>
-							<span className='flex items-center gap-2'>
-								<span className={`w-1.5 h-1.5 rounded-full ${isDbActive ? 'bg-amber-400' : 'bg-transparent'}`} />
-								{t('База данных')}
-							</span>
-							<svg
-								className={`w-4 h-4 opacity-75 transition-transform duration-200 ${mobileDbOpen ? 'rotate-180' : ''}`}
-								fill='none'
-								stroke='currentColor'
-								viewBox='0 0 24 24'
-							>
-								<path strokeLinecap='round' strokeLinejoin='round' strokeWidth={2} d='M19 9l-7 7-7-7' />
-							</svg>
-						</button>
-						{mobileDbOpen && (
-							<div className='space-y-1 pl-2 border-l-2 border-white/15 ml-2.5 my-1'>
-								<Link
-									to='/documents/assessment-centers'
-									onClick={onClose}
-									className={mobileLinkClass(location.pathname === '/documents/assessment-centers')}
-								>
-									{t('Центры оценки компетенций')}
-								</Link>
-								<Link
-									to='/documents/experts'
-									onClick={onClose}
-									className={mobileLinkClass(location.pathname === '/documents/experts')}
-								>
-									{t('База данных экспертов')}
-								</Link>
-							</div>
-						)}
-					</div>
+					<NavMobileAccordion
+						title={t('База данных')}
+						isSectionActive={isDbActive}
+						isOpen={mobileDbOpen}
+						onToggle={() => setMobileDbOpen((prev) => !prev)}
+						items={dbItems}
+						onClose={onClose}
+						mobileLinkClass={mobileLinkClass}
+					/>
 
 					{/* Кнопки действий */}
 					<div className='pt-4 border-t border-blue-800/50 space-y-2.5'>
@@ -240,7 +154,10 @@ export function NavMobileDrawer({
 						</Link>
 						<button
 							type='button'
-							onClick={() => { onClose(); onOpenCallback(); }}
+							onClick={() => {
+								onClose();
+								onOpenCallback();
+							}}
 							className='text-white block w-full text-center py-2.5 rounded-xl text-sm font-medium border border-white/10 hover:bg-white/10 transition-colors cursor-pointer'
 						>
 							{t('Получить консультацию')}
