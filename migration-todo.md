@@ -13,7 +13,7 @@
 - [ ] `pages/PartnerDetail.tsx` (471 строк) → `pages`
 - [x] `pages/Apply.tsx` (463 → 264 строк) → декомпозирован в `widgets/apply-wizard` и `features/apply-form`
 - [x] `pages/CertifiedUsers.tsx` (404 → 240 строк) → декомпозирован в `widgets/candidate-registry`
-- [ ] `components/ui/CustomVideoPlayer.tsx` (367 строк) → `shared/ui`
+- [x] `components/ui/CustomVideoPlayer.tsx` (367 → 4 строки) → декомпозирован в `shared/ui/video-player`
 - [x] `components/staff/StaffHeader.tsx` (390 → 4 строки) → декомпозирован в `widgets/staff-header`
 - [ ] `api/staff.ts` (360 строк) → `entities/api`
 - [ ] `pages/Experts.tsx` (337 строк) → `pages`
