@@ -1,9 +1,9 @@
-import { useEffect, useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 import type { CertifiedUser } from '../../../types';
 import { transliterate } from '../../../utils/transliterate';
 import { translateProfession } from '../../../utils/translateProfession';
+import { useKeyPress, useScrollLock, formatLocalizedDate } from '../../../shared/lib';
 
 interface Props {
 	user: CertifiedUser;
@@ -13,33 +13,10 @@ interface Props {
 export default function CertifiedUserModal({ user, onClose }: Props) {
 	const { t, i18n } = useTranslation();
 
-	// Close on Escape key
-	const handleKey = useCallback(
-		(e: KeyboardEvent) => {
-			if (e.key === 'Escape') onClose();
-		},
-		[onClose]
-	);
+	useKeyPress('Escape', onClose);
+	useScrollLock(true);
 
-	useEffect(() => {
-		document.addEventListener('keydown', handleKey);
-		document.body.style.overflow = 'hidden';
-		return () => {
-			document.removeEventListener('keydown', handleKey);
-			document.body.style.overflow = '';
-		};
-	}, [handleKey]);
-
-	const issuedDate = user.issued_date
-		? new Date(user.issued_date).toLocaleDateString(
-				i18n.language === 'en' ? 'en-US' : i18n.language === 'ky' ? 'ky-KG' : 'ru-RU',
-				{
-					day: 'numeric',
-					month: 'long',
-					year: 'numeric',
-				}
-		  )
-		: null;
+	const issuedDate = formatLocalizedDate(user.issued_date, i18n.language);
 
 	return (
 		/* Backdrop */

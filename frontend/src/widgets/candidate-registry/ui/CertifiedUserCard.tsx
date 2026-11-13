@@ -1,4 +1,5 @@
 import { useTranslation } from 'react-i18next';
+import { formatLocalizedDate } from '../../../shared/lib';
 import type { CertifiedUser } from '../../../types';
 import { transliterate } from '../../../utils/transliterate';
 import { translateProfession } from '../../../utils/translateProfession';
@@ -66,7 +67,7 @@ export default function CertifiedUserCard({
 
 				{user.issued_date && (
 					<p className='text-xs text-gray-400'>
-						{t('Выдача сертификата')}: {new Date(user.issued_date).toLocaleDateString('ru-RU')}
+						{t('Выдача сертификата')}: {formatLocalizedDate(user.issued_date, i18n.language)}
 					</p>
 				)}
 			</div>

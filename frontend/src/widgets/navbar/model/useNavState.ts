@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { useLocation } from 'react-router-dom';
+import { useClickOutside, useScrollLock, useKeyPress } from '../../../shared/lib';
 
 export function useNavState() {
 	const location = useLocation();
@@ -41,41 +42,18 @@ export function useNavState() {
 
 	const [activeDropdown, setActiveDropdown] = useState<string | null>(() => currentSection);
 
-	useEffect(() => {
-		const handleClickOutside = (e: MouseEvent) => {
-			if (navRef.current && !navRef.current.contains(e.target as Node)) {
-				setActiveDropdown(null);
-				setIsLangOpen(false);
-			}
-		};
-		document.addEventListener('mousedown', handleClickOutside);
-		return () => {
-			document.removeEventListener('mousedown', handleClickOutside);
-		};
-	}, []);
+	useClickOutside(navRef, () => {
+		setActiveDropdown(null);
+		setIsLangOpen(false);
+	});
 
-	useEffect(() => {
-		if (isOpen) {
-			document.body.style.overflow = 'hidden';
-		} else {
-			document.body.style.overflow = '';
-		}
-		return () => {
-			document.body.style.overflow = '';
-		};
-	}, [isOpen]);
+	useScrollLock(isOpen);
 
-	useEffect(() => {
-		const handleKeyDown = (e: KeyboardEvent) => {
-			if (e.key === 'Escape') {
-				setIsOpen(false);
-				setActiveDropdown(null);
-				setIsLangOpen(false);
-			}
-		};
-		window.addEventListener('keydown', handleKeyDown);
-		return () => window.removeEventListener('keydown', handleKeyDown);
-	}, []);
+	useKeyPress('Escape', () => {
+		setIsOpen(false);
+		setActiveDropdown(null);
+		setIsLangOpen(false);
+	});
 
 	useEffect(() => {
 		if (currentSection) {

@@ -1,5 +1,5 @@
-import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { useCopyToClipboard } from '../../../shared/lib';
 import emblemKyrgyzstan from '../../../assets/logo/emblem-kyrgyzstan.svg';
 
 interface CertificateHeaderBannerProps {
@@ -8,12 +8,10 @@ interface CertificateHeaderBannerProps {
 
 export function CertificateHeaderBanner({ registrationNumber }: CertificateHeaderBannerProps) {
 	const { t, i18n } = useTranslation();
-	const [copied, setCopied] = useState(false);
+	const [copied, copy] = useCopyToClipboard(2500);
 
 	const handleCopyLink = () => {
-		navigator.clipboard.writeText(window.location.href);
-		setCopied(true);
-		setTimeout(() => setCopied(false), 2500);
+		copy(window.location.href);
 	};
 
 	return (

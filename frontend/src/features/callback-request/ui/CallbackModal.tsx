@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { useKeyPress, useScrollLock } from '../../../shared/lib';
 import { CallbackModalProps, CallbackStatus } from '../model/types';
 import { submitCallbackRequest } from '../api/callbackApi';
 import { CallbackSuccessView } from './CallbackSuccessView';
@@ -30,14 +31,9 @@ export const CallbackModal: React.FC<CallbackModalProps> = ({ isOpen, onClose })
 		}
 	}, [isOpen]);
 
-	// Close on Escape
-	useEffect(() => {
-		const onKey = (e: KeyboardEvent) => {
-			if (e.key === 'Escape') onClose();
-		};
-		if (isOpen) window.addEventListener('keydown', onKey);
-		return () => window.removeEventListener('keydown', onKey);
-	}, [isOpen, onClose]);
+	// Close on Escape & Lock body scroll when open
+	useKeyPress('Escape', onClose, isOpen);
+	useScrollLock(isOpen);
 
 	const handleSubmit = async (e: React.FormEvent) => {
 		e.preventDefault();

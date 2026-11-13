@@ -1,5 +1,6 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { StaffProfile } from '../../../api/staff';
+import { useClickOutside, useKeyPress } from '../../../shared/lib';
 
 interface StaffProfileMenuProps {
 	profile: StaffProfile | null;
@@ -24,18 +25,9 @@ export const StaffProfileMenu: React.FC<StaffProfileMenuProps> = ({
 	const [isMenuOpen, setIsMenuOpen] = useState(false);
 	const menuRef = useRef<HTMLDivElement>(null);
 
-	// Закрытие меню при клике вне его области
-	useEffect(() => {
-		const handleClickOutside = (e: MouseEvent) => {
-			if (menuRef.current && !menuRef.current.contains(e.target as Node)) {
-				setIsMenuOpen(false);
-			}
-		};
-		document.addEventListener('mousedown', handleClickOutside);
-		return () => {
-			document.removeEventListener('mousedown', handleClickOutside);
-		};
-	}, []);
+	// Закрытие меню при клике вне его области или по Escape
+	useClickOutside(menuRef, () => setIsMenuOpen(false), isMenuOpen);
+	useKeyPress('Escape', () => setIsMenuOpen(false), isMenuOpen);
 
 	return (
 		<div

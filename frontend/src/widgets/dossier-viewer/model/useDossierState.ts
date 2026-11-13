@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useCopyToClipboard } from '../../../shared/lib';
 import {
 	staffApi,
 	StaffApplicationDocument,
@@ -57,7 +58,7 @@ export function useDossierState(id: string | undefined, returnUrl: string) {
 	const [deletingCandidate, setDeletingCandidate] = useState(false);
 
 	const [downloadingQR, setDownloadingQR] = useState<string | null>(null);
-	const [linkCopied, setLinkCopied] = useState(false);
+	const [linkCopied, copyLink] = useCopyToClipboard(2000);
 
 	const photoInputRef = useRef<HTMLInputElement>(null);
 
@@ -207,9 +208,7 @@ export function useDossierState(id: string | undefined, returnUrl: string) {
 
 	const handleCopyLink = () => {
 		const url = `https://validation.kg${publicVerifyUrl}`;
-		navigator.clipboard.writeText(url);
-		setLinkCopied(true);
-		setTimeout(() => setLinkCopied(false), 2000);
+		copyLink(url);
 	};
 
 	const handleDownloadQR = async (format: 'svg' | 'png') => {

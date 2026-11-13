@@ -1,5 +1,6 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
+import { formatLocalizedDate } from '../../../shared/lib';
 import { StatusData, STATUS_COLORS } from '../model/types';
 
 export interface ApplicationResultCardProps {
@@ -7,7 +8,7 @@ export interface ApplicationResultCardProps {
 }
 
 export const ApplicationResultCard: React.FC<ApplicationResultCardProps> = ({ result }) => {
-	const { t } = useTranslation();
+	const { t, i18n } = useTranslation();
 
 	return (
 		<div className='bg-white rounded-2xl shadow-lg p-6'>
@@ -30,14 +31,14 @@ export const ApplicationResultCard: React.FC<ApplicationResultCardProps> = ({ re
 				<div className='flex justify-between'>
 					<span className='text-gray-500'>{t('Дата подачи:')}</span>
 					<span className='font-medium'>
-						{new Date(result.created_at).toLocaleDateString('ru-RU')}
+						{formatLocalizedDate(result.created_at, i18n.language)}
 					</span>
 				</div>
 				{result.scheduled_date && (
 					<div className='flex justify-between'>
 						<span className='text-gray-500'>{t('Дата проведения:')}</span>
 						<span className='font-medium'>
-							{new Date(result.scheduled_date).toLocaleDateString('ru-RU')}
+							{formatLocalizedDate(result.scheduled_date, i18n.language)}
 						</span>
 					</div>
 				)}

@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next';
 import { useSearchParams } from 'react-router-dom';
 import { PageHero, SEO } from '../components/ui';
 import { useCertifiedUsers } from '../hooks/useApi';
-import { useDebounce } from '../shared/lib';
+import { useDebounce, safeSessionStorage } from '../shared/lib';
 import {
 	CertifiedUserSearch,
 	CertifiedUsersGrid,
@@ -22,13 +22,13 @@ export default function CertifiedUsers() {
 	const highlightParam = searchParams.get('highlight');
 	const [highlightedReg, setHighlightedReg] = useState<string | null>(highlightParam);
 
-	// Restore search state from sessionStorage or URL highlight parameter
+	// Restore search state safely from sessionStorage or URL highlight parameter
 	const [inputValue, setInputValue] = useState(() => {
-		return highlightParam || sessionStorage.getItem('certified_users_search') || '';
+		return highlightParam || safeSessionStorage.getItem('certified_users_search') || '';
 	});
 	const [page, setPage] = useState(() => {
 		if (highlightParam) return 1;
-		const saved = sessionStorage.getItem('certified_users_page');
+		const saved = safeSessionStorage.getItem('certified_users_page');
 		return saved ? parseInt(saved, 10) : 1;
 	});
 	const [selectedUser, setSelectedUser] = useState<CertifiedUser | null>(null);
@@ -46,13 +46,13 @@ export default function CertifiedUsers() {
 	// Debounced search — API call fires 400ms after user stops typing
 	const search = useDebounce(inputValue, 400);
 
-	// Cache search and page state to sessionStorage
+	// Cache search and page state to sessionStorage safely
 	useEffect(() => {
-		sessionStorage.setItem('certified_users_search', search);
+		safeSessionStorage.setItem('certified_users_search', search);
 	}, [search]);
 
 	useEffect(() => {
-		sessionStorage.setItem('certified_users_page', page.toString());
+		safeSessionStorage.setItem('certified_users_page', page.toString());
 	}, [page]);
 
 	const { data, isLoading, isFetching, error } = useCertifiedUsers(search, page);
