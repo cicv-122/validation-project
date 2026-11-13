@@ -20,7 +20,7 @@ interface StatCardProps {
 }
 
 export default function StatCard({ item, isVisible, delay }: StatCardProps) {
-	const { t } = useTranslation();
+	const { t, i18n } = useTranslation();
 	const [count, setCount] = useState(0);
 
 	useEffect(() => {
@@ -54,7 +54,7 @@ export default function StatCard({ item, isVisible, delay }: StatCardProps) {
 	const formattedCount =
 		item.value !== undefined
 			? item.value >= 1000
-				? count.toLocaleString('ru-RU')
+				? count.toLocaleString(i18n.language === 'en' ? 'en-US' : 'ru-RU')
 				: count
 			: item.displayStr;
 

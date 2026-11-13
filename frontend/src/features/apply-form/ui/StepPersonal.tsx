@@ -74,7 +74,7 @@ export default function StepPersonal({
 						name='full_name'
 						value={form.full_name}
 						onChange={onChange}
-						placeholder='Иванов Иван Иванович'
+						placeholder={t('form.placeholder_name', 'Иванов Иван Иванович')}
 						className='w-full px-4 py-3 bg-white border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 outline-none text-sm transition-all'
 					/>
 				</div>
@@ -103,7 +103,7 @@ export default function StepPersonal({
 						<option value=''>— {t('Выберите гражданство')} —</option>
 						{CITIZENSHIP_OPTIONS.map((opt) => (
 							<option key={opt.value} value={opt.value}>
-								{opt.label}
+								{t(opt.labelKey || opt.label, opt.label)}
 							</option>
 						))}
 					</select>
@@ -120,7 +120,7 @@ export default function StepPersonal({
 						onChange={(e) => handleInnInput(e.target.value)}
 						placeholder={
 							currentCitizenshipMeta
-								? t(currentCitizenshipMeta.placeholder)
+								? t(currentCitizenshipMeta.placeholderKey || currentCitizenshipMeta.placeholder, currentCitizenshipMeta.placeholder)
 								: t('Сначала выберите гражданство')
 						}
 						required
@@ -135,7 +135,7 @@ export default function StepPersonal({
 					/>
 					{form.inn && pinAnalysis.errorMessage && (
 						<p className='text-xs text-red-600 mt-1.5 font-semibold'>
-							{pinAnalysis.errorMessage}
+							{t(pinAnalysis.errorMessage)}
 						</p>
 					)}
 				</div>
@@ -182,7 +182,7 @@ export default function StepPersonal({
 						name='address'
 						value={form.address}
 						onChange={onChange}
-						placeholder='г. Бишкек, Первомайский район, ул. ...'
+						placeholder={t('form.placeholder_address', 'г. Бишкек, Первомайский район, ул. ...')}
 						className='w-full px-4 py-3 bg-white border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 outline-none text-sm transition-all'
 					/>
 				</div>

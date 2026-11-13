@@ -7,6 +7,50 @@ interface RegionBarsProps {
 	currentLang: string;
 }
 
+const CITY_EN_MAP: Record<string, string> = {
+	'г. Бишкек': 'Bishkek',
+	'Бишкек': 'Bishkek',
+	'г. Ош': 'Osh',
+	'Ош': 'Osh',
+	'г. Манас': 'Manas',
+	'Манас': 'Manas',
+	'г. Балыкчы': 'Balykchy',
+	'Балыкчы': 'Balykchy',
+	'г. Кызыл-Кия': 'Kyzyl-Kiya',
+	'Кызыл-Кия': 'Kyzyl-Kiya',
+	'г. Каракол': 'Karakol',
+	'Каракол': 'Karakol',
+	'г. Нарын': 'Naryn',
+	'Нарын': 'Naryn',
+	'г. Талас': 'Talas',
+	'Талас': 'Talas',
+	'г. Джалал-Абад': 'Jalal-Abad',
+	'Джалал-Абад': 'Jalal-Abad',
+};
+
+const REGION_EN_MAP: Record<string, string> = {
+	'Чуйская область': 'Chuy Region',
+	'Ошская область': 'Osh Region',
+	'Джалал-Абадская область': 'Jalal-Abad Region',
+	'Иссык-Кульская область': 'Issyk-Kul Region',
+	'Баткенская область': 'Batken Region',
+	'Нарынская область': 'Naryn Region',
+	'Таласская область': 'Talas Region',
+};
+
+const CITY_KY_MAP: Record<string, string> = {
+	'г. Бишкек': 'Бишкек ш.',
+	'Бишкек': 'Бишкек ш.',
+	'г. Ош': 'Ош ш.',
+	'Ош': 'Ош ш.',
+	'г. Манас': 'Манас ш.',
+	'Манас': 'Манас ш.',
+	'г. Балыкчы': 'Балыкчы ш.',
+	'Балыкчы': 'Балыкчы ш.',
+	'г. Кызыл-Кия': 'Кызыл-Кыя ш.',
+	'Кызыл-Кия': 'Кызыл-Кыя ш.',
+};
+
 export function RegionBars({
 	regionStats,
 	maxCount,
@@ -18,17 +62,29 @@ export function RegionBars({
 			{regionStats.map((r, i) => {
 				const percent = Math.round((r.count / maxCount) * 100);
 
-				const city = currentLang === 'ky' ? r.cityKg || r.cityRu : r.cityRu;
-				const region = currentLang === 'ky' ? r.regionKg || r.regionRu : r.regionRu;
+				const city =
+					currentLang === 'ky'
+						? r.cityKg || CITY_KY_MAP[r.cityRu] || r.cityRu
+						: currentLang === 'en'
+							? CITY_EN_MAP[r.cityRu] || CITY_EN_MAP[r.cityRu.replace(/^г\.\s*/, '')] || r.cityRu
+							: r.cityRu;
+
+				const region =
+					currentLang === 'ky'
+						? r.regionKg || r.regionRu
+						: currentLang === 'en'
+							? REGION_EN_MAP[r.regionRu] || r.regionRu
+							: r.regionRu;
 
 				let labelTitle = city;
 				let labelSubtitle = '';
 
+				const cleanCity = city.replace(/^г\.\s*|\s*ш\./i, '').toLowerCase();
 				if (
 					city &&
 					region &&
 					city !== region &&
-					!region.includes(city.replace(/^г\.\s*/, ''))
+					!region.toLowerCase().includes(cleanCity)
 				) {
 					labelSubtitle = region;
 				} else if (!city && region) {
@@ -74,7 +130,13 @@ export function RegionBars({
 								</span>
 								{r.trainersCount > 0 && (
 									<span
-										title={`Из них ${r.trainersCount} имеют квалификацию тренера-оценщика`}
+										title={
+											currentLang === 'ky'
+												? `Алардын ${r.trainersCount} тренери-баалоочу квалификациясына ээ`
+												: currentLang === 'en'
+													? `${r.trainersCount} of them are certified master trainers`
+													: `Из них ${r.trainersCount} имеют квалификацию тренера-оценщика`
+										}
 										className='text-[10px] font-semibold text-emerald-700 bg-emerald-50 border border-emerald-200/80 px-1.5 py-0.5 rounded-md'
 									>
 										+{r.trainersCount}{' '}

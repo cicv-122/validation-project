@@ -136,7 +136,7 @@ export default function StatsMetricsGrid({ isVisible }: StatsMetricsGridProps) {
 		{
 			id: 'price',
 			value: 10000,
-			suffix: ' сом',
+			suffix: t('stats.currency_suffix', ' сом'),
 			titleKey: 'stats.price_title',
 			descKey: 'stats.price_desc',
 			defaultDesc: 'сом — стоимость услуги для кандидата',
