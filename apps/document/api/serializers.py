@@ -20,7 +20,7 @@ class DevelopmentPartnerSerializer(serializers.ModelSerializer):
             'id', 'title', 'description', 'url', 'address', 'map_url', 'phone', 'email', 
             'image', 'file', 'created_at',
             'facebook_url', 'instagram_url', 'linkedin_url', 'telegram_url',
-            'whatsapp_url', 'tiktok_url', 'youtube_url'
+            'whatsapp_url', 'tiktok_url', 'youtube_url', 'twitter_url', 'threads_url'
         ]
 
     def get_image(self, obj):

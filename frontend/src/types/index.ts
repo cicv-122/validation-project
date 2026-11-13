@@ -65,6 +65,8 @@ export interface PartnerDetailType extends DevelopmentPartner {
 	whatsapp_url?: string;
 	tiktok_url?: string;
 	youtube_url?: string;
+	twitter_url?: string;
+	threads_url?: string;
 }
 
 // ── People ────────────────────────────────────────────────────────────

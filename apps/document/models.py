@@ -49,6 +49,8 @@ class DevelopmentPartner(models.Model):
     whatsapp_url = models.URLField(verbose_name=_('WhatsApp (ссылка)'), blank=True, null=True)
     tiktok_url = models.URLField(verbose_name=_('TikTok (ссылка)'), blank=True, null=True)
     youtube_url = models.URLField(verbose_name=_('YouTube (ссылка)'), blank=True, null=True)
+    twitter_url = models.URLField(verbose_name=_('Twitter / X (ссылка)'), blank=True, null=True)
+    threads_url = models.URLField(verbose_name=_('Threads (ссылка)'), blank=True, null=True)
     image = ProcessedImageField(
         verbose_name=_('Логотип (Фото)'),
         upload_to=development_partner_img,
