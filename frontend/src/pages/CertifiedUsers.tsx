@@ -3,28 +3,13 @@ import { useTranslation } from 'react-i18next';
 import { useSearchParams } from 'react-router-dom';
 import { EmptyState, ErrorMessage, PageHero, SEO, Spinner } from '../components/ui';
 import { useCertifiedUsers } from '../hooks/useApi';
-import CertifiedUserModal from '../components/CertifiedUserModal';
+import {
+	CertifiedUserCard,
+	CertifiedUserModal,
+	CertifiedUserPagination,
+	CertifiedUserSearch,
+} from '../widgets/candidate-registry';
 import type { CertifiedUser } from '../types';
-import { transliterate } from '../utils/transliterate';
-import { translateProfession } from '../utils/translateProfession';
-
-// Search icon SVG
-function SearchIcon() {
-	return (
-		<svg className='w-5 h-5 text-gray-400' fill='none' stroke='currentColor' viewBox='0 0 24 24'>
-			<path strokeLinecap='round' strokeLinejoin='round' strokeWidth={2} d='M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0' />
-		</svg>
-	);
-}
-
-// Person placeholder icon
-function PersonIcon() {
-	return (
-		<svg className='w-16 h-16 text-gray-300' fill='currentColor' viewBox='0 0 24 24'>
-			<path d='M12 12c2.7 0 4.8-2.1 4.8-4.8S14.7 2.4 12 2.4 7.2 4.5 7.2 7.2 9.3 12 12 12zm0 2.4c-3.2 0-9.6 1.6-9.6 4.8v2.4h19.2v-2.4c0-3.2-6.4-4.8-9.6-4.8z' />
-		</svg>
-	);
-}
 
 // Debounce hook — delays API call by 400ms after user stops typing
 function useDebounce(value: string, delay: number) {
@@ -42,12 +27,12 @@ function totalPages(count: number, pageSize = 20) {
 }
 
 export default function CertifiedUsers() {
-	const { t, i18n } = useTranslation();
+	const { t } = useTranslation();
 	const [searchParams, setSearchParams] = useSearchParams();
 	const highlightParam = searchParams.get('highlight');
 	const [highlightedReg, setHighlightedReg] = useState<string | null>(highlightParam);
 
-	// Continuous passive scroll listener to guarantee 100% accurate scrollPos
+	// Continuous passive scroll listener to guarantee accurate scrollPos
 	const activeScrollRef = useRef(0);
 	useEffect(() => {
 		const onScroll = () => {
@@ -58,7 +43,7 @@ export default function CertifiedUsers() {
 		window.addEventListener('scroll', onScroll, { passive: true });
 		return () => window.removeEventListener('scroll', onScroll);
 	}, []);
-	
+
 	// Restore search state from sessionStorage or URL highlight parameter
 	const [inputValue, setInputValue] = useState(() => {
 		return highlightParam || sessionStorage.getItem('certified_users_search') || '';
@@ -210,172 +195,53 @@ export default function CertifiedUsers() {
 			<PageHero title={t('База данных сертифицированных')} />
 
 			<div ref={listRef} className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 scroll-mt-28'>
+				{/* Поисковая строка */}
+				<CertifiedUserSearch
+					value={inputValue}
+					onChange={handleSearch}
+					onClear={clearSearch}
+					totalCount={count}
+					isLoading={isLoading}
+					hasResults={Boolean(data)}
+					hasSearchQuery={Boolean(search)}
+				/>
 
-				{/* ── Search bar ───────────────────────────────────────── */}
-				<div className='mb-8'>
-					<div className='relative max-w-xl mx-auto'>
-						<div className='absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none'>
-							<SearchIcon />
-						</div>
-						<input
-							id='certified-users-search'
-							type='text'
-							value={inputValue}
-							onChange={handleSearch}
-							placeholder={t('Поиск по ФИО, профессии или рег. номеру...')}
-							className='w-full pl-12 pr-10 py-3.5 text-sm bg-white border border-gray-200 rounded-2xl shadow-sm focus:outline-none focus:ring-2 focus:ring-[#283375] focus:border-[#283375] transition-all'
-						/>
-						{inputValue && (
-							<button
-								onClick={clearSearch}
-								className='absolute inset-y-0 right-0 pr-4 flex items-center text-gray-400 hover:text-gray-600 transition-colors'
-								aria-label='Очистить поиск'
-							>
-								<svg className='w-5 h-5' fill='none' stroke='currentColor' viewBox='0 0 24 24'>
-									<path strokeLinecap='round' strokeLinejoin='round' strokeWidth={2} d='M6 18L18 6M6 6l12 12' />
-								</svg>
-							</button>
-						)}
-					</div>
-
-					{/* Result count badge */}
-					{!isLoading && data && (
-						<p className='text-center text-sm text-gray-500 mt-3'>
-							{search
-								? <><span className='font-semibold text-[#283375]'>{count}</span> {t('Найдено специалистов')}</>
-								: <>{t('Найдено специалистов')}: <span className='font-semibold text-[#283375]'>{count}</span></>
-							}
-						</p>
-					)}
-				</div>
-
-				{/* ── Content ──────────────────────────────────────────── */}
+				{/* Контент: спиннер, ошибка или список специалистов */}
 				{isLoading ? (
 					<Spinner />
 				) : error ? (
 					<ErrorMessage message={t('Ошибка загрузки данных.')} />
 				) : users.length > 0 ? (
 					<>
-						{/* Grid with slight opacity while fetching next page */}
-						<div className={`grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 transition-opacity duration-200 ${isFetching ? 'opacity-60' : 'opacity-100'}`}>
-							{users.map((user) => {
-								const isHighlighted = highlightedReg === user.registration_number;
-								return (
-									<div
-										key={user.id}
-										id={`user-card-${encodeURIComponent(user.registration_number)}`}
-										onClick={() => {
-											saveScrollPosition();
-											setSelectedUser(user);
-										}}
-										className={`bg-white rounded-2xl shadow-sm border overflow-hidden hover:shadow-md hover:-translate-y-0.5 transition-all duration-300 cursor-pointer ${
-											isHighlighted
-												? 'ring-4 ring-blue-500 shadow-xl scale-[1.02] border-blue-500 bg-blue-50/30'
-												: 'border-gray-100'
-										}`}
-									>
-									{/* Photo */}
-									{user.image ? (
-										<img
-											src={user.image}
-											alt={i18n.language === 'en' ? transliterate(user.full_name) : user.full_name}
-											className='w-full h-52 object-cover object-top'
-										/>
-									) : (
-										<div className='w-full h-52 flex items-center justify-center bg-gray-100'>
-											<PersonIcon />
-										</div>
-									)}
-
-									{/* Info */}
-									<div className='p-4 text-center space-y-2'>
-										<h3 className='text-base font-bold text-gray-900 leading-tight' title={i18n.language === 'en' ? transliterate(user.full_name) : user.full_name}>
-											{i18n.language === 'en' ? transliterate(user.full_name) : user.full_name}
-										</h3>
-
-										{user.profession && (
-											<p className='text-xs text-gray-500 line-clamp-2'>
-												{translateProfession(user.profession, i18n.language)}
-											</p>
-										)}
-
-										<span className='inline-block text-xs font-semibold text-[#283375] bg-blue-50 border border-blue-100 py-1 px-3 rounded-full'>
-											{t('Рег. номер')}: {user.registration_number}
-										</span>
-
-										{user.issued_date && (
-											<p className='text-xs text-gray-400'>
-												{t('Выдача сертификата')}: {new Date(user.issued_date).toLocaleDateString('ru-RU')}
-											</p>
-										)}
-									</div>
-								</div>
-								);
-							})}
+						{/* Сетка специалистов */}
+						<div
+							className={`grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 transition-opacity duration-200 ${
+								isFetching ? 'opacity-60' : 'opacity-100'
+							}`}
+						>
+							{users.map((user) => (
+								<CertifiedUserCard
+									key={user.id}
+									user={user}
+									isHighlighted={highlightedReg === user.registration_number}
+									onClick={(u) => {
+										saveScrollPosition();
+										setSelectedUser(u);
+									}}
+								/>
+							))}
 						</div>
 
-						{/* ── Pagination ───────────────────────────────────── */}
-						{pages > 1 && (
-							<div className='mt-10 flex flex-col sm:flex-row items-center justify-between gap-4'>
-								{/* Page info */}
-								<p className='text-sm text-gray-500'>
-									{t('Страница')} <span className='font-semibold text-gray-800'>{page}</span> {t('из')} <span className='font-semibold text-gray-800'>{pages}</span>
-								</p>
-
-								{/* Buttons */}
-								<div className='flex items-center gap-2'>
-									<button
-										id='certified-users-prev'
-										onClick={() => handlePageChange(Math.max(1, page - 1))}
-										disabled={page === 1 || isFetching}
-										className='px-4 py-2 text-sm font-medium rounded-xl border border-gray-200 bg-white text-gray-700 hover:bg-gray-50 disabled:opacity-40 disabled:cursor-not-allowed transition-all'
-									>
-										← {t('Предыдущая')}
-									</button>
-
-									{/* Page numbers (show up to 5 around current page) */}
-									<div className='hidden sm:flex gap-1'>
-										{Array.from({ length: pages }, (_, i) => i + 1)
-											.filter((p) => p === 1 || p === pages || Math.abs(p - page) <= 2)
-											.reduce<(number | 'ellipsis')[]>((acc, p, idx, arr) => {
-												if (idx > 0 && p - (arr[idx - 1] as number) > 1) acc.push('ellipsis');
-												acc.push(p);
-												return acc;
-											}, [])
-											.map((p, idx) =>
-												p === 'ellipsis' ? (
-													<span key={`e-${idx}`} className='px-2 py-2 text-gray-400 text-sm'>…</span>
-												) : (
-													<button
-														key={p}
-														onClick={() => handlePageChange(p as number)}
-														disabled={isFetching}
-														className={`w-9 h-9 text-sm font-medium rounded-xl transition-all ${
-															page === p
-																? 'bg-[#283375] text-white shadow-sm'
-																: 'bg-white border border-gray-200 text-gray-700 hover:bg-gray-50'
-														}`}
-													>
-														{p}
-													</button>
-												)
-											)}
-									</div>
-
-									<button
-										id='certified-users-next'
-										onClick={() => handlePageChange(Math.min(pages, page + 1))}
-										disabled={page === pages || isFetching}
-										className='px-4 py-2 text-sm font-medium rounded-xl border border-gray-200 bg-white text-gray-700 hover:bg-gray-50 disabled:opacity-40 disabled:cursor-not-allowed transition-all'
-									>
-										{t('Следующая')} →
-									</button>
-								</div>
-							</div>
-						)}
+						{/* Пагинация */}
+						<CertifiedUserPagination
+							page={page}
+							totalPages={pages}
+							isFetching={isFetching}
+							onPageChange={handlePageChange}
+						/>
 					</>
 				) : (
-					/* Empty state — different message when searching vs no data at all */
+					/* Пустое состояние */
 					search ? (
 						<div className='text-center py-20'>
 							<div className='w-16 h-16 rounded-full bg-slate-100 flex items-center justify-center mx-auto mb-4 text-slate-400'>
@@ -392,7 +258,7 @@ export default function CertifiedUsers() {
 				)}
 			</div>
 
-			{/* Detailed View Modal */}
+			{/* Модальное окно профиля специалиста */}
 			{selectedUser && (
 				<CertifiedUserModal
 					user={selectedUser}
