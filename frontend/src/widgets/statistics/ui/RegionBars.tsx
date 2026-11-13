@@ -7,7 +7,7 @@ interface RegionBarsProps {
 	currentLang: string;
 }
 
-const CITY_EN_MAP: Record<string, string> = {
+const TRANSLATION_MAP_EN: Record<string, string> = {
 	'г. Бишкек': 'Bishkek',
 	'Бишкек': 'Bishkek',
 	'г. Ош': 'Osh',
@@ -26,19 +26,17 @@ const CITY_EN_MAP: Record<string, string> = {
 	'Талас': 'Talas',
 	'г. Джалал-Абад': 'Jalal-Abad',
 	'Джалал-Абад': 'Jalal-Abad',
-};
-
-const REGION_EN_MAP: Record<string, string> = {
 	'Чуйская область': 'Chuy Region',
 	'Ошская область': 'Osh Region',
 	'Джалал-Абадская область': 'Jalal-Abad Region',
+	'Джалал-Абадская область (г. Манас)': 'Manas (Jalal-Abad Region)',
 	'Иссык-Кульская область': 'Issyk-Kul Region',
 	'Баткенская область': 'Batken Region',
 	'Нарынская область': 'Naryn Region',
 	'Таласская область': 'Talas Region',
 };
 
-const CITY_KY_MAP: Record<string, string> = {
+const TRANSLATION_MAP_KY: Record<string, string> = {
 	'г. Бишкек': 'Бишкек ш.',
 	'Бишкек': 'Бишкек ш.',
 	'г. Ош': 'Ош ш.',
@@ -49,6 +47,22 @@ const CITY_KY_MAP: Record<string, string> = {
 	'Балыкчы': 'Балыкчы ш.',
 	'г. Кызыл-Кия': 'Кызыл-Кыя ш.',
 	'Кызыл-Кия': 'Кызыл-Кыя ш.',
+	'г. Каракол': 'Каракол ш.',
+	'Каракол': 'Каракол ш.',
+	'г. Нарын': 'Нарын ш.',
+	'Нарын': 'Нарын ш.',
+	'г. Талас': 'Талас ш.',
+	'Талас': 'Талас ш.',
+	'г. Джалал-Абад': 'Жалал-Абад ш.',
+	'Джалал-Абад': 'Жалал-Абад ш.',
+	'Чуйская область': 'Чүй облусу',
+	'Ошская область': 'Ош облусу',
+	'Джалал-Абадская область': 'Жалал-Абад облусу',
+	'Джалал-Абадская область (г. Манас)': 'Жалал-Абад облусу (Манас ш.)',
+	'Иссык-Кульская область': 'Ысык-Көл облусу',
+	'Баткенская область': 'Баткен облусу',
+	'Нарынская область': 'Нарын облусу',
+	'Таласская область': 'Талас облусу',
 };
 
 export function RegionBars({
@@ -64,27 +78,30 @@ export function RegionBars({
 
 				const city =
 					currentLang === 'ky'
-						? r.cityKg || CITY_KY_MAP[r.cityRu] || r.cityRu
+						? r.cityKg || TRANSLATION_MAP_KY[r.cityRu] || r.cityRu
 						: currentLang === 'en'
-							? CITY_EN_MAP[r.cityRu] || CITY_EN_MAP[r.cityRu.replace(/^г\.\s*/, '')] || r.cityRu
+							? TRANSLATION_MAP_EN[r.cityRu] || TRANSLATION_MAP_EN[r.cityRu.replace(/^г\.\s*/, '')] || r.cityRu
 							: r.cityRu;
 
 				const region =
 					currentLang === 'ky'
-						? r.regionKg || r.regionRu
+						? r.regionKg || TRANSLATION_MAP_KY[r.regionRu] || r.regionRu
 						: currentLang === 'en'
-							? REGION_EN_MAP[r.regionRu] || r.regionRu
+							? TRANSLATION_MAP_EN[r.regionRu] || r.regionRu
 							: r.regionRu;
 
 				let labelTitle = city;
 				let labelSubtitle = '';
 
-				const cleanCity = city.replace(/^г\.\s*|\s*ш\./i, '').toLowerCase();
+				const cleanCity = city.replace(/^г\.\s*|\s*ш\./i, '').trim().toLowerCase();
+				const cleanRegion = region.replace(/^г\.\s*|\s*ш\./i, '').trim().toLowerCase();
+
 				if (
 					city &&
 					region &&
 					city !== region &&
-					!region.toLowerCase().includes(cleanCity)
+					!cleanRegion.includes(cleanCity) &&
+					!cleanCity.includes(cleanRegion)
 				) {
 					labelSubtitle = region;
 				} else if (!city && region) {
