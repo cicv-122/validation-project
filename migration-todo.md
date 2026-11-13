@@ -7,7 +7,7 @@
 - [x] `pages/staff/StaffDashboard.tsx` (1291 → 435 строк) → декомпозирован в `features/application-edit` и `widgets/candidate-registry`
 - [x] `pages/VerifyCertificate.tsx` (1114 → 179 строк) → декомпозирован в `widgets/certificate-verification`
 - [x] `components/Navbar.tsx` (592 → 4 строки) → декомпозирован в `widgets/navbar`
-- [ ] `components/home/StatisticsSection.tsx` (562 строк) → `widgets`
+- [x] `components/home/StatisticsSection.tsx` (562 → 37 строк) → декомпозирован в `widgets/statistics`
 
 ## 🟡 Фаза 2: Компоненты средней сложности (Priority Medium)
 - [ ] `pages/PartnerDetail.tsx` (471 строк) → `pages`
