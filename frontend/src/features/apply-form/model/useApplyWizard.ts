@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import apiClient from '../../../api/client';
-import { analyzeKyrgyzPin, CitizenshipCode } from '../../../shared/lib';
+import { analyzeKyrgyzPin, CitizenshipCode, useSessionStorage } from '../../../shared/lib';
 import type { ProfessionCatalogItem, SpecializationItem } from '../../../types';
 import type { ApplyFormData, DocUpload, SubmitResult } from './types';
 
@@ -29,7 +29,10 @@ export function useApplyWizard() {
 	const [isSubmitting, setIsSubmitting] = useState(false);
 	const [validationError, setValidationError] = useState<string | null>(null);
 	const [submitResult, setSubmitResult] = useState<SubmitResult | null>(null);
-	const [form, setForm] = useState<ApplyFormData>(INITIAL_FORM);
+	const [form, setForm, removeFormDraft] = useSessionStorage<ApplyFormData>(
+		'apply_wizard_form_draft',
+		INITIAL_FORM
+	);
 	const [documents, setDocuments] = useState<DocUpload[]>([]);
 
 	const handleChange = (
@@ -218,6 +221,7 @@ export function useApplyWizard() {
 				headers: { 'Content-Type': 'multipart/form-data' },
 			});
 			setSubmitResult({ success: true, regNumber: response.data.registration_number });
+			removeFormDraft();
 		} catch (err: any) {
 			const msg = err?.response?.data
 				? Object.values(err.response.data).flat().join(' ')
