@@ -146,6 +146,7 @@ class StaffApplicationListSerializer(serializers.ModelSerializer):
             'scheduled_date',
             'scheduled_location',
             'assigned_staff_name',
+            'assigned_staff_phone',
             'documents_count',
             'certificate_number_issued',
             'created_at',
