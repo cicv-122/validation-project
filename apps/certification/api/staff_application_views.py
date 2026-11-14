@@ -161,6 +161,10 @@ class StaffApplicationDetailView(APIView):
             new_status = request.data['status']
             if new_status == 'under_review' and not app.reviewed_at:
                 app.reviewed_at = timezone.now()
+            if request.data.get('assign_to_me') or (new_status in ('under_review', 'assessment_scheduled') and not app.assigned_staff):
+                app.assigned_staff = staff
+        elif request.data.get('assign_to_me'):
+            app.assigned_staff = staff
 
         # Если обновлена профессия - привязать Profession если есть
         if 'profession' in request.data:
@@ -254,6 +258,10 @@ class StaffApplicationStatusUpdateView(APIView):
             app.status = new_status
             if new_status == 'under_review' and not app.reviewed_at:
                 app.reviewed_at = timezone.now()
+            if not app.assigned_staff or request.data.get('assign_to_me'):
+                app.assigned_staff = staff
+        elif request.data.get('assign_to_me'):
+            app.assigned_staff = staff
 
         if 'scheduled_date' in request.data:
             app.scheduled_date = request.data['scheduled_date'] or None

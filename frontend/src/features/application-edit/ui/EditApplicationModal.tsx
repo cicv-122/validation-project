@@ -92,6 +92,7 @@ export function EditApplicationModal({
 		isDeletingApp,
 		uploadingDoc,
 		editAppPinAnalysis,
+		handleTakeInWork,
 		handleSaveAppDetail,
 		handleDeleteApplication,
 		uploadFilesDirectly,
@@ -133,12 +134,28 @@ export function EditApplicationModal({
 										<span>Подано: {formatAppDateTime(appDetail.created_at)}</span>
 									</span>
 								)}
+								{appDetail?.assigned_staff_name && (
+									<span className='px-2 py-0.5 rounded-md text-[10px] font-bold bg-blue-50 text-blue-700 border border-blue-200 flex items-center gap-1'>
+										<span>👤 Ведёт: {appDetail.assigned_staff_name}</span>
+									</span>
+								)}
 							</div>
 							<h2 className='text-xl sm:text-2xl font-black text-slate-900'>
 								{editAppFullName || appDetail?.full_name || 'Дело кандидата'}
 							</h2>
 						</div>
 						<div className='flex items-center gap-2'>
+							{appDetail?.status === 'submitted' && (
+								<button
+									type='button'
+									onClick={handleTakeInWork}
+									disabled={savingAppDetail}
+									className='px-3.5 py-1.5 rounded-xl bg-amber-500 hover:bg-amber-600 text-white text-xs font-bold transition-all shadow-xs flex items-center gap-1.5 cursor-pointer animate-pulse hover:animate-none'
+									title='Назначить себя ответственным и перевести дело на рассмотрение'
+								>
+									<span>⚡ Взять в работу</span>
+								</button>
+							)}
 							{appDetail && (
 								<button
 									type='button'
@@ -227,6 +244,13 @@ export function EditApplicationModal({
 									setNotes={setEditAppNotes}
 									onSave={handleSaveAppDetail}
 									isSaving={savingAppDetail}
+									candidateName={editAppFullName || appDetail.full_name}
+									profession={editAppProfession || appDetail.profession}
+									phone={editAppPhone || appDetail.phone}
+									whatsapp={editAppWhatsapp || appDetail.whatsapp}
+									regNumber={appDetail.short_registration_number || appDetail.registration_number}
+									assignedStaffName={appDetail.assigned_staff_name}
+									assignedStaffPhone={appDetail.assigned_staff_phone}
 								/>
 
 								{/* Документы дела */}

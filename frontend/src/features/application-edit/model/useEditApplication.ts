@@ -151,6 +151,26 @@ export function useEditApplication({
 		}
 	};
 
+	const handleTakeInWork = async () => {
+		if (!applicationId) return;
+		setSavingAppDetail(true);
+		setAppSaveSuccessMsg(null);
+		try {
+			const updated = await staffApi.updateApplicationDetail(applicationId, {
+				status: 'under_review',
+				assign_to_me: true,
+			} as any);
+			setAppDetail(updated);
+			setEditAppStatus('under_review');
+			setAppSaveSuccessMsg('Заявка успешно взята вами на рассмотрение!');
+			onSaved?.();
+		} catch (err: any) {
+			alert(err?.response?.data?.detail || 'Ошибка при взятии заявки в работу');
+		} finally {
+			setSavingAppDetail(false);
+		}
+	};
+
 	const handleDeleteApplication = async () => {
 		if (!applicationId) return;
 		setIsDeletingApp(true);
@@ -293,6 +313,7 @@ export function useEditApplication({
 		isDeletingApp,
 		uploadingDoc,
 		editAppPinAnalysis,
+		handleTakeInWork,
 		handleSaveAppDetail,
 		handleDeleteApplication,
 		uploadFilesDirectly,

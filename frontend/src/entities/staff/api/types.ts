@@ -67,6 +67,7 @@ export interface StaffApplicationItem {
 	scheduled_date: string | null;
 	scheduled_location: string;
 	assigned_staff_name: string;
+	assigned_staff_phone?: string;
 	documents_count: number;
 	certificate_number_issued: string;
 	created_at: string;

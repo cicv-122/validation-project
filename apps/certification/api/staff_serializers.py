@@ -124,6 +124,7 @@ class StaffApplicationListSerializer(serializers.ModelSerializer):
     short_registration_number = serializers.CharField(read_only=True)
     documents_count = serializers.IntegerField(source='documents.count', read_only=True)
     assigned_staff_name = serializers.CharField(source='assigned_staff.full_name', read_only=True, default='')
+    assigned_staff_phone = serializers.CharField(source='assigned_staff.phone', read_only=True, default='')
 
     class Meta:
         model = CertificationApplication
@@ -158,6 +159,7 @@ class StaffApplicationDetailSerializer(serializers.ModelSerializer):
     short_registration_number = serializers.CharField(read_only=True)
     documents = StaffApplicationDocumentSerializer(many=True, read_only=True)
     assigned_staff_name = serializers.CharField(source='assigned_staff.full_name', read_only=True, default='')
+    assigned_staff_phone = serializers.CharField(source='assigned_staff.phone', read_only=True, default='')
     certified_user_id = serializers.SerializerMethodField()
 
     class Meta:
@@ -185,6 +187,7 @@ class StaffApplicationDetailSerializer(serializers.ModelSerializer):
             'status_display',
             'assessor_name',
             'assigned_staff_name',
+            'assigned_staff_phone',
             'scheduled_date',
             'scheduled_location',
             'admin_notes',

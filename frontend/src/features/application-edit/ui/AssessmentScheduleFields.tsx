@@ -1,3 +1,8 @@
+// frontend/src/features/application-edit/ui/AssessmentScheduleFields.tsx
+import { useMemo } from 'react';
+import { useCopyToClipboard, formatLocalizedDate } from '../../../shared/lib';
+import { WhatsAppIcon, CopyIcon, CheckIcon } from '../../../shared/ui';
+
 interface AssessmentScheduleFieldsProps {
 	status: string;
 	setStatus: (val: string) => void;
@@ -11,6 +16,13 @@ interface AssessmentScheduleFieldsProps {
 	setNotes: (val: string) => void;
 	onSave: () => void;
 	isSaving: boolean;
+	candidateName?: string;
+	profession?: string;
+	phone?: string;
+	whatsapp?: string;
+	regNumber?: string;
+	assignedStaffName?: string;
+	assignedStaffPhone?: string;
 }
 
 export function AssessmentScheduleFields({
@@ -26,7 +38,78 @@ export function AssessmentScheduleFields({
 	setNotes,
 	onSave,
 	isSaving,
+	candidateName = '',
+	profession = '',
+	phone = '',
+	whatsapp = '',
+	regNumber = '',
+	assignedStaffName = '',
+	assignedStaffPhone = '',
 }: AssessmentScheduleFieldsProps) {
+	const [isCopied, copy] = useCopyToClipboard(2500);
+
+	const formattedExamDate = useMemo(() => {
+		if (!date) return '';
+		return formatLocalizedDate(date, 'ru');
+	}, [date]);
+
+	// Генерация текста официального уведомления для кандидата
+	const notificationText = useMemo(() => {
+		const targetName = candidateName.trim() || 'кандидат';
+		const targetProf = profession.trim() || 'заявленной профессии';
+		const dateStr = formattedExamDate || 'будет сообщена дополнительно';
+		const locStr = location.trim() || 'будет сообщено дополнительно';
+
+		let msg = `Здравствуйте, ${targetName}!\n\n` +
+			`Центр независимой сертификации и валидации (ЦНСВ) при Министерстве просвещения Кыргызской Республики уведомляет:\n` +
+			`Ваша заявка № ${regNumber} на валидацию квалификации «${targetProf}» успешно одобрена!\n\n` +
+			`Вам назначен квалификационный экзамен:\n` +
+			`📅 Дата: ${dateStr}\n` +
+			`📍 Место проведения: ${locStr}\n`;
+
+		if (assessor.trim()) {
+			msg += `👨‍🏫 Ведущий эксперт-оценщик: ${assessor.trim()}\n`;
+		}
+
+		msg += `\n⚠️ Важно иметь при себе:\n` +
+			`1. Оригинал паспорта (ID-карта)\n` +
+			`2. Рабочую форму / спецодежду (при наличии)\n\n`;
+
+		if (assignedStaffName.trim()) {
+			msg += `По всем вопросам вы можете связаться с вашим ответственным экспертом ЦНСВ:\n` +
+				`👤 ${assignedStaffName.trim()}` +
+				(assignedStaffPhone.trim() ? ` (тел: ${assignedStaffPhone.trim()})\n\n` : `\n\n`);
+		}
+
+		msg += `Проверить статус заявки онлайн:\n` +
+			`👉 https://validation.kg/application-status?reg=${regNumber}`;
+
+		return msg;
+	}, [
+		candidateName,
+		profession,
+		formattedExamDate,
+		location,
+		assessor,
+		assignedStaffName,
+		assignedStaffPhone,
+		regNumber,
+	]);
+
+	// Нормализация номера телефона для WhatsApp (с авто-подстановкой кода 996 для КР)
+	const whatsappUrl = useMemo(() => {
+		const raw = (whatsapp || phone || '').replace(/\D/g, '');
+		if (!raw) return null;
+		const normalized = raw.startsWith('0')
+			? '996' + raw.slice(1)
+			: raw.startsWith('996')
+			? raw
+			: raw.length === 9 || raw.length === 10
+			? '996' + raw
+			: raw;
+		return `https://wa.me/${normalized}?text=${encodeURIComponent(notificationText)}`;
+	}, [whatsapp, phone, notificationText]);
+
 	return (
 		<div className='bg-slate-50/80 p-5 rounded-2xl border border-slate-200/80 space-y-4'>
 			<div className='flex items-center justify-between'>
@@ -112,6 +195,67 @@ export function AssessmentScheduleFields({
 					/>
 				</div>
 			</div>
+
+			{/* БЛОК АВТОМАТИЧЕСКОГО УВЕДОМЛЕНИЯ КАНДИДАТА В WHATSAPP */}
+			{(date || location || status === 'assessment_scheduled') && (
+				<div className='mt-2 p-4 bg-emerald-50/70 border border-emerald-200 rounded-2xl space-y-3 animate-in fade-in duration-200'>
+					<div className='flex items-center justify-between flex-wrap gap-2'>
+						<div className='flex items-center gap-2'>
+							<div className='w-6 h-6 rounded-full bg-emerald-600 text-white flex items-center justify-center text-xs'>
+								<WhatsAppIcon className='w-3.5 h-3.5' />
+							</div>
+							<span className='text-xs font-bold text-emerald-950'>
+								Уведомление кандидата о назначении экзамена
+							</span>
+						</div>
+						<span className='text-[10px] font-semibold text-emerald-700 bg-emerald-100/80 px-2 py-0.5 rounded-md'>
+							WhatsApp / SMS
+						</span>
+					</div>
+
+					<div className='p-3 bg-white rounded-xl border border-emerald-100 text-[11px] text-slate-600 font-mono whitespace-pre-wrap leading-relaxed max-h-36 overflow-y-auto'>
+						{notificationText}
+					</div>
+
+					<div className='flex items-center justify-between gap-2 flex-wrap pt-1'>
+						<div className='flex items-center gap-2'>
+							{whatsappUrl ? (
+								<a
+									href={whatsappUrl}
+									target='_blank'
+									rel='noopener noreferrer'
+									className='px-3.5 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs transition-all shadow-xs flex items-center gap-2 cursor-pointer'
+								>
+									<WhatsAppIcon className='w-4 h-4' />
+									<span>Отправить в WhatsApp</span>
+								</a>
+							) : (
+								<span className='text-xs text-amber-700 font-medium'>
+									⚠️ У кандидата не указан номер телефона для WhatsApp
+								</span>
+							)}
+
+							<button
+								type='button'
+								onClick={() => copy(notificationText)}
+								className='px-3.5 py-2 rounded-xl border border-slate-200 bg-white hover:bg-slate-50 text-slate-700 font-bold text-xs transition-all flex items-center gap-1.5 cursor-pointer shadow-2xs'
+							>
+								{isCopied ? (
+									<>
+										<CheckIcon className='w-4 h-4 text-emerald-600' />
+										<span className='text-emerald-700'>Текст скопирован!</span>
+									</>
+								) : (
+									<>
+										<CopyIcon className='w-4 h-4 text-slate-500' />
+										<span>Скопировать текст</span>
+									</>
+								)}
+							</button>
+						</div>
+					</div>
+				</div>
+			)}
 
 			{/* КНОПКА СОХРАНЕНИЯ ВСЕХ ИЗМЕНЕНИЙ В ДЕЛЕ */}
 			<div className='pt-2 flex justify-end'>

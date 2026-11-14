@@ -141,6 +141,8 @@ class ApplicationStatusSerializer(serializers.ModelSerializer):
     """Lightweight serializer for public status check"""
     status_display = serializers.CharField(source='get_status_display', read_only=True)
     type_display = serializers.CharField(source='get_application_type_display', read_only=True)
+    assigned_staff_name = serializers.SerializerMethodField()
+    assigned_staff_phone = serializers.SerializerMethodField()
 
     class Meta:
         model = CertificationApplication
@@ -156,8 +158,23 @@ class ApplicationStatusSerializer(serializers.ModelSerializer):
             'status_display',
             'scheduled_date',
             'scheduled_location',
+            'assessor_name',
+            'assigned_staff_name',
+            'assigned_staff_phone',
+            'certificate_number_issued',
+            'reviewed_at',
             'created_at',
         ]
+
+    def get_assigned_staff_name(self, obj):
+        if obj.assigned_staff:
+            return obj.assigned_staff.full_name or obj.assigned_staff.user.get_full_name() or obj.assigned_staff.user.username
+        return None
+
+    def get_assigned_staff_phone(self, obj):
+        if obj.assigned_staff and obj.assigned_staff.phone:
+            return obj.assigned_staff.phone
+        return None
 
 
 class CallbackRequestSerializer(serializers.ModelSerializer):
