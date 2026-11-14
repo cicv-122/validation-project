@@ -1,6 +1,7 @@
 // frontend/src/pages/staff/model/useStaffDashboard.ts
 import { useState, useEffect, useLayoutEffect, useRef } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
+import { useUrlQueryState } from '../../../shared/lib';
 import {
 	staffApi,
 	StaffProfile,
@@ -29,33 +30,15 @@ export function useStaffDashboard() {
 	const [searchParams, setSearchParams] = useSearchParams();
 
 	// Active main view: 'applications' | 'certified_registry' (synced with URL ?tab=registry)
-	const [activeMainTab, setActiveMainTab] = useState<MainTabType>(
-		searchParams.get('tab') === 'registry' ? 'certified_registry' : 'applications'
-	);
+	const [tabParam, setTabParam] = useUrlQueryState<string>('tab', {
+		defaultValue: '',
+		replace: true,
+	});
 
-	useEffect(() => {
-		const tabParam = searchParams.get('tab');
-		if (tabParam === 'registry' && activeMainTab !== 'certified_registry') {
-			setActiveMainTab('certified_registry');
-		} else if (!tabParam && activeMainTab !== 'applications') {
-			setActiveMainTab('applications');
-		}
-	}, [searchParams, activeMainTab]);
+	const activeMainTab: MainTabType = tabParam === 'registry' ? 'certified_registry' : 'applications';
 
 	const switchMainTab = (tabId: MainTabType) => {
-		setActiveMainTab(tabId);
-		setSearchParams(
-			(prev) => {
-				const next = new URLSearchParams(prev);
-				if (tabId === 'certified_registry') {
-					next.set('tab', 'registry');
-				} else {
-					next.delete('tab');
-				}
-				return next;
-			},
-			{ replace: true }
-		);
+		setTabParam(tabId === 'certified_registry' ? 'registry' : '');
 	};
 
 	const [profile, setProfile] = useState<StaffProfile | null>(null);
