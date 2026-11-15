@@ -368,10 +368,15 @@ class StaffIssueCertificateView(APIView):
         if not staff:
             return Response({'detail': 'Доступ запрещен'}, status=status.HTTP_403_FORBIDDEN)
 
-        if request.user.is_superuser:
+        if request.user.is_superuser or staff.role == 'supervisor':
             app = get_object_or_404(CertificationApplication, pk=pk, deleted_at__isnull=True)
         else:
-            app = get_object_or_404(CertificationApplication, pk=pk, assigned_staff=staff, deleted_at__isnull=True)
+            app = get_object_or_404(
+                CertificationApplication,
+                Q(assigned_staff=staff) | Q(assigned_staff__isnull=True),
+                pk=pk,
+                deleted_at__isnull=True
+            )
 
         serializer = StaffIssueCertificateSerializer(
             data=request.data,

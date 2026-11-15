@@ -137,6 +137,7 @@ export interface AssessmentDetails {
 	scheduled_date?: string | null;
 	scheduled_location?: string | null;
 	assessor_name?: string | null;
+	verified_by_staff_name?: string | null;
 	evaluation_documents: AssessmentEvidenceDoc[];
 	exam_photos: AssessmentPhotoItem[];
 	candidate_documents?: AssessmentEvidenceDoc[];

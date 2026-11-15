@@ -73,8 +73,8 @@ export function CertificateExamDossier({
 					)}
 				</div>
 
-				{/* Место, Дата, Комиссия */}
-				<div className='grid grid-cols-1 sm:grid-cols-3 gap-3'>
+				{/* Место, Дата, Комиссия, Куратор */}
+				<div className={`grid grid-cols-1 ${assessmentDetails.verified_by_staff_name ? 'sm:grid-cols-2 lg:grid-cols-4' : 'sm:grid-cols-3'} gap-3`}>
 					<div className='bg-white p-3.5 rounded-xl border border-slate-200'>
 						<div className='flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-wider text-slate-400 mb-1'>
 							<svg className='w-3.5 h-3.5 text-slate-400' fill='none' viewBox='0 0 24 24' stroke='currentColor'>
@@ -111,6 +111,23 @@ export function CertificateExamDossier({
 							{t(assessmentDetails.assessor_name || 'Отраслевая квалификационная комиссия ЦНСВ при МП КР')}
 						</div>
 					</div>
+
+					{assessmentDetails.verified_by_staff_name && (
+						<div className='bg-white p-3.5 rounded-xl border border-slate-200'>
+							<div className='flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-wider text-slate-400 mb-1'>
+								<svg className='w-3.5 h-3.5 text-slate-400' fill='none' viewBox='0 0 24 24' stroke='currentColor'>
+									<path strokeLinecap='round' strokeLinejoin='round' strokeWidth={2} d='M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z' />
+								</svg>
+								<span>{t('Дело оформил')}</span>
+							</div>
+							<div className='text-xs font-semibold text-slate-900 truncate' title={assessmentDetails.verified_by_staff_name}>
+								{assessmentDetails.verified_by_staff_name}
+							</div>
+							<div className='text-[10px] text-slate-400 mt-0.5'>
+								{t('Специалист ЦНСВ')}
+							</div>
+						</div>
+					)}
 				</div>
 
 				{/* Решение комиссии */}
