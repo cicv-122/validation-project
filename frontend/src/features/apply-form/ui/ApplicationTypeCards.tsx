@@ -26,7 +26,7 @@ export function ApplicationTypeCards({ value, onChange }: ApplicationTypeCardsPr
 	return (
 		<div>
 			<label className='block text-sm font-semibold text-gray-800 mb-2'>
-				{t('Тип процедуры')} <span className='text-red-500'>*</span>
+				{t('Тип процедуры')}
 			</label>
 			<div className='grid grid-cols-1 sm:grid-cols-2 gap-4'>
 				{TYPE_OPTIONS.map((opt) => {

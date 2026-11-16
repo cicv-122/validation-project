@@ -1,6 +1,8 @@
 import React, { useRef, useState } from 'react';
 import { StaffProfile } from '../../../api/staff';
 import { useClickOutside, useKeyPress } from '../../../shared/lib';
+import { ManageProfessionsModal } from '../../../features/professions-management/ui/ManageProfessionsModal';
+import { ManageExpertsModal } from '../../../features/experts-management/ui/ManageExpertsModal';
 
 interface StaffProfileMenuProps {
 	profile: StaffProfile | null;
@@ -23,6 +25,8 @@ export const StaffProfileMenu: React.FC<StaffProfileMenuProps> = ({
 	onDisconnectTelegram,
 }) => {
 	const [isMenuOpen, setIsMenuOpen] = useState(false);
+	const [isProfessionsModalOpen, setIsProfessionsModalOpen] = useState(false);
+	const [isExpertsModalOpen, setIsExpertsModalOpen] = useState(false);
 	const menuRef = useRef<HTMLDivElement>(null);
 
 	// Закрытие меню при клике вне его области или по Escape
@@ -146,6 +150,54 @@ export const StaffProfileMenu: React.FC<StaffProfileMenuProps> = ({
 						</button>
 					)}
 
+					{/* Справочник утверждённых профессий */}
+					<button
+						type='button'
+						onClick={() => {
+							setIsMenuOpen(false);
+							setIsProfessionsModalOpen(true);
+						}}
+						className='w-full flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-[#283375]/5 text-slate-800 transition-colors group cursor-pointer text-left mb-1'
+					>
+						<div className='w-8 h-8 rounded-xl bg-blue-50 text-blue-700 flex items-center justify-center flex-shrink-0 group-hover:scale-105 transition-transform'>
+							<svg className='w-4 h-4' fill='none' viewBox='0 0 24 24' stroke='currentColor'>
+								<path strokeLinecap='round' strokeLinejoin='round' strokeWidth={2} d='M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z' />
+							</svg>
+						</div>
+						<div className='flex-1 min-w-0'>
+							<div className='text-xs sm:text-sm font-bold text-slate-900 group-hover:text-[#283375]'>
+								Список профессий
+							</div>
+							<div className='text-[11px] text-slate-500'>
+								Реестр профессий и закрепление экспертов
+							</div>
+						</div>
+					</button>
+
+					{/* База аттестованных экспертов */}
+					<button
+						type='button'
+						onClick={() => {
+							setIsMenuOpen(false);
+							setIsExpertsModalOpen(true);
+						}}
+						className='w-full flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-[#283375]/5 text-slate-800 transition-colors group cursor-pointer text-left mb-1'
+					>
+						<div className='w-8 h-8 rounded-xl bg-indigo-50 text-indigo-700 flex items-center justify-center flex-shrink-0 group-hover:scale-105 transition-transform'>
+							<svg className='w-4 h-4' fill='none' viewBox='0 0 24 24' stroke='currentColor'>
+								<path strokeLinecap='round' strokeLinejoin='round' strokeWidth={2} d='M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z' />
+							</svg>
+						</div>
+						<div className='flex-1 min-w-0'>
+							<div className='text-xs sm:text-sm font-bold text-slate-900 group-hover:text-[#283375]'>
+								Список экспертов
+							</div>
+							<div className='text-[11px] text-slate-500'>
+								База экспертов и привязка к площадкам
+							</div>
+						</div>
+					</button>
+
 					{/* Разделитель */}
 					<div className='my-1 border-t border-slate-100' />
 
@@ -177,6 +229,18 @@ export const StaffProfileMenu: React.FC<StaffProfileMenuProps> = ({
 					</button>
 				</div>
 			)}
+
+			{/* Модальное окно управления профессиями */}
+			<ManageProfessionsModal
+				isOpen={isProfessionsModalOpen}
+				onClose={() => setIsProfessionsModalOpen(false)}
+			/>
+
+			{/* Модальное окно управления экспертами */}
+			<ManageExpertsModal
+				isOpen={isExpertsModalOpen}
+				onClose={() => setIsExpertsModalOpen(false)}
+			/>
 		</div>
 	);
 };

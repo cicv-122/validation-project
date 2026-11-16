@@ -171,6 +171,57 @@ export function useEditApplication({
 		}
 	};
 
+	const handleRejectApplication = async (reason?: string) => {
+		if (!applicationId) return;
+		setSavingAppDetail(true);
+		setAppSaveSuccessMsg(null);
+		try {
+			const currentNotes = editAppNotes.trim();
+			const reasonText = reason ? `[Отказ / Архив: ${reason}]` : '[Перемещено в архив]';
+			const newNotes = currentNotes ? `${currentNotes}\n${reasonText}` : reasonText;
+
+			const updated = await staffApi.updateApplicationDetail(applicationId, {
+				status: 'rejected',
+				admin_notes: newNotes,
+			} as any);
+			setAppDetail(updated);
+			setEditAppStatus('rejected');
+			setEditAppNotes(newNotes);
+			setAppSaveSuccessMsg('Дело перемещено в архив (не завершено / отказ)!');
+			onSaved?.();
+		} catch (err: any) {
+			alert(err?.response?.data?.detail || 'Ошибка при перемещении дела в архив');
+		} finally {
+			setSavingAppDetail(false);
+		}
+	};
+
+	const handleRestoreFromArchive = async () => {
+		if (!applicationId) return;
+		setSavingAppDetail(true);
+		setAppSaveSuccessMsg(null);
+		try {
+			const currentNotes = editAppNotes.trim();
+			const restoreText = `[${new Date().toLocaleDateString('ru-RU')}] Дело возвращено из архива в работу (пересдача / донос документов).`;
+			const newNotes = currentNotes ? `${currentNotes}\n${restoreText}` : restoreText;
+
+			const updated = await staffApi.updateApplicationDetail(applicationId, {
+				status: 'under_review',
+				assign_to_me: true,
+				admin_notes: newNotes,
+			} as any);
+			setAppDetail(updated);
+			setEditAppStatus('under_review');
+			setEditAppNotes(newNotes);
+			setAppSaveSuccessMsg('Дело возвращено в работу! Статус обновлён на «На рассмотрении».');
+			onSaved?.();
+		} catch (err: any) {
+			alert(err?.response?.data?.detail || 'Ошибка при возврате дела в работу');
+		} finally {
+			setSavingAppDetail(false);
+		}
+	};
+
 	const handleDeleteApplication = async () => {
 		if (!applicationId) return;
 		setIsDeletingApp(true);
@@ -314,6 +365,8 @@ export function useEditApplication({
 		uploadingDoc,
 		editAppPinAnalysis,
 		handleTakeInWork,
+		handleRejectApplication,
+		handleRestoreFromArchive,
 		handleSaveAppDetail,
 		handleDeleteApplication,
 		uploadFilesDirectly,

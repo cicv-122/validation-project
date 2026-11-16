@@ -188,9 +188,13 @@ class StaffApplicationDetailView(APIView):
         return Response(serializer.data)
 
     def patch(self, request, pk):
+        staff = get_or_create_staff_for_user(request.user)
+        if not staff or not staff.is_active:
+            return Response({'detail': 'Доступ запрещен'}, status=status.HTTP_403_FORBIDDEN)
+
         app = self.get_application(request, pk)
         if not app:
-            return Response({'detail': 'Доступ запрещен'}, status=status.HTTP_403_FORBIDDEN)
+            return Response({'detail': 'Заявка не найдена или доступ запрещен'}, status=status.HTTP_404_NOT_FOUND)
 
         # Полное редактирование личных данных кандидата и дела:
         # ФИО, телефон, whatsapp, email, инн, тип процедуры, профессия, разряд, стаж, адрес, экзамен, статус

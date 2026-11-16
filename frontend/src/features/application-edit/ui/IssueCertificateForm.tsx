@@ -60,7 +60,7 @@ export function IssueCertificateForm({
 			<form onSubmit={onSubmit} className='grid grid-cols-1 sm:grid-cols-3 gap-3'>
 				<div>
 					<label className='block text-[11px] font-bold text-purple-900 mb-1'>
-						Номер сертификата *
+						Номер сертификата
 					</label>
 					<div className='flex items-center px-3 py-2 rounded-xl border border-purple-200 bg-white focus-within:border-purple-600 focus-within:ring-1 focus-within:ring-purple-600'>
 						<span className='text-xs font-bold font-mono text-purple-950 select-none whitespace-nowrap mr-1.5'>

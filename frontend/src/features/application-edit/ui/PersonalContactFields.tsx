@@ -58,7 +58,7 @@ export function PersonalContactFields({
 				{/* ФИО */}
 				<div className='sm:col-span-2 md:col-span-1'>
 					<label className='block text-[11px] font-bold text-slate-600 mb-1'>
-						ФИО кандидата *
+						ФИО кандидата
 					</label>
 					<input
 						type='text'

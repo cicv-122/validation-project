@@ -23,6 +23,10 @@ from apps.certification.api.staff_views import (
     StaffCertifiedUserDeleteDocumentView,
     StaffCertifiedUserQRCodeDownloadView,
     StaffApplicationQRCodeDownloadView,
+    StaffProfessionsManageView,
+    StaffProfessionDetailManageView,
+    StaffExpertsManageView,
+    StaffExpertDetailManageView,
 )
 
 urlpatterns = [
@@ -43,6 +47,12 @@ urlpatterns = [
     path('staff/applications/<int:pk>/documents/<int:doc_id>/', StaffApplicationDeleteDocumentView.as_view(), name='staff-application-delete-document'),
     path('staff/applications/<int:pk>/issue-certificate/', StaffIssueCertificateView.as_view(), name='staff-issue-certificate'),
     path('staff/applications/<int:pk>/qr/', StaffApplicationQRCodeDownloadView.as_view(), name='staff-application-qr-download'),
+
+    # Справочники ЦНСВ (Профессии и Эксперты)
+    path('staff/professions/', StaffProfessionsManageView.as_view(), name='staff-professions-manage'),
+    path('staff/professions/<int:pk>/', StaffProfessionDetailManageView.as_view(), name='staff-profession-detail-manage'),
+    path('staff/experts/', StaffExpertsManageView.as_view(), name='staff-experts-manage'),
+    path('staff/experts/<int:expert_id>/', StaffExpertDetailManageView.as_view(), name='staff-expert-detail-manage'),
 
     # Управление архивом сертифицированных специалистов (Реестр)
     path('staff/certified-users/clusters/', StaffCertifiedUserClustersView.as_view(), name='staff-certified-users-clusters'),

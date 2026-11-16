@@ -1,3 +1,5 @@
+import professionsDictionary from '../../../utils/professions_dictionary.json';
+
 interface ProfessionProcedureFieldsProps {
 	procedureType: 'certification' | 'validation';
 	setProcedureType: (val: 'certification' | 'validation') => void;
@@ -64,15 +66,21 @@ export function ProfessionProcedureFields({
 				{/* Профессия */}
 				<div className='sm:col-span-2'>
 					<label className='block text-[11px] font-bold text-slate-600 mb-1'>
-						Профессия *
+						Профессия
 					</label>
 					<input
 						type='text'
+						list='edit-professions-list'
 						value={profession}
 						onChange={(e) => setProfession(e.target.value)}
-						placeholder='Название профессии...'
+						placeholder='Начните ввод (Повар, Сварщик...)'
 						className='w-full px-3 py-2 text-xs font-bold rounded-xl border border-slate-200 bg-white outline-none focus:border-[#283375]'
 					/>
+					<datalist id='edit-professions-list'>
+						{Object.keys(professionsDictionary).map((name) => (
+							<option key={name} value={name} />
+						))}
+					</datalist>
 				</div>
 
 				{/* Разряд / Уровень */}

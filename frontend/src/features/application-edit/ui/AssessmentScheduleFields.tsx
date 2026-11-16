@@ -1,7 +1,9 @@
 // frontend/src/features/application-edit/ui/AssessmentScheduleFields.tsx
-import { useMemo } from 'react';
+import { useMemo, useState, useRef, useEffect } from 'react';
 import { useCopyToClipboard, formatLocalizedDate } from '../../../shared/lib';
 import { WhatsAppIcon, CopyIcon, CheckIcon } from '../../../shared/ui';
+import localExpertsData from '../../../data/experts_database.json';
+import { useAssessmentCenters } from '../../../entities/center/api/centerHooks';
 
 interface AssessmentScheduleFieldsProps {
 	status: string;
@@ -47,6 +49,46 @@ export function AssessmentScheduleFields({
 	assignedStaffPhone = '',
 }: AssessmentScheduleFieldsProps) {
 	const [isCopied, copy] = useCopyToClipboard(2500);
+	const [isAssessorDropdownOpen, setIsAssessorDropdownOpen] = useState(false);
+	const assessorContainerRef = useRef<HTMLDivElement>(null);
+	const { data: centers } = useAssessmentCenters();
+
+	// Закрытие подсказок эксперта при клике вне поля
+	useEffect(() => {
+		function handleClickOutside(e: MouseEvent) {
+			if (assessorContainerRef.current && !assessorContainerRef.current.contains(e.target as Node)) {
+				setIsAssessorDropdownOpen(false);
+			}
+		}
+		document.addEventListener('mousedown', handleClickOutside);
+		return () => document.removeEventListener('mousedown', handleClickOutside);
+	}, []);
+
+	// Подсказки аттестованных экспертов ЦНСВ с приоритетом по профессии
+	const expertSuggestions = useMemo(() => {
+		const q = assessor.toLowerCase().trim();
+		const candProf = profession.toLowerCase().trim();
+
+		const list = localExpertsData.map((e) => ({
+			...e,
+			isProfMatch: candProf && (e.profession_ru || '').toLowerCase().includes(candProf),
+		}));
+
+		list.sort((a, b) => (b.isProfMatch ? 1 : 0) - (a.isProfMatch ? 1 : 0));
+
+		if (!q) {
+			return list.slice(0, 10);
+		}
+
+		return list
+			.filter(
+				(e) =>
+					e.name.toLowerCase().includes(q) ||
+					(e.organization && e.organization.toLowerCase().includes(q)) ||
+					(e.profession_ru && e.profession_ru.toLowerCase().includes(q))
+			)
+			.slice(0, 10);
+	}, [assessor, profession]);
 
 	const formattedExamDate = useMemo(() => {
 		if (!date) return '';
@@ -153,32 +195,102 @@ export function AssessmentScheduleFields({
 					/>
 				</div>
 
-				{/* Эксперт-оценщик */}
-				<div>
-					<label className='block text-[11px] font-bold text-slate-600 mb-1'>
-						Эксперт-оценщик
-					</label>
-					<input
-						type='text'
-						value={assessor}
-						onChange={(e) => setAssessor(e.target.value)}
-						placeholder='ФИО эксперта-оценщика...'
-						className='w-full px-3 py-2 text-xs rounded-xl border border-slate-200 bg-white outline-none focus:border-[#283375]'
-					/>
+				{/* Эксперт-оценщик с подсказками из базы и свободным вводом */}
+				<div className='relative' ref={assessorContainerRef}>
+					<div className='flex items-center justify-between mb-1'>
+						<label className='block text-[11px] font-bold text-slate-600'>
+							Эксперт-оценщик
+						</label>
+						<span className='text-[10px] text-slate-400 font-normal'>
+							(подсказки из базы / свободный ввод)
+						</span>
+					</div>
+					<div className='relative'>
+						<input
+							type='text'
+							value={assessor}
+							onFocus={() => setIsAssessorDropdownOpen(true)}
+							onChange={(e) => {
+								setAssessor(e.target.value);
+								setIsAssessorDropdownOpen(true);
+							}}
+							placeholder='ФИО эксперта-оценщика...'
+							className='w-full px-3 py-2 text-xs rounded-xl border border-slate-200 bg-white outline-none focus:border-[#283375]'
+						/>
+						{assessor && (
+							<button
+								type='button'
+								onClick={() => setAssessor('')}
+								className='absolute right-2.5 top-2.5 text-slate-400 hover:text-slate-600 text-xs'
+								title='Очистить'
+							>
+								✕
+							</button>
+						)}
+					</div>
+
+					{/* Выпадающий список подсказок экспертов */}
+					{isAssessorDropdownOpen && expertSuggestions.length > 0 && (
+						<div className='absolute z-30 left-0 right-0 mt-1 bg-white rounded-xl shadow-xl border border-slate-200 max-h-56 overflow-y-auto divide-y divide-slate-100'>
+							<div className='px-3 py-1.5 text-[10px] font-bold text-slate-400 uppercase bg-slate-50 tracking-wider flex items-center justify-between'>
+								<span>Аттестованные эксперты ЦНСВ:</span>
+								<span className='text-[9px] text-slate-400 font-normal'>клик для выбора</span>
+							</div>
+							{expertSuggestions.map((exp) => (
+								<button
+									key={exp.id}
+									type='button'
+									onClick={() => {
+										setAssessor(exp.name);
+										setIsAssessorDropdownOpen(false);
+									}}
+									className='w-full px-3 py-2 text-left hover:bg-blue-50/70 transition-colors flex items-start justify-between gap-2 cursor-pointer'
+								>
+									<div className='min-w-0'>
+										<div className='flex items-center gap-1.5 flex-wrap'>
+											<span className='text-xs font-bold text-slate-900'>{exp.name}</span>
+											{exp.isProfMatch && (
+												<span className='px-1.5 py-0.2 rounded text-[9px] font-bold bg-emerald-50 text-emerald-700 border border-emerald-200'>
+													По профилю: {exp.profession_ru}
+												</span>
+											)}
+										</div>
+										<div className='text-[10px] text-slate-500 mt-0.5 truncate'>
+											{exp.organization || 'Организация не указана'} {exp.city_ru ? `• ${exp.city_ru}` : ''}
+										</div>
+									</div>
+									<span className='text-[10px] text-slate-400 font-medium shrink-0'>
+										{exp.role_ru}
+									</span>
+								</button>
+							))}
+						</div>
+					)}
 				</div>
 
-				{/* Место проведения */}
+				{/* Место проведения с подсказками из 10 центров */}
 				<div className='sm:col-span-3'>
-					<label className='block text-[11px] font-bold text-slate-600 mb-1'>
-						Место проведения оценки (Центр / Лаборатория / Колледж)
-					</label>
+					<div className='flex items-center justify-between mb-1'>
+						<label className='block text-[11px] font-bold text-slate-600'>
+							Место проведения оценки (Центр / Лаборатория / Колледж)
+						</label>
+						<span className='text-[10px] text-slate-400 font-normal'>
+							(из списка центров или свободный адрес)
+						</span>
+					</div>
 					<input
 						type='text'
+						list='assessment-centers-datalist'
 						value={location}
 						onChange={(e) => setLocation(e.target.value)}
-						placeholder='Напр. Бишкекский колледж № 93, лаборатория сварки'
+						placeholder='Напр. Бишкекский Колледж Архитектуры и Менеджмента в Строительстве (БКАМС)'
 						className='w-full px-3 py-2 text-xs rounded-xl border border-slate-200 bg-white outline-none focus:border-[#283375]'
 					/>
+					<datalist id='assessment-centers-datalist'>
+						{centers?.map((c) => (
+							<option key={c.id} value={`${c.organization} (${c.address || ''})`} />
+						))}
+					</datalist>
 				</div>
 
 				{/* Заметки сотрудника */}

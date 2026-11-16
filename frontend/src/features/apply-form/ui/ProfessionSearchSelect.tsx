@@ -66,9 +66,7 @@ export function ProfessionSearchSelect({
 	return (
 		<div className='relative'>
 			<label className='block text-sm font-semibold text-gray-800 mb-1.5 flex items-center justify-between'>
-				<span>
-					{t('Профессия')} <span className='text-red-500'>*</span>
-				</span>
+				<span>{t('Профессия')}</span>
 				{selectedProf?.okz_code && (
 					<span className='text-xs font-mono font-medium text-blue-700 bg-blue-50 px-2 py-0.5 rounded-md border border-blue-200'>
 						ОКЗ: {selectedProf.okz_code}
@@ -90,7 +88,7 @@ export function ProfessionSearchSelect({
 						if (professionsList.length > 0) setIsOpenDropdown(true);
 					}}
 					placeholder={t('Начните вводить профессию (напр. Повар, Электрогазосварщик, Швея)...')}
-					className='w-full px-4 py-3 bg-white border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 outline-none text-sm transition-all pr-10'
+					className='w-full px-4 py-3 bg-white border border-gray-300 rounded-xl focus:ring-2 focus:ring-[#283375] focus:border-[#283375] outline-none text-sm transition-all pr-10'
 				/>
 				{isLoading ? (
 					<div className='absolute right-3.5 top-3.5'>
@@ -101,7 +99,9 @@ export function ProfessionSearchSelect({
 					</div>
 				) : (
 					<div className='absolute right-3.5 top-3.5 text-gray-400 pointer-events-none'>
-						🔍
+						<svg className='w-5 h-5 text-gray-400' fill='none' viewBox='0 0 24 24' stroke='currentColor'>
+							<path strokeLinecap='round' strokeLinejoin='round' strokeWidth={2} d='M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z' />
+						</svg>
 					</div>
 				)}
 			</div>
@@ -116,17 +116,12 @@ export function ProfessionSearchSelect({
 								key={item.id}
 								type='button'
 								onClick={() => handleChooseProfession(item)}
-								className='w-full text-left px-4 py-3 hover:bg-blue-50/70 transition-colors flex items-start justify-between gap-3 group'
+								className='w-full text-left px-4 py-3 hover:bg-blue-50/70 transition-colors flex items-center justify-between gap-3 group'
 							>
 								<div>
 									<p className='text-sm font-bold text-gray-900 group-hover:text-blue-700'>
 										{title}
 									</p>
-									{item.section && (
-										<p className='text-xs text-gray-500 line-clamp-1 mt-0.5'>
-											{item.section}
-										</p>
-									)}
 								</div>
 								<span className='text-xs font-mono font-medium text-gray-400 group-hover:text-blue-600 bg-gray-50 px-2 py-1 rounded-md border border-gray-100 shrink-0'>
 									{item.okz_code}

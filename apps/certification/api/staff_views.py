@@ -33,6 +33,13 @@ from .staff_registry_views import (
     StaffCertifiedUserQRCodeDownloadView,
 )
 
+from .staff_directory_views import (
+    StaffProfessionsManageView,
+    StaffProfessionDetailManageView,
+    StaffExpertsManageView,
+    StaffExpertDetailManageView,
+)
+
 from apps.document.services import get_or_create_app_for_certified_user
 
 __all__ = [
@@ -46,6 +53,10 @@ __all__ = [
     'StaffApplicationDeleteDocumentView',
     'StaffIssueCertificateView',
     'StaffApplicationQRCodeDownloadView',
+    'StaffProfessionsManageView',
+    'StaffProfessionDetailManageView',
+    'StaffExpertsManageView',
+    'StaffExpertDetailManageView',
     'StaffCertifiedUserPagination',
     'StaffCertifiedUsersListView',
     'StaffCertifiedUserDetailView',

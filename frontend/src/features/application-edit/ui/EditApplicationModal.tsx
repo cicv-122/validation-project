@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { DossierDocumentSlots } from '../../../widgets/dossier-viewer';
 import { ConfirmDeleteDialog } from '../../status-change';
 import { StatusBadge } from '../../../shared/ui';
@@ -93,6 +94,8 @@ export function EditApplicationModal({
 		uploadingDoc,
 		editAppPinAnalysis,
 		handleTakeInWork,
+		handleRejectApplication,
+		handleRestoreFromArchive,
 		handleSaveAppDetail,
 		handleDeleteApplication,
 		uploadFilesDirectly,
@@ -105,6 +108,9 @@ export function EditApplicationModal({
 		onDeleted,
 		onClose,
 	});
+
+	const [showRejectModal, setShowRejectModal] = useState(false);
+	const [rejectReason, setRejectReason] = useState('Не явился на экзамен');
 
 	if (!isOpen || !applicationId) return null;
 
@@ -148,6 +154,7 @@ export function EditApplicationModal({
 							</h2>
 						</div>
 						<div className='flex items-center gap-2'>
+							{/* Взять в работу (для новых заявок) */}
 							{appDetail?.status === 'submitted' && (
 								<button
 									type='button'
@@ -162,12 +169,45 @@ export function EditApplicationModal({
 									<span>Взять в работу</span>
 								</button>
 							)}
+
+							{/* Вернуть в работу (для архивных / не завершенных) */}
+							{appDetail?.status === 'rejected' && (
+								<button
+									type='button'
+									onClick={handleRestoreFromArchive}
+									disabled={savingAppDetail}
+									className='px-3.5 py-1.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold transition-all shadow-xs flex items-center gap-1.5 cursor-pointer'
+									title='Вернуть дело кандидата на повторное рассмотрение или пересдачу'
+								>
+									<svg className='w-3.5 h-3.5 text-white' fill='none' viewBox='0 0 24 24' stroke='currentColor'>
+										<path strokeLinecap='round' strokeLinejoin='round' strokeWidth={2} d='M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15' />
+									</svg>
+									<span>Вернуть в работу</span>
+								</button>
+							)}
+
+							{/* В архив / Отказ (для активных дел в работе) */}
+							{appDetail && appDetail.status !== 'rejected' && appDetail.status !== 'completed' && (
+								<button
+									type='button'
+									onClick={() => setShowRejectModal(true)}
+									className='px-3 py-1.5 rounded-xl border border-slate-200 bg-slate-50 hover:bg-amber-50 hover:text-amber-700 text-slate-600 text-xs font-bold transition-all flex items-center gap-1.5 cursor-pointer'
+									title='Переместить кандидата в архив (не явился, отказ или на пересдачу)'
+								>
+									<svg className='w-3.5 h-3.5 text-slate-500' fill='none' viewBox='0 0 24 24' stroke='currentColor'>
+										<path strokeLinecap='round' strokeLinejoin='round' strokeWidth={2} d='M5 8h14M5 8a2 2 0 110-4h14a2 2 0 110 4M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8m-9 4h4' />
+									</svg>
+									<span className='hidden sm:inline'>В архив / Отказ</span>
+								</button>
+							)}
+
+							{/* Удалить заявку */}
 							{appDetail && (
 								<button
 									type='button'
 									onClick={() => setShowDeleteConfirm(true)}
 									className='px-3 py-1.5 rounded-xl border border-red-200 bg-red-50 hover:bg-red-100 text-red-600 text-xs font-bold transition-all flex items-center gap-1.5 cursor-pointer'
-									title='Переместить заявку в архив'
+									title='Удалить заявку'
 								>
 									<svg className='w-3.5 h-3.5 text-red-600' fill='none' viewBox='0 0 24 24' stroke='currentColor'>
 										<path strokeLinecap='round' strokeLinejoin='round' strokeWidth={2} d='M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16' />
@@ -297,6 +337,65 @@ export function EditApplicationModal({
 				onCancel={() => setShowDeleteConfirm(false)}
 				onConfirm={handleDeleteApplication}
 			/>
+
+			{/* Модальное окно подтверждения перемещения в архив / отказа */}
+			{showRejectModal && (
+				<div className='fixed inset-0 z-60 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-xs'>
+					<div className='bg-white rounded-2xl p-6 max-w-md w-full shadow-2xl border border-slate-100 animate-in fade-in zoom-in-95 duration-150'>
+						<div className='flex items-center gap-3 mb-3'>
+							<div className='w-9 h-9 rounded-xl bg-amber-50 text-amber-600 flex items-center justify-center font-bold'>
+								<svg className='w-5 h-5' fill='none' viewBox='0 0 24 24' stroke='currentColor'>
+									<path strokeLinecap='round' strokeLinejoin='round' strokeWidth={2} d='M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z' />
+								</svg>
+							</div>
+							<div>
+								<h3 className='text-base font-bold text-slate-900'>
+									В архив / Фиксация отказа
+								</h3>
+								<p className='text-xs text-slate-500'>
+									Дело будет сохранено во вкладке «Архив / Не завершено»
+								</p>
+							</div>
+						</div>
+						<p className='text-xs text-slate-600 mb-3'>
+							Все документы, анкета и ИНН кандидата сохраняются в базе. При повторном обращении вы сможете в 1 клик вернуть дело в работу.
+						</p>
+						<label className='block text-xs font-bold text-slate-700 mb-1'>
+							Укажите причину:
+						</label>
+						<select
+							value={rejectReason}
+							onChange={(e) => setRejectReason(e.target.value)}
+							className='w-full px-3 py-2 text-xs rounded-xl border border-slate-200 bg-white mb-4 outline-none focus:border-[#283375]'
+						>
+							<option value='Не явился на экзамен'>Не явился на квалификационный экзамен</option>
+							<option value='Направлен на пересдачу'>Направлен на пересдачу (не сдал теорию/практику)</option>
+							<option value='Отказ кандидата'>Отказ по инициативе заявителя</option>
+							<option value='Не соответствует квалификационным требованиям'>Не соответствует квалификационным требованиям</option>
+							<option value='Предоставлены неполные или недостоверные документы'>Предоставлены неполные или недостоверные документы</option>
+						</select>
+						<div className='flex justify-end gap-2'>
+							<button
+								type='button'
+								onClick={() => setShowRejectModal(false)}
+								className='px-3.5 py-1.5 rounded-xl border border-slate-200 text-xs font-semibold text-slate-600 hover:bg-slate-100 cursor-pointer'
+							>
+								Отмена
+							</button>
+							<button
+								type='button'
+								onClick={() => {
+									setShowRejectModal(false);
+									handleRejectApplication(rejectReason);
+								}}
+								className='px-4 py-1.5 rounded-xl bg-amber-600 hover:bg-amber-700 text-white text-xs font-bold cursor-pointer'
+							>
+								Переместить в архив
+							</button>
+						</div>
+					</div>
+				</div>
+			)}
 		</>
 	);
 }

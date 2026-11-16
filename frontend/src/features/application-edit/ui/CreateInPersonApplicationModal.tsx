@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Modal } from '../../../shared/ui';
 import { staffApi } from '../../../api/staff';
+import professionsDictionary from '../../../utils/professions_dictionary.json';
 import {
 	analyzeKyrgyzPin,
 	CITIZENSHIP_OPTIONS,
@@ -114,7 +115,7 @@ export const CreateInPersonApplicationModal: React.FC<CreateInPersonApplicationM
 					{/* ФИО */}
 					<div className='sm:col-span-2'>
 						<label className='block text-[11px] font-bold text-slate-700 mb-1'>
-							ФИО кандидата *
+							ФИО кандидата
 						</label>
 						<input
 							type='text'
@@ -182,7 +183,7 @@ export const CreateInPersonApplicationModal: React.FC<CreateInPersonApplicationM
 					{/* Номер телефона */}
 					<div>
 						<label className='block text-[11px] font-bold text-slate-700 mb-1'>
-							Номер телефона *
+							Номер телефона
 						</label>
 						<input
 							type='text'
@@ -233,16 +234,22 @@ export const CreateInPersonApplicationModal: React.FC<CreateInPersonApplicationM
 					{/* Профессия */}
 					<div>
 						<label className='block text-[11px] font-bold text-slate-700 mb-1'>
-							Профессия / Квалификация *
+							Профессия / Квалификация
 						</label>
 						<input
 							type='text'
+							list='in-person-professions'
 							required
 							value={profession}
 							onChange={(e) => setProfession(e.target.value)}
-							placeholder='Например: Электрогазосварщик, Повар'
+							placeholder='Начните ввод (Повар, Сварщик...)'
 							className='w-full px-3 py-2 text-xs font-bold rounded-xl border border-slate-200 focus:border-[#283375] outline-none'
 						/>
+						<datalist id='in-person-professions'>
+							{Object.keys(professionsDictionary).map((name) => (
+								<option key={name} value={name} />
+							))}
+						</datalist>
 					</div>
 
 					{/* Уровень квалификации / разряд */}
