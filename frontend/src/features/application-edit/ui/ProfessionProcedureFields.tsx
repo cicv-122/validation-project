@@ -44,14 +44,21 @@ export function ProfessionProcedureFields({
 					<label className='block text-[11px] font-bold text-slate-600 mb-1'>
 						Тип процедуры
 					</label>
-					<select
-						value={procedureType}
-						onChange={(e) => setProcedureType(e.target.value as 'certification' | 'validation')}
-						className='w-full px-3 py-2 text-xs font-bold rounded-xl border border-slate-200 bg-white outline-none focus:border-[#283375]'
-					>
-						<option value='certification'>Сертификация</option>
-						<option value='validation'>Валидация</option>
-					</select>
+					<div className='relative'>
+						<select
+							value={procedureType}
+							onChange={(e) => setProcedureType(e.target.value as 'certification' | 'validation')}
+							className='w-full pl-3 pr-9 py-2 text-xs font-bold rounded-xl border border-slate-200 bg-white outline-none focus:border-[#283375] appearance-none cursor-pointer'
+						>
+							<option value='certification'>Сертификация</option>
+							<option value='validation'>Валидация</option>
+						</select>
+						<div className='pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3 text-slate-400'>
+							<svg className='w-4 h-4' fill='none' viewBox='0 0 24 24' stroke='currentColor'>
+								<path strokeLinecap='round' strokeLinejoin='round' strokeWidth={2} d='M19 9l-7 7-7-7' />
+							</svg>
+						</div>
+					</div>
 				</div>
 
 				{/* Профессия */}

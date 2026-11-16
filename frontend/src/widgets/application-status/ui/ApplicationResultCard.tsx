@@ -235,8 +235,10 @@ export const ApplicationResultCard: React.FC<ApplicationResultCardProps> = ({ re
 			{result.assigned_staff_name && (
 				<div className="p-4 bg-slate-50 border border-slate-200/80 rounded-2xl flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs">
 					<div className="flex items-center gap-2.5">
-						<div className="w-8 h-8 rounded-full bg-blue-100 text-[#283375] font-bold flex items-center justify-center text-xs">
-							👤
+						<div className="w-8 h-8 rounded-full bg-blue-100 text-[#283375] flex items-center justify-center">
+							<svg className="w-4 h-4 text-[#283375]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+								<path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+							</svg>
 						</div>
 						<div>
 							<span className="text-[11px] text-slate-400 font-semibold block">

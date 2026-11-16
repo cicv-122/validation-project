@@ -136,7 +136,10 @@ export function EditApplicationModal({
 								)}
 								{appDetail?.assigned_staff_name && (
 									<span className='px-2 py-0.5 rounded-md text-[10px] font-bold bg-blue-50 text-blue-700 border border-blue-200 flex items-center gap-1'>
-										<span>👤 Ведёт: {appDetail.assigned_staff_name}</span>
+										<svg className='w-3 h-3 text-blue-600' fill='none' viewBox='0 0 24 24' stroke='currentColor'>
+											<path strokeLinecap='round' strokeLinejoin='round' strokeWidth={2} d='M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z' />
+										</svg>
+										<span>Ведёт: {appDetail.assigned_staff_name}</span>
 									</span>
 								)}
 							</div>
@@ -150,10 +153,13 @@ export function EditApplicationModal({
 									type='button'
 									onClick={handleTakeInWork}
 									disabled={savingAppDetail}
-									className='px-3.5 py-1.5 rounded-xl bg-amber-500 hover:bg-amber-600 text-white text-xs font-bold transition-all shadow-xs flex items-center gap-1.5 cursor-pointer animate-pulse hover:animate-none'
+									className='px-3.5 py-1.5 rounded-xl bg-[#283375] hover:bg-[#1e265c] text-white text-xs font-bold transition-all shadow-xs flex items-center gap-1.5 cursor-pointer'
 									title='Назначить себя ответственным и перевести дело на рассмотрение'
 								>
-									<span>⚡ Взять в работу</span>
+									<svg className='w-3.5 h-3.5 text-white' fill='none' viewBox='0 0 24 24' stroke='currentColor'>
+										<path strokeLinecap='round' strokeLinejoin='round' strokeWidth={2} d='M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2' />
+									</svg>
+									<span>Взять в работу</span>
 								</button>
 							)}
 							{appDetail && (
@@ -261,16 +267,18 @@ export function EditApplicationModal({
 									onDeleteDoc={handleDeleteDoc}
 								/>
 
-								{/* Выпуск сертификата */}
-								<IssueCertificateForm
-									certNumber={certNumber}
-									setCertNumber={setCertNumber}
-									certInn={certInn}
-									setCertInn={setCertInn}
-									onSubmit={handleIssueCertificate}
-									isIssuing={issuingCert}
-									issueResult={issueResult}
-								/>
+								{/* Выпуск сертификата (доступно только после взятия дела в работу и проведения экзамена) */}
+								{appDetail.status !== 'submitted' && (
+									<IssueCertificateForm
+										certNumber={certNumber}
+										setCertNumber={setCertNumber}
+										certInn={certInn}
+										setCertInn={setCertInn}
+										onSubmit={handleIssueCertificate}
+										isIssuing={issuingCert}
+										issueResult={issueResult}
+									/>
+								)}
 							</>
 						) : null}
 					</div>

@@ -74,22 +74,29 @@ export function PersonalContactFields({
 					<label className='block text-[11px] font-bold text-slate-600 mb-1'>
 						Гражданство
 					</label>
-					<select
-						value={citizenship}
-						onChange={(e) => setCitizenship(e.target.value as CitizenshipCode)}
-						className={`w-full px-3 py-2 text-xs font-semibold rounded-xl border bg-white outline-none transition-colors cursor-pointer ${
-							inn && !citizenship
-								? 'border-red-400 bg-red-50/30 text-red-700'
-								: 'border-slate-200 focus:border-[#283375]'
-						}`}
-					>
-						<option value=''>— Выберите —</option>
-						{CITIZENSHIP_OPTIONS.map((opt) => (
-							<option key={opt.value} value={opt.value}>
-								{opt.label}
-							</option>
-						))}
-					</select>
+					<div className='relative'>
+						<select
+							value={citizenship}
+							onChange={(e) => setCitizenship(e.target.value as CitizenshipCode)}
+							className={`w-full pl-3 pr-9 py-2 text-xs font-semibold rounded-xl border bg-white outline-none transition-colors cursor-pointer appearance-none ${
+								inn && !citizenship
+									? 'border-red-400 bg-red-50/30 text-red-700'
+									: 'border-slate-200 focus:border-[#283375]'
+							}`}
+						>
+							<option value=''>— Выберите —</option>
+							{CITIZENSHIP_OPTIONS.map((opt) => (
+								<option key={opt.value} value={opt.value}>
+									{opt.label}
+								</option>
+							))}
+						</select>
+						<div className='pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3 text-slate-400'>
+							<svg className='w-4 h-4' fill='none' viewBox='0 0 24 24' stroke='currentColor'>
+								<path strokeLinecap='round' strokeLinejoin='round' strokeWidth={2} d='M19 9l-7 7-7-7' />
+							</svg>
+						</div>
+					</div>
 				</div>
 
 				{/* ПИН / ИНН */}

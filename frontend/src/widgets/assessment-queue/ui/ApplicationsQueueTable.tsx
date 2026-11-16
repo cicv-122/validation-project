@@ -168,13 +168,14 @@ export const ApplicationsQueueTable: React.FC<ApplicationsQueueTableProps> = ({
 														</span>
 													)}
 													{app.assigned_staff_name ? (
-														<span className="inline-flex items-center gap-1 text-[10px] font-semibold text-indigo-700 bg-indigo-50 border border-indigo-200/80 px-1.5 py-0.5 rounded-md">
-															<span className="w-1.5 h-1.5 rounded-full bg-indigo-500" />
+														<span className="inline-flex items-center gap-1 text-[10px] font-semibold text-[#283375] bg-blue-50 border border-blue-200/80 px-1.5 py-0.5 rounded-md">
+															<span className="w-1.5 h-1.5 rounded-full bg-[#283375]" />
 															Ведёт: {app.assigned_staff_name}
 														</span>
 													) : (
 														<span className="inline-flex items-center gap-1 text-[10px] font-medium text-slate-500 bg-slate-100 px-1.5 py-0.5 rounded-md">
-															<span>⚡</span> Не назначен
+															<span className="w-1.5 h-1.5 rounded-full bg-slate-400" />
+															Куратор не назначен
 														</span>
 													)}
 												</div>
