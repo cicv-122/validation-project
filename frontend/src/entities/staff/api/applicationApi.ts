@@ -20,6 +20,25 @@ export const applicationApi = {
 		return res.data;
 	},
 
+	createInPersonApplication: async (data: {
+		full_name: string;
+		profession: string;
+		inn?: string;
+		phone?: string;
+		whatsapp?: string;
+		email?: string;
+		application_type?: 'certification' | 'validation';
+		qualification_level?: string;
+		experience_years?: number;
+		address?: string;
+		admin_notes?: string;
+	}): Promise<StaffApplicationDetail> => {
+		const res = await apiClient.post('/certification/staff/applications/', data, {
+			headers: authHeader(),
+		});
+		return res.data;
+	},
+
 	getApplicationDetail: async (id: number): Promise<StaffApplicationDetail> => {
 		const res = await apiClient.get(`/certification/staff/applications/${id}/`, {
 			headers: authHeader(),

@@ -267,6 +267,7 @@ class CertificationApplication(models.Model):
 
     ORIGIN_CHOICES = [
         ('online', _('Электронная приёмная (онлайн)')),
+        ('in_person', _('Очный приём в ЦНСВ')),
         ('registry_archive', _('Архив реестра (выданные сертификаты)')),
     ]
     origin = models.CharField(

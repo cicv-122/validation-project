@@ -1,4 +1,5 @@
 // frontend/src/pages/staff/StaffDashboard.tsx
+import { useState } from 'react';
 import StaffHeader from '../../components/staff/StaffHeader';
 import {
 	MinistryReportModal,
@@ -8,7 +9,7 @@ import {
 } from '../../features/candidate-filter';
 import { TelegramConnectModal } from '../../features/auth-staff';
 import { ConfirmDeleteDialog } from '../../features/status-change';
-import { EditApplicationModal } from '../../features/application-edit';
+import { EditApplicationModal, CreateInPersonApplicationModal } from '../../features/application-edit';
 import { DigitizationArchiveHero } from '../../widgets/digitization-stats';
 import { CertifiedSpecialistsTable } from '../../widgets/candidate-registry';
 import { ApplicationsQueueTable } from '../../widgets/assessment-queue';
@@ -55,6 +56,8 @@ export default function StaffDashboard() {
 		handleDeleteSpecialist,
 		handleDisconnectTelegram,
 	} = useStaffDashboard();
+
+	const [showCreateInPersonModal, setShowCreateInPersonModal] = useState(false);
 
 	if (loadingProfile) {
 		return (
@@ -143,6 +146,7 @@ export default function StaffDashboard() {
 							profile={profile}
 							activeAppStatus={activeAppStatus}
 							appSearchQuery={appSearchQuery}
+							onCreateInPerson={() => setShowCreateInPersonModal(true)}
 							onOpenApplication={(id) => setSelectedAppId(id)}
 							onResetFilters={() => {
 								setActiveAppStatus('');
@@ -217,6 +221,17 @@ export default function StaffDashboard() {
 					</div>
 				)}
 			</main>
+
+			{/* МОДАЛЬНОЕ ОКНО: ОЧНЫЙ ПРИЁМ КАНДИДАТА */}
+			<CreateInPersonApplicationModal
+				isOpen={showCreateInPersonModal}
+				onClose={() => setShowCreateInPersonModal(false)}
+				onCreated={(createdId) => {
+					loadApplications();
+					loadProfile();
+					setSelectedAppId(createdId);
+				}}
+			/>
 
 			{/* МОДАЛЬНОЕ ОКНО: РЕДАКТИРОВАНИЕ ДЕЛА КАНДИДАТА И ВЫПУСК СЕРТИФИКАТА */}
 			<EditApplicationModal

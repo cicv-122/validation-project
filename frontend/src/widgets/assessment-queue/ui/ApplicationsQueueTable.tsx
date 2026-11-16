@@ -8,6 +8,7 @@ const APPLICATION_STATUS_TABS = [
 	{ id: 'submitted', label: 'Новые', statKey: 'submitted' },
 	{ id: 'under_review', label: 'На рассмотрении', statKey: 'under_review' },
 	{ id: 'completed', label: 'Выдано', statKey: 'completed' },
+	{ id: 'rejected', label: 'Архив / Не завершено', statKey: 'rejected' },
 ];
 
 
@@ -38,6 +39,7 @@ interface ApplicationsQueueTableProps {
 	profile: StaffProfile | null;
 	activeAppStatus: string;
 	appSearchQuery: string;
+	onCreateInPerson?: () => void;
 	onOpenApplication: (id: number) => void;
 	onResetFilters: () => void;
 	onStatusChange: (status: string) => void;
@@ -51,6 +53,7 @@ export const ApplicationsQueueTable: React.FC<ApplicationsQueueTableProps> = ({
 	profile,
 	activeAppStatus,
 	appSearchQuery,
+	onCreateInPerson,
 	onOpenApplication,
 	onResetFilters,
 	onStatusChange,
@@ -60,8 +63,8 @@ export const ApplicationsQueueTable: React.FC<ApplicationsQueueTableProps> = ({
 	return (
 		<div className="space-y-4">
 			{/* Фильтры-табы с бейджами и поиск */}
-			<div className="bg-white p-4 rounded-2xl border border-slate-200 shadow-xs flex flex-col md:flex-row items-center justify-between gap-4">
-				<div className="flex items-center gap-1.5 overflow-x-auto w-full md:w-auto pb-1 md:pb-0">
+			<div className="bg-white p-4 rounded-2xl border border-slate-200 shadow-xs flex flex-col lg:flex-row items-center justify-between gap-4">
+				<div className="flex items-center gap-1.5 overflow-x-auto w-full lg:w-auto pb-1 lg:pb-0">
 					{APPLICATION_STATUS_TABS.map((tab) => {
 						const count = tab.statKey ? (profile?.stats as any)?.[tab.statKey] : profile?.stats.total;
 						const isActive = activeAppStatus === tab.id;
@@ -89,21 +92,36 @@ export const ApplicationsQueueTable: React.FC<ApplicationsQueueTableProps> = ({
 					})}
 				</div>
 
-				<form onSubmit={onSearchSubmit} className="w-full md:w-80 flex items-center gap-2">
-					<input
-						type="text"
-						value={appSearchQuery}
-						onChange={(e) => onSearchChange(e.target.value)}
-						placeholder="ФИО, ИНН, телефон или номер..."
-						className="w-full px-3.5 py-2 text-xs font-medium rounded-xl border border-slate-200 focus:border-[#283375] outline-none"
-					/>
-					<button
-						type="submit"
-						className="px-4 py-2 rounded-xl bg-[#283375] text-white text-xs font-bold hover:bg-[#1e265c] transition-all flex-shrink-0 cursor-pointer"
-					>
-						Найти
-					</button>
-				</form>
+				<div className="flex flex-col sm:flex-row items-center gap-2 w-full lg:w-auto">
+					<form onSubmit={onSearchSubmit} className="w-full sm:w-72 flex items-center gap-2">
+						<input
+							type="text"
+							value={appSearchQuery}
+							onChange={(e) => onSearchChange(e.target.value)}
+							placeholder="ФИО, ИНН, телефон или номер..."
+							className="w-full px-3.5 py-2 text-xs font-medium rounded-xl border border-slate-200 focus:border-[#283375] outline-none"
+						/>
+						<button
+							type="submit"
+							className="px-3.5 py-2 rounded-xl bg-[#283375] text-white text-xs font-bold hover:bg-[#1e265c] transition-all flex-shrink-0 cursor-pointer"
+						>
+							Найти
+						</button>
+					</form>
+					{onCreateInPerson && (
+						<button
+							type="button"
+							onClick={onCreateInPerson}
+							className="w-full sm:w-auto px-4 py-2 rounded-xl bg-emerald-700 hover:bg-emerald-800 text-white text-xs font-bold transition-all flex items-center justify-center gap-1.5 flex-shrink-0 shadow-xs cursor-pointer"
+							title="Зарегистрировать кандидата, обратившегося лично в Центр"
+						>
+							<svg className="w-3.5 h-3.5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+								<path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M12 4v16m8-8H4" />
+							</svg>
+							<span>Очный приём</span>
+						</button>
+					)}
+				</div>
 			</div>
 
 			{/* Таблица кандидатов */}

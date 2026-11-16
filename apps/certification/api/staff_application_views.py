@@ -68,6 +68,8 @@ class StaffApplicationsListView(APIView):
         if status_filter:
             if status_filter == 'under_review':
                 qs = qs.filter(status__in=['under_review', 'assessment_scheduled', 'assessment_in_progress', 'approved'])
+            elif status_filter == 'rejected':
+                qs = qs.filter(status__in=['rejected', 'cancelled'])
             else:
                 qs = qs.filter(status=status_filter)
 
@@ -87,6 +89,64 @@ class StaffApplicationsListView(APIView):
 
         serializer = StaffApplicationListSerializer(qs, many=True, context={'request': request})
         return Response(serializer.data)
+
+    def post(self, request):
+        """
+        POST /api/v1/certification/staff/applications/
+        Регистрация кандидата при очном обращении в Центр (очный прием).
+        """
+        staff = get_or_create_staff_for_user(request.user)
+        if not staff or not staff.is_active:
+            return Response({'detail': 'Доступ запрещен'}, status=status.HTTP_403_FORBIDDEN)
+
+        data = request.data
+        full_name = data.get('full_name', '').strip()
+        if not full_name:
+            return Response({'detail': 'Укажите ФИО кандидата'}, status=status.HTTP_400_BAD_REQUEST)
+
+        profession = data.get('profession', '').strip()
+        if not profession:
+            return Response({'detail': 'Укажите профессию кандидата'}, status=status.HTTP_400_BAD_REQUEST)
+
+        inn = data.get('inn', '').strip()
+        phone = data.get('phone', '').strip()
+        whatsapp = data.get('whatsapp', '').strip() or phone
+        email = data.get('email', '').strip()
+        app_type = data.get('application_type', 'certification')
+        qualification_level = data.get('qualification_level', '').strip()
+        experience_years = data.get('experience_years') or 0
+        address = data.get('address', '').strip()
+        admin_notes = data.get('admin_notes', '').strip()
+
+        from apps.certification.models import Profession
+        profession_ref = None
+        if profession:
+            profession_ref = Profession.objects.filter(
+                Q(name_ru__iexact=profession) | Q(name_ky__iexact=profession)
+            ).first()
+
+        app = CertificationApplication.objects.create(
+            full_name=full_name,
+            inn=inn or None,
+            phone=phone,
+            whatsapp=whatsapp,
+            email=email,
+            application_type=app_type,
+            profession=profession,
+            profession_ref=profession_ref,
+            qualification_level=qualification_level,
+            experience_years=int(experience_years) if str(experience_years).isdigit() else 0,
+            address=address,
+            admin_notes=admin_notes,
+            status='under_review',
+            origin='in_person',
+            assigned_staff=staff,
+            reviewed_at=timezone.now(),
+            submitted_at=timezone.now(),
+        )
+
+        serializer = StaffApplicationDetailSerializer(app, context={'request': request})
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
 
 
 class StaffApplicationDetailView(APIView):
