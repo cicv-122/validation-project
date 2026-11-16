@@ -185,36 +185,6 @@ export function EditApplicationModal({
 									<span>Вернуть в работу</span>
 								</button>
 							)}
-
-							{/* В архив / Отказ (для активных дел в работе) */}
-							{appDetail && appDetail.status !== 'rejected' && appDetail.status !== 'completed' && (
-								<button
-									type='button'
-									onClick={() => setShowRejectModal(true)}
-									className='px-3 py-1.5 rounded-xl border border-slate-200 bg-slate-50 hover:bg-amber-50 hover:text-amber-700 text-slate-600 text-xs font-bold transition-all flex items-center gap-1.5 cursor-pointer'
-									title='Переместить кандидата в архив (не явился, отказ или на пересдачу)'
-								>
-									<svg className='w-3.5 h-3.5 text-slate-500' fill='none' viewBox='0 0 24 24' stroke='currentColor'>
-										<path strokeLinecap='round' strokeLinejoin='round' strokeWidth={2} d='M5 8h14M5 8a2 2 0 110-4h14a2 2 0 110 4M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8m-9 4h4' />
-									</svg>
-									<span className='hidden sm:inline'>В архив / Отказ</span>
-								</button>
-							)}
-
-							{/* Удалить заявку */}
-							{appDetail && (
-								<button
-									type='button'
-									onClick={() => setShowDeleteConfirm(true)}
-									className='px-3 py-1.5 rounded-xl border border-red-200 bg-red-50 hover:bg-red-100 text-red-600 text-xs font-bold transition-all flex items-center gap-1.5 cursor-pointer'
-									title='Удалить заявку'
-								>
-									<svg className='w-3.5 h-3.5 text-red-600' fill='none' viewBox='0 0 24 24' stroke='currentColor'>
-										<path strokeLinecap='round' strokeLinejoin='round' strokeWidth={2} d='M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16' />
-									</svg>
-									<span className='hidden sm:inline'>Удалить заявку</span>
-								</button>
-							)}
 							<button
 								onClick={onClose}
 								className='w-9 h-9 rounded-full bg-white border border-slate-200 text-slate-400 hover:text-slate-700 flex items-center justify-center shadow-xs transition-colors cursor-pointer'
@@ -321,6 +291,49 @@ export function EditApplicationModal({
 								)}
 							</>
 						) : null}
+					</div>
+
+					{/* Подвал модального окна: действия архивации / удаления слева, закрытие справа */}
+					<div className='px-6 py-3.5 bg-slate-50 border-t border-slate-100 rounded-b-3xl flex items-center justify-between gap-3'>
+						<div className='flex items-center gap-2'>
+							{/* В архив / Отказ (для активных дел в работе) */}
+							{appDetail && appDetail.status !== 'rejected' && appDetail.status !== 'completed' && (
+								<button
+									type='button'
+									onClick={() => setShowRejectModal(true)}
+									className='px-3.5 py-1.5 rounded-xl border border-slate-200 bg-white hover:bg-amber-50 hover:border-amber-200 hover:text-amber-700 text-slate-600 text-xs font-bold transition-all flex items-center gap-1.5 cursor-pointer shadow-2xs'
+									title='Переместить кандидата в архив (не явился, отказ или на пересдачу)'
+								>
+									<svg className='w-3.5 h-3.5 text-slate-400 group-hover:text-amber-600' fill='none' viewBox='0 0 24 24' stroke='currentColor'>
+										<path strokeLinecap='round' strokeLinejoin='round' strokeWidth={2} d='M5 8h14M5 8a2 2 0 110-4h14a2 2 0 110 4M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8m-9 4h4' />
+									</svg>
+									<span>В архив / Отказ</span>
+								</button>
+							)}
+
+							{/* Удалить заявку */}
+							{appDetail && (
+								<button
+									type='button'
+									onClick={() => setShowDeleteConfirm(true)}
+									className='px-3.5 py-1.5 rounded-xl border border-red-200/80 bg-white hover:bg-red-50 text-red-600 text-xs font-bold transition-all flex items-center gap-1.5 cursor-pointer shadow-2xs'
+									title='Удалить заявку'
+								>
+									<svg className='w-3.5 h-3.5 text-red-500' fill='none' viewBox='0 0 24 24' stroke='currentColor'>
+										<path strokeLinecap='round' strokeLinejoin='round' strokeWidth={2} d='M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16' />
+									</svg>
+									<span>Удалить заявку</span>
+								</button>
+							)}
+						</div>
+
+						<button
+							type='button'
+							onClick={onClose}
+							className='px-4 py-1.5 rounded-xl bg-white border border-slate-200 text-slate-700 hover:bg-slate-100 text-xs font-bold transition-colors shadow-2xs cursor-pointer'
+						>
+							Закрыть
+						</button>
 					</div>
 				</div>
 			</div>

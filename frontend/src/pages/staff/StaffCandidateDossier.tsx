@@ -34,6 +34,7 @@ export default function StaffCandidateDossier() {
 	const location = useLocation();
 	const returnUrl =
 		(location.state as any)?.returnUrl ||
+		(typeof window !== 'undefined' ? sessionStorage.getItem('staff_dashboard_last_url') : null) ||
 		`/staff/dashboard?tab=registry${id ? `&target=${id}` : ''}`;
 
 	const {

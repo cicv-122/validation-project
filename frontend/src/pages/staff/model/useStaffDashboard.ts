@@ -1,6 +1,6 @@
 // frontend/src/pages/staff/model/useStaffDashboard.ts
 import { useState, useEffect, useLayoutEffect, useRef } from 'react';
-import { useNavigate, useSearchParams } from 'react-router-dom';
+import { useNavigate, useSearchParams, useLocation } from 'react-router-dom';
 import { useUrlQueryState } from '../../../shared/lib';
 import {
 	staffApi,
@@ -36,6 +36,15 @@ export function useStaffDashboard() {
 	});
 
 	const activeMainTab: MainTabType = tabParam === 'registry' ? 'certified_registry' : 'applications';
+
+	const location = useLocation();
+
+	// Сохраняем текущий активный URL кабинета (включая ?tab=registry), чтобы возврат возвращал ровно в эту вкладку
+	useEffect(() => {
+		if (location.pathname === '/staff/dashboard') {
+			sessionStorage.setItem('staff_dashboard_last_url', location.pathname + location.search);
+		}
+	}, [location.pathname, location.search]);
 
 	const switchMainTab = (tabId: MainTabType) => {
 		setTabParam(tabId === 'certified_registry' ? 'registry' : '');

@@ -181,6 +181,11 @@ export default function StaffProfessionsPage() {
 		});
 	}, [expertSearch]);
 
+	const returnUrl =
+		typeof window !== 'undefined'
+			? sessionStorage.getItem('staff_dashboard_last_url') || '/staff/dashboard'
+			: '/staff/dashboard';
+
 	return (
 		<div className='min-h-screen bg-slate-50 flex flex-col font-sans'>
 			<StaffHeader profile={profile} onProfileUpdated={setProfile} />
@@ -189,7 +194,7 @@ export default function StaffProfessionsPage() {
 				{/* Хлебные крошки и заголовок */}
 				<div className='mb-6'>
 					<Link
-						to='/staff/dashboard'
+						to={returnUrl}
 						className='inline-flex items-center gap-1.5 text-xs font-bold text-slate-500 hover:text-[#283375] transition-colors mb-3 group'
 					>
 						<svg className='w-4 h-4 text-slate-400 group-hover:text-[#283375] transition-colors' fill='none' viewBox='0 0 24 24' stroke='currentColor'>

@@ -24,9 +24,14 @@ export const StaffBrandHeader: React.FC<StaffBrandHeaderProps> = ({ isDossier = 
 		isSubpage = true;
 	}
 
+	const returnUrl =
+		typeof window !== 'undefined'
+			? sessionStorage.getItem('staff_dashboard_last_url') || '/staff/dashboard'
+			: '/staff/dashboard';
+
 	return (
 		<Link
-			to='/staff/dashboard'
+			to={returnUrl}
 			title={isSubpage ? 'Вернуться в рабочий кабинет' : 'Рабочий кабинет сотрудника'}
 			className='flex items-center gap-3 group cursor-pointer select-none flex-shrink-0'
 		>
