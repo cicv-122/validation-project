@@ -1,6 +1,6 @@
 // frontend/src/pages/staff/StaffExpertsPage.tsx
 import { useState, useEffect, useMemo } from 'react';
-import { useNavigate, Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import StaffHeader from '../../components/staff/StaffHeader';
 import { staffApi, StaffProfile } from '../../api/staff';
 import apiClient from '../../api/client';
@@ -100,43 +100,23 @@ export default function StaffExpertsPage() {
 		});
 	}, [experts, searchQuery, roleFilter, centerFilter]);
 
-	const returnUrl =
-		typeof window !== 'undefined'
-			? sessionStorage.getItem('staff_dashboard_last_url') || '/staff/dashboard'
-			: '/staff/dashboard';
-
 	return (
 		<div className='min-h-screen bg-slate-50 flex flex-col font-sans'>
 			<StaffHeader profile={profile} onProfileUpdated={setProfile} />
 
 			<main className='flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6'>
-				{/* Хлебные крошки и заголовок */}
-				<div className='mb-6'>
-					<Link
-						to={returnUrl}
-						className='inline-flex items-center gap-1.5 text-xs font-bold text-slate-500 hover:text-[#283375] transition-colors mb-3 group'
-					>
-						<svg className='w-4 h-4 text-slate-400 group-hover:text-[#283375] transition-colors' fill='none' viewBox='0 0 24 24' stroke='currentColor'>
-							<path strokeLinecap='round' strokeLinejoin='round' strokeWidth={2} d='M10 19l-7-7m0 0l7-7m-7 7h18' />
-						</svg>
-						<span>Назад в рабочий кабинет</span>
-					</Link>
-
-					<div className='flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4'>
-						<div>
-							<div className='text-xs font-bold uppercase tracking-wider text-slate-400'>
-								Министерство просвещения Кыргызской Республики • ЦНСВ
-							</div>
-							<h1 className='text-2xl sm:text-3xl font-black text-slate-900 mt-1 flex items-center gap-3'>
-								<span>База аттестованных экспертов</span>
-								<span className='text-sm px-2.5 py-0.5 rounded-full bg-indigo-100 text-[#283375] font-bold'>
-									{filteredExperts.length}
-								</span>
-							</h1>
-							<p className='text-xs text-slate-500 mt-1'>
-								Официальный реестр экспертов-оценщиков и закрепление специалистов за площадками оценки (БКАМС, FabLab и др.)
-							</p>
-						</div>
+				{/* Заголовок страницы */}
+				<div className='mb-6 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4'>
+					<div>
+						<h1 className='text-2xl sm:text-3xl font-black text-slate-900 flex items-center gap-3'>
+							<span>База аттестованных экспертов</span>
+							<span className='text-sm px-2.5 py-0.5 rounded-full bg-indigo-100 text-[#283375] font-bold'>
+								{filteredExperts.length}
+							</span>
+						</h1>
+						<p className='text-xs text-slate-500 mt-1'>
+							Официальный реестр экспертов-оценщиков и закрепление специалистов за площадками оценки (БКАМС, FabLab и др.)
+						</p>
 					</div>
 				</div>
 
