@@ -363,17 +363,24 @@ export function EditApplicationModal({
 						<label className='block text-xs font-bold text-slate-700 mb-1'>
 							Укажите причину:
 						</label>
-						<select
-							value={rejectReason}
-							onChange={(e) => setRejectReason(e.target.value)}
-							className='w-full px-3 py-2 text-xs rounded-xl border border-slate-200 bg-white mb-4 outline-none focus:border-[#283375]'
-						>
-							<option value='Не явился на экзамен'>Не явился на квалификационный экзамен</option>
-							<option value='Направлен на пересдачу'>Направлен на пересдачу (не сдал теорию/практику)</option>
-							<option value='Отказ кандидата'>Отказ по инициативе заявителя</option>
-							<option value='Не соответствует квалификационным требованиям'>Не соответствует квалификационным требованиям</option>
-							<option value='Предоставлены неполные или недостоверные документы'>Предоставлены неполные или недостоверные документы</option>
-						</select>
+						<div className='relative mb-4'>
+							<select
+								value={rejectReason}
+								onChange={(e) => setRejectReason(e.target.value)}
+								className='w-full pl-3 pr-9 py-2 text-xs font-semibold rounded-xl border border-slate-200 bg-white outline-none focus:border-[#283375] appearance-none cursor-pointer'
+							>
+								<option value='Не явился на экзамен'>Не явился на квалификационный экзамен</option>
+								<option value='Направлен на пересдачу'>Направлен на пересдачу (не сдал теорию/практику)</option>
+								<option value='Отказ кандидата'>Отказ по инициативе заявителя</option>
+								<option value='Не соответствует квалификационным требованиям'>Не соответствует квалификационным требованиям</option>
+								<option value='Предоставлены неполные или недостоверные документы'>Предоставлены неполные или недостоверные документы</option>
+							</select>
+							<div className='pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3 text-slate-400'>
+								<svg className='w-4 h-4' fill='none' viewBox='0 0 24 24' stroke='currentColor'>
+									<path strokeLinecap='round' strokeLinejoin='round' strokeWidth={2} d='M19 9l-7 7-7-7' />
+								</svg>
+							</div>
+						</div>
 						<div className='flex justify-end gap-2'>
 							<button
 								type='button'

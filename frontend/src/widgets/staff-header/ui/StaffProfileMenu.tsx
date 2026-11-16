@@ -1,8 +1,7 @@
 import React, { useRef, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { StaffProfile } from '../../../api/staff';
 import { useClickOutside, useKeyPress } from '../../../shared/lib';
-import { ManageProfessionsModal } from '../../../features/professions-management/ui/ManageProfessionsModal';
-import { ManageExpertsModal } from '../../../features/experts-management/ui/ManageExpertsModal';
 
 interface StaffProfileMenuProps {
 	profile: StaffProfile | null;
@@ -24,9 +23,8 @@ export const StaffProfileMenu: React.FC<StaffProfileMenuProps> = ({
 	onConnectTelegram,
 	onDisconnectTelegram,
 }) => {
+	const navigate = useNavigate();
 	const [isMenuOpen, setIsMenuOpen] = useState(false);
-	const [isProfessionsModalOpen, setIsProfessionsModalOpen] = useState(false);
-	const [isExpertsModalOpen, setIsExpertsModalOpen] = useState(false);
 	const menuRef = useRef<HTMLDivElement>(null);
 
 	// Закрытие меню при клике вне его области или по Escape
@@ -155,7 +153,7 @@ export const StaffProfileMenu: React.FC<StaffProfileMenuProps> = ({
 						type='button'
 						onClick={() => {
 							setIsMenuOpen(false);
-							setIsProfessionsModalOpen(true);
+							navigate('/staff/professions');
 						}}
 						className='w-full flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-[#283375]/5 text-slate-800 transition-colors group cursor-pointer text-left mb-1'
 					>
@@ -179,7 +177,7 @@ export const StaffProfileMenu: React.FC<StaffProfileMenuProps> = ({
 						type='button'
 						onClick={() => {
 							setIsMenuOpen(false);
-							setIsExpertsModalOpen(true);
+							navigate('/staff/experts');
 						}}
 						className='w-full flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-[#283375]/5 text-slate-800 transition-colors group cursor-pointer text-left mb-1'
 					>
@@ -229,18 +227,6 @@ export const StaffProfileMenu: React.FC<StaffProfileMenuProps> = ({
 					</button>
 				</div>
 			)}
-
-			{/* Модальное окно управления профессиями */}
-			<ManageProfessionsModal
-				isOpen={isProfessionsModalOpen}
-				onClose={() => setIsProfessionsModalOpen(false)}
-			/>
-
-			{/* Модальное окно управления экспертами */}
-			<ManageExpertsModal
-				isOpen={isExpertsModalOpen}
-				onClose={() => setIsExpertsModalOpen(false)}
-			/>
 		</div>
 	);
 };

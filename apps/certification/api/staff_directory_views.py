@@ -132,7 +132,8 @@ class StaffProfessionsManageView(APIView):
         if not staff or not staff.is_active:
             return Response({'detail': 'Доступ запрещен'}, status=status.HTTP_403_FORBIDDEN)
 
-        q = request.query_params.get('q', '').strip()
+        qp = getattr(request, 'query_params', getattr(request, 'GET', {}))
+        q = qp.get('q', '').strip()
         qs = Profession.objects.filter(is_active=True)
         if q:
             qs = qs.filter(
@@ -295,10 +296,11 @@ class StaffExpertsManageView(APIView):
 
         experts, _, centers_map = load_experts_data()
 
-        q = request.query_params.get('q', '').strip().lower()
-        center_id = request.query_params.get('center_id')
-        role = request.query_params.get('role', '').strip().lower()
-        prof = request.query_params.get('profession', '').strip().lower()
+        qp = getattr(request, 'query_params', getattr(request, 'GET', {}))
+        q = qp.get('q', '').strip().lower()
+        center_id = qp.get('center_id')
+        role = qp.get('role', '').strip().lower()
+        prof = qp.get('profession', '').strip().lower()
 
         filtered = []
         for e in experts:

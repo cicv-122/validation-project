@@ -11,12 +11,20 @@ const apiClient = axios.create({
 	},
 });
 
-// Добавляем перехватчик, чтобы клиент всегда отправлял текущий язык в бэкенд
+// Добавляем перехватчик, чтобы клиент всегда отправлял текущий язык и токен сотрудника в бэкенд
 apiClient.interceptors.request.use((config) => {
 	// LocaleMiddleware в Django читает заголовок Accept-Language
 	if (i18n && i18n.language) {
 		config.headers['Accept-Language'] = i18n.language;
 	}
+
+	const token =
+		localStorage.getItem('staff_token') ||
+		localStorage.getItem('staff_access_token');
+	if (token && !config.headers['Authorization']) {
+		config.headers['Authorization'] = `Token ${token}`;
+	}
+
 	return config;
 });
 
