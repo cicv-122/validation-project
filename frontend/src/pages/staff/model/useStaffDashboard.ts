@@ -91,6 +91,51 @@ export function useStaffDashboard() {
 	// Предотвращение любых прыжков скролла при фильтрации и переключении отраслей
 	const scrollYBeforeUpdate = useRef<number | null>(null);
 
+	// Кэш страниц реестра в оперативной памяти: key -> { results, count, timestamp }
+	const registryCacheRef = useRef<Map<string, { results: StaffCertifiedUser[]; count: number; timestamp: number }>>(new Map());
+
+	const getCacheKey = (cluster?: string, inn?: string, q?: string, page = 1) => {
+		return `${cluster || ''}|${inn || ''}|${(q || '').trim()}|${page}`;
+	};
+
+	const scrollToTableTop = () => {
+		setTimeout(() => {
+			const tableEl = document.getElementById('certified-specialists-table');
+			if (tableEl) {
+				const headerOffset = 100; // отступ под верхнюю панель
+				const elementPosition = tableEl.getBoundingClientRect().top;
+				const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+				window.scrollTo({
+					top: Math.max(0, offsetPosition),
+					behavior: 'smooth',
+				});
+			}
+		}, 30);
+	};
+
+	const prefetchNextPage = (currentPage: number, totalCount: number, cluster?: string, inn?: string, q?: string) => {
+		const nextPage = currentPage + 1;
+		if (currentPage * 20 >= totalCount) return;
+
+		const nextCacheKey = getCacheKey(cluster, inn, q, nextPage);
+		if (registryCacheRef.current.has(nextCacheKey)) return;
+
+		staffApi.getCertifiedUsers({
+			page: nextPage,
+			q: (q || '').trim() || undefined,
+			has_inn: inn || undefined,
+			cluster: cluster || undefined,
+		}).then((data) => {
+			registryCacheRef.current.set(nextCacheKey, {
+				results: data.results,
+				count: data.count,
+				timestamp: Date.now(),
+			});
+		}).catch(() => {
+			// игнорируем ошибку фонового префетча
+		});
+	};
+
 	useLayoutEffect(() => {
 		if (scrollYBeforeUpdate.current !== null) {
 			const savedY = scrollYBeforeUpdate.current;
@@ -127,14 +172,58 @@ export function useStaffDashboard() {
 		}
 	};
 
-	const loadCertifiedList = async (page = 1, clusterOverride?: string, innOverride?: string, qOverride?: string) => {
-		if (scrollYBeforeUpdate.current === null) {
-			scrollYBeforeUpdate.current = window.scrollY;
-		}
-		setLoadingCertified(true);
+	const loadCertifiedList = async (
+		page = 1,
+		clusterOverride?: string,
+		innOverride?: string,
+		qOverride?: string,
+		shouldScrollToTable = false
+	) => {
 		const targetCluster = clusterOverride !== undefined ? clusterOverride : certifiedCluster;
 		const targetInn = innOverride !== undefined ? innOverride : certifiedHasInn;
 		const targetQ = qOverride !== undefined ? qOverride : certifiedSearch;
+		const cacheKey = getCacheKey(targetCluster, targetInn, targetQ, page);
+
+		// Если данные уже есть в кэше оперативной памяти — отдаём моментально (0 мс, 0 сетевых запросов)
+		if (registryCacheRef.current.has(cacheKey)) {
+			const cached = registryCacheRef.current.get(cacheKey)!;
+			if (shouldScrollToTable) {
+				scrollYBeforeUpdate.current = null;
+			}
+			setCertifiedList(cached.results);
+			setCertifiedTotal(cached.count);
+			setCertifiedPage(page);
+			setLoadingCertified(false);
+
+			setSearchParams(
+				(prev) => {
+					const next = new URLSearchParams(prev);
+					next.set('tab', 'registry');
+					if (page > 1) next.set('page', String(page)); else next.delete('page');
+					if (targetQ.trim()) next.set('q', targetQ.trim()); else next.delete('q');
+					if (targetInn) next.set('has_inn', targetInn); else next.delete('has_inn');
+					if (targetCluster) next.set('cluster', targetCluster); else next.delete('cluster');
+					next.delete('target');
+					return next;
+				},
+				{ replace: true }
+			);
+
+			if (shouldScrollToTable) {
+				scrollToTableTop();
+			}
+
+			prefetchNextPage(page, cached.count, targetCluster, targetInn, targetQ);
+			return;
+		}
+
+		if (shouldScrollToTable) {
+			scrollYBeforeUpdate.current = null;
+		} else if (scrollYBeforeUpdate.current === null) {
+			scrollYBeforeUpdate.current = window.scrollY;
+		}
+
+		setLoadingCertified(true);
 		try {
 			const data = await staffApi.getCertifiedUsers({
 				page,
@@ -142,6 +231,13 @@ export function useStaffDashboard() {
 				has_inn: targetInn || undefined,
 				cluster: targetCluster || undefined,
 			});
+
+			registryCacheRef.current.set(cacheKey, {
+				results: data.results,
+				count: data.count,
+				timestamp: Date.now(),
+			});
+
 			setCertifiedList(data.results);
 			setCertifiedTotal(data.count);
 			setCertifiedPage(page);
@@ -160,6 +256,12 @@ export function useStaffDashboard() {
 				},
 				{ replace: true }
 			);
+
+			if (shouldScrollToTable) {
+				scrollToTableTop();
+			}
+
+			prefetchNextPage(page, data.count, targetCluster, targetInn, targetQ);
 		} catch (err) {
 			console.error(err);
 		} finally {
@@ -237,7 +339,8 @@ export function useStaffDashboard() {
 
 	const handleCertifiedSearch = (e: React.FormEvent) => {
 		e.preventDefault();
-		loadCertifiedList(1);
+		registryCacheRef.current.clear();
+		loadCertifiedList(1, undefined, undefined, certifiedSearch, true);
 	};
 
 	const handleDeleteSpecialist = async () => {
@@ -246,7 +349,8 @@ export function useStaffDashboard() {
 		try {
 			await staffApi.deleteCertifiedUser(deletingSpecialist.id);
 			setDeletingSpecialist(null);
-			await loadCertifiedList(certifiedPage);
+			registryCacheRef.current.clear();
+			await loadCertifiedList(certifiedPage, undefined, undefined, undefined, false);
 			await loadProfile();
 		} catch (err: any) {
 			alert(err?.response?.data?.detail || 'Ошибка при удалении специалиста');

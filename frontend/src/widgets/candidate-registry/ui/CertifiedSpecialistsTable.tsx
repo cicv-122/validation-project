@@ -48,7 +48,7 @@ export const CertifiedSpecialistsTable: React.FC<CertifiedSpecialistsTableProps>
 	const isUpdating = loading && certifiedList.length > 0;
 
 	return (
-		<div className="bg-white rounded-2xl border border-slate-200 shadow-xs overflow-hidden relative min-h-[680px]">
+		<div id="certified-specialists-table" className="bg-white rounded-2xl border border-slate-200 shadow-xs overflow-hidden relative min-h-[680px]">
 			{/* Индикатор фонового обновления данных при смене фильтра/отрасли */}
 			{isUpdating && (
 				<div className="absolute top-0 inset-x-0 z-20 h-1 bg-slate-100 overflow-hidden">

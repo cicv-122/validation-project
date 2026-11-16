@@ -198,7 +198,7 @@ export default function StaffDashboard() {
 							certifiedList={certifiedList}
 							certifiedTotal={certifiedTotal}
 							certifiedPage={certifiedPage}
-							onPageChange={(page) => loadCertifiedList(page)}
+							onPageChange={(page) => loadCertifiedList(page, undefined, undefined, undefined, true)}
 							onDeleteSpecialist={(item) => setDeletingSpecialist(item)}
 							candidateDossierState={candidateDossierState}
 							certifiedCluster={certifiedCluster}
