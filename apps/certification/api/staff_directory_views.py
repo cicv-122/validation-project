@@ -61,60 +61,76 @@ def save_experts_overrides(overrides):
         json.dump(overrides, f, ensure_ascii=False, indent=2)
 
 
-def sync_assessment_center_experts(center_id, profession_name):
+def sync_assessment_center_experts(center_id=None):
     """
-    Автоматически обновляет или создаёт запись AppraisersExpert для AssessmentCenter,
+    Автоматически синхронизирует записи AppraisersExpert для AssessmentCenter,
     чтобы на публичной странице центра (/documents/assessment-centers/:id)
-    сразу отображалась официальная таблица направлений и закреплённой комиссии.
+    сразу отображались актуальные направления и прикреплённые эксперты.
     """
-    if not center_id or not profession_name:
-        return
-
     try:
-        center = AssessmentCenter.objects.filter(id=center_id).first()
-        if not center:
-            return
-
         experts, _, _ = load_experts_data()
-        center_profs = [
-            e for e in experts
-            if e.get('assessment_center_id') == center_id and
-            e.get('profession_ru', '').strip().lower() == profession_name.strip().lower()
-        ]
 
-        appraisers_list = []
-        employers_list = []
-        consultants_list = []
-
-        for e in center_profs:
-            role = (e.get('role_ru') or '').lower()
-            name_with_org = f"{e['name']} ({e['organization']})" if e.get('organization') else e['name']
-            if 'работодател' in role:
-                employers_list.append(name_with_org)
-            elif 'консультант' in role:
-                consultants_list.append(name_with_org)
-            else:
-                appraisers_list.append(name_with_org)
-
-        if not center_profs:
-            # Если экспертов больше нет, запись можно оставить или деактивировать
-            return
-
-        ae, _ = AppraisersExpert.objects.get_or_create(
-            assessment_center=center,
-            profession=profession_name,
-            defaults={
-                'appraisers': ', '.join(appraisers_list) or 'Комиссия ЦНСВ',
-                'appraiser_employer': ', '.join(employers_list) or 'Представитель профильного предприятия',
-                'consultant': ', '.join(consultants_list) or 'Консультант ЦНСВ',
-                'is_active': True,
-            }
+        centers_to_sync = (
+            AssessmentCenter.objects.filter(id=center_id)
+            if center_id else
+            AssessmentCenter.objects.all()
         )
-        ae.appraisers = ', '.join(appraisers_list) or 'Комиссия ЦНСВ'
-        ae.appraiser_employer = ', '.join(employers_list) or 'Представитель профильного предприятия'
-        ae.consultant = ', '.join(consultants_list) or 'Консультант ЦНСВ'
-        ae.is_active = True
-        ae.save()
+
+        for center in centers_to_sync:
+            # Находим всех экспертов, закреплённых за данным центром
+            center_experts = [
+                e for e in experts
+                if e.get('assessment_center_id') == center.id
+            ]
+
+            # Группируем экспертов по профессиям
+            prof_groups = {}
+            for e in center_experts:
+                prof_name = (e.get('profession_ru') or '').strip()
+                if not prof_name:
+                    continue
+                if prof_name not in prof_groups:
+                    prof_groups[prof_name] = []
+                prof_groups[prof_name].append(e)
+
+            # Деактивируем направления, у которых больше нет прикреплённых экспертов
+            existing_aes = AppraisersExpert.objects.filter(assessment_center=center)
+            for ae in existing_aes:
+                if ae.profession not in prof_groups:
+                    ae.is_active = False
+                    ae.save(update_fields=['is_active'])
+
+            # Для каждой профессии обновляем или создаём запись
+            for prof_name, exp_list in prof_groups.items():
+                appraisers_list = []
+                employers_list = []
+                consultants_list = []
+
+                for e in exp_list:
+                    role = (e.get('role_ru') or '').lower()
+                    name_with_org = f"{e['name']} ({e['organization']})" if e.get('organization') else e['name']
+                    if 'работодател' in role:
+                        employers_list.append(name_with_org)
+                    elif 'консультант' in role:
+                        consultants_list.append(name_with_org)
+                    else:
+                        appraisers_list.append(name_with_org)
+
+                ae, _ = AppraisersExpert.objects.get_or_create(
+                    assessment_center=center,
+                    profession=prof_name,
+                    defaults={
+                        'appraisers': ', '.join(appraisers_list) or 'Комиссия ЦНСВ',
+                        'appraiser_employer': ', '.join(employers_list) or 'Представитель профильного предприятия',
+                        'consultant': ', '.join(consultants_list) or 'Консультант ЦНСВ',
+                        'is_active': True,
+                    }
+                )
+                ae.appraisers = ', '.join(appraisers_list) or 'Комиссия ЦНСВ'
+                ae.appraiser_employer = ', '.join(employers_list) or 'Представитель профильного предприятия'
+                ae.consultant = ', '.join(consultants_list) or 'Консультант ЦНСВ'
+                ae.is_active = True
+                ae.save()
     except Exception as exc:
         pass
 
@@ -348,6 +364,8 @@ class StaffExpertDetailManageView(APIView):
             overrides[exp_key] = {}
 
         data = request.data
+        prev_center_id = target.get('assessment_center_id')
+
         if 'assessment_center_id' in data:
             c_id = data['assessment_center_id']
             if c_id in (None, '', 0, '0', 'null'):
@@ -360,8 +378,6 @@ class StaffExpertDetailManageView(APIView):
                     overrides[exp_key]['assessment_center_id'] = c_id_int
                     target['assessment_center_id'] = c_id_int
                     target['assessment_center_name'] = centers_map.get(c_id_int, '')
-                    # Синхронизируем таблицу сертифицируемых направлений колледжа
-                    sync_assessment_center_experts(c_id_int, target.get('profession_ru', ''))
                 except (ValueError, TypeError):
                     pass
 
@@ -370,9 +386,14 @@ class StaffExpertDetailManageView(APIView):
             if prof_val:
                 overrides[exp_key]['profession_ru'] = prof_val
                 target['profession_ru'] = prof_val
-                if target.get('assessment_center_id'):
-                    sync_assessment_center_experts(target['assessment_center_id'], prof_val)
 
+        # Сохраняем обновленные привязки на диск
         save_experts_overrides(overrides)
+
+        # Синхронизируем направления для центров оценки (старого и нового)
+        if prev_center_id and prev_center_id != target.get('assessment_center_id'):
+            sync_assessment_center_experts(prev_center_id)
+        if target.get('assessment_center_id'):
+            sync_assessment_center_experts(target['assessment_center_id'])
 
         return Response(target)

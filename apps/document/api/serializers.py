@@ -39,18 +39,49 @@ class AssessmentCenterDirectorSerializer(serializers.ModelSerializer):
 
 
 class AssessmentCenterExpertSerializer(serializers.ModelSerializer):
+    experts_detail = serializers.SerializerMethodField()
+
     class Meta:
         model = AppraisersExpert
-        fields = ['id', 'profession', 'appraisers', 'appraiser_employer', 'consultant']
+        fields = ['id', 'profession', 'appraisers', 'appraiser_employer', 'consultant', 'experts_detail']
+
+    def get_experts_detail(self, obj):
+        try:
+            from apps.certification.api.staff_directory_views import load_experts_data
+            experts, _, _ = load_experts_data()
+            target_center_id = obj.assessment_center_id
+            target_prof = (obj.profession or '').strip().lower()
+
+            matched = [
+                {
+                    'id': e.get('id'),
+                    'name': e.get('name'),
+                    'role_ru': e.get('role_ru', 'Оценщик'),
+                    'role_kg': e.get('role_kg', 'Баалоочу'),
+                    'organization': e.get('organization', ''),
+                    'city_ru': e.get('city_ru', ''),
+                    'phone': e.get('phone', ''),
+                }
+                for e in experts
+                if e.get('assessment_center_id') == target_center_id and
+                (e.get('profession_ru') or '').strip().lower() == target_prof
+            ]
+            return matched
+        except Exception:
+            return []
 
 
 class AssessmentCenterSerializer(serializers.ModelSerializer):
     directors = AssessmentCenterDirectorSerializer(many=True, read_only=True)
-    experts = AssessmentCenterExpertSerializer(source='assessment_centers', many=True, read_only=True)
+    experts = serializers.SerializerMethodField()
 
     class Meta:
         model = AssessmentCenter
         fields = ['id', 'organization', 'address', 'map_url', 'phone', 'email', 'website', 'directors', 'experts', 'created_at']
+
+    def get_experts(self, obj):
+        active_experts = obj.assessment_centers.filter(is_active=True).order_by('order', 'profession')
+        return AssessmentCenterExpertSerializer(active_experts, many=True, context=self.context).data
 
 
 class AppraisersExpertSerializer(serializers.ModelSerializer):

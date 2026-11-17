@@ -93,12 +93,23 @@ export interface AssessmentCenterDirector {
 	phone?: string;
 }
 
+export interface AssessmentCenterExpertDetail {
+	id?: number;
+	name: string;
+	role_ru?: string;
+	role_kg?: string;
+	organization?: string;
+	city_ru?: string;
+	phone?: string;
+}
+
 export interface AssessmentCenterExpert {
 	id: number;
 	profession: string;
 	appraisers: string;
 	appraiser_employer: string;
 	consultant: string;
+	experts_detail?: AssessmentCenterExpertDetail[];
 }
 
 export interface AssessmentCenter {
