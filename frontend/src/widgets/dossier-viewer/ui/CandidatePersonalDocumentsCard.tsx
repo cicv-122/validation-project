@@ -9,6 +9,7 @@ interface CandidatePersonalDocumentsCardProps {
 	selectedDoc: StaffApplicationDocument | null;
 	uploadingDocSlot: string | null;
 	onSelectDoc: (doc: StaffApplicationDocument) => void;
+	onViewDoc?: (doc: StaffApplicationDocument) => void;
 	onDeleteDoc: (docId: number) => void;
 	onSlotFileChange: (slotType: string, file: File, placeholder: string) => void;
 	onOpenAddModal: () => void;
@@ -20,6 +21,7 @@ export const CandidatePersonalDocumentsCard: React.FC<CandidatePersonalDocuments
 	selectedDoc,
 	uploadingDocSlot,
 	onSelectDoc,
+	onViewDoc,
 	onDeleteDoc,
 	onSlotFileChange,
 	onOpenAddModal,
@@ -110,7 +112,10 @@ export const CandidatePersonalDocumentsCard: React.FC<CandidatePersonalDocuments
 													<div className="flex items-center gap-1 flex-shrink-0" onClick={(e) => e.stopPropagation()}>
 														<button
 															type="button"
-															onClick={() => onSelectDoc(doc)}
+															onClick={() => {
+																onSelectDoc(doc);
+																onViewDoc?.(doc);
+															}}
 															className="px-2.5 py-1 text-[11px] font-bold text-[#283375] hover:bg-white rounded-lg transition-colors cursor-pointer"
 														>
 															Просмотр

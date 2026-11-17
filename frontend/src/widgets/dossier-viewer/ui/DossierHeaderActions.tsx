@@ -12,6 +12,8 @@ interface DossierHeaderActionsProps {
 	onSave: () => void;
 	saving: boolean;
 	onDeleteClick: () => void;
+	isSplitMode?: boolean;
+	onToggleSplitMode?: () => void;
 }
 
 export const DossierHeaderActions: React.FC<DossierHeaderActionsProps> = ({
@@ -25,6 +27,8 @@ export const DossierHeaderActions: React.FC<DossierHeaderActionsProps> = ({
 	onSave,
 	saving,
 	onDeleteClick,
+	isSplitMode,
+	onToggleSplitMode,
 }) => {
 	return (
 		<div className="sticky top-[68px] sm:top-[74px] z-20 flex flex-col md:flex-row md:items-center justify-between gap-4 bg-white/95 backdrop-blur-md p-4 sm:p-5 rounded-2xl border border-slate-200 shadow-sm transition-all">
@@ -83,6 +87,24 @@ export const DossierHeaderActions: React.FC<DossierHeaderActionsProps> = ({
 			</div>
 
 			<div className="flex items-center gap-2.5 flex-wrap">
+				{onToggleSplitMode && (
+					<button
+						type="button"
+						onClick={onToggleSplitMode}
+						className={`hidden lg:flex items-center gap-1.5 px-3 py-2 rounded-xl text-xs font-bold transition-all border cursor-pointer ${
+							isSplitMode
+								? 'bg-blue-50 text-[#283375] border-blue-200 shadow-2xs'
+								: 'bg-white hover:bg-slate-50 text-slate-700 border-slate-200'
+						}`}
+						title={isSplitMode ? 'Вернуться к стандартному виду' : 'Разделить экран пополам для удобной сверки'}
+					>
+						<svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+							<path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 17V7m0 10a2 2 0 01-2 2H5a2 2 0 01-2-2V7a2 2 0 012-2h2a2 2 0 012 2m0 10a2 2 0 002 2h2a2 2 0 002-2M9 7a2 2 0 012-2h2a2 2 0 012 2m0 10V7m0 10a2 2 0 002 2h2a2 2 0 002-2V7a2 2 0 00-2-2h-2a2 2 0 00-2 2" />
+						</svg>
+						<span>{isSplitMode ? 'Вид 50/50' : 'Сверка 50/50'}</span>
+					</button>
+				)}
+
 				<button
 					type="button"
 					onClick={onPrint}
