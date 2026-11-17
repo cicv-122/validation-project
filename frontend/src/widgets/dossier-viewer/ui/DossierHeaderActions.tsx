@@ -31,7 +31,7 @@ export const DossierHeaderActions: React.FC<DossierHeaderActionsProps> = ({
 	onToggleSplitMode,
 }) => {
 	return (
-		<div className="sticky top-[68px] sm:top-[74px] z-20 flex flex-col md:flex-row md:items-center justify-between gap-4 bg-white/95 backdrop-blur-md p-4 sm:p-5 rounded-2xl border border-slate-200 shadow-sm transition-all">
+		<div className="flex flex-col md:flex-row md:items-center justify-between gap-4 bg-white p-4 sm:p-5 rounded-2xl border border-slate-200 shadow-2xs transition-all">
 			<div className="flex items-center gap-3">
 				<button
 					type="button"

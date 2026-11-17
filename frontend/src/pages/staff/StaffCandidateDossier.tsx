@@ -324,6 +324,7 @@ export default function StaffCandidateDossier() {
 							examTaskDoc={examTaskDoc}
 							examPhotos={examPhotos}
 							personalDocs={personalDocs}
+							allDocs={documents}
 							selectedDoc={selectedDoc}
 							onSelectDoc={(doc) => setSelectedDoc(doc)}
 							onOpenModal={() => setIsViewerModalOpen(true)}
