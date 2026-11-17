@@ -7,5 +7,4 @@ export * from './ui/CandidateCertificateCard';
 export * from './ui/CandidateExamDocumentsCard';
 export * from './ui/CandidatePersonalDocumentsCard';
 export * from './ui/DossierCompletenessInspector';
-export * from './ui/DossierDocumentModal';
 export * from './model/useDossierState';

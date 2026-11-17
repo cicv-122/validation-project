@@ -8,7 +8,6 @@ interface CandidateExamDocumentsCardProps {
 	selectedDoc: StaffApplicationDocument | null;
 	uploadingDocSlot: string | null;
 	onSelectDoc: (doc: StaffApplicationDocument) => void;
-	onViewDoc?: (doc: StaffApplicationDocument) => void;
 	onDeleteDoc: (docId: number) => void;
 	onSlotFileUpload: (slotType: string, files: FileList, placeholder: string) => void;
 }
@@ -18,7 +17,6 @@ export const CandidateExamDocumentsCard: React.FC<CandidateExamDocumentsCardProp
 	selectedDoc,
 	uploadingDocSlot,
 	onSelectDoc,
-	onViewDoc,
 	onDeleteDoc,
 	onSlotFileUpload,
 }) => {
@@ -78,10 +76,7 @@ export const CandidateExamDocumentsCard: React.FC<CandidateExamDocumentsCardProp
 												return (
 													<div
 														key={doc.id}
-														onClick={() => {
-															onSelectDoc(doc);
-															onViewDoc?.(doc);
-														}}
+														onClick={() => onSelectDoc(doc)}
 														className={`group relative aspect-square rounded-xl overflow-hidden border-2 cursor-pointer transition-all ${
 															isSelected
 																? 'border-[#283375] ring-2 ring-[#283375]/20 shadow-md'
@@ -134,10 +129,7 @@ export const CandidateExamDocumentsCard: React.FC<CandidateExamDocumentsCardProp
 													<div className="flex items-center gap-1 flex-shrink-0" onClick={(e) => e.stopPropagation()}>
 														<button
 															type="button"
-															onClick={() => {
-																onSelectDoc(doc);
-																onViewDoc?.(doc);
-															}}
+															onClick={() => onSelectDoc(doc)}
 															className="px-2.5 py-1 text-[11px] font-bold text-[#283375] hover:bg-white rounded-lg transition-colors cursor-pointer"
 														>
 															Просмотр

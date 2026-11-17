@@ -1,5 +1,4 @@
 // frontend/src/pages/staff/StaffCandidateDossier.tsx
-import { useState } from 'react';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import StaffHeader from '../../components/staff/StaffHeader';
 import {
@@ -14,7 +13,6 @@ import {
 	CandidatePersonalCard,
 	CandidatePersonalDocumentsCard,
 	DossierCompletenessInspector,
-	DossierDocumentModal,
 	DossierHeaderActions,
 } from '../../widgets/dossier-viewer';
 import { useDossierState } from '../../widgets/dossier-viewer/model/useDossierState';
@@ -111,9 +109,6 @@ export default function StaffCandidateDossier() {
 		handleUploadPersonalDoc,
 	} = useDossierState(id, returnUrl);
 
-	const [isViewerModalOpen, setIsViewerModalOpen] = useState<boolean>(false);
-	const [isSplitMode, setIsSplitMode] = useState<boolean>(false);
-
 	// Completeness stats for checklist
 	const evalSheetDoc = documents.find((d) => d.doc_type === 'evaluation_sheet');
 	const examTaskDoc = documents.find((d) => d.doc_type === 'exam_task');
@@ -196,8 +191,6 @@ export default function StaffCandidateDossier() {
 					onSave={() => handleSaveDossier()}
 					saving={saving}
 					onDeleteClick={() => setShowDeleteModal(true)}
-					isSplitMode={isSplitMode}
-					onToggleSplitMode={() => setIsSplitMode((prev) => !prev)}
 				/>
 
 				{saveSuccessMsg && (
@@ -219,7 +212,7 @@ export default function StaffCandidateDossier() {
 				)}
 
 				<div className='grid grid-cols-1 lg:grid-cols-12 gap-6 items-start'>
-					<div className={`${isSplitMode ? 'lg:col-span-6' : 'lg:col-span-7'} space-y-6 transition-all duration-200`}>
+					<div className='lg:col-span-7 space-y-6'>
 						<CandidatePersonalCard
 							candidateId={candidate.id}
 							fullName={fullName}
@@ -267,10 +260,7 @@ export default function StaffCandidateDossier() {
 						<CandidateCertificateCard
 							fullRegistrationNumber={fullRegistrationNumber}
 							certScanDoc={certScanDoc}
-							onViewDoc={(doc) => {
-								setSelectedDoc(doc);
-								setIsViewerModalOpen(true);
-							}}
+							onViewDoc={(doc) => setSelectedDoc(doc)}
 							onDeleteDoc={handleDeleteDoc}
 							onUploadSlotFile={(slotType, file, desc) =>
 								handleSlotFileUpload(slotType, file, desc)
@@ -289,10 +279,6 @@ export default function StaffCandidateDossier() {
 							selectedDoc={selectedDoc}
 							uploadingDocSlot={uploadingDocSlot}
 							onSelectDoc={(doc) => setSelectedDoc(doc)}
-							onViewDoc={(doc) => {
-								setSelectedDoc(doc);
-								setIsViewerModalOpen(true);
-							}}
 							onDeleteDoc={handleDeleteDoc}
 							onSlotFileUpload={handleSlotFileUpload}
 						/>
@@ -303,10 +289,6 @@ export default function StaffCandidateDossier() {
 							selectedDoc={selectedDoc}
 							uploadingDocSlot={uploadingDocSlot}
 							onSelectDoc={(doc) => setSelectedDoc(doc)}
-							onViewDoc={(doc) => {
-								setSelectedDoc(doc);
-								setIsViewerModalOpen(true);
-							}}
 							onDeleteDoc={handleDeleteDoc}
 							onSlotFileChange={(slotType, file, placeholder) =>
 								handleSlotFileUpload(slotType, file, placeholder)
@@ -315,21 +297,17 @@ export default function StaffCandidateDossier() {
 						/>
 					</div>
 
-					<div className={`${isSplitMode ? 'lg:col-span-6' : 'lg:col-span-5'} transition-all duration-200`}>
-						<DossierCompletenessInspector
-							completenessPercent={completenessPercent}
-							certScanDoc={certScanDoc}
-							examProtocolDoc={examProtocolDoc}
-							evalSheetDoc={evalSheetDoc}
-							examTaskDoc={examTaskDoc}
-							examPhotos={examPhotos}
-							personalDocs={personalDocs}
-							selectedDoc={selectedDoc}
-							onSelectDoc={(doc) => setSelectedDoc(doc)}
-							onOpenModal={() => setIsViewerModalOpen(true)}
-							onDeleteDoc={handleDeleteDoc}
-						/>
-					</div>
+					<DossierCompletenessInspector
+						completenessPercent={completenessPercent}
+						certScanDoc={certScanDoc}
+						examProtocolDoc={examProtocolDoc}
+						evalSheetDoc={evalSheetDoc}
+						examTaskDoc={examTaskDoc}
+						examPhotos={examPhotos}
+						personalDocs={personalDocs}
+						selectedDoc={selectedDoc}
+						onDeleteDoc={handleDeleteDoc}
+					/>
 				</div>
 			</div>
 
@@ -345,15 +323,6 @@ export default function StaffCandidateDossier() {
 				onSubmit={handleUploadPersonalDoc}
 				uploading={uploadingPersonalDoc}
 				hasFile={!!newPersonalDocFile}
-			/>
-
-			<DossierDocumentModal
-				isOpen={isViewerModalOpen}
-				onClose={() => setIsViewerModalOpen(false)}
-				documents={documents}
-				activeDoc={selectedDoc}
-				onSelectDoc={(doc) => setSelectedDoc(doc)}
-				onDeleteDoc={handleDeleteDoc}
 			/>
 
 			<DeleteDossierModal
