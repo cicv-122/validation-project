@@ -24,7 +24,11 @@ class AdminNewsVideo(admin.TabularInline):
 @admin.register(News)
 class AdminNews(TabbedTranslationAdmin):
     model = News
-    list_display = ('title', 'is_active', 'get_photo')
+    list_display = ('title', 'is_active', 'created', 'get_photo')
+    list_filter = ('is_active', 'created')
+    search_fields = ('title', 'title_ru', 'title_ky')
+    date_hierarchy = 'created'
+    list_per_page = 20
     inlines = [AdminNewsImages, AdminNewsVideo]
     readonly_fields = ('get_photo',)
     filter_horizontal = ('certified_users',)
@@ -32,7 +36,10 @@ class AdminNews(TabbedTranslationAdmin):
     exclude = ('slug',)
 
     class Media:
-        js = ('admin/js/prevent_double_submit.js',)
+        js = ('custom_admin/js/prevent_double_submit.js',)
+
+    def get_queryset(self, request):
+        return super().get_queryset(request).defer('description', 'description_ru', 'description_ky')
 
     def get_photo(self, obj):
         if obj and obj.image:
