@@ -12,6 +12,7 @@ export const NewsLoadMoreButton: React.FC<NewsLoadMoreButtonProps> = ({ loading,
 	return (
 		<div className='text-center mt-12'>
 			<button
+				data-keep-nav-dropdown
 				onClick={onClick}
 				disabled={loading}
 				className='inline-flex items-center gap-3 bg-[#283375] text-white font-semibold px-10 py-3.5 rounded-xl hover:bg-blue-800 transition-colors shadow-md hover:shadow-lg disabled:opacity-60 disabled:cursor-not-allowed'

@@ -64,6 +64,7 @@ export default function VideoGallery() {
 						{hasNextPage && (
 							<div className='mt-12 flex justify-center'>
 								<button
+									data-keep-nav-dropdown
 									onClick={() => fetchNextPage()}
 									disabled={isFetchingNextPage}
 									className='px-8 py-3 bg-blue-600 text-white rounded-full font-medium hover:bg-blue-700 transition-colors disabled:opacity-70 flex items-center'

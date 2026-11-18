@@ -26,7 +26,11 @@ export function useNavState() {
 
 	const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
 
-	useClickOutside(navRef, () => {
+	useClickOutside(navRef, (event) => {
+		const target = event.target as HTMLElement | null;
+		if (target?.closest?.('[data-keep-nav-dropdown]')) {
+			return;
+		}
 		setActiveDropdown(null);
 		setIsLangOpen(false);
 	});
