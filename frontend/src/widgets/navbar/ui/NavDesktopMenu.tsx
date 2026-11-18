@@ -52,7 +52,7 @@ export function NavDesktopMenu({
 
 	return (
 		<div className='hidden sm:flex sm:items-center sm:justify-center sm:space-x-0.5 w-full'>
-			<Link to='/' className={desktopLinkClass(isActive('/'))}>
+			<Link to='/' onClick={() => setActiveDropdown(null)} className={desktopLinkClass(isActive('/'))}>
 				{t('Главная')}
 			</Link>
 
@@ -83,23 +83,26 @@ export function NavDesktopMenu({
 				minWidthClass='min-w-[270px]'
 			/>
 
-			<Link to='/apply' className={desktopLinkClass(isActive('/apply'))}>
+			<Link to='/apply' onClick={() => setActiveDropdown(null)} className={desktopLinkClass(isActive('/apply'))}>
 				{t('Электронная приемная')}
 			</Link>
 
-			<Link to='/apply/status' className={desktopLinkClass(isActive('/apply/status'))}>
+			<Link to='/apply/status' onClick={() => setActiveDropdown(null)} className={desktopLinkClass(isActive('/apply/status'))}>
 				{t('Статус заявки')}
 			</Link>
 
 			<button
 				type='button'
-				onClick={() => setIsCallbackOpen(true)}
+				onClick={() => {
+					setActiveDropdown(null);
+					setIsCallbackOpen(true);
+				}}
 				className={desktopLinkClass(isCallbackOpen)}
 			>
 				{t('Консультация')}
 			</button>
 
-			<Link to='/contacts' className={desktopLinkClass(isActive('/contacts'))}>
+			<Link to='/contacts' onClick={() => setActiveDropdown(null)} className={desktopLinkClass(isActive('/contacts'))}>
 				{t('Контакты')}
 			</Link>
 

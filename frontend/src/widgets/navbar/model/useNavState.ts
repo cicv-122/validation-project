@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import { useClickOutside, useScrollLock, useKeyPress } from '../../../shared/lib';
 
@@ -38,12 +38,6 @@ export function useNavState() {
 		setActiveDropdown(null);
 		setIsLangOpen(false);
 	});
-
-	// При смене страницы всегда закрываем выпадающие меню
-	useEffect(() => {
-		setActiveDropdown(null);
-		setIsLangOpen(false);
-	}, [location.pathname]);
 
 	const toggleDropdown = (key: string) => {
 		setActiveDropdown((prev) => (prev === key ? null : key));
