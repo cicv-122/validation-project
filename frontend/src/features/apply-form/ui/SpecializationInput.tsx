@@ -20,7 +20,7 @@ export function SpecializationInput({
 	return (
 		<div>
 			<label className='block text-sm font-semibold text-gray-800 mb-1.5'>
-				{t('Специализация (необязательно)')}
+				{t('Специализация')}
 			</label>
 			<input
 				type='text'

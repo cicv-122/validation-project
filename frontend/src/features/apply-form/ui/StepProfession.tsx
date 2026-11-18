@@ -82,7 +82,7 @@ export default function StepProfession({
 						className='w-full px-4 py-3 bg-white border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 outline-none text-sm transition-all'
 					/>
 					<p className='text-xs text-gray-400 mt-1'>
-						{t('Необязательно. Если не уверены, уровень будет определен экспертной комиссией')}
+						{t('Если не уверены, уровень будет определен экспертной комиссией')}
 					</p>
 				</div>
 

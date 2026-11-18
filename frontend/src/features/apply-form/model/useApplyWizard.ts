@@ -137,53 +137,7 @@ export function useApplyWizard() {
 
 	const handleNext = () => {
 		setValidationError(null);
-		if (step === 0) {
-			if (!form.full_name.trim()) {
-				setValidationError('Укажите ФИО кандидата');
-				return;
-			}
-			if (form.birth_year) {
-				const by = parseInt(form.birth_year, 10);
-				const currentYear = new Date().getFullYear();
-				if (isNaN(by) || by < 1935 || by > currentYear - 14) {
-					setValidationError(`Укажите реальный год рождения (от 1935 до ${currentYear - 14})`);
-					return;
-				}
-			}
-			if (!form.citizenship) {
-				setValidationError('Выберите гражданство');
-				return;
-			}
-			if (!form.inn.trim()) {
-				setValidationError('Укажите персональный номер (ПИН / ИНН)');
-				return;
-			}
-			const pinCheck = analyzeKyrgyzPin(form.inn, form.full_name, form.citizenship);
-			if (!pinCheck.isValid) {
-				setValidationError('Неправильный ПИН / ИНН');
-				return;
-			}
-			if (
-				form.birth_year &&
-				pinCheck.birthYear &&
-				parseInt(form.birth_year, 10) !== pinCheck.birthYear
-			) {
-				setValidationError(
-					`Указанный год рождения (${form.birth_year}) не совпадает с годом рождения в ПИН (${pinCheck.birthYear})`
-				);
-				return;
-			}
-			if (!form.phone.trim()) {
-				setValidationError('Укажите номер телефона для связи');
-				return;
-			}
-		} else if (step === 1) {
-			if (!form.profession.trim()) {
-				setValidationError('Укажите вашу профессию');
-				return;
-			}
-		}
-		setStep((s) => s + 1);
+		setStep((s) => Math.min(STEPS.length - 1, s + 1));
 	};
 
 	const handlePrev = () => {

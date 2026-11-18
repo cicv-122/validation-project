@@ -83,30 +83,37 @@ export default function StepPersonal({
 					<label className='block text-sm font-semibold text-gray-800 mb-1.5'>
 						{t('Гражданство')}
 					</label>
-					<select
-						name='citizenship'
-						value={citizenship}
-						onChange={(e) => {
-							const nextCode = e.target.value as CitizenshipCode;
-							if (onCitizenshipChange) {
-								onCitizenshipChange(nextCode);
-							} else {
-								onChange(e);
-							}
-						}}
-						className={`w-full px-4 py-3 bg-white border rounded-xl focus:ring-2 outline-none text-sm transition-all cursor-pointer ${
-							form.inn && !citizenship
-								? 'border-red-400 focus:ring-red-400 bg-red-50/30'
-								: 'border-gray-300 focus:ring-blue-500'
-						}`}
-					>
-						<option value=''>— {t('Выберите гражданство')} —</option>
-						{CITIZENSHIP_OPTIONS.map((opt) => (
-							<option key={opt.value} value={opt.value}>
-								{t(opt.labelKey || opt.label, opt.label)}
-							</option>
-						))}
-					</select>
+					<div className='relative'>
+						<select
+							name='citizenship'
+							value={citizenship}
+							onChange={(e) => {
+								const nextCode = e.target.value as CitizenshipCode;
+								if (onCitizenshipChange) {
+									onCitizenshipChange(nextCode);
+								} else {
+									onChange(e);
+								}
+							}}
+							className={`w-full pl-4 pr-10 py-3 bg-white border rounded-xl appearance-none focus:ring-2 outline-none text-sm transition-all cursor-pointer ${
+								form.inn && !citizenship
+									? 'border-red-400 focus:ring-red-400 bg-red-50/30'
+									: 'border-gray-300 focus:ring-blue-500'
+							}`}
+						>
+							<option value=''>— {t('Выберите гражданство')} —</option>
+							{CITIZENSHIP_OPTIONS.map((opt) => (
+								<option key={opt.value} value={opt.value}>
+									{t(opt.labelKey || opt.label, opt.label)}
+								</option>
+							))}
+						</select>
+						<div className='pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3.5 text-gray-400'>
+							<svg className='w-4 h-4' fill='none' stroke='currentColor' viewBox='0 0 24 24'>
+								<path strokeLinecap='round' strokeLinejoin='round' strokeWidth={2} d='M19 9l-7 7-7-7' />
+							</svg>
+						</div>
+					</div>
 				</div>
 
 				<div>
@@ -142,7 +149,7 @@ export default function StepPersonal({
 
 				<div>
 					<label className='block text-sm font-semibold text-gray-800 mb-1.5'>
-						{t('Год рождения')} <span className='text-xs font-normal text-gray-400'>({t('необязательно')})</span>
+						{t('Год рождения')}
 					</label>
 					<input
 						type='number'
@@ -175,7 +182,7 @@ export default function StepPersonal({
 
 				<div>
 					<label className='block text-sm font-semibold text-gray-800 mb-1.5'>
-						{t('Адрес проживания')} <span className='text-xs font-normal text-gray-400'>({t('необязательно')})</span>
+						{t('Адрес проживания')}
 					</label>
 					<input
 						type='text'
@@ -202,10 +209,10 @@ export default function StepPersonal({
 				</div>
 
 				<div>
-					<label className='block text-sm font-semibold text-gray-800 mb-1.5 flex items-center justify-between'>
-						<span>
-							{t('Номер WhatsApp')} <span className='text-xs font-normal text-gray-400'>({t('необязательно')})</span>
-						</span>
+					<div className='flex items-center justify-between mb-1.5'>
+						<label className='block text-sm font-semibold text-gray-800'>
+							{t('Номер WhatsApp')}
+						</label>
 						<button
 							type='button'
 							onClick={() => {
@@ -219,7 +226,7 @@ export default function StepPersonal({
 						>
 							{t('Такой же, как телефон')}
 						</button>
-					</label>
+					</div>
 					<input
 						type='tel'
 						name='whatsapp'
