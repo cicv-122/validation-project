@@ -24,23 +24,7 @@ export function useNavState() {
 		'/documents/experts',
 	]);
 
-	// Проверяем, находится ли пользователь на детальной странице (конкретная новость, партнер или центр)
-	const isDetailPage =
-		location.pathname.startsWith('/news/') ||
-		/^\/documents\/partners\/.+/.test(location.pathname) ||
-		/^\/documents\/assessment-centers\/.+/.test(location.pathname);
-
-	const currentSection = !isDetailPage
-		? isNewsActive
-			? 'news'
-			: isAboutActive
-			? 'about'
-			: isDbActive
-			? 'db'
-			: null
-		: null;
-
-	const [activeDropdown, setActiveDropdown] = useState<string | null>(() => currentSection);
+	const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
 
 	useClickOutside(navRef, () => {
 		setActiveDropdown(null);
@@ -55,13 +39,11 @@ export function useNavState() {
 		setIsLangOpen(false);
 	});
 
+	// При смене страницы всегда закрываем выпадающие меню
 	useEffect(() => {
-		if (currentSection) {
-			setActiveDropdown(currentSection);
-		} else {
-			setActiveDropdown(null);
-		}
-	}, [location.pathname, currentSection]);
+		setActiveDropdown(null);
+		setIsLangOpen(false);
+	}, [location.pathname]);
 
 	const toggleDropdown = (key: string) => {
 		setActiveDropdown((prev) => (prev === key ? null : key));

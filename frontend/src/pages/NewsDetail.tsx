@@ -3,24 +3,20 @@ import { useTranslation } from 'react-i18next';
 import { Link, useParams } from 'react-router-dom';
 import Lightbox from 'yet-another-react-lightbox';
 import 'yet-another-react-lightbox/styles.css';
-import CertifiedUserModal from '../components/CertifiedUserModal';
 import { ErrorMessage, SEO } from '../components/ui';
 import { useNewsItem } from '../hooks/useApi';
-import { CertifiedUser } from '../types';
 import { newsStore } from '../utils/newsStore';
 import {
 	NewsDetailHeader,
 	NewsDetailContent,
 	NewsDetailGallery,
 	NewsDetailVideos,
-	NewsDetailCertifiedUsers,
 } from '../widgets/news-detail';
 
 export default function NewsDetail() {
 	const { slug } = useParams<{ slug: string }>();
 	const { t, i18n } = useTranslation();
 	const [lightboxIndex, setLightboxIndex] = useState(-1);
-	const [selectedUser, setSelectedUser] = useState<CertifiedUser | null>(null);
 
 	const { data: news, isLoading, error } = useNewsItem(slug);
 
@@ -161,11 +157,6 @@ export default function NewsDetail() {
 				/>
 
 				<NewsDetailVideos videos={bottomVideos} />
-
-				<NewsDetailCertifiedUsers
-					users={news.certified_users}
-					onSelectUser={setSelectedUser}
-				/>
 			</div>
 
 			<Lightbox
@@ -174,13 +165,6 @@ export default function NewsDetail() {
 				close={() => setLightboxIndex(-1)}
 				slides={slides}
 			/>
-
-			{selectedUser && (
-				<CertifiedUserModal
-					user={selectedUser}
-					onClose={() => setSelectedUser(null)}
-				/>
-			)}
 		</article>
 	);
 }
