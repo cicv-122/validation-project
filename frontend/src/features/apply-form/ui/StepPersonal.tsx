@@ -67,7 +67,7 @@ export default function StepPersonal({
 			<div className='grid grid-cols-1 md:grid-cols-2 gap-5 items-start'>
 				<div className='md:col-span-2'>
 					<label className='block text-sm font-semibold text-gray-800 mb-1.5'>
-						{t('ФИО кандидата')} <span className='text-red-500'>*</span>
+						{t('ФИО кандидата')}
 					</label>
 					<input
 						type='text'
@@ -81,7 +81,7 @@ export default function StepPersonal({
 
 				<div>
 					<label className='block text-sm font-semibold text-gray-800 mb-1.5'>
-						{t('Гражданство')} <span className='text-red-500'>*</span>
+						{t('Гражданство')}
 					</label>
 					<select
 						name='citizenship'
@@ -111,7 +111,7 @@ export default function StepPersonal({
 
 				<div>
 					<label className='block text-sm font-semibold text-gray-800 mb-1.5'>
-						{t('Персональный номер (ПИН / ИНН)')} <span className='text-red-500'>*</span>
+						{t('Персональный номер (ПИН / ИНН)')}
 					</label>
 					<input
 						type='text'
@@ -142,7 +142,7 @@ export default function StepPersonal({
 
 				<div>
 					<label className='block text-sm font-semibold text-gray-800 mb-1.5'>
-						{t('Год рождения')}
+						{t('Год рождения')} <span className='text-xs font-normal text-gray-400'>({t('необязательно')})</span>
 					</label>
 					<input
 						type='number'
@@ -175,7 +175,7 @@ export default function StepPersonal({
 
 				<div>
 					<label className='block text-sm font-semibold text-gray-800 mb-1.5'>
-						{t('Адрес проживания')}
+						{t('Адрес проживания')} <span className='text-xs font-normal text-gray-400'>({t('необязательно')})</span>
 					</label>
 					<input
 						type='text'
@@ -189,7 +189,7 @@ export default function StepPersonal({
 
 				<div>
 					<label className='block text-sm font-semibold text-gray-800 mb-1.5'>
-						{t('Телефон для связи')} <span className='text-red-500'>*</span>
+						{t('Телефон для связи')}
 					</label>
 					<input
 						type='tel'
@@ -203,7 +203,9 @@ export default function StepPersonal({
 
 				<div>
 					<label className='block text-sm font-semibold text-gray-800 mb-1.5 flex items-center justify-between'>
-						<span>{t('Номер WhatsApp')}</span>
+						<span>
+							{t('Номер WhatsApp')} <span className='text-xs font-normal text-gray-400'>({t('необязательно')})</span>
+						</span>
 						<button
 							type='button'
 							onClick={() => {
