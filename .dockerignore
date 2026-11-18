@@ -1,5 +1,6 @@
 node_modules
 venv
+.venv
 .git
 .idea
 __pycache__
@@ -9,5 +10,9 @@ media.tar.gz
 media/
 staticfiles/
 archive.tar.gz
+archive_data/
+backups/
+*.sql.gz
+*.sql
 frontend/node_modules
 frontend/dist
