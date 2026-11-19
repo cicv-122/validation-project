@@ -34,8 +34,8 @@ WORKDIR /var/www/project
 
 # Устанавливаем зависимости Python
 # Копируем сначала файлы поэтри для использования кэша
-COPY pyproject.toml poetry.lock ./
-RUN poetry install --no-root --only main
+COPY pyproject.toml poetry.lock* ./
+RUN poetry lock --no-update && poetry install --no-root --only main
 
 # Копируем весь проект
 COPY . .
