@@ -42,6 +42,40 @@ CSRF_TRUSTED_ORIGINS = list(set([
     'https://195.38.165.127',
 ] + [o for o in _env_csrf.split(' ') if o]))
 
+# Sentry Configuration
+SENTRY_DSN = os.environ.get('SENTRY_DSN', 'https://f36e2d114adbfb3a2770d81bd2111f07@o4512457042755584.ingest.de.sentry.io/4512457082667088')
+if SENTRY_DSN:
+    try:
+        import sentry_sdk
+        from sentry_sdk.integrations.django import DjangoIntegration
+
+        def scrub_sensitive_data(event, hint):
+            sensitive_keys = {'pin', 'inn', 'passport', 'phone', 'whatsapp', 'full_name', 'name', 'fio', 'candidate_name'}
+            if 'request' in event:
+                req = event['request']
+                if 'data' in req and isinstance(req['data'], dict):
+                    for k in list(req['data'].keys()):
+                        if any(s in k.lower() for s in sensitive_keys):
+                            req['data'][k] = '[SCRUBBED]'
+                if 'headers' in req and isinstance(req['headers'], dict):
+                    for h in ['Authorization', 'Cookie']:
+                        if h in req['headers']:
+                            req['headers'][h] = '[SCRUBBED]'
+            if 'user' in event:
+                event['user'] = {'id': event['user'].get('id')}
+            return event
+
+        sentry_sdk.init(
+            dsn=SENTRY_DSN,
+            integrations=[DjangoIntegration()],
+            traces_sample_rate=1.0 if DEBUG else 0.1,
+            send_default_pii=False,
+            before_send=scrub_sensitive_data,
+            environment='development' if DEBUG else 'production',
+        )
+    except ImportError:
+        pass
+
 # Application definition
 
 INSTALLED_APPS = [

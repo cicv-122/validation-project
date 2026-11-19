@@ -71,3 +71,4 @@ egov_export/
 egov_news_bundle.zip
 validation_db_prod.sql
 
+sentry-cli
