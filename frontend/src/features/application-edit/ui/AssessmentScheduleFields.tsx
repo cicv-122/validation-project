@@ -204,14 +204,12 @@ export function AssessmentScheduleFields({
 
 				{/* Эксперт-оценщик с подсказками из базы и свободным вводом */}
 				<div className='relative' ref={assessorContainerRef}>
-					<div className='flex items-center justify-between mb-1'>
-						<label className='block text-[11px] font-bold text-slate-600'>
-							Эксперт-оценщик
-						</label>
-						<span className='text-[10px] text-slate-400 font-normal'>
-							(подсказки из базы / свободный ввод)
-						</span>
-					</div>
+					<label
+						className='block text-[11px] font-bold text-slate-600 mb-1 truncate'
+						title='Эксперт-оценщик (подсказки из базы / свободный ввод)'
+					>
+						Эксперт-оценщик
+					</label>
 					<div className='relative'>
 						<input
 							type='text'
@@ -221,7 +219,7 @@ export function AssessmentScheduleFields({
 								setAssessor(e.target.value);
 								setIsAssessorDropdownOpen(true);
 							}}
-							placeholder='ФИО эксперта-оценщика...'
+							placeholder='ФИО эксперта (из базы или ввод)...'
 							className='w-full px-3 py-2 text-xs rounded-xl border border-slate-200 bg-white outline-none focus:border-[#283375]'
 						/>
 						{assessor && (
