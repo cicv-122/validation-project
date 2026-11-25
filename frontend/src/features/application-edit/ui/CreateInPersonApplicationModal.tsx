@@ -28,6 +28,9 @@ export const CreateInPersonApplicationModal: React.FC<CreateInPersonApplicationM
 	const [profession, setProfession] = useState('');
 	const [qualificationLevel, setQualificationLevel] = useState('');
 	const [experienceYears, setExperienceYears] = useState<number | string>(0);
+	const [isLaborMigrant, setIsLaborMigrant] = useState(false);
+	const [migrationCountry, setMigrationCountry] = useState('Россия (РФ)');
+	const [migrationCategory, setMigrationCategory] = useState<'returned' | 'planning'>('returned');
 	const [address, setAddress] = useState('');
 	const [adminNotes, setAdminNotes] = useState('Очный приём в Центре. Документы проверены лично.');
 	const [submitting, setSubmitting] = useState(false);
@@ -45,6 +48,9 @@ export const CreateInPersonApplicationModal: React.FC<CreateInPersonApplicationM
 		setProfession('');
 		setQualificationLevel('');
 		setExperienceYears(0);
+		setIsLaborMigrant(false);
+		setMigrationCountry('Россия (РФ)');
+		setMigrationCategory('returned');
 		setAddress('');
 		setAdminNotes('Очный приём в Центре. Документы проверены лично.');
 		setError(null);
@@ -84,6 +90,9 @@ export const CreateInPersonApplicationModal: React.FC<CreateInPersonApplicationM
 				experience_years: Number(experienceYears) || 0,
 				address: address.trim() || undefined,
 				admin_notes: adminNotes.trim() || undefined,
+				is_labor_migrant: isLaborMigrant,
+				migration_country: isLaborMigrant ? migrationCountry : undefined,
+				migration_category: isLaborMigrant ? migrationCategory : undefined,
 			});
 
 			resetForm();
@@ -279,6 +288,84 @@ export const CreateInPersonApplicationModal: React.FC<CreateInPersonApplicationM
 							onChange={(e) => setExperienceYears(e.target.value)}
 							className='w-full px-3 py-2 text-xs rounded-xl border border-slate-200 focus:border-[#283375] outline-none'
 						/>
+					</div>
+
+					{/* Блок трудовой миграции */}
+					<div className='sm:col-span-2 p-3.5 rounded-xl bg-slate-50 border border-slate-200 transition-all'>
+						<label className='flex items-center gap-2.5 cursor-pointer select-none'>
+							<input
+								type='checkbox'
+								checked={isLaborMigrant}
+								onChange={(e) => {
+									setIsLaborMigrant(e.target.checked);
+									if (e.target.checked && !migrationCountry) {
+										setMigrationCountry('Россия (РФ)');
+									}
+								}}
+								className='w-4 h-4 text-[#283375] rounded border-slate-300 focus:ring-[#283375] cursor-pointer'
+							/>
+							<span className='text-xs font-bold text-slate-800'>
+								Кандидат является трудовым мигрантом (опыт работы за рубежом)
+							</span>
+						</label>
+
+						{isLaborMigrant && (
+							<div className='mt-2.5 pt-2.5 border-t border-slate-200/90 space-y-2.5 animate-in fade-in duration-150'>
+								<div>
+									<div className='text-[10px] font-bold uppercase tracking-wider text-slate-500 mb-1.5'>
+										Страна наработки опыта / миграции:
+									</div>
+									<div className='flex items-center gap-1.5 flex-wrap'>
+										{[
+											'Россия (РФ)',
+											'Турция',
+											'Южная Корея',
+											'ОАЭ / Залив',
+											'Казахстан',
+											'Страны ЕС',
+										].map((c) => (
+											<button
+												key={c}
+												type='button'
+												onClick={() => setMigrationCountry(c)}
+												className={`px-2.5 py-1 rounded-lg text-xs font-bold transition-all cursor-pointer ${
+													migrationCountry === c
+														? 'bg-[#283375] text-white shadow-2xs'
+														: 'bg-white border border-slate-200 text-slate-700 hover:border-slate-400'
+												}`}
+											>
+												{c}
+											</button>
+										))}
+									</div>
+								</div>
+
+								<div className='flex items-center gap-4 text-xs font-medium text-slate-700 pt-1'>
+									<label className='flex items-center gap-1.5 cursor-pointer'>
+										<input
+											type='radio'
+											name='inperson_migration_cat'
+											value='returned'
+											checked={migrationCategory === 'returned'}
+											onChange={() => setMigrationCategory('returned')}
+											className='text-[#283375] cursor-pointer'
+										/>
+										<span>Вернулся в Кыргызстан</span>
+									</label>
+									<label className='flex items-center gap-1.5 cursor-pointer'>
+										<input
+											type='radio'
+											name='inperson_migration_cat'
+											value='planning'
+											checked={migrationCategory === 'planning'}
+											onChange={() => setMigrationCategory('planning')}
+											className='text-[#283375] cursor-pointer'
+										/>
+										<span>Готовится к выезду за рубеж</span>
+									</label>
+								</div>
+							</div>
+						)}
 					</div>
 
 					{/* Адрес проживания */}

@@ -51,27 +51,40 @@ class StaffApplicationsListView(APIView):
             else:
                 qs = CertificationApplication.objects.all()
         else:
-            if staff.assigned_professions.exists():
-                qs = CertificationApplication.objects.filter(
-                    Q(assigned_staff=staff) | Q(profession_ref__in=staff.assigned_professions.all()) | Q(assigned_staff__isnull=True)
-                ).distinct()
-            else:
-                qs = CertificationApplication.objects.filter(
-                    Q(assigned_staff=staff) | Q(assigned_staff__isnull=True)
-                ).distinct()
+            # Рядовой сотрудник: видит все новые, выданные и архивные дела Центра,
+            # но в блоке "На рассмотрении" видит строго только своих!
+            qs = CertificationApplication.objects.all()
 
         # Исключаем мягко удаленные и архивные теневые дела реестра
         qs = qs.filter(deleted_at__isnull=True).exclude(origin='registry_archive')
 
-        # Фильтр по статусу
+        # Фильтр по статусу и подстатусам
         status_filter = request.query_params.get('status')
         if status_filter:
-            if status_filter == 'under_review':
-                qs = qs.filter(status__in=['under_review', 'assessment_scheduled', 'assessment_in_progress', 'approved'])
+            if status_filter in ('under_review', 'under_review_docs', 'assessment_scheduled'):
+                # В блоке "На рассмотрении" рядовой сотрудник видит СТРОГО только тех, кого ведет сам!
+                if not (request.user.is_superuser or staff.role == 'supervisor'):
+                    qs = qs.filter(assigned_staff=staff)
+
+                if status_filter == 'under_review':
+                    qs = qs.filter(status__in=['under_review', 'assessment_scheduled', 'assessment_in_progress', 'approved'])
+                elif status_filter == 'under_review_docs':
+                    qs = qs.filter(status='under_review')
+                elif status_filter == 'assessment_scheduled':
+                    qs = qs.filter(status__in=['assessment_scheduled', 'assessment_in_progress'])
             elif status_filter == 'rejected':
                 qs = qs.filter(status__in=['rejected', 'cancelled'])
+            elif status_filter == 'rejected_exam':
+                qs = qs.filter(status='rejected')
+            elif status_filter == 'rejected_cancelled':
+                qs = qs.filter(status='cancelled')
             else:
                 qs = qs.filter(status=status_filter)
+
+        # Фильтр по источнику (онлайн / очный)
+        origin_filter = request.query_params.get('origin')
+        if origin_filter:
+            qs = qs.filter(origin=origin_filter)
 
         # Поиск по ФИО, ИНН, телефону, профессии, номеру
         q = request.query_params.get('q', '').strip()
@@ -118,6 +131,11 @@ class StaffApplicationsListView(APIView):
         address = data.get('address', '').strip()
         admin_notes = data.get('admin_notes', '').strip()
 
+        # Трудовая миграция
+        is_labor_migrant = bool(data.get('is_labor_migrant'))
+        migration_country = data.get('migration_country', '').strip()
+        migration_category = data.get('migration_category', 'returned').strip() or 'returned'
+
         from apps.certification.models import Profession
         profession_ref = None
         if profession:
@@ -138,6 +156,9 @@ class StaffApplicationsListView(APIView):
             experience_years=int(experience_years) if str(experience_years).isdigit() else 0,
             address=address,
             admin_notes=admin_notes,
+            is_labor_migrant=is_labor_migrant,
+            migration_country=migration_country,
+            migration_category=migration_category,
             status='under_review',
             origin='in_person',
             assigned_staff=staff,
@@ -162,23 +183,7 @@ class StaffApplicationDetailView(APIView):
         staff = get_or_create_staff_for_user(request.user)
         if not staff:
             return None
-        if request.user.is_superuser or staff.role == 'supervisor':
-            return get_object_or_404(CertificationApplication, pk=pk, deleted_at__isnull=True)
-        else:
-            if staff.assigned_professions.exists():
-                return get_object_or_404(
-                    CertificationApplication,
-                    Q(assigned_staff=staff) | Q(profession_ref__in=staff.assigned_professions.all()) | Q(assigned_staff__isnull=True),
-                    pk=pk,
-                    deleted_at__isnull=True
-                )
-            else:
-                return get_object_or_404(
-                    CertificationApplication,
-                    Q(assigned_staff=staff) | Q(assigned_staff__isnull=True),
-                    pk=pk,
-                    deleted_at__isnull=True
-                )
+        return get_object_or_404(CertificationApplication, pk=pk, deleted_at__isnull=True)
 
     def get(self, request, pk):
         app = self.get_application(request, pk)
@@ -196,6 +201,15 @@ class StaffApplicationDetailView(APIView):
         if not app:
             return Response({'detail': 'Заявка не найдена или доступ запрещен'}, status=status.HTTP_404_NOT_FOUND)
 
+        # Защита от случайного изменения чужого дела:
+        # Если дело уже ведётся другим сотрудником, рядовой сотрудник не может его менять
+        if not (request.user.is_superuser or staff.role == 'supervisor'):
+            if app.assigned_staff and app.assigned_staff != staff:
+                return Response(
+                    {'detail': f'Это дело ведёт другой сотрудник ({app.assigned_staff.full_name}). Вы не можете его изменять.'},
+                    status=status.HTTP_403_FORBIDDEN
+                )
+
         # Полное редактирование личных данных кандидата и дела:
         # ФИО, телефон, whatsapp, email, инн, тип процедуры, профессия, разряд, стаж, адрес, экзамен, статус
         fields = [
@@ -203,7 +217,8 @@ class StaffApplicationDetailView(APIView):
             'application_type', 'profession', 'qualification_level',
             'experience_years', 'experience_desc', 'address',
             'assessor_name', 'scheduled_date', 'scheduled_location',
-            'admin_notes', 'status', 'certificate_number_issued'
+            'admin_notes', 'status', 'certificate_number_issued',
+            'is_labor_migrant', 'migration_country', 'migration_category'
         ]
 
         for field in fields:

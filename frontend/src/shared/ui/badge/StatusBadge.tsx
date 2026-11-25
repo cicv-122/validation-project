@@ -42,10 +42,10 @@ export const StatusBadge: React.FC<StatusBadgeProps> = ({
 
 	return (
 		<span
-			className={`inline-flex items-center gap-1.5 rounded-full font-bold border ${style.bg} ${style.text} ${style.border} ${SIZE_STYLES[size]} ${className}`}
+			className={`inline-flex items-center justify-center text-center leading-tight gap-1.5 rounded-full font-bold border ${style.bg} ${style.text} ${style.border} ${SIZE_STYLES[size]} ${className}`}
 		>
-			{showDot && <span className={`w-1.5 h-1.5 rounded-full ${style.dot}`} />}
-			<span>{displayLabel}</span>
+			{showDot && <span className={`w-1.5 h-1.5 rounded-full shrink-0 ${style.dot}`} />}
+			<span className="text-center">{displayLabel}</span>
 		</span>
 	);
 };

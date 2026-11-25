@@ -14,10 +14,10 @@ export const ApplicationsStatusCards: React.FC<ApplicationsStatusCardsProps> = (
 	onStatusChange,
 }) => {
 	const cards = [
-		{ id: '', label: 'Всего заявок', count: profile?.stats.total || 0 },
-		{ id: 'submitted', label: 'Новые', count: profile?.stats.submitted || 0 },
+		{ id: 'submitted', label: 'Новые заявки', count: profile?.stats.submitted || 0 },
 		{ id: 'under_review', label: 'На рассмотрении', count: profile?.stats.under_review || 0 },
 		{ id: 'completed', label: 'Выдано', count: profile?.stats.completed || 0 },
+		{ id: 'rejected', label: 'Архив', count: profile?.stats.rejected || 0 },
 	];
 
 	return (

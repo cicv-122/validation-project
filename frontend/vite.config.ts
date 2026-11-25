@@ -18,11 +18,29 @@ export default defineConfig({
 	},
 	server: {
 		proxy: {
+			// Кабинет сотрудника ходит в локальный бэкенд с безопасными тестовыми кандидатами
+			'/api/v1/certification/staff': {
+				target: 'http://127.0.0.1:8000',
+				changeOrigin: true,
+			},
+			// Все остальные API (новости, слайдеры, документы) читаются с боевого validation.kg
+			// С железной защитой от записи: любые POST/PUT/PATCH/DELETE на боевой прод с локалки блокируются!
 			'/api': {
 				target: 'https://validation.kg',
 				changeOrigin: true,
 				secure: false,
+				bypass: (req, res) => {
+					if (['POST', 'PUT', 'PATCH', 'DELETE'].includes(req.method || '')) {
+						res.statusCode = 403;
+						res.setHeader('Content-Type', 'application/json');
+						res.end(JSON.stringify({
+							detail: 'Защита: любые изменения боевого сервера (POST/PUT/DELETE) с локального компьютера заблокированы.'
+						}));
+						return false;
+					}
+				},
 			},
+			// Медиа и статика (картинки новостей, логотипы) грузятся с боевого сайта
 			'/media': {
 				target: 'https://validation.kg',
 				changeOrigin: true,

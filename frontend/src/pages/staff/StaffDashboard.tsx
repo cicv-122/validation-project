@@ -25,7 +25,9 @@ export default function StaffDashboard() {
 		applications,
 		loadingApps,
 		activeAppStatus,
-		setActiveAppStatus,
+		activeSubStatus,
+		setActiveSubStatus,
+		handleStatusChange,
 		appSearchQuery,
 		setAppSearchQuery,
 		selectedAppId,
@@ -138,21 +140,22 @@ export default function StaffDashboard() {
 						<ApplicationsStatusCards
 							profile={profile}
 							activeStatus={activeAppStatus}
-							onStatusChange={(status) => setActiveAppStatus(status)}
+							onStatusChange={handleStatusChange}
 						/>
 						<ApplicationsQueueTable
 							loading={loadingApps}
 							applications={applications}
 							profile={profile}
 							activeAppStatus={activeAppStatus}
+							activeSubStatus={activeSubStatus}
 							appSearchQuery={appSearchQuery}
 							onCreateInPerson={() => setShowCreateInPersonModal(true)}
 							onOpenApplication={(id) => setSelectedAppId(id)}
 							onResetFilters={() => {
-								setActiveAppStatus('');
+								setActiveSubStatus('');
 								setAppSearchQuery('');
 							}}
-							onStatusChange={(status) => setActiveAppStatus(status)}
+							onSubStatusChange={(sub) => setActiveSubStatus(sub)}
 							onSearchChange={(query) => setAppSearchQuery(query)}
 							onSearchSubmit={handleAppSearch}
 						/>

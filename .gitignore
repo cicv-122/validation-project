@@ -72,3 +72,5 @@ egov_news_bundle.zip
 validation_db_prod.sql
 
 sentry-cli
+scripts/seed_local_data.py
+

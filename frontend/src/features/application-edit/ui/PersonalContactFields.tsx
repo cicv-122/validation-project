@@ -21,6 +21,12 @@ interface PersonalContactFieldsProps {
 	setEmail: (val: string) => void;
 	address: string;
 	setAddress: (val: string) => void;
+	isLaborMigrant?: boolean;
+	setIsLaborMigrant?: (val: boolean) => void;
+	migrationCountry?: string;
+	setMigrationCountry?: (val: string) => void;
+	migrationCategory?: 'returned' | 'planning';
+	setMigrationCategory?: (val: 'returned' | 'planning') => void;
 }
 
 export function PersonalContactFields({
@@ -41,6 +47,12 @@ export function PersonalContactFields({
 	setEmail,
 	address,
 	setAddress,
+	isLaborMigrant = false,
+	setIsLaborMigrant,
+	migrationCountry = '',
+	setMigrationCountry,
+	migrationCategory = 'returned',
+	setMigrationCategory,
 }: PersonalContactFieldsProps) {
 	return (
 		<div className='bg-slate-50/80 p-5 rounded-2xl border border-slate-200/80 space-y-4'>
@@ -200,6 +212,88 @@ export function PersonalContactFields({
 						className='w-full px-3 py-2 text-xs font-semibold rounded-xl border border-slate-200 bg-white outline-none focus:border-[#283375]'
 					/>
 				</div>
+
+				{/* Блок трудовой миграции */}
+				{setIsLaborMigrant && (
+					<div className='sm:col-span-2 md:col-span-3 p-3.5 rounded-xl bg-white border border-slate-200/90 shadow-2xs transition-all'>
+						<label className='flex items-center gap-2.5 cursor-pointer select-none'>
+							<input
+								type='checkbox'
+								checked={isLaborMigrant}
+								onChange={(e) => {
+									setIsLaborMigrant(e.target.checked);
+									if (e.target.checked && !migrationCountry && setMigrationCountry) {
+										setMigrationCountry('Россия (РФ)');
+									}
+								}}
+								className='w-4 h-4 text-[#283375] rounded border-slate-300 focus:ring-[#283375] cursor-pointer'
+							/>
+							<span className='text-xs font-bold text-slate-800'>
+								Кандидат является трудовым мигрантом (опыт работы за рубежом)
+							</span>
+						</label>
+
+						{isLaborMigrant && (
+							<div className='mt-2.5 pt-2.5 border-t border-slate-100 space-y-2.5 animate-in fade-in duration-150'>
+								<div>
+									<div className='text-[10px] font-bold uppercase tracking-wider text-slate-500 mb-1.5'>
+										Страна наработки опыта / миграции:
+									</div>
+									<div className='flex items-center gap-1.5 flex-wrap'>
+										{[
+											'Россия (РФ)',
+											'Турция',
+											'Южная Корея',
+											'ОАЭ / Залив',
+											'Казахстан',
+											'Страны ЕС',
+										].map((c) => (
+											<button
+												key={c}
+												type='button'
+												onClick={() => setMigrationCountry && setMigrationCountry(c)}
+												className={`px-2.5 py-1 rounded-lg text-xs font-bold transition-all cursor-pointer ${
+													migrationCountry === c
+														? 'bg-[#283375] text-white shadow-2xs'
+														: 'bg-slate-50 border border-slate-200 text-slate-700 hover:border-slate-400'
+												}`}
+											>
+												{c}
+											</button>
+										))}
+									</div>
+								</div>
+
+								{setMigrationCategory && (
+									<div className='flex items-center gap-4 text-xs font-medium text-slate-700 pt-1'>
+										<label className='flex items-center gap-1.5 cursor-pointer'>
+											<input
+												type='radio'
+												name='edit_migration_cat'
+												value='returned'
+												checked={migrationCategory === 'returned'}
+												onChange={() => setMigrationCategory('returned')}
+												className='text-[#283375] cursor-pointer'
+											/>
+											<span>Вернулся в Кыргызстан</span>
+										</label>
+										<label className='flex items-center gap-1.5 cursor-pointer'>
+											<input
+												type='radio'
+												name='edit_migration_cat'
+												value='planning'
+												checked={migrationCategory === 'planning'}
+												onChange={() => setMigrationCategory('planning')}
+												className='text-[#283375] cursor-pointer'
+											/>
+											<span>Готовится к выезду за рубеж</span>
+										</label>
+									</div>
+								)}
+							</div>
+						)}
+					</div>
+				)}
 			</div>
 		</div>
 	);

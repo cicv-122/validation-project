@@ -56,7 +56,8 @@ export function useStaffDashboard() {
 	// Applications State
 	const [applications, setApplications] = useState<StaffApplicationItem[]>([]);
 	const [loadingApps, setLoadingApps] = useState(false);
-	const [activeAppStatus, setActiveAppStatus] = useState('');
+	const [activeAppStatus, setActiveAppStatus] = useState('submitted');
+	const [activeSubStatus, setActiveSubStatus] = useState('online');
 	const [appSearchQuery, setAppSearchQuery] = useState('');
 
 	// Application Detail Modal State
@@ -160,8 +161,20 @@ export function useStaffDashboard() {
 	const loadApplications = async () => {
 		setLoadingApps(true);
 		try {
+			let statusParam: string | undefined = activeAppStatus || undefined;
+			let originParam: string | undefined = undefined;
+
+			if (activeSubStatus) {
+				if (activeSubStatus === 'online' || activeSubStatus === 'in_person') {
+					originParam = activeSubStatus;
+				} else {
+					statusParam = activeSubStatus;
+				}
+			}
+
 			const data = await staffApi.getApplications({
-				status: activeAppStatus || undefined,
+				status: statusParam,
+				origin: originParam,
 				q: appSearchQuery.trim() || undefined,
 			});
 			setApplications(data);
@@ -291,7 +304,7 @@ export function useStaffDashboard() {
 				loadCertifiedList(certifiedPage);
 			}
 		}
-	}, [profile, activeMainTab, activeAppStatus]);
+	}, [profile, activeMainTab, activeAppStatus, activeSubStatus]);
 
 	// Плавная прокрутка и фокус прямо к той строке кандидата, откуда переходили в карточку (только 1 раз при возврате)
 	const hasScrolledTargetRef = useRef<boolean>(false);
@@ -379,6 +392,20 @@ export function useStaffDashboard() {
 		loadingApps,
 		activeAppStatus,
 		setActiveAppStatus,
+		activeSubStatus,
+		setActiveSubStatus,
+		handleStatusChange: (status: string) => {
+			setActiveAppStatus(status);
+			if (status === 'submitted') {
+				setActiveSubStatus('online');
+			} else if (status === 'under_review') {
+				setActiveSubStatus('under_review_docs');
+			} else if (status === 'rejected') {
+				setActiveSubStatus('rejected_exam');
+			} else {
+				setActiveSubStatus('');
+			}
+		},
 		appSearchQuery,
 		setAppSearchQuery,
 		selectedAppId,

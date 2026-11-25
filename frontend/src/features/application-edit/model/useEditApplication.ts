@@ -37,6 +37,9 @@ export function useEditApplication({
 	const [editAppExpYears, setEditAppExpYears] = useState<number | string>(0);
 	const [editAppExpDesc, setEditAppExpDesc] = useState('');
 	const [editAppAddress, setEditAppAddress] = useState('');
+	const [isLaborMigrant, setIsLaborMigrant] = useState(false);
+	const [migrationCountry, setMigrationCountry] = useState('Россия (РФ)');
+	const [migrationCategory, setMigrationCategory] = useState<'returned' | 'planning'>('returned');
 	const [editAppAssessor, setEditAppAssessor] = useState('');
 	const [editAppDate, setEditAppDate] = useState('');
 	const [editAppLocation, setEditAppLocation] = useState('');
@@ -83,6 +86,9 @@ export function useEditApplication({
 			setEditAppExpYears(data.experience_years ?? 0);
 			setEditAppExpDesc(data.experience_desc || '');
 			setEditAppAddress(data.address || '');
+			setIsLaborMigrant(Boolean(data.is_labor_migrant));
+			setMigrationCountry(data.migration_country || 'Россия (РФ)');
+			setMigrationCategory((data.migration_category as any) || 'returned');
 			setEditAppAssessor(data.assessor_name || '');
 			setEditAppDate(data.scheduled_date ? data.scheduled_date.split('T')[0] : '');
 			setEditAppLocation(data.scheduled_location || '');
@@ -140,6 +146,9 @@ export function useEditApplication({
 				scheduled_location: editAppLocation.trim(),
 				admin_notes: editAppNotes.trim(),
 				status: editAppStatus,
+				is_labor_migrant: isLaborMigrant,
+				migration_country: isLaborMigrant ? migrationCountry : '',
+				migration_category: isLaborMigrant ? migrationCategory : 'returned',
 			} as any);
 			setAppDetail(updated);
 			setAppSaveSuccessMsg('Данные кандидата и статус дела успешно сохранены!');
@@ -340,6 +349,12 @@ export function useEditApplication({
 		setEditAppExpDesc,
 		editAppAddress,
 		setEditAppAddress,
+		isLaborMigrant,
+		setIsLaborMigrant,
+		migrationCountry,
+		setMigrationCountry,
+		migrationCategory,
+		setMigrationCategory,
 		editAppAssessor,
 		setEditAppAssessor,
 		editAppDate,

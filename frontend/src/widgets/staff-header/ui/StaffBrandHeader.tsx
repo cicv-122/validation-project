@@ -19,6 +19,9 @@ export const StaffBrandHeader: React.FC<StaffBrandHeaderProps> = ({ isDossier = 
 	} else if (path.includes('/staff/experts')) {
 		pageTitle = 'Список экспертов';
 		isSubpage = true;
+	} else if (path.includes('/staff/indicators')) {
+		pageTitle = 'Показатели Центра';
+		isSubpage = true;
 	} else if (path.includes('/staff/candidates/') || isDossier) {
 		pageTitle = 'Дело специалиста';
 		isSubpage = true;

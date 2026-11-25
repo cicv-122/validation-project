@@ -53,19 +53,7 @@ class StaffProfileSerializer(serializers.ModelSerializer):
         return f"https://t.me/{bot_username}?start=auth_{code}"
 
     def get_stats(self, obj):
-        if obj.user.is_superuser or obj.role == 'supervisor':
-            qs = CertificationApplication.objects.filter(deleted_at__isnull=True).exclude(origin='registry_archive')
-        else:
-            if obj.assigned_professions.exists():
-                qs = CertificationApplication.objects.filter(
-                    Q(assigned_staff=obj) | Q(profession_ref__in=obj.assigned_professions.all()) | Q(assigned_staff__isnull=True),
-                    deleted_at__isnull=True
-                ).exclude(origin='registry_archive').distinct()
-            else:
-                qs = CertificationApplication.objects.filter(
-                    Q(assigned_staff=obj) | Q(assigned_staff__isnull=True),
-                    deleted_at__isnull=True
-                ).exclude(origin='registry_archive').distinct()
+        qs = CertificationApplication.objects.filter(deleted_at__isnull=True).exclude(origin='registry_archive')
 
         # Статистика оцифровки Государственного реестра (759 специалистов)
         from apps.document.models import CertifiedUser
@@ -74,17 +62,37 @@ class StaffProfileSerializer(serializers.ModelSerializer):
         without_inn_count = total_registry - with_inn_count
         digitized_percent = round((with_inn_count / total_registry * 100), 1) if total_registry > 0 else 0
 
-        under_review_count = qs.filter(
+        # Для "На рассмотрении":
+        # Руководитель видит все дела в работе по Центру.
+        # Рядовой сотрудник видит СТРОГО только те дела, которые ведет лично сам!
+        if obj.user.is_superuser or obj.role == 'supervisor':
+            under_review_qs = qs
+        else:
+            under_review_qs = qs.filter(assigned_staff=obj)
+
+        under_review_count = under_review_qs.filter(
             status__in=['under_review', 'assessment_scheduled', 'assessment_in_progress', 'approved']
         ).count()
+        scheduled_count = under_review_qs.filter(status__in=['assessment_scheduled', 'assessment_in_progress']).count()
+        docs_review_count = under_review_qs.filter(status='under_review').count()
+        rejected_exam_count = qs.filter(status='rejected').count()
+        rejected_cancelled_count = qs.filter(status='cancelled').count()
+        online_count = qs.filter(status='submitted', origin='online').count()
+        in_person_count = qs.filter(status='submitted', origin='in_person').count()
+
         return {
             'total': qs.count(),
             'submitted': qs.filter(status='submitted').count(),
+            'submitted_online': online_count,
+            'submitted_in_person': in_person_count,
             'under_review': under_review_count,
-            'scheduled': qs.filter(status='assessment_scheduled').count(),
-            'approved': qs.filter(status='approved').count(),
+            'under_review_docs': docs_review_count,
+            'scheduled': scheduled_count,
+            'approved': under_review_qs.filter(status='approved').count(),
             'completed': qs.filter(status='completed').count(),
-            'rejected': qs.filter(status='rejected').count(),
+            'rejected': qs.filter(status__in=['rejected', 'cancelled']).count(),
+            'rejected_exam': rejected_exam_count,
+            'rejected_cancelled': rejected_cancelled_count,
             'validation_count': qs.filter(application_type='validation').count(),
             'certification_count': qs.filter(application_type='certification').count(),
             # Счётчики оцифровки архива
@@ -149,6 +157,9 @@ class StaffApplicationListSerializer(serializers.ModelSerializer):
             'assigned_staff_phone',
             'documents_count',
             'certificate_number_issued',
+            'is_labor_migrant',
+            'migration_country',
+            'migration_category',
             'created_at',
             'submitted_at',
         ]
@@ -194,6 +205,9 @@ class StaffApplicationDetailSerializer(serializers.ModelSerializer):
             'admin_notes',
             'certificate_number_issued',
             'certified_user_id',
+            'is_labor_migrant',
+            'migration_country',
+            'migration_category',
             'documents',
             'created_at',
             'submitted_at',

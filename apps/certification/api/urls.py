@@ -27,6 +27,8 @@ from apps.certification.api.staff_views import (
     StaffProfessionDetailManageView,
     StaffExpertsManageView,
     StaffExpertDetailManageView,
+    StaffExpertsRenameOrganizationView,
+    StaffIndicators2026View,
 )
 
 urlpatterns = [
@@ -52,7 +54,9 @@ urlpatterns = [
     path('staff/professions/', StaffProfessionsManageView.as_view(), name='staff-professions-manage'),
     path('staff/professions/<int:pk>/', StaffProfessionDetailManageView.as_view(), name='staff-profession-detail-manage'),
     path('staff/experts/', StaffExpertsManageView.as_view(), name='staff-experts-manage'),
+    path('staff/experts/rename-organization/', StaffExpertsRenameOrganizationView.as_view(), name='staff-experts-rename-org'),
     path('staff/experts/<int:expert_id>/', StaffExpertDetailManageView.as_view(), name='staff-expert-detail-manage'),
+    path('staff/indicators-2026/', StaffIndicators2026View.as_view(), name='staff-indicators-2026'),
 
     # Управление архивом сертифицированных специалистов (Реестр)
     path('staff/certified-users/clusters/', StaffCertifiedUserClustersView.as_view(), name='staff-certified-users-clusters'),

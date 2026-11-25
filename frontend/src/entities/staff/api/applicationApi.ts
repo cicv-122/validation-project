@@ -4,12 +4,14 @@ import {
 	StaffApplicationItem,
 	StaffApplicationDetail,
 	StaffApplicationDocument,
+	StaffIndicators2026,
 } from './types';
 import { authHeader } from './token';
 
 export const applicationApi = {
 	getApplications: async (params?: {
 		status?: string;
+		origin?: string;
 		q?: string;
 		staff_id?: number;
 	}): Promise<StaffApplicationItem[]> => {
@@ -32,6 +34,9 @@ export const applicationApi = {
 		experience_years?: number;
 		address?: string;
 		admin_notes?: string;
+		is_labor_migrant?: boolean;
+		migration_country?: string;
+		migration_category?: string;
 	}): Promise<StaffApplicationDetail> => {
 		const res = await apiClient.post('/certification/staff/applications/', data, {
 			headers: authHeader(),
@@ -152,5 +157,15 @@ export const applicationApi = {
 		link.click();
 		link.remove();
 		window.URL.revokeObjectURL(url);
+	},
+
+	getIndicators2026: async (): Promise<StaffIndicators2026> => {
+		const res = await apiClient.get<StaffIndicators2026>(
+			'/certification/staff/indicators-2026/',
+			{
+				headers: authHeader(),
+			}
+		);
+		return res.data;
 	},
 };

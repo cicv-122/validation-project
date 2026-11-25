@@ -69,6 +69,12 @@ export function EditApplicationModal({
 		setEditAppExpDesc,
 		editAppAddress,
 		setEditAppAddress,
+		isLaborMigrant,
+		setIsLaborMigrant,
+		migrationCountry,
+		setMigrationCountry,
+		migrationCategory,
+		setMigrationCategory,
 		editAppAssessor,
 		setEditAppAssessor,
 		editAppDate,
@@ -230,6 +236,12 @@ export function EditApplicationModal({
 									setEmail={setEditAppEmail}
 									address={editAppAddress}
 									setAddress={setEditAppAddress}
+									isLaborMigrant={isLaborMigrant}
+									setIsLaborMigrant={setIsLaborMigrant}
+									migrationCountry={migrationCountry}
+									setMigrationCountry={setMigrationCountry}
+									migrationCategory={migrationCategory}
+									setMigrationCategory={setMigrationCategory}
 								/>
 
 								<ProfessionProcedureFields

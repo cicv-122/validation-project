@@ -32,6 +32,7 @@ const StaffDashboard = lazy(() => import('./pages/staff/StaffDashboard'));
 const StaffCandidateDossier = lazy(() => import('./pages/staff/StaffCandidateDossier'));
 const StaffProfessionsPage = lazy(() => import('./pages/staff/StaffProfessionsPage'));
 const StaffExpertsPage = lazy(() => import('./pages/staff/StaffExpertsPage'));
+const StaffIndicatorsPage = lazy(() => import('./pages/staff/StaffIndicatorsPage'));
 
 const LanguageRedirect = () => {
 	const location = useLocation();
@@ -63,6 +64,7 @@ function AppContent() {
 					<Route path='staff/candidates/:id' element={<StaffCandidateDossier />} />
 					<Route path='staff/professions' element={<StaffProfessionsPage />} />
 					<Route path='staff/experts' element={<StaffExpertsPage />} />
+					<Route path='staff/indicators' element={<StaffIndicatorsPage />} />
 					<Route path='*' element={<NotFound />} />
 				</Routes>
 			</Suspense>

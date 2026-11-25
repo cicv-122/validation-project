@@ -24,11 +24,16 @@ export interface StaffProfile {
 	stats: {
 		total: number;
 		submitted: number;
+		submitted_online?: number;
+		submitted_in_person?: number;
 		under_review: number;
+		under_review_docs?: number;
 		scheduled: number;
 		approved: number;
 		completed: number;
 		rejected: number;
+		rejected_exam?: number;
+		rejected_cancelled?: number;
 		validation_count: number;
 		certification_count: number;
 		// Оцифровка государственного реестра (759 специалистов)
@@ -70,6 +75,9 @@ export interface StaffApplicationItem {
 	assigned_staff_phone?: string;
 	documents_count: number;
 	certificate_number_issued: string;
+	is_labor_migrant?: boolean;
+	migration_country?: string;
+	migration_category?: string;
 	created_at: string;
 	submitted_at: string;
 }
@@ -129,4 +137,33 @@ export interface PaginatedResponse<T> {
 	next: string | null;
 	previous: string | null;
 	results: T[];
+}
+
+export interface StaffIndicators2026 {
+	start_date: string;
+	start_date_display: string;
+	today: string;
+	days_tracked: number;
+	is_started: boolean;
+	metrics: {
+		certified_since_start: number;
+		candidates_since_start?: number;
+		certified_all_time: number;
+		migrants_since_start: number;
+		migrants_completed_since_start?: number;
+		migrants_completed_all?: number;
+		migrants_total_registered: number;
+		migrants_countries: { country: string; count: number }[];
+		migrants_categories: {
+			returned: number;
+			planning: number;
+		};
+		professions_since_start?: number;
+		professions_count: number;
+		assessment_tools_count: number;
+		assessors_count: number;
+		standards_count: number;
+		labs_count: number;
+		service_cost: number;
+	};
 }

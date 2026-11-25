@@ -1,5 +1,5 @@
 // frontend/src/widgets/candidate-registry/ui/CertifiedSpecialistsTable.tsx
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import type { StaffCertifiedUser, CertifiedClusterItem } from '../../../api/staff';
 import { formatProfessionTitle } from '../../../entities/candidate';
@@ -46,6 +46,35 @@ export const CertifiedSpecialistsTable: React.FC<CertifiedSpecialistsTableProps>
 }) => {
 	const isInitialLoading = loading && certifiedList.length === 0;
 	const isUpdating = loading && certifiedList.length > 0;
+
+	const [jumpInput, setJumpInput] = useState('');
+
+	const PAGE_SIZE = 20;
+	const totalPages = Math.max(1, Math.ceil(certifiedTotal / PAGE_SIZE));
+	const fromIndex = certifiedTotal === 0 ? 0 : (certifiedPage - 1) * PAGE_SIZE + 1;
+	const toIndex = Math.min(certifiedPage * PAGE_SIZE, certifiedTotal);
+
+	const handleJumpSubmit = (e: React.FormEvent) => {
+		e.preventDefault();
+		const target = parseInt(jumpInput.trim(), 10);
+		if (!isNaN(target) && target >= 1 && target <= totalPages) {
+			onPageChange(target);
+			setJumpInput('');
+		}
+	};
+
+	const getPaginationRange = () => {
+		if (totalPages <= 7) {
+			return Array.from({ length: totalPages }, (_, i) => i + 1);
+		}
+		if (certifiedPage <= 4) {
+			return [1, 2, 3, 4, 5, '...', totalPages];
+		}
+		if (certifiedPage >= totalPages - 3) {
+			return [1, '...', totalPages - 4, totalPages - 3, totalPages - 2, totalPages - 1, totalPages];
+		}
+		return [1, '...', certifiedPage - 1, certifiedPage, certifiedPage + 1, '...', totalPages];
+	};
 
 	return (
 		<div id="certified-specialists-table" className="bg-white rounded-2xl border border-slate-200 shadow-xs overflow-hidden relative min-h-[680px]">
@@ -229,30 +258,113 @@ export const CertifiedSpecialistsTable: React.FC<CertifiedSpecialistsTableProps>
 					</div>
 
 					{/* Пагинация */}
-					<div className="p-4 bg-slate-50 border-t border-slate-200 flex items-center justify-between text-xs">
-						<span className="text-slate-500">
-							Показано {certifiedList.length} из {certifiedTotal} специалистов
-						</span>
-						<div className="flex items-center gap-2">
+					<div className="p-4 bg-slate-50 border-t border-slate-200 flex flex-col md:flex-row items-center justify-between gap-3 text-xs">
+						<div className="text-slate-500 font-medium">
+							Показано <strong className="text-slate-800 font-bold">{fromIndex}–{toIndex}</strong> из{' '}
+							<strong className="text-slate-800 font-bold">{certifiedTotal}</strong> специалистов
+							{totalPages > 1 && (
+								<span className="text-slate-400 ml-1.5 font-normal">
+									(Всего {totalPages} {totalPages === 1 ? 'страница' : (totalPages < 5 ? 'страницы' : 'страниц')})
+								</span>
+							)}
+						</div>
+
+						<div className="flex flex-wrap items-center justify-center gap-1.5">
+							{/* В начало */}
+							<button
+								type="button"
+								disabled={certifiedPage <= 1}
+								onClick={() => onPageChange(1)}
+								title="В начало (первая страница)"
+								className="px-2.5 py-1.5 rounded-lg border border-slate-200 bg-white font-bold text-slate-700 hover:bg-slate-100 disabled:opacity-30 disabled:cursor-not-allowed transition-colors cursor-pointer"
+							>
+								«
+							</button>
+
+							{/* Предыдущая */}
 							<button
 								type="button"
 								disabled={certifiedPage <= 1}
 								onClick={() => onPageChange(certifiedPage - 1)}
-								className="px-3 py-1.5 rounded-lg border border-slate-200 bg-white font-bold disabled:opacity-40 cursor-pointer disabled:cursor-not-allowed"
+								title="Предыдущая страница"
+								className="px-3 py-1.5 rounded-lg border border-slate-200 bg-white font-bold text-slate-700 hover:bg-slate-100 disabled:opacity-30 disabled:cursor-not-allowed transition-colors cursor-pointer"
 							>
 								← Назад
 							</button>
-							<span className="font-bold text-slate-700 px-2">
-								Страница {certifiedPage}
-							</span>
+
+							{/* Номера страниц (на экранах от sm) */}
+							<div className="hidden sm:flex items-center gap-1">
+								{getPaginationRange().map((p, idx) =>
+									p === '...' ? (
+										<span key={`dots-${idx}`} className="px-1.5 py-1 text-slate-400 font-bold select-none">
+											…
+										</span>
+									) : (
+										<button
+											type="button"
+											key={p}
+											onClick={() => onPageChange(p as number)}
+											className={`min-w-8 h-8 px-2 rounded-lg font-bold text-xs transition-all cursor-pointer ${
+												certifiedPage === p
+													? 'bg-[#283375] text-white shadow-2xs'
+													: 'bg-white border border-slate-200 text-slate-700 hover:bg-slate-100'
+											}`}
+										>
+											{p}
+										</button>
+									)
+								)}
+							</div>
+
+							{/* Мобильный компактный индикатор */}
+							<div className="sm:hidden px-2 font-bold text-slate-700">
+								{certifiedPage} / {totalPages}
+							</div>
+
+							{/* Следующая */}
 							<button
 								type="button"
-								disabled={certifiedList.length < 20}
+								disabled={certifiedPage >= totalPages || certifiedList.length < PAGE_SIZE}
 								onClick={() => onPageChange(certifiedPage + 1)}
-								className="px-3 py-1.5 rounded-lg border border-slate-200 bg-white font-bold disabled:opacity-40 cursor-pointer disabled:cursor-not-allowed"
+								title="Следующая страница"
+								className="px-3 py-1.5 rounded-lg border border-slate-200 bg-white font-bold text-slate-700 hover:bg-slate-100 disabled:opacity-30 disabled:cursor-not-allowed transition-colors cursor-pointer"
 							>
 								Вперед →
 							</button>
+
+							{/* В конец */}
+							<button
+								type="button"
+								disabled={certifiedPage >= totalPages || certifiedList.length < PAGE_SIZE}
+								onClick={() => onPageChange(totalPages)}
+								title={`В конец (страница ${totalPages})`}
+								className="px-2.5 py-1.5 rounded-lg border border-slate-200 bg-white font-bold text-slate-700 hover:bg-slate-100 disabled:opacity-30 disabled:cursor-not-allowed transition-colors cursor-pointer"
+							>
+								»
+							</button>
+
+							{/* Быстрый переход по номеру */}
+							{totalPages > 3 && (
+								<form onSubmit={handleJumpSubmit} className="hidden lg:flex items-center gap-1 ml-2 pl-2 border-l border-slate-200">
+									<span className="text-[11px] text-slate-500 font-medium">Стр:</span>
+									<input
+										type="number"
+										min={1}
+										max={totalPages}
+										value={jumpInput}
+										onChange={(e) => setJumpInput(e.target.value)}
+										placeholder={String(certifiedPage)}
+										className="w-12 px-1.5 py-1 text-center font-bold text-xs rounded-lg border border-slate-200 bg-white text-slate-800 focus:border-[#283375] focus:outline-none"
+									/>
+									<button
+										type="submit"
+										disabled={!jumpInput}
+										className="px-2.5 py-1 rounded-lg bg-slate-100 hover:bg-[#283375] text-slate-700 hover:text-white font-bold text-[11px] disabled:opacity-40 transition-colors cursor-pointer"
+									>
+										Перейти
+									</button>
+								</form>
+							)}
 						</div>
 					</div>
 				</div>

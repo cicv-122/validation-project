@@ -38,6 +38,8 @@ from .staff_directory_views import (
     StaffProfessionDetailManageView,
     StaffExpertsManageView,
     StaffExpertDetailManageView,
+    StaffExpertsRenameOrganizationView,
+    StaffIndicators2026View,
 )
 
 from apps.document.services import get_or_create_app_for_certified_user
@@ -57,6 +59,8 @@ __all__ = [
     'StaffProfessionDetailManageView',
     'StaffExpertsManageView',
     'StaffExpertDetailManageView',
+    'StaffExpertsRenameOrganizationView',
+    'StaffIndicators2026View',
     'StaffCertifiedUserPagination',
     'StaffCertifiedUsersListView',
     'StaffCertifiedUserDetailView',

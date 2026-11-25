@@ -253,6 +253,28 @@ class CertificationApplication(models.Model):
         verbose_name=_('Описание опыта'),
     )
 
+    # Трудовая миграция (учёт для статистики МП КР и доноров)
+    is_labor_migrant = models.BooleanField(
+        default=False,
+        verbose_name=_('Трудовой мигрант'),
+        help_text=_('Опыт работы за рубежом в качестве трудового мигранта'),
+        db_index=True,
+    )
+    migration_country = models.CharField(
+        max_length=100,
+        blank=True,
+        default='',
+        verbose_name=_('Страна трудовой миграции'),
+        help_text=_('Например: Россия, Турция, Корея, ОАЭ и др.'),
+    )
+    migration_category = models.CharField(
+        max_length=50,
+        blank=True,
+        default='returned',
+        verbose_name=_('Категория миграции'),
+        help_text=_('returned (вернулся в КР) или planning (готовится к выезду)'),
+    )
+
     # Контактные данные
     phone = models.CharField(max_length=50, verbose_name=_('Телефон'))
     whatsapp = models.CharField(max_length=50, blank=True, default='', verbose_name=_('WhatsApp'))

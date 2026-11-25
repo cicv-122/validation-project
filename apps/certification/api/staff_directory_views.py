@@ -16,6 +16,23 @@ from apps.document.models import AssessmentCenter, AppraisersExpert
 
 EXPERTS_DB_PATH = os.path.join(settings.BASE_DIR, 'frontend', 'src', 'data', 'experts_database.json')
 EXPERTS_OVERRIDE_PATH = os.path.join(settings.BASE_DIR, 'data', 'experts_custom_bindings.json')
+EXPERTS_CUSTOM_ADDED_PATH = os.path.join(settings.BASE_DIR, 'data', 'experts_custom_added.json')
+
+
+def load_custom_added_experts():
+    if os.path.exists(EXPERTS_CUSTOM_ADDED_PATH):
+        try:
+            with open(EXPERTS_CUSTOM_ADDED_PATH, 'r', encoding='utf-8') as f:
+                return json.load(f)
+        except Exception:
+            return []
+    return []
+
+
+def save_custom_added_experts(added_list):
+    os.makedirs(os.path.dirname(EXPERTS_CUSTOM_ADDED_PATH), exist_ok=True)
+    with open(EXPERTS_CUSTOM_ADDED_PATH, 'w', encoding='utf-8') as f:
+        json.dump(added_list, f, ensure_ascii=False, indent=2)
 
 
 def load_experts_data():
@@ -28,6 +45,11 @@ def load_experts_data():
         except Exception:
             base_experts = []
 
+    # Добавляем новых экспертов, созданных сотрудниками ЦНСВ
+    custom_added = load_custom_added_experts()
+    if custom_added:
+        base_experts.extend(custom_added)
+
     # Загружаем кастомные привязки (center_id, custom professions)
     overrides = {}
     if os.path.exists(EXPERTS_OVERRIDE_PATH):
@@ -39,15 +61,14 @@ def load_experts_data():
 
     centers_map = {c.id: c.organization for c in AssessmentCenter.objects.all()}
 
-    # Обогащаем экспертов актуальными привязками к центрам
+    # Обогащаем экспертов актуальными привязками к центрам и кастомными правками
     for exp in base_experts:
         exp_id_str = str(exp.get('id'))
         if exp_id_str in overrides:
             ov = overrides[exp_id_str]
-            if 'assessment_center_id' in ov:
-                exp['assessment_center_id'] = ov['assessment_center_id']
-            if 'profession_ru' in ov:
-                exp['profession_ru'] = ov['profession_ru']
+            for key in ('assessment_center_id', 'profession_ru', 'profession_kg', 'organization', 'name', 'role_ru', 'role_kg', 'city_ru', 'phone'):
+                if key in ov:
+                    exp[key] = ov[key]
 
         c_id = exp.get('assessment_center_id')
         exp['assessment_center_name'] = centers_map.get(c_id, '') if c_id else ''
@@ -317,6 +338,7 @@ class StaffExpertsManageView(APIView):
         center_id = qp.get('center_id')
         role = qp.get('role', '').strip().lower()
         prof = qp.get('profession', '').strip().lower()
+        org = qp.get('organization', '').strip().lower()
 
         filtered = []
         for e in experts:
@@ -336,10 +358,59 @@ class StaffExpertsManageView(APIView):
             if prof:
                 if prof not in (e.get('profession_ru') or '').lower():
                     continue
+            if org:
+                if org not in (e.get('organization') or '').lower():
+                    continue
 
             filtered.append(e)
 
         return Response(filtered)
+
+    def post(self, request):
+        staff = get_or_create_staff_for_user(request.user)
+        if not staff or not staff.is_active:
+            return Response({'detail': 'Доступ запрещен'}, status=status.HTTP_403_FORBIDDEN)
+
+        data = request.data
+        name = data.get('name', '').strip()
+        if not name:
+            return Response({'detail': 'Укажите ФИО эксперта'}, status=status.HTTP_400_BAD_REQUEST)
+
+        role_ru = data.get('role_ru', 'Оценщик').strip() or 'Оценщик'
+        profession_ru = data.get('profession_ru', '').strip()
+        organization = data.get('organization', '').strip()
+        city_ru = data.get('city_ru', 'г. Бишкек').strip() or 'г. Бишкек'
+        phone = data.get('phone', '').strip()
+        center_id = data.get('assessment_center_id')
+
+        experts, overrides, centers_map = load_experts_data()
+        new_id = max([e.get('id', 0) for e in experts] or [0]) + 1
+
+        new_expert = {
+            'id': new_id,
+            'name': name,
+            'role_ru': role_ru,
+            'role_kg': role_ru,
+            'profession_ru': profession_ru,
+            'profession_kg': profession_ru,
+            'organization': organization,
+            'city_ru': city_ru,
+            'phone': phone,
+            'assessment_center_id': int(center_id) if center_id else None,
+            'assessment_center_name': centers_map.get(int(center_id), '') if center_id else '',
+            'is_custom_added': True,
+        }
+
+        added = load_custom_added_experts()
+        added.append(new_expert)
+        save_custom_added_experts(added)
+
+        if center_id:
+            overrides[str(new_id)] = {'assessment_center_id': int(center_id)}
+            save_experts_overrides(overrides)
+            sync_assessment_center_experts(int(center_id))
+
+        return Response(new_expert, status=status.HTTP_201_CREATED)
 
 
 class StaffExpertDetailManageView(APIView):
@@ -381,14 +452,24 @@ class StaffExpertDetailManageView(APIView):
                 except (ValueError, TypeError):
                     pass
 
-        if 'profession_ru' in data:
-            prof_val = data['profession_ru'].strip()
-            if prof_val:
-                overrides[exp_key]['profession_ru'] = prof_val
-                target['profession_ru'] = prof_val
+        for key in ('organization', 'name', 'role_ru', 'profession_ru', 'city_ru', 'phone'):
+            if key in data:
+                val = data[key].strip() if isinstance(data[key], str) else data[key]
+                overrides[exp_key][key] = val
+                target[key] = val
 
         # Сохраняем обновленные привязки на диск
         save_experts_overrides(overrides)
+
+        # Если эксперт находится в custom_added - обновляем и там тоже
+        custom_added = load_custom_added_experts()
+        if custom_added:
+            for e in custom_added:
+                if e.get('id') == expert_id:
+                    for key in ('organization', 'name', 'role_ru', 'profession_ru', 'city_ru', 'phone', 'assessment_center_id'):
+                        if key in target:
+                            e[key] = target[key]
+            save_custom_added_experts(custom_added)
 
         # Синхронизируем направления для центров оценки (старого и нового)
         if prev_center_id and prev_center_id != target.get('assessment_center_id'):
@@ -397,3 +478,157 @@ class StaffExpertDetailManageView(APIView):
             sync_assessment_center_experts(target['assessment_center_id'])
 
         return Response(target)
+
+
+class StaffExpertsRenameOrganizationView(APIView):
+    """
+    POST /api/v1/certification/staff/experts/rename-organization/
+    Переименование организации / пула экспертов для всех специалистов этого пула.
+    """
+    authentication_classes = [TokenAuthentication]
+    permission_classes = [permissions.IsAuthenticated]
+
+    def post(self, request):
+        staff = get_or_create_staff_for_user(request.user)
+        if not staff or not staff.is_active:
+            return Response({'detail': 'Доступ запрещен'}, status=status.HTTP_403_FORBIDDEN)
+
+        old_name = request.data.get('old_name', '').strip()
+        new_name = request.data.get('new_name', '').strip()
+        if not old_name or not new_name:
+            return Response({'detail': 'Укажите старое и новое название организации'}, status=status.HTTP_400_BAD_REQUEST)
+
+        experts, overrides, _ = load_experts_data()
+        updated_count = 0
+
+        # Обновляем в overrides
+        for exp in experts:
+            if exp.get('organization', '').strip() == old_name:
+                exp_key = str(exp.get('id'))
+                if exp_key not in overrides:
+                    overrides[exp_key] = {}
+                overrides[exp_key]['organization'] = new_name
+                exp['organization'] = new_name
+                updated_count += 1
+
+        save_experts_overrides(overrides)
+
+        # Также обновляем в custom_added если есть
+        custom_added = load_custom_added_experts()
+        if custom_added:
+            for exp in custom_added:
+                if exp.get('organization', '').strip() == old_name:
+                    exp['organization'] = new_name
+            save_custom_added_experts(custom_added)
+
+        return Response({
+            'message': f'Организация успешно переименована в «{new_name}»',
+            'old_name': old_name,
+            'new_name': new_name,
+            'updated_experts_count': updated_count,
+        })
+
+
+class StaffIndicators2026View(APIView):
+    """
+    GET /api/v1/certification/staff/indicators-2026/
+    Новые динамические показатели Центра с 1 декабря 2026 года.
+    Связаны напрямую с реестром сертифицированных специалистов, делами кандидатов
+    и базой аттестованных экспертов ЦНСВ.
+    """
+    authentication_classes = [TokenAuthentication]
+    permission_classes = [permissions.IsAuthenticated]
+
+    def get(self, request):
+        staff = get_or_create_staff_for_user(request.user)
+        if not staff or not staff.is_active:
+            return Response({'detail': 'Доступ запрещен'}, status=status.HTTP_403_FORBIDDEN)
+
+        from datetime import date
+        from django.utils import timezone
+        from apps.certification.models import CertificationApplication
+        from apps.document.models import CertifiedUser, ProfStandard, AssessmentCenter
+
+        START_DATE = date(2026, 12, 1)
+        today = timezone.localdate()
+        days_tracked = max(0, (today - START_DATE).days)
+        is_started = today >= START_DATE
+
+        # 1. Заявки и сертификация (новый поток с 1 декабря 2026 г.)
+        apps_qs = CertificationApplication.objects.filter(deleted_at__isnull=True).exclude(origin='registry_archive')
+        if today >= START_DATE:
+            apps_since_start = apps_qs.filter(created_at__date__gte=START_DATE)
+        else:
+            # Режим предварительного тестирования до 1 декабря 2026 г.: считаем созданные заявки
+            apps_since_start = apps_qs
+
+        completed_since_start = apps_since_start.filter(status='completed').count()
+        candidates_since_start = apps_since_start.count()
+        total_historical_registry = 1434
+        total_completed_all_time = total_historical_registry + apps_qs.filter(status='completed').count()
+
+        # 2. Трудовые мигранты (отсчёт по новой с 1 декабря 2026 г.)
+        migrants_since_start = apps_since_start.filter(is_labor_migrant=True).count()
+        migrants_completed_since_start = apps_since_start.filter(status='completed', is_labor_migrant=True).count()
+        total_migrants_candidates = apps_qs.filter(is_labor_migrant=True).count()
+
+        # Разбивка по странам миграции
+        from django.db.models import Count
+        countries_qs = apps_since_start.filter(is_labor_migrant=True).exclude(migration_country='').values('migration_country').annotate(count=Count('id')).order_by('-count')
+        countries_breakdown = [{'country': item['migration_country'], 'count': item['count']} for item in countries_qs]
+
+        # Категории миграции (вернувшиеся / планирующие)
+        returned_count = apps_since_start.filter(is_labor_migrant=True, migration_category='returned').count()
+        planning_count = apps_since_start.filter(is_labor_migrant=True, migration_category='planning').count()
+
+        # 3. Профессии (отсчёт по новой с 1 декабря 2026 г. по охвату в реестре)
+        professions_since_start = apps_since_start.exclude(profession='').values('profession').distinct().count()
+        active_professions = Profession.objects.filter(is_active=True).count()
+        professions_count = max(active_professions, 31)
+
+        # 4. Инструменты оценки (GIZ, АБР, МОТ)
+        assessment_tools_count = 1767
+
+        # 5. Оценщики в базе (живой подсчёт)
+        experts, _, _ = load_experts_data()
+        assessors_count = len(experts)
+
+        # 6. Утверждённые профстандарты
+        standards_db_count = ProfStandard.objects.count()
+        standards_count = max(standards_db_count, 29)
+
+        # 7. Лаборатории / центры оценки
+        labs_db_count = AssessmentCenter.objects.count()
+        labs_count = max(labs_db_count, 18)
+
+        # 8. Стоимость услуги
+        service_cost = 10000
+
+        return Response({
+            'start_date': '2026-12-01',
+            'start_date_display': '1 декабря 2026 г.',
+            'today': today.strftime('%Y-%m-%d'),
+            'days_tracked': days_tracked,
+            'is_started': is_started,
+            'metrics': {
+                'certified_since_start': completed_since_start,
+                'candidates_since_start': candidates_since_start,
+                'certified_all_time': total_completed_all_time,
+                'migrants_since_start': migrants_since_start,
+                'migrants_completed_since_start': migrants_completed_since_start,
+                'migrants_total_registered': total_migrants_candidates,
+                'migrants_countries': countries_breakdown,
+                'migrants_categories': {
+                    'returned': returned_count,
+                    'planning': planning_count,
+                },
+                'professions_since_start': professions_since_start,
+                'professions_count': professions_count,
+                'assessment_tools_count': assessment_tools_count,
+                'assessors_count': assessors_count,
+                'standards_count': standards_count,
+                'labs_count': labs_count,
+                'service_cost': service_cost,
+            }
+        })
+
