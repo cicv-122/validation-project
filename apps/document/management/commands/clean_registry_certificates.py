@@ -25,9 +25,9 @@ class Command(BaseCommand):
         if '5601' in cleaned:
             return 'ЦС № 000601'
 
-        # Случаи с нулями (архив без номера) - стандартизируем к 6-значному ЦС № 000000
+        # Случаи с нулями (архив без номера) - не объединяем, чтобы не нарушать unique constraint
         if re.match(r'^(?:ЦС|Цс|цс)\s*№?\s*0+$', cleaned):
-            return 'ЦС № 000000'
+            return cleaned
 
         # Стандартизация формата ЦС № XXXXXX
         m = re.match(r'^(?:ЦС|Цс|цс)\s*№?\s*(\d+)$', cleaned)
@@ -50,12 +50,18 @@ class Command(BaseCommand):
 
         users = CertifiedUser.objects.all().order_by('id')
         user_changes = []
+        existing_regs = set(users.values_list('registration_number', flat=True))
 
         for u in users:
             old_reg = u.registration_number or ''
             new_reg = self.normalize_reg(old_reg)
             if old_reg != new_reg:
+                if new_reg in existing_regs and new_reg != old_reg:
+                    self.stdout.write(self.style.WARNING(f"  [ПРОПУСК] Номер '{new_reg}' уже занят другой записью. Пропускаем ID {u.id} {u.get_full_name()}"))
+                    continue
                 user_changes.append((u, old_reg, new_reg))
+                existing_regs.discard(old_reg)
+                existing_regs.add(new_reg)
 
         self.stdout.write(f"\nНайдено записей CertifiedUser для обновления: {len(user_changes)} из {users.count()}")
         for u, old_reg, new_reg in user_changes:
