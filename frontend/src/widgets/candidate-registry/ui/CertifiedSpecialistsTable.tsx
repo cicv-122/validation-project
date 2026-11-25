@@ -184,8 +184,19 @@ export const CertifiedSpecialistsTable: React.FC<CertifiedSpecialistsTableProps>
 												</div>
 											)}
 										</td>
-										<td className="py-2 px-2.5 font-mono font-bold text-blue-900 whitespace-nowrap text-xs">
-											{item.registration_number}
+										<td className="py-2 px-2.5 whitespace-nowrap text-xs">
+											{!item.registration_number || /^ЦС\s*№?\s*0+$/i.test(item.registration_number.trim()) ? (
+												<span
+													className="inline-flex items-center gap-1 px-2 py-0.5 rounded-md bg-slate-100 text-slate-500 border border-slate-200 text-[11px] font-semibold tracking-tight shadow-2xs"
+													title="Номер бланка сертификата не был внесён в архивной ведомости. Нажмите «Редактировать дело», чтобы внести номер."
+												>
+													<span className="text-slate-400 font-bold">№</span> Не присвоен
+												</span>
+											) : (
+												<span className="font-mono font-bold text-blue-900">
+													{item.registration_number}
+												</span>
+											)}
 										</td>
 										<td className="py-2 px-2.5 font-bold text-slate-900 text-xs leading-snug">
 											<Link

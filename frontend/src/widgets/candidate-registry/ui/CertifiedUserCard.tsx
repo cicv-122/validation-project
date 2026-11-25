@@ -61,9 +61,15 @@ export default function CertifiedUserCard({
 					</p>
 				)}
 
-				<span className='inline-block text-xs font-semibold text-[#283375] bg-blue-50 border border-blue-100 py-1 px-3 rounded-full'>
-					{t('Рег. номер')}: {user.registration_number}
-				</span>
+				{!user.registration_number || /^ЦС\s*№?\s*0+$/i.test(user.registration_number.trim()) ? (
+					<span className='inline-block text-xs font-semibold text-slate-500 bg-slate-100 border border-slate-200 py-1 px-3 rounded-full'>
+						{t('Рег. номер')}: {t('Не присвоен')}
+					</span>
+				) : (
+					<span className='inline-block text-xs font-semibold text-[#283375] bg-blue-50 border border-blue-100 py-1 px-3 rounded-full'>
+						{t('Рег. номер')}: {user.registration_number}
+					</span>
+				)}
 
 				{user.issued_date && (
 					<p className='text-xs text-gray-400'>

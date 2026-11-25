@@ -98,7 +98,9 @@ export default function CertifiedUserModal({ user, onClose }: Props) {
 										{t('Регистрационный номер')}
 									</p>
 									<p className='text-base font-mono font-bold text-gray-900'>
-										{user.registration_number}
+										{!user.registration_number || /^ЦС\s*№?\s*0+$/i.test(user.registration_number.trim())
+											? t('Не присвоен (архив)')
+											: user.registration_number}
 									</p>
 								</div>
 
