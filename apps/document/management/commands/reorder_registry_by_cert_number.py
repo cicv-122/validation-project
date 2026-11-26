@@ -16,13 +16,22 @@ class Command(BaseCommand):
             help='Применить изменения в базе данных (по умолчанию dry-run)',
         )
 
-    def extract_cert_number(self, reg_str: str) -> int:
+    def extract_cert_tuple(self, reg_str: str) -> tuple:
         if not reg_str:
-            return 0
+            return (0, 0, 0)
+        m = re.match(r'^(?:ЦС\s*№\s*)?(\d+)(?:/(\d+)(?:-(\d+))?)?', reg_str)
+        if m:
+            main_n = int(m.group(1))
+            slash_n = int(m.group(2)) if m.group(2) else 0
+            sub_n = int(m.group(3)) if m.group(3) else 0
+            return (main_n, slash_n, sub_n)
         digits = re.findall(r'\d+', reg_str)
-        if not digits:
-            return 0
-        return int(digits[0])
+        if digits:
+            return (int(digits[0]), 0, 0)
+        return (0, 0, 0)
+
+    def extract_cert_number(self, reg_str: str) -> int:
+        return self.extract_cert_tuple(reg_str)[0]
 
     def handle(self, *args, **options):
         apply_changes = options.get('apply', False)
@@ -33,12 +42,11 @@ class Command(BaseCommand):
         total_count = len(users)
         self.stdout.write(f"Всего записей в реестре: {total_count}")
 
-        # Сортируем: сначала записи без номеров (0), затем по возрастанию номера сертификата от 1 до MAX
-        # Внутри одинаковых номеров сортируем по дате выдачи
+        # Сортируем: сначала записи без номеров (0), затем по возрастанию номера сертификата (номер, код профессии, подномер)
         def sort_key(u):
-            num = self.extract_cert_number(u.registration_number)
+            tup = self.extract_cert_tuple(u.registration_number)
             dt = u.issued_date or date.min
-            return (1 if num > 0 else 0, num, dt, u.id)
+            return (1 if tup[0] > 0 else 0, tup[0], tup[1], tup[2], dt, u.id)
 
         sorted_users = sorted(users, key=sort_key)
 

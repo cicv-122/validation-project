@@ -96,7 +96,7 @@ class CertifiedUserVerifyView(APIView):
         # Normalize search: allow '000026', 'ЦС № 000026', 'ЦС-000026', '000001/1', 'ЦС № 000001/1'
         q_reg = Q(registration_number__iexact=reg)
         if '/' in reg:
-            m = re.search(r'(\d+)\s*/\s*(\d+)', reg)
+            m = re.search(r'(\d+)\s*/\s*([0-9\-]+)', reg)
             if m:
                 d1, d2 = m.group(1), m.group(2)
                 q_reg |= Q(registration_number__icontains=f"{d1.zfill(6)}/{d2}") | Q(registration_number__icontains=f"{d1}/{d2}")

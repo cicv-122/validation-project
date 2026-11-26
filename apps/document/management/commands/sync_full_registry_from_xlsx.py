@@ -28,15 +28,42 @@ def parse_date_value(val):
 
 def clean_reg_base(reg_str: str) -> str:
     cleaned = re.sub(r'\s+', ' ', str(reg_str or '')).strip()
+    if '/' in cleaned:
+        cleaned = cleaned.split('/')[0].strip()
     if '5601' in cleaned:
         return 'ЦС № 000601'
-    m = re.match(r'^(?:ЦС|Цс|цс)\s*№?\s*(\d+)$', cleaned)
+    m = re.match(r'^(?:ЦС|Цс|цс)?\s*№?\s*(\d+)$', cleaned)
     if m:
         digits = m.group(1)
+        if digits == '0000' or digits == '0':
+            return '0000'
         return f'ЦС № {digits.zfill(6)}' if len(digits) <= 6 else f'ЦС № {digits}'
     if cleaned.startswith('Цс'):
         return 'ЦС' + cleaned[2:]
     return cleaned
+
+
+def get_profession_code(prof_raw: str) -> str:
+    p = clean_profession_name(prof_raw).lower()
+    if 'штукатур' in p:
+        return '1'
+    elif 'слесарь по ремонту автомобилей' in p:
+        return '2'
+    elif 'ветеринарн' in p or 'животных' in p:
+        return '3'
+    elif 'горничная' in p:
+        return '4'
+    elif 'портной' in p or 'швея' in p:
+        return '5'
+    elif 'электрогазосварщик' in p or 'сварщик' in p:
+        return '6'
+    elif 'сантехник' in p:
+        return '7'
+    elif 'повар' in p:
+        return '8'
+    elif 'электромонтажник' in p:
+        return '9'
+    return '0'
 
 
 class Command(BaseCommand):
@@ -120,29 +147,33 @@ class Command(BaseCommand):
         self.stdout.write(f"  • Кандидатов без сертификата (0000 / не сдали): {len(uncertified)}")
         self.stdout.write(f"  • Кандидатов с сертификатами: {len(certified)}")
 
-        # 2. Вычисление финальных регистрационных номеров с разрешением дубликатов
+        # 2. Вычисление финальных регистрационных номеров с кодами профессий (/1, /2, /2-1...)
         for c in certified:
             c['clean_base'] = clean_reg_base(c['reg_raw'])
 
-        base_counts = defaultdict(int)
+        base_groups = defaultdict(list)
         for c in certified:
-            base_counts[c['clean_base']] += 1
+            base_groups[c['clean_base']].append(c)
 
-        seq_tracker = defaultdict(int)
-        for c in certified:
-            base = c['clean_base']
-            if base_counts[base] > 1:
-                seq_tracker[base] += 1
-                c['final_reg'] = f"{base}/{seq_tracker[base]}"
+        for base, recs in base_groups.items():
+            if len(recs) == 1:
+                recs[0]['final_reg'] = base
             else:
-                c['final_reg'] = base
+                code_counts = defaultdict(int)
+                for c in recs:
+                    p_code = get_profession_code(c['prof_raw'])
+                    code_counts[p_code] += 1
+                    if code_counts[p_code] == 1:
+                        c['final_reg'] = f"{base}/{p_code}"
+                    else:
+                        c['final_reg'] = f"{base}/{p_code}-{code_counts[p_code] - 1}"
 
         unique_regs = set(c['final_reg'] for c in certified)
         if len(unique_regs) != len(certified):
             raise CommandError("Критическая ошибка: обнаружены коллизии финальных номеров!")
 
-        dup_bases_count = sum(1 for cnt in base_counts.values() if cnt > 1)
-        self.stdout.write(f"  • Номеров бланков с дубликатами: {dup_bases_count} (все разрешены через суффиксы /1, /2...)")
+        dup_bases_count = sum(1 for recs in base_groups.values() if len(recs) > 1)
+        self.stdout.write(f"  • Номеров бланков с дубликатами: {dup_bases_count} (все разрешены по кодам профессий /1, /2, /2-1...)")
 
         # 3. Нормализация ФИО и профессий
         for c in certified:
@@ -159,12 +190,13 @@ class Command(BaseCommand):
 
         # 4. Сортировка и присвоение строгой сквозной нумерации order
         def extract_sort_key(c):
-            m = re.match(r'^(?:ЦС\s*№\s*)?(\d+)(?:/(\d+))?', c['final_reg'])
+            m = re.match(r'^(?:ЦС\s*№\s*)?(\d+)(?:/(\d+)(?:-(\d+))?)?', c['final_reg'])
             if m:
                 main_num = int(m.group(1))
-                slash_num = int(m.group(2)) if m.group(2) else 0
-                return (main_num, slash_num)
-            return (0, 0)
+                prof_num = int(m.group(2)) if m.group(2) else 0
+                sub_num = int(m.group(3)) if m.group(3) else 0
+                return (main_num, prof_num, sub_num)
+            return (0, 0, 0)
 
         certified.sort(key=extract_sort_key)
         for rank, c in enumerate(certified, start=1):
