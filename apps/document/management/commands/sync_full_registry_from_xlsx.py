@@ -65,34 +65,44 @@ class Command(BaseCommand):
         if not os.path.exists(source_path):
             raise CommandError(f'Файл не найден: {source_path}')
 
-        try:
-            import openpyxl
-        except ImportError:
-            raise CommandError('Необходимо установить openpyxl')
-
-        mode_str = "ПРИМЕНЕНИЕ ИЗМЕНЕНИЙ" if apply_changes else "ТЕСТОВЫЙ РЕЖИМ (DRY-RUN)"
-        self.stdout.write(self.style.MIGRATE_HEADING(f"=== Синхронизация реестра ЦНСВ: {mode_str} ==="))
-        self.stdout.write(f"📂 Загрузка Excel файла: {source_path}")
-
-        wb = openpyxl.load_workbook(source_path, data_only=True)
-        ws = wb.active
-
         raw_rows = []
-        for r_idx, r in enumerate(ws.iter_rows(min_row=3, values_only=True), start=3):
-            row_id, date_col, fio_raw, prof_raw, reg_raw, loc_raw, cert_d_raw, iss_d_raw = r[:8]
-            if not fio_raw or not str(fio_raw).strip():
-                continue
-            raw_rows.append({
-                'row_idx': r_idx,
-                'excel_id': row_id,
-                'date_col': date_col,
-                'fio_raw': str(fio_raw).strip(),
-                'prof_raw': str(prof_raw or '').strip(),
-                'reg_raw': str(reg_raw or '').strip(),
-                'loc_raw': str(loc_raw or '').strip(),
-                'cert_d_raw': cert_d_raw,
-                'iss_d_raw': iss_d_raw,
-            })
+        if source_path.endswith('.json'):
+            self.stdout.write(f"📂 Загрузка данных из JSON: {source_path}")
+            with open(source_path, 'r', encoding='utf-8') as f:
+                import json
+                raw_rows = json.load(f)
+        else:
+            try:
+                import openpyxl
+                self.stdout.write(f"📂 Загрузка Excel файла: {source_path}")
+                wb = openpyxl.load_workbook(source_path, data_only=True)
+                ws = wb.active
+                for r_idx, r in enumerate(ws.iter_rows(min_row=3, values_only=True), start=3):
+                    row_id, date_col, fio_raw, prof_raw, reg_raw, loc_raw, cert_d_raw, iss_d_raw = r[:8]
+                    if not fio_raw or not str(fio_raw).strip():
+                        continue
+                    raw_rows.append({
+                        'row_idx': r_idx,
+                        'excel_id': row_id,
+                        'date_col': date_col,
+                        'fio_raw': str(fio_raw).strip(),
+                        'prof_raw': str(prof_raw or '').strip(),
+                        'reg_raw': str(reg_raw or '').strip(),
+                        'loc_raw': str(loc_raw or '').strip(),
+                        'cert_d_raw': cert_d_raw,
+                        'iss_d_raw': iss_d_raw,
+                    })
+            except ImportError:
+                fallback_json = os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(os.path.dirname(os.path.dirname(source_path))))), 'data', 'full_sync_candidates.json')
+                if not os.path.exists(fallback_json):
+                    fallback_json = os.path.abspath('data/full_sync_candidates.json')
+                if os.path.exists(fallback_json):
+                    self.stdout.write(self.style.WARNING(f"openpyxl не установлен, используем подготовленный {fallback_json}"))
+                    with open(fallback_json, 'r', encoding='utf-8') as f:
+                        import json
+                        raw_rows = json.load(f)
+                else:
+                    raise CommandError(f'Необходимо установить openpyxl или передать JSON файл (не найден {fallback_json})')
 
         self.stdout.write(f"📊 Загружено заполненных строк из Excel: {len(raw_rows)}")
 
@@ -257,14 +267,14 @@ class Command(BaseCommand):
                         full_name=u.get_full_name(),
                         inn=u.inn or '',
                         profession=u.profession or '',
-                        status='failed',
-                        note='Экзамен не сдан / сертификат не выдан (архив 10.07.2024)',
+                        status='rejected',
+                        admin_notes='Экзамен не сдан / сертификат не выдан (архив 10.07.2024)',
                     )
                 else:
-                    app.status = 'failed'
-                    app.certificate_number_issued = None
-                    app.note = 'Экзамен не сдан / сертификат не выдан (архив 10.07.2024)'
-                    app.save(update_fields=['status', 'certificate_number_issued', 'note'])
+                    app.status = 'rejected'
+                    app.certificate_number_issued = ''
+                    app.admin_notes = 'Экзамен не сдан / сертификат не выдан (архив 10.07.2024)'
+                    app.save(update_fields=['status', 'certificate_number_issued', 'admin_notes'])
 
                 u.delete()
                 self.stdout.write(f"  ✓ Перенесён в архив и исключён из реестра: {u.get_full_name()} (было {u.registration_number})")
