@@ -12,23 +12,24 @@ import {
 } from '../widgets/certificate-verification';
 
 export default function VerifyCertificate() {
-	const { id } = useParams<{ id: string }>();
+	const params = useParams();
+	const wildcardId = params['*'] || params.id;
 	const [searchParams, setSearchParams] = useSearchParams();
 	const { t } = useTranslation();
 
 	const tokenParam = searchParams.get('token') || '';
-	const initialReg = id || searchParams.get('reg') || '';
-	const initialDigits = initialReg.replace(/[^0-9]/g, '');
+	const initialReg = wildcardId || searchParams.get('reg') || '';
+	const initialDigits = initialReg.replace(/[^0-9/]/g, '');
 	const initialInn = searchParams.get('inn') || '';
 
-	const isDirectScan = Boolean(id || tokenParam);
+	const isDirectScan = Boolean(wildcardId || tokenParam);
 
 	const [numberInput, setNumberInput] = useState(initialDigits);
 	const [innInput, setInnInput] = useState(initialInn.replace(/[^0-9]/g, '').slice(0, 14));
 	const [activeReg, setActiveReg] = useState(initialReg);
 	const [activeInn, setActiveInn] = useState(initialInn);
 	const [activeToken, setActiveToken] = useState(tokenParam);
-	const [showSearch, setShowSearch] = useState(!initialReg && !id && !tokenParam);
+	const [showSearch, setShowSearch] = useState(!initialReg && !wildcardId && !tokenParam);
 
 	// Lightbox / Modal preview for exam photos and evaluation documents
 	const [previewModal, setPreviewModal] = useState<CertificateMediaPreview | null>(null);

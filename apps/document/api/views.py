@@ -92,13 +92,19 @@ class CertifiedUserVerifyView(APIView):
                 status=status.HTTP_400_BAD_REQUEST
             )
 
-        # Normalize search: allow '000026', 'ЦС № 000026', 'ЦС-000026'
-        digits_only = ''.join(c for c in reg if c.isdigit())
-        
-        # Exact match or number match
+        # Normalize search: allow '000026', 'ЦС № 000026', 'ЦС-000026', '000001/1', 'ЦС № 000001/1'
         q_reg = Q(registration_number__iexact=reg)
-        if digits_only:
-            q_reg |= Q(registration_number__icontains=digits_only)
+        if '/' in reg:
+            m = re.search(r'(\d+)\s*/\s*(\d+)', reg)
+            if m:
+                d1, d2 = m.group(1), m.group(2)
+                q_reg |= Q(registration_number__icontains=f"{d1.zfill(6)}/{d2}") | Q(registration_number__icontains=f"{d1}/{d2}")
+        else:
+            digits_only = ''.join(c for c in reg if c.isdigit())
+            if digits_only:
+                q_reg |= Q(registration_number__iexact=f'ЦС № {digits_only.zfill(6)}')
+                q_reg |= Q(registration_number__startswith=f'ЦС № {digits_only.zfill(6)}/')
+                q_reg |= Q(registration_number__icontains=digits_only)
 
         user = CertifiedUser.objects.filter(q_reg).first()
 

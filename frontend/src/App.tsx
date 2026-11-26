@@ -100,7 +100,7 @@ function AppContent() {
 						<Route path='documents/certified-users' element={<Navigate to='/' replace />} />
 						<Route path='documents/prof-standards' element={<ProfStandards />} />
 						<Route path='verify' element={<VerifyCertificate />} />
-						<Route path='verify/:id' element={<VerifyCertificate />} />
+						<Route path='verify/*' element={<VerifyCertificate />} />
 						<Route path='apply' element={<Apply />} />
 						<Route path='apply/status' element={<ApplicationStatus />} />
 						<Route path='contacts' element={<Contacts />} />
