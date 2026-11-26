@@ -65,35 +65,39 @@ class StaffCertifiedUsersListView(APIView):
                 cluster_q |= Q(profession__icontains=stem)
             qs = qs.filter(cluster_q)
 
-        # Поиск с поддержкой умного стемминга профессий
+        # Поиск по ФИО, номеру сертификата, ИНН, профессии и контактам
         q = request.query_params.get('q', '').strip()
         if q:
-            q_lower = q.lower()
-            expanded_stems = set()
-            for group in PROFESSION_CLUSTERS.values():
-                for stem in group['stems']:
-                    if stem in q_lower or (len(q_lower) >= 3 and q_lower.startswith(stem[:3])):
-                        expanded_stems.update(group['stems'])
-                        break
+            words = q.split()
+            for word in words:
+                word_lower = word.lower()
+                expanded_stems = set()
+                # Если слово явно относится к корню профессии (от 4 букв)
+                if len(word_lower) >= 4:
+                    for group in PROFESSION_CLUSTERS.values():
+                        for stem in group['stems']:
+                            if word_lower.startswith(stem) or stem.startswith(word_lower):
+                                expanded_stems.update(group['stems'])
+                                break
 
-            base_match = (
-                Q(last_name__icontains=q) |
-                Q(first_name__icontains=q) |
-                Q(sur_name__icontains=q) |
-                Q(registration_number__icontains=q) |
-                Q(inn__icontains=q) |
-                Q(profession__icontains=q) |
-                Q(application__phone__icontains=q) |
-                Q(application__whatsapp__icontains=q)
-            )
+                word_match = (
+                    Q(last_name__icontains=word) |
+                    Q(first_name__icontains=word) |
+                    Q(sur_name__icontains=word) |
+                    Q(registration_number__icontains=word) |
+                    Q(inn__icontains=word) |
+                    Q(profession__icontains=word) |
+                    Q(application__phone__icontains=word) |
+                    Q(application__whatsapp__icontains=word)
+                )
 
-            if expanded_stems:
-                profession_matches = Q()
-                for stem in expanded_stems:
-                    profession_matches |= Q(profession__icontains=stem)
-                qs = qs.filter(base_match | profession_matches)
-            else:
-                qs = qs.filter(base_match)
+                if expanded_stems:
+                    profession_matches = Q()
+                    for stem in expanded_stems:
+                        profession_matches |= Q(profession__icontains=stem)
+                    word_match |= profession_matches
+
+                qs = qs.filter(word_match)
 
         paginator = StaffCertifiedUserPagination()
         page = paginator.paginate_queryset(qs, request)
