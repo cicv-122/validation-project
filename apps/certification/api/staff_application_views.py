@@ -297,10 +297,6 @@ class StaffApplicationDetailView(APIView):
                         status=status.HTTP_400_BAD_REQUEST
                     )
 
-        staff = get_or_create_staff_for_user(request.user)
-        if staff:
-            app.assigned_staff = staff
-
         app.save()
         serializer = StaffApplicationDetailSerializer(app, context={'request': request})
         return Response(serializer.data)
