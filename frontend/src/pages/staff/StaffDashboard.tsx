@@ -243,7 +243,7 @@ export default function StaffDashboard() {
 				isAdmin={profile?.role === 'supervisor' || Boolean(profile?.is_superuser)}
 				onClose={() => setSelectedAppId(null)}
 				onSaved={() => {
-					loadApplications();
+					loadApplications(true);
 					loadProfile();
 				}}
 				onDeleted={() => {

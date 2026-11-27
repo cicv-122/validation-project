@@ -158,8 +158,8 @@ export function useStaffDashboard() {
 		}
 	};
 
-	const loadApplications = async () => {
-		setLoadingApps(true);
+	const loadApplications = async (silent = false) => {
+		if (!silent) setLoadingApps(true);
 		try {
 			let statusParam: string | undefined = activeAppStatus || undefined;
 			let originParam: string | undefined = undefined;
@@ -181,7 +181,7 @@ export function useStaffDashboard() {
 		} catch (err) {
 			console.error(err);
 		} finally {
-			setLoadingApps(false);
+			if (!silent) setLoadingApps(false);
 		}
 	};
 
@@ -304,7 +304,7 @@ export function useStaffDashboard() {
 				loadCertifiedList(certifiedPage);
 			}
 		}
-	}, [profile, activeMainTab, activeAppStatus, activeSubStatus]);
+	}, [Boolean(profile), activeMainTab, activeAppStatus, activeSubStatus]);
 
 	// Плавная прокрутка и фокус прямо к той строке кандидата, откуда переходили в карточку (только 1 раз при возврате)
 	const hasScrolledTargetRef = useRef<boolean>(false);

@@ -239,13 +239,11 @@ export function useEditApplication({
 		setSavingAppDetail(true);
 		setAppSaveSuccessMsg(null);
 		try {
-			const updated = await staffApi.updateApplicationDetail(applicationId, {
+			await staffApi.updateApplicationDetail(applicationId, {
 				status: 'submitted',
 				unassign_staff: true,
 			} as any);
-			setAppDetail(updated);
-			setEditAppStatus('submitted');
-			setAppSaveSuccessMsg('Дело успешно возвращено в статус «Новые заявки» и куратор снят!');
+			onClose();
 			onSaved?.();
 		} catch (err: any) {
 			alert(err?.response?.data?.detail || 'Ошибка при возврате заявки в новые');

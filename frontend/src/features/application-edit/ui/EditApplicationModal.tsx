@@ -128,8 +128,8 @@ export function EditApplicationModal({
 			<div className='fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-xs flex items-center justify-center p-4 overflow-y-auto'>
 				<div className='bg-white rounded-3xl max-w-4xl w-full max-h-[92vh] flex flex-col shadow-2xl overflow-hidden border border-slate-100'>
 					{/* Заголовок модального окна */}
-					<div className='p-5 sm:p-6 bg-slate-50 border-b border-slate-200 flex items-center justify-between gap-4'>
-						<div>
+					<div className='p-4 sm:p-6 bg-slate-50 border-b border-slate-200 flex items-center justify-between gap-4'>
+						<div className='flex-1 min-w-0'>
 							<div className='flex items-center gap-2 mb-1 flex-wrap'>
 								<span className='text-[11px] uppercase font-bold text-slate-400'>
 									Дело кандидата • {appDetail?.short_registration_number}
@@ -158,21 +158,21 @@ export function EditApplicationModal({
 									</span>
 								)}
 							</div>
-							<h2 className='text-xl sm:text-2xl font-black text-slate-900'>
+							<h2 className='text-lg sm:text-2xl font-black text-slate-900 truncate' title={editAppFullName || appDetail?.full_name}>
 								{editAppFullName || appDetail?.full_name || 'Дело кандидата'}
 							</h2>
 						</div>
-						<div className='flex items-center gap-2'>
+						<div className='flex items-center gap-2.5 flex-shrink-0'>
 							{/* Взять в работу (для новых заявок) */}
 							{appDetail?.status === 'submitted' && (
 								<button
 									type='button'
 									onClick={handleTakeInWork}
 									disabled={savingAppDetail}
-									className='px-3.5 py-1.5 rounded-xl bg-[#283375] hover:bg-[#1e265c] text-white text-xs font-bold transition-all shadow-xs flex items-center gap-1.5 cursor-pointer'
+									className='whitespace-nowrap flex-shrink-0 px-4 py-2 rounded-xl bg-[#283375] hover:bg-[#1e265c] text-white text-xs font-bold transition-all shadow-xs inline-flex items-center gap-1.5 cursor-pointer'
 									title='Назначить себя ответственным и перевести дело на рассмотрение'
 								>
-									<svg className='w-3.5 h-3.5 text-white' fill='none' viewBox='0 0 24 24' stroke='currentColor'>
+									<svg className='w-4 h-4 text-white flex-shrink-0' fill='none' viewBox='0 0 24 24' stroke='currentColor'>
 										<path strokeLinecap='round' strokeLinejoin='round' strokeWidth={2} d='M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2' />
 									</svg>
 									<span>Взять в работу</span>
@@ -185,10 +185,10 @@ export function EditApplicationModal({
 									type='button'
 									onClick={handleReturnToSubmitted}
 									disabled={savingAppDetail}
-									className='px-3.5 py-1.5 rounded-xl bg-amber-500 hover:bg-amber-600 text-white text-xs font-bold transition-all shadow-xs flex items-center gap-1.5 cursor-pointer'
+									className='whitespace-nowrap flex-shrink-0 px-4 py-2 rounded-xl bg-amber-500 hover:bg-amber-600 text-white text-xs font-bold transition-all shadow-xs inline-flex items-center gap-1.5 cursor-pointer'
 									title='Вернуть дело в статус новой заявки и снять куратора (доступно только Администратору)'
 								>
-									<svg className='w-3.5 h-3.5 text-white' fill='none' viewBox='0 0 24 24' stroke='currentColor'>
+									<svg className='w-4 h-4 text-white flex-shrink-0' fill='none' viewBox='0 0 24 24' stroke='currentColor'>
 										<path strokeLinecap='round' strokeLinejoin='round' strokeWidth={2} d='M3 10h10a8 8 0 018 8v2M3 10l6 6m-6-6l6-6' />
 									</svg>
 									<span>Вернуть в новые заявки</span>
@@ -201,10 +201,10 @@ export function EditApplicationModal({
 									type='button'
 									onClick={handleRestoreFromArchive}
 									disabled={savingAppDetail}
-									className='px-3.5 py-1.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold transition-all shadow-xs flex items-center gap-1.5 cursor-pointer'
+									className='whitespace-nowrap flex-shrink-0 px-4 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold transition-all shadow-xs inline-flex items-center gap-1.5 cursor-pointer'
 									title='Вернуть дело кандидата на повторное рассмотрение или пересдачу'
 								>
-									<svg className='w-3.5 h-3.5 text-white' fill='none' viewBox='0 0 24 24' stroke='currentColor'>
+									<svg className='w-4 h-4 text-white flex-shrink-0' fill='none' viewBox='0 0 24 24' stroke='currentColor'>
 										<path strokeLinecap='round' strokeLinejoin='round' strokeWidth={2} d='M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15' />
 									</svg>
 									<span>Вернуть в работу</span>
@@ -212,7 +212,7 @@ export function EditApplicationModal({
 							)}
 							<button
 								onClick={onClose}
-								className='w-9 h-9 rounded-full bg-white border border-slate-200 text-slate-400 hover:text-slate-700 flex items-center justify-center shadow-xs transition-colors cursor-pointer'
+								className='w-9 h-9 flex-shrink-0 rounded-full bg-white border border-slate-200 text-slate-400 hover:text-slate-700 flex items-center justify-center shadow-xs transition-colors cursor-pointer'
 							>
 								✕
 							</button>
