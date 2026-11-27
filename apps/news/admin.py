@@ -31,9 +31,8 @@ class AdminNews(TabbedTranslationAdmin):
     list_per_page = 20
     inlines = [AdminNewsImages, AdminNewsVideo]
     readonly_fields = ('get_photo',)
-    filter_horizontal = ('certified_users',)
 
-    exclude = ('slug',)
+    exclude = ('slug', 'certified_users')
 
     class Media:
         js = ('custom_admin/js/prevent_double_submit.js',)
