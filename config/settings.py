@@ -89,7 +89,6 @@ INSTALLED_APPS = [
     'django.contrib.sites',
     'django.contrib.sitemaps',
     'django_cleanup',
-    'cachalot',
     'imagekit',
     'ckeditor',
     'ckeditor_uploader',

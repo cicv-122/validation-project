@@ -158,10 +158,12 @@ export default function StaffDashboard() {
 								setActiveSubStatus('');
 								setAppSearchQuery('');
 								loadApplications(false, activeAppStatus, '', '');
+								loadProfile(true);
 							}}
 							onSubStatusChange={(sub) => {
-								setActiveSubStatus(sub);
-								loadApplications(false, activeAppStatus, sub);
+								if (sub !== activeSubStatus) {
+									setActiveSubStatus(sub);
+								}
 							}}
 							onSearchChange={(query) => setAppSearchQuery(query)}
 							onSearchSubmit={handleAppSearch}
