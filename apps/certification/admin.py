@@ -205,7 +205,7 @@ class AssessmentCriteriaInline(admin.TabularInline):
     fields = ['criterion_name', 'max_points', 'earned_points', 'comment']
 
 
-@admin.register(Assessment)
+# @admin.register(Assessment)
 class AssessmentAdmin(admin.ModelAdmin):
     list_display = ['application', 'assessor_name', 'result_badge', 'score_display', 'conducted_at']
     list_filter = ['result', 'conducted_at']
@@ -237,7 +237,7 @@ class CertificateVerificationInline(admin.TabularInline):
     can_delete = False
 
 
-@admin.register(Certificate)
+# @admin.register(Certificate)
 class CertificateAdmin(admin.ModelAdmin):
     list_display = [
         'certificate_number',
