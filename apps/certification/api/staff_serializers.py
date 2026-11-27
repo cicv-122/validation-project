@@ -22,6 +22,7 @@ class StaffProfileSerializer(serializers.ModelSerializer):
     role_display = serializers.CharField(source='get_role_display', read_only=True)
     assigned_professions = StaffProfessionMiniSerializer(many=True, read_only=True)
     username = serializers.CharField(source='user.username', read_only=True)
+    is_superuser = serializers.BooleanField(source='user.is_superuser', read_only=True)
     stats = serializers.SerializerMethodField()
     is_telegram_connected = serializers.SerializerMethodField()
     telegram_bot_url = serializers.SerializerMethodField()
@@ -35,6 +36,7 @@ class StaffProfileSerializer(serializers.ModelSerializer):
             'phone',
             'role',
             'role_display',
+            'is_superuser',
             'is_active',
             'assigned_professions',
             'stats',

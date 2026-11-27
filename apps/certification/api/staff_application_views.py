@@ -236,8 +236,19 @@ class StaffApplicationDetailView(APIView):
                 else:
                     setattr(app, field, val)
 
-        if 'status' in request.data:
+        is_admin = bool(request.user.is_superuser or staff.role == 'supervisor')
+
+        if request.data.get('unassign_staff') or request.data.get('status') == 'submitted':
+            if not is_admin:
+                return Response(
+                    {'detail': 'Только администратор или руководитель может возвращать дело в статус новых заявок и снимать куратора.'},
+                    status=status.HTTP_403_FORBIDDEN
+                )
+            app.status = 'submitted'
+            app.assigned_staff = None
+        elif 'status' in request.data:
             new_status = request.data['status']
+            app.status = new_status
             if new_status == 'under_review' and not app.reviewed_at:
                 app.reviewed_at = timezone.now()
             if request.data.get('assign_to_me') or (new_status in ('under_review', 'assessment_scheduled') and not app.assigned_staff):
@@ -329,8 +340,19 @@ class StaffApplicationStatusUpdateView(APIView):
 
         app = get_object_or_404(CertificationApplication, pk=pk, deleted_at__isnull=True)
 
+        is_admin = bool(request.user.is_superuser or staff.role == 'supervisor')
         new_status = request.data.get('status')
-        if new_status:
+        unassign = request.data.get('unassign_staff')
+
+        if new_status == 'submitted' or unassign:
+            if not is_admin:
+                return Response(
+                    {'detail': 'Только администратор или руководитель может возвращать дело в статус новых заявок и снимать куратора.'},
+                    status=status.HTTP_403_FORBIDDEN
+                )
+            app.status = 'submitted'
+            app.assigned_staff = None
+        elif new_status:
             valid_statuses = [choice[0] for choice in CertificationApplication.STATUS_CHOICES]
             if new_status not in valid_statuses:
                 return Response({'detail': f'Недопустимый статус: {new_status}'}, status=status.HTTP_400_BAD_REQUEST)

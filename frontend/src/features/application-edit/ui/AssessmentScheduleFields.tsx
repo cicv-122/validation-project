@@ -6,6 +6,7 @@ import localExpertsData from '../../../data/experts_database.json';
 import { useAssessmentCenters } from '../../../entities/center/api/centerHooks';
 
 interface AssessmentScheduleFieldsProps {
+	isAdmin?: boolean;
 	status: string;
 	setStatus: (val: string) => void;
 	date: string;
@@ -28,6 +29,7 @@ interface AssessmentScheduleFieldsProps {
 }
 
 export function AssessmentScheduleFields({
+	isAdmin,
 	status,
 	setStatus,
 	date,
@@ -175,7 +177,9 @@ export function AssessmentScheduleFields({
 							onChange={(e) => setStatus(e.target.value)}
 							className='w-full pl-3 pr-9 py-2 text-xs font-bold rounded-xl border border-slate-200 bg-white outline-none focus:border-[#283375] appearance-none cursor-pointer'
 						>
-							<option value='submitted'>Входящая (Новая)</option>
+							{(isAdmin || status === 'submitted') && (
+								<option value='submitted'>Входящая (Новая)</option>
+							)}
 							<option value='under_review'>На рассмотрении</option>
 							<option value='assessment_scheduled'>Оценка назначена</option>
 							<option value='completed'>В реестре (Выдано)</option>

@@ -15,6 +15,7 @@ export interface StaffProfile {
 	phone: string;
 	role: string;
 	role_display: string;
+	is_superuser?: boolean;
 	is_active: boolean;
 	assigned_professions: StaffProfession[];
 	telegram_chat_id: string | null;

@@ -14,6 +14,7 @@ interface EditApplicationModalProps {
 	onClose: () => void;
 	onSaved?: () => void;
 	onDeleted?: () => void;
+	isAdmin?: boolean;
 }
 
 
@@ -41,6 +42,7 @@ export function EditApplicationModal({
 	onClose,
 	onSaved,
 	onDeleted,
+	isAdmin,
 }: EditApplicationModalProps) {
 	const {
 		appDetail,
@@ -100,6 +102,7 @@ export function EditApplicationModal({
 		uploadingDoc,
 		editAppPinAnalysis,
 		handleTakeInWork,
+		handleReturnToSubmitted,
 		handleRejectApplication,
 		handleRestoreFromArchive,
 		handleSaveAppDetail,
@@ -173,6 +176,22 @@ export function EditApplicationModal({
 										<path strokeLinecap='round' strokeLinejoin='round' strokeWidth={2} d='M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2' />
 									</svg>
 									<span>Взять в работу</span>
+								</button>
+							)}
+
+							{/* Вернуть в новые заявки (ТОЛЬКО для администратора, если дело уже на рассмотрении / в работе) */}
+							{isAdmin && appDetail && appDetail.status !== 'submitted' && (
+								<button
+									type='button'
+									onClick={handleReturnToSubmitted}
+									disabled={savingAppDetail}
+									className='px-3.5 py-1.5 rounded-xl bg-amber-500 hover:bg-amber-600 text-white text-xs font-bold transition-all shadow-xs flex items-center gap-1.5 cursor-pointer'
+									title='Вернуть дело в статус новой заявки и снять куратора (доступно только Администратору)'
+								>
+									<svg className='w-3.5 h-3.5 text-white' fill='none' viewBox='0 0 24 24' stroke='currentColor'>
+										<path strokeLinecap='round' strokeLinejoin='round' strokeWidth={2} d='M3 10h10a8 8 0 018 8v2M3 10l6 6m-6-6l6-6' />
+									</svg>
+									<span>Вернуть в новые заявки</span>
 								</button>
 							)}
 
@@ -260,6 +279,7 @@ export function EditApplicationModal({
 								/>
 
 								<AssessmentScheduleFields
+									isAdmin={isAdmin}
 									status={editAppStatus}
 									setStatus={setEditAppStatus}
 									date={editAppDate}

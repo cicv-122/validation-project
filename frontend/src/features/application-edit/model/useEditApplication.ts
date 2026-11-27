@@ -231,6 +231,29 @@ export function useEditApplication({
 		}
 	};
 
+	const handleReturnToSubmitted = async () => {
+		if (!applicationId) return;
+		if (!window.confirm('Вы действительно хотите вернуть это дело в статус «Новые заявки» и снять куратора? Заявка станет доступна для распределения и взятия в работу всем сотрудникам.')) {
+			return;
+		}
+		setSavingAppDetail(true);
+		setAppSaveSuccessMsg(null);
+		try {
+			const updated = await staffApi.updateApplicationDetail(applicationId, {
+				status: 'submitted',
+				unassign_staff: true,
+			} as any);
+			setAppDetail(updated);
+			setEditAppStatus('submitted');
+			setAppSaveSuccessMsg('Дело успешно возвращено в статус «Новые заявки» и куратор снят!');
+			onSaved?.();
+		} catch (err: any) {
+			alert(err?.response?.data?.detail || 'Ошибка при возврате заявки в новые');
+		} finally {
+			setSavingAppDetail(false);
+		}
+	};
+
 	const handleDeleteApplication = async () => {
 		if (!applicationId) return;
 		setIsDeletingApp(true);
@@ -380,6 +403,7 @@ export function useEditApplication({
 		uploadingDoc,
 		editAppPinAnalysis,
 		handleTakeInWork,
+		handleReturnToSubmitted,
 		handleRejectApplication,
 		handleRestoreFromArchive,
 		handleSaveAppDetail,

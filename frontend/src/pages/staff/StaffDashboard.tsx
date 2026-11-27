@@ -240,6 +240,7 @@ export default function StaffDashboard() {
 			<EditApplicationModal
 				isOpen={Boolean(selectedAppId)}
 				applicationId={selectedAppId}
+				isAdmin={profile?.role === 'supervisor' || Boolean(profile?.is_superuser)}
 				onClose={() => setSelectedAppId(null)}
 				onSaved={() => {
 					loadApplications();
