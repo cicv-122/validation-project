@@ -170,7 +170,9 @@ export function useEditApplication({
 				assign_to_me: true,
 			} as any);
 			onClose();
-			await onSaved?.();
+			if (onSaved) {
+				await onSaved();
+			}
 		} catch (err: any) {
 			alert(err?.response?.data?.detail || 'Ошибка при взятии заявки в работу');
 		} finally {
@@ -242,7 +244,9 @@ export function useEditApplication({
 				unassign_staff: true,
 			} as any);
 			onClose();
-			onSaved?.();
+			if (onSaved) {
+				await onSaved();
+			}
 		} catch (err: any) {
 			alert(err?.response?.data?.detail || 'Ошибка при возврате заявки в новые');
 		} finally {

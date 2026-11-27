@@ -203,8 +203,9 @@ class StaffApplicationDetailView(APIView):
 
         # Защита от случайного изменения чужого дела:
         # Если дело уже ведётся другим сотрудником, рядовой сотрудник не может его менять
+        # (но если дело новое в статусе 'submitted', любой сотрудник может взять его в работу)
         if not (request.user.is_superuser or staff.role == 'supervisor'):
-            if app.assigned_staff and app.assigned_staff != staff:
+            if app.status != 'submitted' and app.assigned_staff and app.assigned_staff != staff:
                 return Response(
                     {'detail': f'Это дело ведёт другой сотрудник ({app.assigned_staff.full_name}). Вы не можете его изменять.'},
                     status=status.HTTP_403_FORBIDDEN
@@ -238,7 +239,7 @@ class StaffApplicationDetailView(APIView):
 
         is_admin = bool(request.user.is_superuser or staff.role == 'supervisor')
 
-        if request.data.get('unassign_staff') or request.data.get('status') == 'submitted':
+        if request.data.get('unassign_staff') or (request.data.get('status') == 'submitted' and app.status != 'submitted'):
             if not is_admin:
                 return Response(
                     {'detail': 'Только администратор или руководитель может возвращать дело в статус новых заявок и снимать куратора.'},
@@ -249,7 +250,9 @@ class StaffApplicationDetailView(APIView):
         elif 'status' in request.data:
             new_status = request.data['status']
             app.status = new_status
-            if new_status == 'under_review' and not app.reviewed_at:
+            if new_status == 'submitted':
+                app.assigned_staff = None
+            elif new_status == 'under_review' and not app.reviewed_at:
                 app.reviewed_at = timezone.now()
             if request.data.get('assign_to_me') or (new_status in ('under_review', 'assessment_scheduled') and not app.assigned_staff):
                 app.assigned_staff = staff

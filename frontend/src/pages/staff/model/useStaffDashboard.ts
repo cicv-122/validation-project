@@ -30,7 +30,7 @@ export function useStaffDashboard() {
 	const [searchParams, setSearchParams] = useSearchParams();
 
 	// Active main view: 'applications' | 'certified_registry' (synced with URL ?tab=registry)
-	const [tabParam, setTabParam] = useUrlQueryState<string>('tab', {
+	const [tabParam] = useUrlQueryState<string>('tab', {
 		defaultValue: '',
 		replace: true,
 	});
@@ -47,7 +47,25 @@ export function useStaffDashboard() {
 	}, [location.pathname, location.search]);
 
 	const switchMainTab = (tabId: MainTabType) => {
-		setTabParam(tabId === 'certified_registry' ? 'registry' : '');
+		if (tabId === 'certified_registry') {
+			setSearchParams(
+				(prev) => {
+					const next = new URLSearchParams(prev);
+					next.set('tab', 'registry');
+					return next;
+				},
+				{ replace: true }
+			);
+		} else {
+			// При переходе в Электронную приёмную очищаем параметры поиска реестра (?q=..., ?cluster=...)
+			setSearchParams(
+				() => {
+					const next = new URLSearchParams();
+					return next;
+				},
+				{ replace: true }
+			);
+		}
 	};
 
 	const [profile, setProfile] = useState<StaffProfile | null>(null);
@@ -145,8 +163,8 @@ export function useStaffDashboard() {
 		}
 	}, [certifiedList]);
 
-	const loadProfile = async () => {
-		setLoadingProfile(true);
+	const loadProfile = async (silent = false) => {
+		if (!silent && !profile) setLoadingProfile(true);
 		try {
 			const data = await staffApi.getProfile();
 			setProfile(data);
@@ -154,28 +172,37 @@ export function useStaffDashboard() {
 			staffApi.logout();
 			navigate('/staff/login');
 		} finally {
-			setLoadingProfile(false);
+			if (!silent && !profile) setLoadingProfile(false);
 		}
 	};
 
-	const loadApplications = async (silent = false) => {
+	const loadApplications = async (
+		silent = false,
+		overrideStatus?: string,
+		overrideSubStatus?: string,
+		overrideQ?: string
+	) => {
 		if (!silent) setLoadingApps(true);
 		try {
-			let statusParam: string | undefined = activeAppStatus || undefined;
+			const currentStatus = overrideStatus !== undefined ? overrideStatus : activeAppStatus;
+			const currentSub = overrideSubStatus !== undefined ? overrideSubStatus : activeSubStatus;
+			const currentQ = overrideQ !== undefined ? overrideQ : appSearchQuery;
+
+			let statusParam: string | undefined = currentStatus || undefined;
 			let originParam: string | undefined = undefined;
 
-			if (activeSubStatus) {
-				if (activeSubStatus === 'online' || activeSubStatus === 'in_person') {
-					originParam = activeSubStatus;
+			if (currentSub) {
+				if (currentSub === 'online' || currentSub === 'in_person') {
+					originParam = currentSub;
 				} else {
-					statusParam = activeSubStatus;
+					statusParam = currentSub;
 				}
 			}
 
 			const data = await staffApi.getApplications({
 				status: statusParam,
 				origin: originParam,
-				q: appSearchQuery.trim() || undefined,
+				q: currentQ.trim() || undefined,
 			});
 			setApplications(data);
 		} catch (err) {
@@ -396,15 +423,16 @@ export function useStaffDashboard() {
 		setActiveSubStatus,
 		handleStatusChange: (status: string) => {
 			setActiveAppStatus(status);
+			let nextSub = '';
 			if (status === 'submitted') {
-				setActiveSubStatus('online');
+				nextSub = 'online';
 			} else if (status === 'under_review') {
-				setActiveSubStatus('under_review_docs');
+				nextSub = 'under_review_docs';
 			} else if (status === 'rejected') {
-				setActiveSubStatus('rejected_exam');
-			} else {
-				setActiveSubStatus('');
+				nextSub = 'rejected_exam';
 			}
+			setActiveSubStatus(nextSub);
+			loadApplications(false, status, nextSub);
 		},
 		appSearchQuery,
 		setAppSearchQuery,

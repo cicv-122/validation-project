@@ -154,8 +154,12 @@ export default function StaffDashboard() {
 							onResetFilters={() => {
 								setActiveSubStatus('');
 								setAppSearchQuery('');
+								loadApplications(false, activeAppStatus, '', '');
 							}}
-							onSubStatusChange={(sub) => setActiveSubStatus(sub)}
+							onSubStatusChange={(sub) => {
+								setActiveSubStatus(sub);
+								loadApplications(false, activeAppStatus, sub);
+							}}
 							onSearchChange={(query) => setAppSearchQuery(query)}
 							onSearchSubmit={handleAppSearch}
 						/>
@@ -245,14 +249,14 @@ export default function StaffDashboard() {
 				onSaved={async () => {
 					await Promise.all([
 						loadApplications(true),
-						loadProfile(),
+						loadProfile(true),
 					]);
 				}}
 				onDeleted={async () => {
 					setSelectedAppId(null);
 					await Promise.all([
 						loadApplications(true),
-						loadProfile(),
+						loadProfile(true),
 					]);
 				}}
 			/>
