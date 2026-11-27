@@ -158,15 +158,23 @@ export const ApplicationsQueueTable: React.FC<ApplicationsQueueTableProps> = ({
 				) : applications.length === 0 ? (
 					<div className="py-16 text-center text-slate-400 text-sm space-y-2">
 						<div>В этом разделе пока нет заявок кандидатов.</div>
-						{(activeSubStatus || appSearchQuery) && (
+						{appSearchQuery ? (
 							<button
 								type="button"
 								onClick={onResetFilters}
 								className="text-xs font-bold text-blue-600 hover:underline cursor-pointer"
 							>
-								Очистить поисковый запрос
+								Очистить поисковый запрос «{appSearchQuery}»
 							</button>
-						)}
+						) : activeSubStatus ? (
+							<button
+								type="button"
+								onClick={onResetFilters}
+								className="text-xs font-bold text-blue-600 hover:underline cursor-pointer"
+							>
+								Сбросить под-фильтр
+							</button>
+						) : null}
 					</div>
 				) : (
 					<div className="overflow-x-auto">

@@ -76,6 +76,7 @@ export interface StaffApplicationItem {
 	assigned_staff_phone?: string;
 	documents_count: number;
 	certificate_number_issued: string;
+	origin?: 'online' | 'in_person';
 	is_labor_migrant?: boolean;
 	migration_country?: string;
 	migration_category?: string;

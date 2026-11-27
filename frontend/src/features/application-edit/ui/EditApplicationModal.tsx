@@ -8,12 +8,14 @@ import { IssueCertificateForm } from './IssueCertificateForm';
 import { PersonalContactFields } from './PersonalContactFields';
 import { ProfessionProcedureFields } from './ProfessionProcedureFields';
 
-interface EditApplicationModalProps {
+export interface EditApplicationModalProps {
 	applicationId: number | null;
 	isOpen: boolean;
 	onClose: () => void;
 	onSaved?: () => void;
-	onDeleted?: () => void;
+	onDeleted?: (id?: number) => void;
+	onTakeInWork?: (id: number) => void;
+	onReturnToSubmitted?: (id: number) => void;
 	isAdmin?: boolean;
 }
 
@@ -42,6 +44,8 @@ export function EditApplicationModal({
 	onClose,
 	onSaved,
 	onDeleted,
+	onTakeInWork,
+	onReturnToSubmitted,
 	isAdmin,
 }: EditApplicationModalProps) {
 	const {
@@ -113,8 +117,11 @@ export function EditApplicationModal({
 	} = useEditApplication({
 		applicationId,
 		isOpen,
+		isAdmin,
 		onSaved,
 		onDeleted,
+		onTakeInWork,
+		onReturnToSubmitted,
 		onClose,
 	});
 

@@ -9,8 +9,11 @@ import {
 interface UseEditApplicationProps {
 	applicationId: number | null;
 	isOpen: boolean;
+	isAdmin?: boolean;
 	onSaved?: () => void;
-	onDeleted?: () => void;
+	onDeleted?: (id?: number) => void;
+	onTakeInWork?: (id: number) => void;
+	onReturnToSubmitted?: (id: number) => void;
 	onClose: () => void;
 }
 
@@ -19,6 +22,8 @@ export function useEditApplication({
 	isOpen,
 	onSaved,
 	onDeleted,
+	onTakeInWork,
+	onReturnToSubmitted,
 	onClose,
 }: UseEditApplicationProps) {
 	const [appDetail, setAppDetail] = useState<StaffApplicationDetail | null>(null);
@@ -162,19 +167,22 @@ export function useEditApplication({
 
 	const handleTakeInWork = async () => {
 		if (!applicationId) return;
+		const idToTake = applicationId;
 		setSavingAppDetail(true);
 		setAppSaveSuccessMsg(null);
+		onClose();
+		onTakeInWork?.(idToTake);
 		try {
-			await staffApi.updateApplicationDetail(applicationId, {
+			await staffApi.updateApplicationDetail(idToTake, {
 				status: 'under_review',
 				assign_to_me: true,
 			} as any);
-			onClose();
 			if (onSaved) {
 				await onSaved();
 			}
 		} catch (err: any) {
 			alert(err?.response?.data?.detail || 'Ошибка при взятии заявки в работу');
+			onSaved?.();
 		} finally {
 			setSavingAppDetail(false);
 		}
@@ -233,22 +241,25 @@ export function useEditApplication({
 
 	const handleReturnToSubmitted = async () => {
 		if (!applicationId) return;
+		const idToReturn = applicationId;
 		if (!window.confirm('Вы действительно хотите вернуть это дело в статус «Новые заявки» и снять куратора? Заявка станет доступна для распределения и взятия в работу всем сотрудникам.')) {
 			return;
 		}
 		setSavingAppDetail(true);
 		setAppSaveSuccessMsg(null);
+		onClose();
+		onReturnToSubmitted?.(idToReturn);
 		try {
-			await staffApi.updateApplicationDetail(applicationId, {
+			await staffApi.updateApplicationDetail(idToReturn, {
 				status: 'submitted',
 				unassign_staff: true,
 			} as any);
-			onClose();
 			if (onSaved) {
 				await onSaved();
 			}
 		} catch (err: any) {
 			alert(err?.response?.data?.detail || 'Ошибка при возврате заявки в новые');
+			onSaved?.();
 		} finally {
 			setSavingAppDetail(false);
 		}
@@ -256,14 +267,17 @@ export function useEditApplication({
 
 	const handleDeleteApplication = async () => {
 		if (!applicationId) return;
+		const idToDelete = applicationId;
 		setIsDeletingApp(true);
+		setShowDeleteConfirm(false);
+		onClose();
+		onDeleted?.(idToDelete);
 		try {
-			await staffApi.deleteApplication(applicationId);
-			setShowDeleteConfirm(false);
-			onDeleted?.();
-			onClose();
+			await staffApi.deleteApplication(idToDelete);
+			onSaved?.();
 		} catch (err: any) {
 			alert(err?.response?.data?.detail || 'Ошибка при удалении заявки');
+			onSaved?.();
 		} finally {
 			setIsDeletingApp(false);
 		}

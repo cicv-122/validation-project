@@ -52,6 +52,9 @@ export default function StaffDashboard() {
 		isDeletingSpecialist,
 		loadApplications,
 		loadCertifiedList,
+		optimisticDeleteApp,
+		optimisticTakeInWork,
+		optimisticReturnToSubmitted,
 		candidateDossierState,
 		handleAppSearch,
 		handleCertifiedSearch,
@@ -246,14 +249,17 @@ export default function StaffDashboard() {
 				applicationId={selectedAppId}
 				isAdmin={profile?.role === 'supervisor' || Boolean(profile?.is_superuser)}
 				onClose={() => setSelectedAppId(null)}
-				onSaved={async () => {
-					await Promise.all([
-						loadApplications(true),
-						loadProfile(true),
-					]);
+				onTakeInWork={(id) => {
+					optimisticTakeInWork(id);
 				}}
-				onDeleted={async () => {
+				onReturnToSubmitted={(id) => {
+					optimisticReturnToSubmitted(id);
+				}}
+				onDeleted={(id) => {
+					if (id) optimisticDeleteApp(id);
 					setSelectedAppId(null);
+				}}
+				onSaved={async () => {
 					await Promise.all([
 						loadApplications(true),
 						loadProfile(true),

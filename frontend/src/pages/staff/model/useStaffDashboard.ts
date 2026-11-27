@@ -163,6 +163,9 @@ export function useStaffDashboard() {
 		}
 	}, [certifiedList]);
 
+	// Предотвращение гонки асинхронных ответов при быстром переключении
+	const appsRequestIdRef = useRef<number>(0);
+
 	const loadProfile = async (silent = false) => {
 		if (!silent && !profile) setLoadingProfile(true);
 		try {
@@ -182,6 +185,7 @@ export function useStaffDashboard() {
 		overrideSubStatus?: string,
 		overrideQ?: string
 	) => {
+		const reqId = ++appsRequestIdRef.current;
 		if (!silent) setLoadingApps(true);
 		try {
 			const currentStatus = overrideStatus !== undefined ? overrideStatus : activeAppStatus;
@@ -204,12 +208,74 @@ export function useStaffDashboard() {
 				origin: originParam,
 				q: currentQ.trim() || undefined,
 			});
+			if (appsRequestIdRef.current !== reqId) return; // Устаревший ответ игнорируем!
 			setApplications(data);
 		} catch (err) {
 			console.error(err);
 		} finally {
-			if (!silent) setLoadingApps(false);
+			if (appsRequestIdRef.current === reqId && !silent) setLoadingApps(false);
 		}
+	};
+
+	const optimisticDeleteApp = (id: number) => {
+		setApplications((prev) => prev.filter((app) => app.id !== id));
+		setProfile((prev) => {
+			if (!prev) return prev;
+			const target = applications.find((a) => a.id === id);
+			const isOnline = target?.origin !== 'in_person';
+			const curOnline = prev.stats.submitted_online ?? prev.stats.submitted;
+			return {
+				...prev,
+				stats: {
+					...prev.stats,
+					total: Math.max(0, prev.stats.total - 1),
+					submitted: target?.status === 'submitted' ? Math.max(0, prev.stats.submitted - 1) : prev.stats.submitted,
+					submitted_online: target?.status === 'submitted' && isOnline ? Math.max(0, curOnline - 1) : curOnline,
+					under_review: target?.status === 'under_review' ? Math.max(0, prev.stats.under_review - 1) : prev.stats.under_review,
+					under_review_docs: target?.status === 'under_review' ? Math.max(0, (prev.stats.under_review_docs || 1) - 1) : prev.stats.under_review_docs,
+				},
+			};
+		});
+	};
+
+	const optimisticTakeInWork = (id: number) => {
+		if (activeAppStatus === 'submitted') {
+			setApplications((prev) => prev.filter((app) => app.id !== id));
+		}
+		setProfile((prev) => {
+			if (!prev) return prev;
+			const curOnline = prev.stats.submitted_online ?? prev.stats.submitted;
+			return {
+				...prev,
+				stats: {
+					...prev.stats,
+					submitted: Math.max(0, prev.stats.submitted - 1),
+					submitted_online: Math.max(0, curOnline - 1),
+					under_review: prev.stats.under_review + 1,
+					under_review_docs: (prev.stats.under_review_docs || 0) + 1,
+				},
+			};
+		});
+	};
+
+	const optimisticReturnToSubmitted = (id: number) => {
+		if (activeAppStatus === 'under_review') {
+			setApplications((prev) => prev.filter((app) => app.id !== id));
+		}
+		setProfile((prev) => {
+			if (!prev) return prev;
+			const curOnline = prev.stats.submitted_online ?? prev.stats.submitted;
+			return {
+				...prev,
+				stats: {
+					...prev.stats,
+					under_review: Math.max(0, prev.stats.under_review - 1),
+					under_review_docs: Math.max(0, (prev.stats.under_review_docs || 1) - 1),
+					submitted: prev.stats.submitted + 1,
+					submitted_online: curOnline + 1,
+				},
+			};
+		});
 	};
 
 	const loadCertifiedList = async (
@@ -333,6 +399,26 @@ export function useStaffDashboard() {
 		}
 	}, [Boolean(profile), activeMainTab, activeAppStatus, activeSubStatus]);
 
+	// При нахождении в приёмной заявок очищаем старые параметры поиска реестра (?q=..., ?cluster=...)
+	useEffect(() => {
+		if (activeMainTab === 'applications') {
+			if (searchParams.has('q') || searchParams.has('cluster') || searchParams.has('page') || searchParams.has('has_inn') || searchParams.has('target')) {
+				setSearchParams(
+					(prev) => {
+						const next = new URLSearchParams(prev);
+						next.delete('q');
+						next.delete('cluster');
+						next.delete('page');
+						next.delete('has_inn');
+						next.delete('target');
+						return next;
+					},
+					{ replace: true }
+				);
+			}
+		}
+	}, [activeMainTab]);
+
 	// Плавная прокрутка и фокус прямо к той строке кандидата, откуда переходили в карточку (только 1 раз при возврате)
 	const hasScrolledTargetRef = useRef<boolean>(false);
 
@@ -432,7 +518,6 @@ export function useStaffDashboard() {
 				nextSub = 'rejected_exam';
 			}
 			setActiveSubStatus(nextSub);
-			loadApplications(false, status, nextSub);
 		},
 		appSearchQuery,
 		setAppSearchQuery,
@@ -458,6 +543,9 @@ export function useStaffDashboard() {
 		isDeletingSpecialist,
 		loadApplications,
 		loadCertifiedList,
+		optimisticDeleteApp,
+		optimisticTakeInWork,
+		optimisticReturnToSubmitted,
 		candidateDossierState,
 		handleAppSearch,
 		handleCertifiedSearch,
