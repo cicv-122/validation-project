@@ -16,7 +16,7 @@ export const applicationApi = {
 		staff_id?: number;
 	}): Promise<StaffApplicationItem[]> => {
 		const res = await apiClient.get('/certification/staff/applications/', {
-			params,
+			params: { ...params, _t: Date.now() },
 			headers: authHeader(),
 		});
 		return res.data;

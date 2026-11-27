@@ -61,7 +61,7 @@ export default function StaffDashboard() {
 
 	const [showCreateInPersonModal, setShowCreateInPersonModal] = useState(false);
 
-	if (loadingProfile) {
+	if (loadingProfile && !profile) {
 		return (
 			<div className="min-h-screen bg-slate-50 flex items-center justify-center">
 				<div className="flex flex-col items-center gap-3">
@@ -242,14 +242,18 @@ export default function StaffDashboard() {
 				applicationId={selectedAppId}
 				isAdmin={profile?.role === 'supervisor' || Boolean(profile?.is_superuser)}
 				onClose={() => setSelectedAppId(null)}
-				onSaved={() => {
-					loadApplications(true);
-					loadProfile();
+				onSaved={async () => {
+					await Promise.all([
+						loadApplications(true),
+						loadProfile(),
+					]);
 				}}
-				onDeleted={() => {
+				onDeleted={async () => {
 					setSelectedAppId(null);
-					loadApplications();
-					loadProfile();
+					await Promise.all([
+						loadApplications(true),
+						loadProfile(),
+					]);
 				}}
 			/>
 

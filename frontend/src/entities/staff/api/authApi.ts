@@ -12,6 +12,7 @@ export const authApi = {
 
 	getProfile: async (): Promise<StaffProfile> => {
 		const res = await apiClient.get('/certification/staff/profile/', {
+			params: { _t: Date.now() },
 			headers: authHeader(),
 		});
 		return res.data;

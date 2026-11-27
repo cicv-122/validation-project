@@ -165,14 +165,12 @@ export function useEditApplication({
 		setSavingAppDetail(true);
 		setAppSaveSuccessMsg(null);
 		try {
-			const updated = await staffApi.updateApplicationDetail(applicationId, {
+			await staffApi.updateApplicationDetail(applicationId, {
 				status: 'under_review',
 				assign_to_me: true,
 			} as any);
-			setAppDetail(updated);
-			setEditAppStatus('under_review');
-			setAppSaveSuccessMsg('Заявка успешно взята вами на рассмотрение!');
-			onSaved?.();
+			onClose();
+			await onSaved?.();
 		} catch (err: any) {
 			alert(err?.response?.data?.detail || 'Ошибка при взятии заявки в работу');
 		} finally {
