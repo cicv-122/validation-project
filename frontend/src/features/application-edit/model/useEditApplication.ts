@@ -170,8 +170,8 @@ export function useEditApplication({
 		const idToTake = applicationId;
 		setSavingAppDetail(true);
 		setAppSaveSuccessMsg(null);
-		onClose();
 		onTakeInWork?.(idToTake);
+		onClose();
 		try {
 			await staffApi.updateApplicationDetail(idToTake, {
 				status: 'under_review',
@@ -247,8 +247,8 @@ export function useEditApplication({
 		}
 		setSavingAppDetail(true);
 		setAppSaveSuccessMsg(null);
-		onClose();
 		onReturnToSubmitted?.(idToReturn);
+		onClose();
 		try {
 			await staffApi.updateApplicationDetail(idToReturn, {
 				status: 'submitted',
@@ -270,8 +270,8 @@ export function useEditApplication({
 		const idToDelete = applicationId;
 		setIsDeletingApp(true);
 		setShowDeleteConfirm(false);
-		onClose();
 		onDeleted?.(idToDelete);
+		onClose();
 		try {
 			await staffApi.deleteApplication(idToDelete);
 			onSaved?.();

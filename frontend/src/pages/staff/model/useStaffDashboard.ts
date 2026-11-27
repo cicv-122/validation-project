@@ -210,6 +210,45 @@ export function useStaffDashboard() {
 			});
 			if (appsRequestIdRef.current !== reqId) return; // Устаревший ответ игнорируем!
 			setApplications(data);
+
+			// Синхронизируем счетчик активного раздела с реальным количеством элементов в ответе
+			if (!currentQ.trim()) {
+				setProfile((prev) => {
+					if (!prev) return prev;
+					const updatedStats = { ...prev.stats };
+					if (currentStatus === 'submitted') {
+						if (currentSub === 'online') {
+							updatedStats.submitted_online = data.length;
+						} else if (currentSub === 'in_person') {
+							updatedStats.submitted_in_person = data.length;
+						} else {
+							updatedStats.submitted = data.length;
+						}
+						updatedStats.submitted = (updatedStats.submitted_online ?? 0) + (updatedStats.submitted_in_person ?? 0);
+					} else if (currentStatus === 'under_review') {
+						if (currentSub === 'under_review_docs') {
+							updatedStats.under_review_docs = data.length;
+						} else if (currentSub === 'assessment_scheduled') {
+							updatedStats.scheduled = data.length;
+						} else {
+							updatedStats.under_review = data.length;
+						}
+						updatedStats.under_review = (updatedStats.under_review_docs ?? 0) + (updatedStats.scheduled ?? 0);
+					} else if (currentStatus === 'completed') {
+						updatedStats.completed = data.length;
+					} else if (currentStatus === 'rejected') {
+						if (currentSub === 'rejected_exam') {
+							updatedStats.rejected_exam = data.length;
+						} else if (currentSub === 'rejected_cancelled') {
+							updatedStats.rejected_cancelled = data.length;
+						} else {
+							updatedStats.rejected = data.length;
+						}
+						updatedStats.rejected = (updatedStats.rejected_exam ?? 0) + (updatedStats.rejected_cancelled ?? 0);
+					}
+					return { ...prev, stats: updatedStats };
+				});
+			}
 		} catch (err) {
 			console.error(err);
 		} finally {
@@ -218,10 +257,11 @@ export function useStaffDashboard() {
 	};
 
 	const optimisticDeleteApp = (id: number) => {
-		setApplications((prev) => prev.filter((app) => app.id !== id));
+		const targetId = Number(id);
+		setApplications((prev) => prev.filter((app) => Number(app.id) !== targetId));
 		setProfile((prev) => {
 			if (!prev) return prev;
-			const target = applications.find((a) => a.id === id);
+			const target = applications.find((a) => Number(a.id) === targetId);
 			const isOnline = target?.origin !== 'in_person';
 			const curOnline = prev.stats.submitted_online ?? prev.stats.submitted;
 			return {
@@ -239,40 +279,50 @@ export function useStaffDashboard() {
 	};
 
 	const optimisticTakeInWork = (id: number) => {
+		const targetId = Number(id);
 		if (activeAppStatus === 'submitted') {
-			setApplications((prev) => prev.filter((app) => app.id !== id));
+			setApplications((prev) => prev.filter((app) => Number(app.id) !== targetId));
 		}
 		setProfile((prev) => {
 			if (!prev) return prev;
 			const curOnline = prev.stats.submitted_online ?? prev.stats.submitted;
+			const newOnline = Math.max(0, curOnline - 1);
+			const newSubmitted = Math.max(0, prev.stats.submitted - 1);
+			const newDocs = (prev.stats.under_review_docs || 0) + 1;
+			const newUnderReview = prev.stats.under_review + 1;
 			return {
 				...prev,
 				stats: {
 					...prev.stats,
-					submitted: Math.max(0, prev.stats.submitted - 1),
-					submitted_online: Math.max(0, curOnline - 1),
-					under_review: prev.stats.under_review + 1,
-					under_review_docs: (prev.stats.under_review_docs || 0) + 1,
+					submitted: newSubmitted,
+					submitted_online: newOnline,
+					under_review: newUnderReview,
+					under_review_docs: newDocs,
 				},
 			};
 		});
 	};
 
 	const optimisticReturnToSubmitted = (id: number) => {
+		const targetId = Number(id);
 		if (activeAppStatus === 'under_review') {
-			setApplications((prev) => prev.filter((app) => app.id !== id));
+			setApplications((prev) => prev.filter((app) => Number(app.id) !== targetId));
 		}
 		setProfile((prev) => {
 			if (!prev) return prev;
 			const curOnline = prev.stats.submitted_online ?? prev.stats.submitted;
+			const newOnline = curOnline + 1;
+			const newSubmitted = prev.stats.submitted + 1;
+			const newDocs = Math.max(0, (prev.stats.under_review_docs || 1) - 1);
+			const newUnderReview = Math.max(0, prev.stats.under_review - 1);
 			return {
 				...prev,
 				stats: {
 					...prev.stats,
-					under_review: Math.max(0, prev.stats.under_review - 1),
-					under_review_docs: Math.max(0, (prev.stats.under_review_docs || 1) - 1),
-					submitted: prev.stats.submitted + 1,
-					submitted_online: curOnline + 1,
+					under_review: newUnderReview,
+					under_review_docs: newDocs,
+					submitted: newSubmitted,
+					submitted_online: newOnline,
 				},
 			};
 		});
@@ -393,6 +443,7 @@ export function useStaffDashboard() {
 		if (profile) {
 			if (activeMainTab === 'applications') {
 				loadApplications();
+				loadProfile(true);
 			} else {
 				loadCertifiedList(certifiedPage);
 			}
